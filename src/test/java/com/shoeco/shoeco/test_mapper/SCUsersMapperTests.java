@@ -32,9 +32,7 @@ public class SCUsersMapperTests {
     	
     	sCUsersMapper.insertSCUser();
     	sCUsersMapper.insertSCAuthoritys();
-        
-        
+    	
     }// test end
     
 } //class-end
-
