@@ -11,7 +11,7 @@ import lombok.AllArgsConstructor;
 //230628 1303 동현 수정
 @Controller
 @AllArgsConstructor
-@RequestMapping("/common")
+@RequestMapping("/")
 public class SCUsersController {
 	
 	private SCUsersService scUsersService ;
