@@ -13,22 +13,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>ShoeCo</title>
 
-<!-- bootstrap 공식 js -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <title>ShoeCo Shop eCommerce HTML CSS Template</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!-- bootstrap icons 추가 -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <!-- bootstrap 공식 js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
-<link href="${contextPath}/resources/css/bootstrap.min.css" type="text/css" rel="stylesheet" >
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/js/bootstrap-datepicker.min.js" ></script>
+    <!-- bootstrap icons 추가 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+
+    <link rel="apple-touch-icon" href="${contextPath}/resources/img/apple-icon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="${contextPath}/resources/img/favicon.ico">
+
+    <link rel="stylesheet" href="${contextPath}/resources/css/bootstrap.min.css">
+    <link rel="stylesheet" href="${contextPath}/resources/css/templatemo.css">
+    <link rel="stylesheet" href="${contextPath}/resources/css/custom.css">
+
+    <!-- Load fonts style after rendering the layout styles -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&amp;display=swap">
+    <link rel="stylesheet" href="${contextPath}/resources/css/fontawesome.min.css">
 
 
-<link rel="shortcut icon" href="${contextPath}/resources/img/favicon.ico" type="image/x-icon">
-
+	<!--
+	    
+	TemplateMo 559 Zay Shop
+	
+	https://templatemo.com/tm-559-zay-shop
+	
+	-->
 </head>
 <body>
 
@@ -71,16 +87,22 @@
                 <div class="flex-fill">
                     <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="index.html">Home</a>
-                        </li>
+                            <a class="nav-link" href="index.html">BRAND</a>
+                        </li>&nbsp;&nbsp;&nbsp;&nbsp;
                         <li class="nav-item">
-                            <a class="nav-link" href="about.html">About</a>
-                        </li>
+                            <a class="nav-link" href="about.html">MEN</a>
+                        </li>&nbsp;&nbsp;&nbsp;&nbsp;
                         <li class="nav-item">
-                            <a class="nav-link" href="shop.html">Shop</a>
-                        </li>
+                            <a class="nav-link" href="shop.html">WOMEN</a>
+                        </li>&nbsp;&nbsp;&nbsp;&nbsp;
                         <li class="nav-item">
-                            <a class="nav-link" href="contact.html">Contact</a>
+                            <a class="nav-link" href="contact.html">BEST</a>
+                        </li>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">SALE</a>
+                        </li>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">관리자페이지</a>
                         </li>
                     </ul>
                 </div>
@@ -93,9 +115,6 @@
                             </div>
                         </div>
                     </div>
-                    <a class="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal" data-bs-target="#templatemo_search">
-                        <i class="fa fa-fw fa-search text-dark mr-2"></i>
-                    </a>
                     <a class="nav-icon position-relative text-decoration-none" href="#">
                         <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
                         <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">7</span>
