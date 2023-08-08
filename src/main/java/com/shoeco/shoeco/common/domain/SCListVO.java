@@ -7,7 +7,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString	
-public class SCList {
+public class SCListVO {
 
 	//sc_products
 	private String prodCode;
