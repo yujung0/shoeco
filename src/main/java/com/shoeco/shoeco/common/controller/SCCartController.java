@@ -1,11 +1,11 @@
 package com.shoeco.shoeco.common.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.shoeco.shoeco.common.service.SCCartService;
-import com.shoeco.shoeco.common.service.SCUsersService;
 
 import lombok.AllArgsConstructor;
 
@@ -17,12 +17,11 @@ public class SCCartController {
 	
 	private SCCartService cartService ;
 	
-	// 회원 등록
+	// 회원의 장바구니 목록 조회
 	@GetMapping("/cart")
-	public void showCartList(){
+	public void showCartList(Model model){
 		
-		System.out.println("controller의 showCartList 메서드 실행: " + cartService.selectCart());
-		
+		model.addAttribute("cartList", cartService.selectCart());
 	}
 
 		

@@ -22,10 +22,6 @@ public class SCCartServiceImpl implements SCCartService{
 	// 회원의 장바구니 목록 조회
 	public List<SCCartVO> selectCart(){
 		
-		
-		List<SCCartVO> cartList = cartMapper.selectCartList();
-		System.out.println("Service의 장바구니 목록 조회: " + cartList);
-		
-		return cartList;
+		return cartMapper.selectCartList();
 	}
 }
