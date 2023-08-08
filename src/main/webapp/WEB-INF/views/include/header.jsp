@@ -52,7 +52,7 @@
  	.smallCategories {
  		display: none;
  	}
- 	.nav-item:hover .smallCategories {
+ 	.nav-item:hover .smallCategories{
  		display: block;
  	}
 	 
@@ -140,67 +140,65 @@
                        <div>
                        		<li class="nav-item">
 	                            <a class="nav-link" href="index.html">BRAND</a>
-	                             	<ul class="smallCategories" style="list-style-type: none;">
-		                        		<li>아디다스</li>
-		                        		<li>나이키</li>
-		                        		<li>뉴발란스</li>
-		                        		<li>컨버스</li>
-		                        		<li>퓨마</li>
-		                        		<li>닥터마틴</li>
-		                        	</ul> 
+	                             	<div class="smallCategories">
+		                        		<p>아디다스</p>
+		                        		<p>나이키</p>
+		                        		<p>뉴발란스</p>
+		                        		<p>컨버스</p>
+		                        		<p>퓨마</p>
+		                        		<p>닥터마틴</p>
+		                        	</div> 
 	                        </li> 
 	                   </div>
 	                   <div>
                         <li class="nav-item">
                            <a class="nav-link" href="about.html">MEN</a>
-	                        	<ul class="smallCategories" style="list-style-type: none;">
-	                        		<li>운동화</li>
-	                        		<li>구두</li>
-	                        		<li>샌들</li>
-	                        		<li>스포츠</li>
-	                        		<li>아쿠아</li>
-	                        	</ul> 
+								<div class="smallCategories">
+	                        		<p>운동화</p>
+	                        		<p>구두</p>
+	                        		<p>샌들</p>
+	                        		<p>스포츠</p>
+	                        		<p>아쿠아</p>
+	                        	</div> 
                         </li> 
                         </div>  
                         <div>   
                         <li class="nav-item">
                             <a class="nav-link" href="shop.html">WOMEN</a>
-	                            <ul class="smallCategories" style="list-style-type: none;">
+	                           <!-- 초기 버전 디자인/ 글자배열때문에 div 로 바꿈
+	                           	<ul class="smallCategories" style="list-style-type: none;">
 	                        		<li>운동화</li>
 	                        		<li>구두</li>
 	                        		<li>샌들</li>
 	                        		<li>스포츠</li>
 	                        		<li>아쿠아</li>
-	                        	</ul> 
+	                        	</ul>  -->
+	                        	<div class="smallCategories">
+	                        		<p>운동화</p>
+	                        		<p>구두</p>
+	                        		<p>샌들</p>
+	                        		<p>스포츠</p>
+	                        		<p>아쿠아</p>
+	                        	</div> 
                         </li> 
                         </div>  
                         <div>  
                         <li class="nav-item">
                             <a class="nav-link" href="contact.html">BEST</a>
-                            	  <ul class="smallCategories" style="list-style-type: none;">
-	                        		<li>운동화</li>
-	                        		<li>구두</li>
-	                        		<li>샌들</li>
-	                        		<li>스포츠</li>
-	                        		<li>아쿠아</li>
-	                        	</ul> 
                         </li> 
                         </div>  
                         <div>  
                         <li class="nav-item">
                             <a class="nav-link" href="contact.html">SALE</a>
-                            	  <ul class="smallCategories" style="list-style-type: none;">
-	                        		<li>운동화</li>
-	                        		<li>구두</li>
-	                        		<li>샌들</li>
-	                        		<li>스포츠</li>
-	                        		<li>아쿠아</li>
-	                        	</ul> 
+                            	   
                         </li> 
                         </div>  
                         <div>  
                         <li class="nav-item">
-                            <a class="nav-link" href="contact.html">관리자페이지</a>
+                          <!-- 230808 세연/ 소비자 입장에서 굳이 관리자페이지가 카테고리란에 나란히 같이 있을 이유는 없는 것 같아서 임시로
+                          이벤트/기획으로 대체했어요(앗 나 바보같은짓 했나? 그럼 알려줘요!(찡긋))
+                           <a class="nav-link" href="contact.html">관리자페이지</a> -->  
+ 							<a class="nav-link" href="contact.html">이벤트/기획전</a>
                              
                         </li>
                         </div>
