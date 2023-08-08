@@ -12,7 +12,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class SCAuthoritys implements GrantedAuthority{
+public class SCAuthoritysVO implements GrantedAuthority{
     // stream 하기 싫어서 interface 상속 받아서 구현
 
 	private static final long serialVersionUID = 1L;
@@ -20,7 +20,7 @@ public class SCAuthoritys implements GrantedAuthority{
     private String userId;
     private String authority; // security가 사용하는 변수
 
-    public SCAuthoritys(String authority) {
+    public SCAuthoritysVO(String authority) {
 		Assert.hasText(authority, "A granted authority textual representation is required");
         this.authority = authority;
     }
@@ -32,8 +32,8 @@ public class SCAuthoritys implements GrantedAuthority{
 		if (this == obj) {
 			return true;
 		}
-		if (obj instanceof SCAuthoritys) {
-			return this.authority.equals(((SCAuthoritys) obj).authority);
+		if (obj instanceof SCAuthoritysVO) {
+			return this.authority.equals(((SCAuthoritysVO) obj).authority);
 		}
 		return false;
     }
