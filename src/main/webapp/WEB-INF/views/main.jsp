@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
@@ -7,10 +8,87 @@
 
 <c:set var="contextPath" value="${pageContext.request.contextPath }"/><%-- 
 <sec:authentication property="principal" var="principal"/> --%>
- 
 
 
 <%@include file="./include/header.jsp" %>
+
+<style>
+a {
+	text-decoration: none;	
+}
+
+.top_gnb_area {
+	position:relative;
+}
+
+.top_gnb_area .list {
+	position: absolute;
+	top: 0px;
+	right: 0;
+}
+
+.top_gnb_area .list li {
+	list-style: none;
+	float: left;
+	padding: 13px 15px 0 10px;
+	font_weight: 900;
+	cursor: pointer;
+}
+</style>
+
+ <!DOCTYPE html>
+ 
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+</html>
+
+
+<form th:action="@{/signin}" sec:authorize="!isAuthenticated()">
+                <button class="btn btn-outline-dark" type="submit">
+                    로그인
+                </button>
+            </form>
+            
+            
+<form th:action="@{/logout}" method="post" sec:authorize="isAuthenticated()">
+                <button class="btn btn-outline-dark" type="submit">
+                    로그아웃
+                </button>
+            </form>
+            
+            
+<!-- 로그인 X 메뉴 -->   
+<div class="wrapper">
+<div class="wrap">
+<div class="top_gnb_area">
+			<!-- <h1>gnb area</h1> --> <!-- 삭제 -->
+			<ul class="list">
+				<c:if test="${member == null }">
+					<li>
+						<a href="/member/login">로그인</a>
+					</li>	
+					<li>
+						<a href="/member/join">회원가입</a>
+					</li>
+				</c:if>
+				<c:if test="${member != null }">
+				 <c:if test="${member.adminCk == 1 }">
+                        <li><a href="/admin/main">관리자 페이지</a></li>
+                    </c:if>
+					<li>
+						로그아웃
+					</li>
+					<li>
+						마이룸
+					</li>
+					<li>
+						장바구니
+					</li>
+				</c:if>
+			</ul>
+		</div>	
+</div>
+</div>                                 
+
 
     <!-- Modal -->
     <div class="modal fade bg-white" id="templatemo_search" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

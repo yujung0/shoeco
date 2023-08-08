@@ -35,4 +35,6 @@ public class SCUsersMapperTests {
     	
     }// test end
     
+
+    
 } //class-end

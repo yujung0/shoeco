@@ -13,7 +13,7 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="com.booknow.travelapp">
+	<logger name="com.shoeco.shoeco">
 		<level value="info" />
 	</logger>
 	
