@@ -148,7 +148,7 @@
 		                        		<li>퓨마</li>
 		                        		<li>닥터마틴</li>
 		                        	</ul> 
-	                        </li>&nbsp;&nbsp;&nbsp;&nbsp;
+	                        </li> 
 	                   </div>
 	                   <div>
                         <li class="nav-item">
@@ -160,7 +160,7 @@
 	                        		<li>스포츠</li>
 	                        		<li>아쿠아</li>
 	                        	</ul> 
-                        </li>&nbsp;&nbsp;&nbsp;&nbsp;
+                        </li> 
                         </div>  
                         <div>   
                         <li class="nav-item">
@@ -172,7 +172,7 @@
 	                        		<li>스포츠</li>
 	                        		<li>아쿠아</li>
 	                        	</ul> 
-                        </li>&nbsp;&nbsp;&nbsp;&nbsp;
+                        </li> 
                         </div>  
                         <div>  
                         <li class="nav-item">
@@ -184,7 +184,7 @@
 	                        		<li>스포츠</li>
 	                        		<li>아쿠아</li>
 	                        	</ul> 
-                        </li>&nbsp;&nbsp;&nbsp;&nbsp;
+                        </li> 
                         </div>  
                         <div>  
                         <li class="nav-item">
@@ -196,14 +196,12 @@
 	                        		<li>스포츠</li>
 	                        		<li>아쿠아</li>
 	                        	</ul> 
-                        </li>&nbsp;&nbsp;&nbsp;&nbsp;
+                        </li> 
                         </div>  
                         <div>  
                         <li class="nav-item">
                             <a class="nav-link" href="contact.html">관리자페이지</a>
-                            <ul class="smallCategories" style="list-style-type: none;">
-	                        		<li></li>
-	                        	</ul> 
+                             
                         </li>
                         </div>
                     </ul>
