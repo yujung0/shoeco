@@ -12,7 +12,7 @@ import lombok.ToString;
 @Setter
 @Getter
 @NoArgsConstructor
-public class SCUsers {
+public class SCUsersVO {
 
     private String userId;
     private String userPassword;
