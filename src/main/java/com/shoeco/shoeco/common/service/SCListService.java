@@ -6,6 +6,6 @@ import com.shoeco.shoeco.common.domain.SCListVO;
 
 public interface SCListService {
 	
-	public List<SCListVO> getCategoryList();
+	public List<SCListVO> getCategoryList(String category);
 
 }

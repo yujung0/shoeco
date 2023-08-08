@@ -7,7 +7,7 @@ import com.shoeco.shoeco.common.domain.SCListVO;
 public interface SCListMapper {
 //	private 
 
-	public List<SCListVO> selectCategoryList();
+	public List<SCListVO> selectCategoryList(String category);
 	
 	
 }
