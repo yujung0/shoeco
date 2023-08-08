@@ -79,6 +79,8 @@
                 ShoeCo
             </a>
 
+			<input type="text" placeholder="검색어 입력"><button>검색</button>
+
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
