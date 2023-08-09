@@ -21,7 +21,7 @@
 					<button class="nav-link" id="nav-QNA-tab" data-bs-toggle="tab" data-bs-target="#nav-QNA" type="button" role="tab" aria-controls="nav-QNA" aria-selected="false">문의내역</button>
 					<button class="nav-link" id="nav-review-tab" data-bs-toggle="tab" data-bs-target="#nav-review" type="button" role="tab" aria-controls="nav-review" aria-selected="false">리뷰 작성내역</button>
 					<button class="nav-link" id="nav-modify-tab" data-bs-toggle="tab" data-bs-target="#nav-modify" type="button" role="tab" aria-controls="nav-modify" aria-selected="false">회원정보 수정</button>
-					<button class="nav-link" id="nav-withdraw-tab" data-bs-toggle="tab" data-bs-target="#nav-withdraw" type="button" role="tab" aria-controls="nav-withdraw" aria-selected="false">회원 탙퇴</button>
+					<button class="nav-link" id="nav-withdraw-tab" data-bs-toggle="tab" data-bs-target="#nav-withdraw" type="button" role="tab" aria-controls="nav-withdraw" aria-selected="false">회원 탈퇴</button>
 				</div>
 		 	</nav>
 			<div class="tab-content" id="nav-tabContent">
