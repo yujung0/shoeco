@@ -23,6 +23,12 @@ public class SCCartController {
 		
 		model.addAttribute("cartList", cartService.selectCart());
 	}
+	
+	// 매핑 테스트
+	@GetMapping("/mypage")
+	public void showMypage(Model model){
+		
+	}
 
 		
 }
