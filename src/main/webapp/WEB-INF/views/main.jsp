@@ -36,59 +36,37 @@ a {
 }
 </style>
 
- <!DOCTYPE html>
- 
+<!-- 2308091251 장유정_로그인/회원가입 부분 -->
+<!DOCTYPE html> 
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 </html>
 
-
-<form th:action="@{/signin}" sec:authorize="!isAuthenticated()">
-                <button class="btn btn-outline-dark" type="submit">
-                    로그인
-                </button>
-            </form>
-            
-            
-<form th:action="@{/logout}" method="post" sec:authorize="isAuthenticated()">
-                <button class="btn btn-outline-dark" type="submit">
-                    로그아웃
-                </button>
-            </form>
-            
-            
-<!-- 로그인 X 메뉴 -->   
 <div class="wrapper">
-<div class="wrap">
-<div class="top_gnb_area">
-			<!-- <h1>gnb area</h1> --> <!-- 삭제 -->
-			<ul class="list">
-				<c:if test="${member == null }">
-					<li>
-						<a href="/member/login">로그인</a>
-					</li>	
-					<li>
-						<a href="/member/join">회원가입</a>
-					</li>
-				</c:if>
-				<c:if test="${member != null }">
-				 <c:if test="${member.adminCk == 1 }">
-                        <li><a href="/admin/main">관리자 페이지</a></li>
-                    </c:if>
-					<li>
-						로그아웃
-					</li>
-					<li>
-						마이룸
-					</li>
-					<li>
-						장바구니
-					</li>
-				</c:if>
-			</ul>
-		</div>	
+	<div class="wrap">
+		<div class="top_gnb_area">
+			<h1>gnb area</h1>
+		</div>
+		<div class="top_area">
+			<div class="logo_area">
+				<h1>logo area</h1>
+			</div>
+			<div class="search_area">
+				<h1>Search area</h1>
+			</div>
+			<div class="login_area">
+				<div class="login_button"><a href="${contextPath}/member/login">로그인</a></div>
+				<span><a href="${contextPath}/member/join">회원가입</a></span>
+			</div>
+			<div class="clearfix"></div>			
+		</div>
+		<div class="navi_bar_area">
+			<h1>navi area</h1>
+		</div>
+		<div class="content_area">
+			<h1>content area</h1>
+		</div>
+	</div>
 </div>
-</div>                                 
-
 
     <!-- Modal -->
     <div class="modal fade bg-white" id="templatemo_search" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
