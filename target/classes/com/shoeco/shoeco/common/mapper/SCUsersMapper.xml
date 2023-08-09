@@ -7,8 +7,8 @@
 
   <insert id="insertSCUser">
 	INSERT INTO SC_USER
-	VALUES('firstUser', 'firstUser', 'firstUser@naver.com', '19940920', 
-     	   '구로구 구로동', '01012345678', DEFAULT, 0, '일반', '이동현')
+	VALUES(#{userId}, #{userPassword}, #{userEmail}, #{userBDate}, 
+     	   #{userAddress}, #{userPhoneNo}, #{userJoinDate}, #{mileage}, #{userRank}, #{userName})
   </insert>
 
 
