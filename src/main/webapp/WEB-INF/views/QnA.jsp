@@ -19,31 +19,30 @@
     <section class="container py-5">
         <div class="row text-left pt-3">
             <div class="col-lg-10 m-auto">
-                <h1 class="h1">장바구니 목록</h1>				
-				<table class="table table-hover">
-					<thead style="text-align: center;">
-						<tr class="table-dark">
-							<th>상품명</th>
-							<th>사이즈</th>
-							<th>색상</th>
-							<th>갯수</th>
-							<th>가격</th>
-						</tr>
-					</thead>
-					<tbody style="text-align: center;">
-						<tr class="text-secondary-emphasis">
-							<td>${cartList[0].prodName}</td>
-							<td>${cartList[0].prodSize}</td>
-							<td>${cartList[0].color}</td>
-							<td>${cartList[0].cartCount}</td>
-							<td>${cartList[0].price}</td>
-						</tr>
-					</tbody>
-				</table>
+                <h1 class="h1">Q&A</h1>
+                <p>
+                    구매내역
+                </p>
+                <p>
+                    리뷰내역
+                </p>
+                <p>
+                    마일리지
+                </p>
+                <p>
+                    Q&A 내역
+                </p>
+                <p>
+                    회원정보 수정
+                </p>
+                <p>
+                    회원 탈퇴
+                </p>
             </div>
         </div>
     </section>
     <!-- End Categories of The Month -->
+
 
 
 <%@include file="./include/footer.jsp" %>
