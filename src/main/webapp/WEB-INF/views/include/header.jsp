@@ -88,7 +88,7 @@
    
     <!-- Close Top Nav -->
      <div class="navbar align-self-center d-flex">
-	     <a class="navbar-brand text-success logo h1 align-self-center" href="index.html">
+	     <a class="navbar-brand text-success logo h1 align-self-center" href="${contextPath}/main">
 	                ShoeCo
 	     </a>
      
@@ -104,11 +104,11 @@
          	<input type="text" placeholder="검색어 입력"><button>검색</button>
          </div>
          <div style="display: inline;">
-	         <a class="nav-icon position-relative text-decoration-none" href="#">
+	         <a class="nav-icon position-relative text-decoration-none" href="${contextPath}/cart">
 	             <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
 	             &nbsp;<span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">7</span>
 	         </a>
-	         <a class="nav-icon position-relative text-decoration-none" href="#">
+	         <a class="nav-icon position-relative text-decoration-none" href="${contextPath}/mypage">
 	             <i class="fa fa-fw fa-user text-dark mr-3"></i>
 	             &nbsp;<span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">+99</span>
 	         </a>
