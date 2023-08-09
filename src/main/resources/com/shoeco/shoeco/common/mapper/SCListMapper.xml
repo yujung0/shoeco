@@ -5,9 +5,12 @@
   
 <mapper namespace="com.shoeco.shoeco.common.mapper.SCListMapper">
 
-
-
-
+<!-- 230808 세연 / 배너 눌렀을때 리스트랑 사진 나오는것 (카테고리별 분류) -->
+	<select id="selectCategoryList">
+	SELECT a.prodCode, a.brandCode, a.prodName, a.gender, a.sellPrice, a.category, a.material, a.country,
+	   	   b.prodUploadPath, b.prodFileType FROM SC_PRODUCTS a JOIN SC_PRODUCTS_ATTACHMENTS b ON (a.prodCode = b.prodCode) 
+	   	   WHERE a.category = #{category}   
+	</select>
 
 
 
