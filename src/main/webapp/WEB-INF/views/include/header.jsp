@@ -45,11 +45,28 @@
 	https://templatemo.com/tm-559-zay-shop
 	
 	-->
+	
+	    
+<style>
+
+ 	.smallCategories {
+ 		display: none;
+ 	}
+ 	.nav-item:hover .smallCategories{
+ 		display: block;
+ 	}
+	 
+ 
+</style>
+	
 </head>
 <body>
 
-<body>
+<!--  <body> 23.8.8 세연/ 위에도 하나 더 있어서 혹시나 해서 주석했어요  -->
     <!-- Start Top Nav -->
+    
+
+    	
     <nav class="navbar navbar-expand-lg bg-dark navbar-light d-none d-lg-block" id="templatemo_nav_top">
         <div class="container text-light">
             <div class="w-100 d-flex justify-content-between">
@@ -68,16 +85,50 @@
             </div>
         </div>
     </nav>
+   
     <!-- Close Top Nav -->
-
+     <div class="navbar align-self-center d-flex">
+	     <a class="navbar-brand text-success logo h1 align-self-center" href="index.html">
+	                ShoeCo
+	     </a>
+     
+          <!-- 23.08.08 세연/일단 왜 있는지 모르겠어서 주석 했어요(데헷) <div class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
+             <div class="input-group">
+                 <input type="text" class="form-control" id="inputMobileSearch" placeholder="Search ...">
+                 <div class="input-group-text">
+                     <i class="fa fa-fw fa-search"></i>
+                 </div>
+             </div> 
+         </div>-->
+         <div style="display: inline;">
+         	<input type="text" placeholder="검색어 입력"><button>검색</button>
+         </div>
+         <div style="display: inline;">
+	         <a class="nav-icon position-relative text-decoration-none" href="#">
+	             <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
+	             &nbsp;<span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">7</span>
+	         </a>
+	         <a class="nav-icon position-relative text-decoration-none" href="#">
+	             <i class="fa fa-fw fa-user text-dark mr-3"></i>
+	             &nbsp;<span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">+99</span>
+	         </a>
+	         <!--23.08.08 세연/ 위에 마크가 페이지 밖으로 삐져나와서 nbsp;만 썼을때는 이상하게 먹혀서 안삐져나오게 하려고 추가 했어요 -->
+	         <a>
+	             &nbsp;<span> &nbsp;  &nbsp;</span>
+	         </a>
+	         
+         </div>
+         
+      </div>      
+    
+ 	
 
     <!-- Header -->
     <nav class="navbar navbar-expand-lg navbar-light shadow">
         <div class="container d-flex justify-content-between align-items-center">
 
-            <a class="navbar-brand text-success logo h1 align-self-center" href="index.html">
-                ShoeCo
-            </a>
+           
+		
 
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -86,48 +137,88 @@
             <div class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between" id="templatemo_main_nav">
                 <div class="flex-fill">
                     <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
+                       <div>
+                       		<li class="nav-item">
+	                            <a class="nav-link" href="index.html">BRAND</a>
+	                             	<div class="smallCategories">
+		                        		<p>아디다스</p>
+		                        		<p>나이키</p>
+		                        		<p>뉴발란스</p>
+		                        		<p>컨버스</p>
+		                        		<p>퓨마</p>
+		                        		<p>닥터마틴</p>
+		                        	</div> 
+	                        </li> 
+	                   </div>
+	                   <div>
                         <li class="nav-item">
-                            <a class="nav-link" href="index.html">BRAND</a>
-                        </li>&nbsp;&nbsp;&nbsp;&nbsp;
-                        <li class="nav-item">
-                            <a class="nav-link" href="about.html">MEN</a>
-                        </li>&nbsp;&nbsp;&nbsp;&nbsp;
+                           <a class="nav-link" href="about.html">MEN</a>
+								<div class="smallCategories">
+	                        		<p>운동화</p>
+	                        		<p>구두</p>
+	                        		<p>샌들</p>
+	                        		<p>스포츠</p>
+	                        		<p>아쿠아</p>
+	                        	</div> 
+                        </li> 
+                        </div>  
+                        <div>   
                         <li class="nav-item">
                             <a class="nav-link" href="shop.html">WOMEN</a>
-                        </li>&nbsp;&nbsp;&nbsp;&nbsp;
+	                           <!-- 초기 버전 디자인/ 글자배열때문에 div 로 바꿈
+	                           	<ul class="smallCategories" style="list-style-type: none;">
+	                        		<li>운동화</li>
+	                        		<li>구두</li>
+	                        		<li>샌들</li>
+	                        		<li>스포츠</li>
+	                        		<li>아쿠아</li>
+	                        	</ul>  -->
+	                        	<div class="smallCategories">
+	                        		<p>운동화</p>
+	                        		<p>구두</p>
+	                        		<p>샌들</p>
+	                        		<p>스포츠</p>
+	                        		<p>아쿠아</p>
+	                        	</div> 
+                        </li> 
+                        </div>  
+                        <div>  
                         <li class="nav-item">
                             <a class="nav-link" href="contact.html">BEST</a>
-                        </li>&nbsp;&nbsp;&nbsp;&nbsp;
+                        </li> 
+                        </div>  
+                        <div>  
                         <li class="nav-item">
                             <a class="nav-link" href="contact.html">SALE</a>
-                        </li>&nbsp;&nbsp;&nbsp;&nbsp;
+                            	   
+                        </li> 
+                        </div>  
+                        <div>  
                         <li class="nav-item">
-                            <a class="nav-link" href="contact.html">관리자페이지</a>
+                          <!-- 230808 세연/ 소비자 입장에서 굳이 관리자페이지가 카테고리란에 나란히 같이 있을 이유는 없는 것 같아서 임시로
+                          이벤트/기획으로 대체했어요(앗 나 바보같은짓 했나? 그럼 알려줘요!(찡긋))
+                           <a class="nav-link" href="contact.html">관리자페이지</a> -->  
+ 							<a class="nav-link" href="contact.html">이벤트/기획전</a>
+                             
                         </li>
+                        </div>
                     </ul>
                 </div>
-                <div class="navbar align-self-center d-flex">
-                    <div class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="inputMobileSearch" placeholder="Search ...">
-                            <div class="input-group-text">
-                                <i class="fa fa-fw fa-search"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <a class="nav-icon position-relative text-decoration-none" href="#">
-                        <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
-                        <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">7</span>
-                    </a>
-                    <a class="nav-icon position-relative text-decoration-none" href="#">
-                        <i class="fa fa-fw fa-user text-dark mr-3"></i>
-                        <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">+99</span>
-                    </a>
-                </div>
+               
             </div>
 
         </div>
     </nav>
+    
+    
+  <script>
+  	
+  
+  
+  
+  </script>
+    
+    
     <!-- Close Header -->
 
 
