@@ -18,7 +18,7 @@ import lombok.Setter;
 @ContextConfiguration({"file:src/main/webapp/WEB-INF/spring/mybatis-context.xml" ,
 //                       "file:src/main/webapp/WEB-INF/spring/security-context.xml" ,
                        "file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml"})
-public class SCUsersMapperTests {
+public class SCCartMapperTests {
 
 
     //사용자 패스워드 암호화 
@@ -26,14 +26,13 @@ public class SCUsersMapperTests {
 //    private PasswordEncoder pwencoder;
     
     @Setter(onMethod_ = @Autowired)
-    private SCUsersMapper sCUsersMapper;
+    private SCCartMapper scCartMapper;
 //
-    //회원 등록 테스트
+    //장바구니 목록 조회 테스트
     @Test
     public void testInsertMyMember() {
     	
-    	sCUsersMapper.insertSCUser();
-    	sCUsersMapper.insertSCAuthoritys();
+    	System.out.println(scCartMapper.selectCartList());
     	
     }// test end
 

@@ -31,13 +31,15 @@
 						</tr>
 					</thead>
 					<tbody style="text-align: center;">
-						<tr class="text-secondary-emphasis">
-							<td>${cartList[0].prodName}</td>
-							<td>${cartList[0].prodSize}</td>
-							<td>${cartList[0].color}</td>
-							<td>${cartList[0].cartCount}</td>
-							<td>${cartList[0].price}</td>
-						</tr>
+						<c:forEach var="cartItem" items="${cartList}">
+							<tr class="text-secondary-emphasis">
+								<td>${cartItem.prodName}</td>
+								<td>${cartItem.prodSize}</td>
+								<td>${cartItem.color}</td>
+								<td>${cartItem.cartCount}</td>
+								<td>${cartItem.price}</td>
+							</tr>
+						</c:forEach>
 					</tbody>
 				</table>
             </div>
