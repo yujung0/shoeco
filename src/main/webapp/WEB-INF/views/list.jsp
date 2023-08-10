@@ -95,6 +95,17 @@
                         
                     </li>
                     
+                      <li class="pb-3">
+                        <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
+                            Price
+                        </a>
+                        	<input type="range">
+                         
+                        
+                    </li>
+                    
+                    
+                    
                     <li class="pb-3">
                         <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
                             Brand

@@ -18,9 +18,14 @@ public class ListPagingDTO {
 	private String arraykeyword; //정렬관련 keyword desc
 	
 	private String keyword;
-	private String colorArray[];
+	
 	private String sizeArray[];
+	private String colorArray[];
+//	private long price;
+
+	
 	private String brandArray[];
+	
 	
 //	private String soldOut; 향후 고려 
 	
