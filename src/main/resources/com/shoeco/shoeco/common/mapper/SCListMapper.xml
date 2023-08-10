@@ -66,7 +66,7 @@
 	
 	</select>
 
-<!-- 	<select id="rowTotal">
+ 	<select id="rowTotal">
 	 SELECT COUNT(*) from SC_PRODUCTS a join SC_PRODUCTS_OPTION b on(a.prodCode  = b.prodCode) 사진 자료 생기면 쓰고 이거대신 옵션 테이블 
 									 join SC_BRAND c on(a.brandCode= c.brandCode)
 		 <where>
@@ -78,7 +78,6 @@
 			 
 			 <if test="keyword !=null">
 				  a.prodCode LIKE '%'||#{keyword}||'%' OR 
-				  brand가 나중에 join하게 되면 추가 brandName LIKE '%'||#{keyword}||'%' OR 
 				  a.prodName LIKE '%'||#{keyword}||'%' OR 
 				  c.brandName LIKE '%'||#{keyword}||'%' OR 
 				  a.category LIKE '%'||#{keyword}||'%' 
@@ -113,10 +112,10 @@
 			</otherwise>
 			
 			
-			</choose> count라 굳이스러워서 주석
+			</choose> 
 	
 	</select>
- -->
+ 
  
 
 
