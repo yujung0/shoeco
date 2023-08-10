@@ -13,23 +13,24 @@
 	</select>
  --> 
 
+<!-- 성별에 따른 카테고리-->
 <!-- 230810 아직 미완성: 카테고리, 검색어, 페이징 고려 mapper-->
+<!-- 큰 카테고리의 브랜드 jsp는 따로 만듬-->
 	<select id="selectCategoryList">
 	Select * from SC_PRODUCTS a join SC_PRODUCTS_OPTION b on(a.prodCode  = b.prodCode) <!-- 사진 자료 생기면 쓰고 이거대신 옵션 테이블 --> 
 								 join SC_BRAND c on(a.brandCode= c.brandCode)
-		<where>
-		
-		 <if test="category !=null">
-			a.category = #{category}
+	 <where>
+	 
+		 <if test="category != null">		 
+		 	a.category = #{category} 	
 		 </if>
 		 
 		 <if test="keyword !=null">
-			 AND a.prodCode LIKE '%'||#{keyword}||'%' OR 
+			  a.prodCode LIKE '%'||#{keyword}||'%' OR 
 			  <!-- brand가 나중에 join하게 되면 추가 brandName LIKE '%'||#{keyword}||'%' OR  -->
 			  a.prodName LIKE '%'||#{keyword}||'%' OR 
 			  c.brandName LIKE '%'||#{keyword}||'%' OR 
 			  a.category LIKE '%'||#{keyword}||'%' 
-			
 		 </if>
 		
 		
@@ -39,20 +40,15 @@
 		  </if>
 		
 	 		  <if test="size != null ">
-			a.size = #{size} 
+			a.prodSize = #{prodSize} 
 		  </if>
 		 
 		 <if test="brand != null ">
-			a.brand= #{brand}
+			a.brandName= #{brandName}
 		 </if>
 		    
-		</where>
-	
-	 
-	
-	
+	 </where>
 		Order by 
-		
 		<choose>
 		 <when test="arraykeyword == null">
 		 1 DESC 
@@ -70,12 +66,58 @@
 	
 	</select>
 
-<!-- <select id= rowTotal>
- SELECT COUNT(*) 
-
-</select>
-
+<!-- 	<select id="rowTotal">
+	 SELECT COUNT(*) from SC_PRODUCTS a join SC_PRODUCTS_OPTION b on(a.prodCode  = b.prodCode) 사진 자료 생기면 쓰고 이거대신 옵션 테이블 
+									 join SC_BRAND c on(a.brandCode= c.brandCode)
+		 <where>
+			 a.gender = #{gender}
+			
+			 <if test="category != null">		 
+			 	a.category = #{category} 	
+			 </if>
+			 
+			 <if test="keyword !=null">
+				  a.prodCode LIKE '%'||#{keyword}||'%' OR 
+				  brand가 나중에 join하게 되면 추가 brandName LIKE '%'||#{keyword}||'%' OR 
+				  a.prodName LIKE '%'||#{keyword}||'%' OR 
+				  c.brandName LIKE '%'||#{keyword}||'%' OR 
+				  a.category LIKE '%'||#{keyword}||'%' 
+			 </if>
+			
+			
+			  <if test="color != null">
+				 a.color = #{color}  b.prodCount != 0 이건 나중에 밑에까지 고려 추가할지 생각중
+				 
+			  </if>
+			
+		 		  <if test="size != null ">
+				a.prodSize = #{prodSize} 
+			  </if>
+			 
+			 <if test="brand != null ">
+				a.brandName= #{brandName}
+			 </if>
+			    
+		 </where>
+			Order by 
+			<choose>
+			 <when test="arraykeyword == null">
+			 1 DESC 
+			
+			
+			</when>
+			<otherwise>
+			  # { arraykeyword} DESC 
+			
+			
+			</otherwise>
+			
+			
+			</choose> count라 굳이스러워서 주석
+	
+	</select>
  -->
+ 
 
 
 

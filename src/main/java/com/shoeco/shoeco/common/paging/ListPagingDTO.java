@@ -40,7 +40,7 @@ public class ListPagingDTO {
 		
 		if(perPage== null ) {
 			
-			this.perPage= 40;
+			this.perPage= 20;
 			
 		}else {
 			this.perPage= pageNum;

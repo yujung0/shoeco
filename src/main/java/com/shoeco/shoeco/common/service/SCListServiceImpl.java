@@ -22,5 +22,9 @@ public class SCListServiceImpl implements SCListService{
 	public List<SCListVO> getCategoryList(ListPagingDTO paging){
 		return scListMapper.selectCategoryList(paging);
 	}
+	
+	public long rowTotal(ListPagingDTO paging){
+		return scListMapper.rowTotal(paging);
+	}
 
 }

@@ -8,5 +8,7 @@ import com.shoeco.shoeco.common.paging.ListPagingDTO;
 public interface SCListService {
 	
 	public List<SCListVO> getCategoryList(ListPagingDTO paging);
+	
+	public long rowTotal(ListPagingDTO paging);
 
 }

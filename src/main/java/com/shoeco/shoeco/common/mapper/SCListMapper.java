@@ -10,5 +10,5 @@ public interface SCListMapper {
 
 	public List<SCListVO> selectCategoryList(ListPagingDTO paging);
 	
-	
+	public long rowTotal(ListPagingDTO paging);
 }
