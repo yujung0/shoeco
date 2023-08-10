@@ -77,56 +77,64 @@
 
 <!--2 rowTotal 페이징고려해야함  -->
 
- 	<select id="rowTotal">
-	 SELECT COUNT(*) from SC_PRODUCTS a join SC_PRODUCTS_OPTION b on(a.prodCode  = b.prodCode)  
-									 join SC_BRAND c on(a.brandCode= c.brandCode)
-		 <where>
-			 a.gender = #{gender}
-			
-			 <if test="category != null">		 
-			 	a.category = #{category} 	
-			 </if>
+ 	<select id="selectRowTotal">
+	Select COUNT(*) from SC_PRODUCTS a join SC_PRODUCTS_OPTION b on(a.prodCode  = b.prodCode) <!-- 사진 자료 생기면 쓰고 이거대신 옵션 테이블 --> 
+								 join SC_BRAND c on(a.brandCode= c.brandCode) 
+	 <where>
+	 
+		 <if test="category != null">		 
+		 	a.category = #{category} 	
+		 </if>
+		 
+		 <if test="keyword !=null">
+		 	 
+			  a.prodCode LIKE '%'||#{keyword}||'%' OR 
+			  <!-- brand가 나중에 join하게 되면 추가 brandName LIKE '%'||#{keyword}||'%' OR  -->
+			  a.prodName LIKE '%'||#{keyword}||'%' OR 
+			  c.brandName LIKE '%'||#{keyword}||'%' OR 
+			  a.category LIKE '%'||#{keyword}||'%' 
+			  
+		 </if>
+		
+		  
+	 	  <if test="sizeArray != null">
+			 <foreach item="size" collection="sizeArray" open="(" close=")" separator="OR">
+		 			a.prodSize = #{size} 
+			 </foreach>
 			 
-			 <if test="keyword !=null">
-				  a.prodCode LIKE '%'||#{keyword}||'%' OR 
-				  a.prodName LIKE '%'||#{keyword}||'%' OR 
-				  c.brandName LIKE '%'||#{keyword}||'%' OR 
-				  a.category LIKE '%'||#{keyword}||'%' 
-			 </if>
-			
-			
-			  <if test="color != null">
-				 a.color = #{color}  
-				 
-			  </if>
-			
-		 		  <if test="size != null ">
-				a.prodSize = #{prodSize} 
-			  </if>
-			 
-			 <if test="brand != null ">
-				a.brandName= #{brandName}
-			 </if>
-			    
-		 </where>
-			Order by 
-			<choose>
-			 <when test="arraykeyword == null">
-			 1 DESC 
-			
-			
-			</when>
-			<otherwise>
-			  # { arraykeyword} DESC 
-			
-			
-			</otherwise>
-			
-			
-			</choose> 
+		  </if>
+		
+		
+		 <if test="colorArray != null ">
+		 	<foreach item="color" collection="colorArray" open="(" close=")" separator="OR">
+				a.color= #{color}
+			</foreach>
+		 </if>
+		 
+		 <if test="brandArray != null ">
+		 	<foreach item="brand" collection="brandArray" open="(" close=")" separator="OR">
+				a.brandName= #{brand}
+			</foreach>
+		 </if>
+		    
+	 </where>
+		Order by 
+		<choose>
+		 <when test="arraykeyword == null">
+		 1 DESC 
+		
+		
+		</when>
+		<otherwise>
+		  # { arraykeyword} DESC 
+		
+		
+		</otherwise>
+		
+		
+		</choose>
 	
 	</select>
- 
  
 
 
@@ -135,7 +143,7 @@
 
 
  
-<select id="SelectMinPrice">
+<select id="selectMinPrice">
 	 SELECT MIN(sellPrice) from SC_PRODUCTS a join SC_PRODUCTS_OPTION b on(a.prodCode  = b.prodCode) <!-- 사진 자료 생기면 쓰고 이거대신 옵션 테이블 --> 
 								 join SC_BRAND c on(a.brandCode= c.brandCode) 
 	 <where>
@@ -181,8 +189,8 @@
 	</select>
 
 
-<!--3번째 mapper range범위의 최대값  -->
-<select id="SelectMaxPrice">
+<!--4번째 mapper range범위의 최대값  -->
+<select id="selectMaxPrice">
 	 SELECT MAX(sellPrice) from SC_PRODUCTS a join SC_PRODUCTS_OPTION b on(a.prodCode  = b.prodCode) <!-- 사진 자료 생기면 쓰고 이거대신 옵션 테이블 --> 
 								 join SC_BRAND c on(a.brandCode= c.brandCode) 
 	 <where>

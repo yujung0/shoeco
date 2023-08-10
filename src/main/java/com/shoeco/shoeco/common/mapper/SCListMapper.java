@@ -10,5 +10,9 @@ public interface SCListMapper {
 
 	public List<SCListVO> selectCategoryList(ListPagingDTO paging);
 	
-	public long rowTotal(ListPagingDTO paging);
+	public long selectRowTotal(ListPagingDTO paging);
+	
+	public long selectMinPrice();
+	
+	public long selectMaxPrice();
 }

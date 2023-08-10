@@ -24,7 +24,14 @@ public class SCListServiceImpl implements SCListService{
 	}
 	
 	public long rowTotal(ListPagingDTO paging){
-		return scListMapper.rowTotal(paging);
+		return scListMapper.selectRowTotal(paging);
 	}
 
+	public long MinPrice(){
+		return scListMapper.selectMinPrice();
+	};
+
+	public long MaxPrice(){
+		return scListMapper.selectMaxPrice();
+	};
 }

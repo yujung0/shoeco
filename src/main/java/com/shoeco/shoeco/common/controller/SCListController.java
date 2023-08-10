@@ -28,6 +28,10 @@ public class SCListController {
 	@GetMapping("/list")
 	public void showCategoryList(Model model,ListPagingDTO paging){
 		model.addAttribute("categoryList",scListService.getCategoryList(paging));
+		model.addAttribute("minPrice",scListService.MinPrice());
+		model.addAttribute("maxPrice",scListService.MaxPrice());
+		System.err.println(scListService.MinPrice());
+		System.err.println(scListService.MaxPrice());
 		 
 	}
 

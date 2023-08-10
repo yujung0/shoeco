@@ -99,7 +99,7 @@
                         <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
                             Price
                         </a>
-                        	<input type="range">
+                        	<input type="range" min="${minPrice}" max="${maxPrice}">
                          
                         
                     </li>
