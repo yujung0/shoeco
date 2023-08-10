@@ -26,25 +26,34 @@
 		 </if>
 		 
 		 <if test="keyword !=null">
+		 	 
 			  a.prodCode LIKE '%'||#{keyword}||'%' OR 
 			  <!-- brand가 나중에 join하게 되면 추가 brandName LIKE '%'||#{keyword}||'%' OR  -->
 			  a.prodName LIKE '%'||#{keyword}||'%' OR 
 			  c.brandName LIKE '%'||#{keyword}||'%' OR 
 			  a.category LIKE '%'||#{keyword}||'%' 
+			  
 		 </if>
 		
-		
-		  <if test="color != null">
-			 a.color = #{color}  <!-- b.prodCount != 0 이건 나중에 밑에까지 고려 추가할지 생각중-->
+		  
+	 	  <if test="sizeArray != null">
+			 <foreach item="size" collection="sizeArray" open="(" close=")" separator="OR">
+		 			a.prodSize = #{size} 
+			 </foreach>
 			 
 		  </if>
 		
-	 		  <if test="size != null ">
-			a.prodSize = #{prodSize} 
-		  </if>
+		
+		 <if test="colorArray != null ">
+		 	<foreach item="color" collection="colorArray" open="(" close=")" separator="OR">
+				a.color= #{color}
+			</foreach>
+		 </if>
 		 
-		 <if test="brand != null ">
-			a.brandName= #{brandName}
+		 <if test="brandArray != null ">
+		 	<foreach item="brand" collection="brandArray" open="(" close=")" separator="OR">
+				a.brandName= #{brand}
+			</foreach>
 		 </if>
 		    
 	 </where>
@@ -67,7 +76,7 @@
 	</select>
 
  	<select id="rowTotal">
-	 SELECT COUNT(*) from SC_PRODUCTS a join SC_PRODUCTS_OPTION b on(a.prodCode  = b.prodCode) 사진 자료 생기면 쓰고 이거대신 옵션 테이블 
+	 SELECT COUNT(*) from SC_PRODUCTS a join SC_PRODUCTS_OPTION b on(a.prodCode  = b.prodCode)  
 									 join SC_BRAND c on(a.brandCode= c.brandCode)
 		 <where>
 			 a.gender = #{gender}
@@ -85,7 +94,7 @@
 			
 			
 			  <if test="color != null">
-				 a.color = #{color}  b.prodCount != 0 이건 나중에 밑에까지 고려 추가할지 생각중
+				 a.color = #{color}  
 				 
 			  </if>
 			

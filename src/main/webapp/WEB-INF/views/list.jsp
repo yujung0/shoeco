@@ -37,9 +37,9 @@
             <div class="col-lg-3">
                 <h1 class="h2 pb-4">Categories</h1> <!--  -->
                 <ul class="list-unstyled templatemo-accordion">
-                    <li class="pb-3">
+                 <!--    <li class="pb-3">
                         <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
-                            Gender
+                            Size
                             <i class="fa fa-fw fa-chevron-circle-down mt-1"></i>
                         </a>
                         <ul class="collapse show list-unstyled pl-3">
@@ -49,24 +49,64 @@
                     </li>
                     <li class="pb-3">
                         <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
-                            Sale
+                            Color
                             <i class="pull-right fa fa-fw fa-chevron-circle-down mt-1"></i>
                         </a>
                         <ul id="collapseTwo" class="collapse list-unstyled pl-3">
                             <li><a class="text-decoration-none" href="#">Sport</a></li>
                             <li><a class="text-decoration-none" href="#">Luxury</a></li>
                         </ul>
-                    </li>
+                    </li> -->
                     <li class="pb-3">
                         <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
-                            Product
-                            <i class="pull-right fa fa-fw fa-chevron-circle-down mt-1"></i>
+                            Size
                         </a>
-                        <ul id="collapseThree" class="collapse list-unstyled pl-3">
-                            <li><a class="text-decoration-none" href="#">Bag</a></li>
-                            <li><a class="text-decoration-none" href="#">Sweather</a></li>
-                            <li><a class="text-decoration-none" href="#">Sunglass</a></li>
-                        </ul>
+                    <!--     	220<input type="checkbox" value="220" >
+                        	225<input type="checkbox" value="225">
+                        	225<input type="checkbox" value="235">
+                        	<input type="checkbox" value="240">
+                        	<input type="checkbox" value="245">
+                        	<input type="checkbox" value="250">
+                        	<input type="checkbox" value="255">
+                        	<input type="checkbox" value="260">
+                        	<input type="checkbox" value="265">
+                        	<input type="checkbox" value="270">
+                        	<input type="checkbox" value="275">
+                        	<input type="checkbox" value="280">
+                        	<input type="checkbox" value="285">
+                        	<input type="checkbox" value="290">
+                        	<input type="checkbox" value="295">
+                     -->
+                    	<c:forEach var="sizeOne" begin="220" step="5" end="300" >
+                    		<c:out value="${sizeOne}"/> <input type="checkbox" value="${sizeOne}">	
+                    	</c:forEach>
+                    
+                    </li>
+                     <li class="pb-3">
+                        <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
+                            Color
+                        </a>
+                        	red<input type="checkbox" value="red" >
+                        	blue<input type="checkbox" value="blue">
+                        	yellow<input type="checkbox" value="yellow">
+                        	white<input type="checkbox" value="white">
+                        	black<input type="checkbox" value="black">
+                         
+                        
+                    </li>
+                    
+                    <li class="pb-3">
+                        <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
+                            Brand
+                        </a>
+                        	아디다스<input type="checkbox" value="아디다스" >
+                        	나이키<input type="checkbox" value="나이키">
+                        	뉴발란스<input type="checkbox" value="뉴발란스">
+                        	컨버스<input type="checkbox" value="컨버스">
+                        	퓨마<input type="checkbox" value="퓨마">
+                        	닥터마틴<input type="checkbox" value="닥터마틴">
+                         
+                        
                     </li>
                 </ul>
             </div>
