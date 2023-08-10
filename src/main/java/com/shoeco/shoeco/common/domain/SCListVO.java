@@ -19,7 +19,24 @@ public class SCListVO {
 	private String material;
 	private String country;
 	
+	//sc_products_option
+	private String prodOptionNo;
+//	private string prodCode;
+	private String prodSize;
+	private String color;
+	private long prodCount;
 	
+	
+	//sc_brand
+//	private String brandCode;
+	private String brandName;
+	private String businessNo;
+	private String managerName;
+	private String brandPhonename;
+	private String brandEmail;
+	
+	
+	 
 	//sc_products_attachments
 	private String prodAttachUuid;
 	//private String prodCode;

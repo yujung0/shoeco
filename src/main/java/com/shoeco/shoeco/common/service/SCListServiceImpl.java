@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.shoeco.shoeco.common.domain.SCListVO;
 import com.shoeco.shoeco.common.mapper.SCListMapper;
+import com.shoeco.shoeco.common.paging.ListPagingDTO;
 
 @Service
 @Primary
@@ -18,8 +19,8 @@ public class SCListServiceImpl implements SCListService{
 		this.scListMapper = scListMapper  ;
 	} 
 	
-	public List<SCListVO> getCategoryList(String category){
-		return scListMapper.selectCategoryList(category);
+	public List<SCListVO> getCategoryList(ListPagingDTO paging){
+		return scListMapper.selectCategoryList(paging);
 	}
 
 }

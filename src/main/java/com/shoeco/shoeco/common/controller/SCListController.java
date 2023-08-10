@@ -1,10 +1,14 @@
 package com.shoeco.shoeco.common.controller;
 
 import org.springframework.ui.Model;
+
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.shoeco.shoeco.common.paging.ListPagingDTO;
 import com.shoeco.shoeco.common.service.SCListService;
 
 @Controller
@@ -22,8 +26,8 @@ public class SCListController {
 	
 	
 	@GetMapping("/list")
-	public void showCategoryList(Model model,String category){
-		model.addAttribute("categoryList",scListService.getCategoryList(category));
+	public void showCategoryList(Model model,ListPagingDTO paging){
+		model.addAttribute("categoryList",scListService.getCategoryList(paging));
 		 
 	}
 
