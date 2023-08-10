@@ -152,7 +152,8 @@
 	                   </div>
 	                   <div>
                         <li class="nav-item">
-                           <a class="nav-link" href="about.html">MEN</a>
+                          <%--  <a class="nav-link" href="${contextPath}/list?gender=남성">MEN</a> --%>
+                           <a class="nav-link" href="$">MEN</a>
 								<div class="smallCategories">
 	                        		<p>운동화</p>
 	                        		<p>구두</p>
@@ -181,7 +182,15 @@
 	                        		<p>아쿠아</p>
 	                        	</div> 
                         </li> 
-                        </div>  
+                        </div> 
+                       <!--  a자체에 넣어서?
+                        <form action="$">
+                        
+                        
+                        </form>
+                         -->
+                        
+                         
                         <div>  
                         <li class="nav-item">
                             <a class="nav-link" href="contact.html">BEST</a>

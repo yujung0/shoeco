@@ -20,38 +20,43 @@
 	Select * from SC_PRODUCTS a join SC_PRODUCTS_OPTION b on(a.prodCode  = b.prodCode) <!-- 사진 자료 생기면 쓰고 이거대신 옵션 테이블 --> 
 								 join SC_BRAND c on(a.brandCode= c.brandCode) 
 	 <where>
+	 	 <!-- 테스트 중 -->
+	 	  <if test="gender != null">	
+	 	   a.gender = #{gender}
+	 	  </if>
+	 	 <!--  -->
 	 
-		 <if test="category != null">		 
-		 	a.category = #{category} 	
+		 <if test="paging.category != null">		 
+		 	a.category = #{paging.category} 	
 		 </if>
 		 
-		 <if test="keyword !=null">
+		 <if test="paging.keyword !=null">
 		 	 
-			  a.prodCode LIKE '%'||#{keyword}||'%' OR 
-			  <!-- brand가 나중에 join하게 되면 추가 brandName LIKE '%'||#{keyword}||'%' OR  -->
-			  a.prodName LIKE '%'||#{keyword}||'%' OR 
-			  c.brandName LIKE '%'||#{keyword}||'%' OR 
-			  a.category LIKE '%'||#{keyword}||'%' 
+			  a.prodCode LIKE '%'||#{paging.keyword}||'%' OR 
+			  <!-- brand가 나중에 join하게 되면 추가 brandName LIKE '%'||#{paging.keyword}||'%' OR  -->
+			  a.prodName LIKE '%'||#{paging.keyword}||'%' OR 
+			  c.brandName LIKE '%'||#{paging.keyword}||'%' OR 
+			  a.category LIKE '%'||#{paging.keyword}||'%' 
 			  
 		 </if>
 		
 		  
-	 	  <if test="sizeArray != null">
-			 <foreach item="size" collection="sizeArray" open="(" close=")" separator="OR">
-		 			a.prodSize = #{size} 
+	 	  <if test="paging.sizeArray != null">
+			 <foreach item="size" collection="paging.sizeArray" open="(" close=")" separator="OR">
+		 			a.prodSize = CAST (#{size} AS INTEGER) 
 			 </foreach>
 			 
 		  </if>
 		
 		
-		 <if test="colorArray != null ">
-		 	<foreach item="color" collection="colorArray" open="(" close=")" separator="OR">
+		 <if test="paging.colorArray != null ">
+		 	<foreach item="color" collection="paging.colorArray" open="(" close=")" separator="OR">
 				a.color= #{color}
 			</foreach>
 		 </if>
 		 
-		 <if test="brandArray != null ">
-		 	<foreach item="brand" collection="brandArray" open="(" close=")" separator="OR">
+		 <if test="paging.brandArray != null ">
+		 	<foreach item="brand" collection="paging.brandArray" open="(" close=")" separator="OR">
 				a.brandName= #{brand}
 			</foreach>
 		 </if>
@@ -59,13 +64,13 @@
 	 </where>
 		Order by 
 		<choose>
-		 <when test="arraykeyword == null">
+		 <when test="paging.arraykeyword == null">
 		 1 DESC 
 		
 		
 		</when>
 		<otherwise>
-		  # { arraykeyword} DESC 
+		  # { paging.arraykeyword} DESC 
 		
 		
 		</otherwise>
@@ -81,38 +86,43 @@
 	Select COUNT(*) from SC_PRODUCTS a join SC_PRODUCTS_OPTION b on(a.prodCode  = b.prodCode) <!-- 사진 자료 생기면 쓰고 이거대신 옵션 테이블 --> 
 								 join SC_BRAND c on(a.brandCode= c.brandCode) 
 	 <where>
-	 
-		 <if test="category != null">		 
-		 	a.category = #{category} 	
+	 	 <!-- 테스트 중 -->
+	 	    <if test="gender != null">	
+	 	 	  a.gender = #{gender}
+	 	  	</if>
+	 	 <!--  -->
+	 	
+		 <if test="paging.category != null">		 
+		 	a.category = #{paging.category} 	
 		 </if>
 		 
-		 <if test="keyword !=null">
+		 <if test="paging.keyword !=null">
 		 	 
-			  a.prodCode LIKE '%'||#{keyword}||'%' OR 
-			  <!-- brand가 나중에 join하게 되면 추가 brandName LIKE '%'||#{keyword}||'%' OR  -->
-			  a.prodName LIKE '%'||#{keyword}||'%' OR 
-			  c.brandName LIKE '%'||#{keyword}||'%' OR 
-			  a.category LIKE '%'||#{keyword}||'%' 
+			  a.prodCode LIKE '%'||#{paging.keyword}||'%' OR 
+			  <!-- brand가 나중에 join하게 되면 추가 brandName LIKE '%'||#{paging.keyword}||'%' OR  -->
+			  a.prodName LIKE '%'||#{paging.keyword}||'%' OR 
+			  c.brandName LIKE '%'||#{paging.keyword}||'%' OR 
+			  a.category LIKE '%'||#{paging.keyword}||'%' 
 			  
 		 </if>
 		
 		  
-	 	  <if test="sizeArray != null">
-			 <foreach item="size" collection="sizeArray" open="(" close=")" separator="OR">
-		 			a.prodSize = #{size} 
+	 	  <if test="paging.sizeArray != null">
+			 <foreach item="size" collection="paging.sizeArray" open="(" close=")" separator="OR">
+		 			a.prodSize = CAST (#{size} AS INTEGER) 
 			 </foreach>
 			 
 		  </if>
 		
 		
-		 <if test="colorArray != null ">
-		 	<foreach item="color" collection="colorArray" open="(" close=")" separator="OR">
+		 <if test="paging.colorArray != null ">
+		 	<foreach item="color" collection="paging.colorArray" open="(" close=")" separator="OR">
 				a.color= #{color}
 			</foreach>
 		 </if>
 		 
-		 <if test="brandArray != null ">
-		 	<foreach item="brand" collection="brandArray" open="(" close=")" separator="OR">
+		 <if test="paging.brandArray != null ">
+		 	<foreach item="brand" collection="paging.brandArray" open="(" close=")" separator="OR">
 				a.brandName= #{brand}
 			</foreach>
 		 </if>
@@ -120,13 +130,13 @@
 	 </where>
 		Order by 
 		<choose>
-		 <when test="arraykeyword == null">
+		 <when test="paging.arraykeyword == null">
 		 1 DESC 
 		
 		
 		</when>
 		<otherwise>
-		  # { arraykeyword} DESC 
+		  # { paging.arraykeyword} DESC 
 		
 		
 		</otherwise>
@@ -147,38 +157,42 @@
 	 SELECT MIN(sellPrice) from SC_PRODUCTS a join SC_PRODUCTS_OPTION b on(a.prodCode  = b.prodCode) <!-- 사진 자료 생기면 쓰고 이거대신 옵션 테이블 --> 
 								 join SC_BRAND c on(a.brandCode= c.brandCode) 
 	 <where>
-	 
-		 <if test="category != null">		 
-		 	a.category = #{category} 	
+	 	   <!-- 테스트 중 -->
+	 	    <if test="gender != null">	
+	 	 	  a.gender = #{gender}
+	 	  	</if>
+	 	   <!--  -->
+		 <if test="paging.category != null">		 
+		 	a.category = #{paging.category} 	
 		 </if>
 		 
-		 <if test="keyword !=null">
+		 <if test="paging.keyword !=null">
 		 	 
-			  a.prodCode LIKE '%'||#{keyword}||'%' OR 
-			  <!-- brand가 나중에 join하게 되면 추가 brandName LIKE '%'||#{keyword}||'%' OR  -->
-			  a.prodName LIKE '%'||#{keyword}||'%' OR 
-			  c.brandName LIKE '%'||#{keyword}||'%' OR 
-			  a.category LIKE '%'||#{keyword}||'%' 
+			  a.prodCode LIKE '%'||#{paging.keyword}||'%' OR 
+			  <!-- brand가 나중에 join하게 되면 추가 brandName LIKE '%'||#{paging.keyword}||'%' OR  -->
+			  a.prodName LIKE '%'||#{paging.keyword}||'%' OR 
+			  c.brandName LIKE '%'||#{paging.keyword}||'%' OR 
+			  a.category LIKE '%'||#{paging.keyword}||'%' 
 			  
 		 </if>
 		
 		  
-	 	  <if test="sizeArray != null">
-			 <foreach item="size" collection="sizeArray" open="(" close=")" separator="OR">
-		 			a.prodSize = #{size} 
+	 	  <if test="paging.sizeArray != null">
+			 <foreach item="size" collection="paging.sizeArray" open="(" close=")" separator="OR">
+		 			a.prodSize = CAST (#{size} AS INTEGER) 
 			 </foreach>
 			 
 		  </if>
 		
 		
-		 <if test="colorArray != null ">
-		 	<foreach item="color" collection="colorArray" open="(" close=")" separator="OR">
+		 <if test="paging.colorArray != null ">
+		 	<foreach item="color" collection="paging.colorArray" open="(" close=")" separator="OR">
 				a.color= #{color}
 			</foreach>
 		 </if>
 		 
-		 <if test="brandArray != null ">
-		 	<foreach item="brand" collection="brandArray" open="(" close=")" separator="OR">
+		 <if test="paging.brandArray != null ">
+		 	<foreach item="brand" collection="paging.brandArray" open="(" close=")" separator="OR">
 				a.brandName= #{brand}
 			</foreach>
 		 </if>
@@ -194,38 +208,43 @@
 	 SELECT MAX(sellPrice) from SC_PRODUCTS a join SC_PRODUCTS_OPTION b on(a.prodCode  = b.prodCode) <!-- 사진 자료 생기면 쓰고 이거대신 옵션 테이블 --> 
 								 join SC_BRAND c on(a.brandCode= c.brandCode) 
 	 <where>
+	 	 <!-- 테스트 중 -->
+	 	  <if test="gender != null">	
+	 	 	  a.gender = #{gender}
+	 	  </if>
+	 	 <!--  -->
 	 
-		 <if test="category != null">		 
-		 	a.category = #{category} 	
+		 <if test="paging.category != null">		 
+		 	a.category = #{paging.category} 	
 		 </if>
 		 
-		 <if test="keyword !=null">
+		 <if test="paging.keyword !=null">
 		 	 
-			  a.prodCode LIKE '%'||#{keyword}||'%' OR 
-			  <!-- brand가 나중에 join하게 되면 추가 brandName LIKE '%'||#{keyword}||'%' OR  -->
-			  a.prodName LIKE '%'||#{keyword}||'%' OR 
-			  c.brandName LIKE '%'||#{keyword}||'%' OR 
-			  a.category LIKE '%'||#{keyword}||'%' 
+			  a.prodCode LIKE '%'||#{paging.keyword}||'%' OR 
+			  <!-- brand가 나중에 join하게 되면 추가 brandName LIKE '%'||#{paging.keyword}||'%' OR  -->
+			  a.prodName LIKE '%'||#{paging.keyword}||'%' OR 
+			  c.brandName LIKE '%'||#{paging.keyword}||'%' OR 
+			  a.category LIKE '%'||#{paging.keyword}||'%' 
 			  
 		 </if>
 		
 		  
-	 	  <if test="sizeArray != null">
-			 <foreach item="size" collection="sizeArray" open="(" close=")" separator="OR">
-		 			a.prodSize = #{size} 
+	 	  <if test="paging.sizeArray != null">
+			 <foreach item="size" collection="paging.sizeArray" open="(" close=")" separator="OR">
+		 			a.prodSize = CAST (#{size} AS INTEGER) 
 			 </foreach>
 			 
 		  </if>
 		
 		
-		 <if test="colorArray != null ">
-		 	<foreach item="color" collection="colorArray" open="(" close=")" separator="OR">
+		 <if test="paging.colorArray != null ">
+		 	<foreach item="color" collection="paging.colorArray" open="(" close=")" separator="OR">
 				a.color= #{color}
 			</foreach>
 		 </if>
 		 
-		 <if test="brandArray != null ">
-		 	<foreach item="brand" collection="brandArray" open="(" close=")" separator="OR">
+		 <if test="paging.brandArray != null ">
+		 	<foreach item="brand" collection="paging.brandArray" open="(" close=")" separator="OR">
 				a.brandName= #{brand}
 			</foreach>
 		 </if>

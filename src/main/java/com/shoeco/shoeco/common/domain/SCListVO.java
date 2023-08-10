@@ -21,7 +21,7 @@ public class SCListVO {
 	
 	//sc_products_option
 	private String prodOptionNo;
-//	private string prodCode;
+//	private String prodCode;
 	private String prodSize;
 	private String color;
 	private long prodCount;

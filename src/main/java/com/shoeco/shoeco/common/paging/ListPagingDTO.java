@@ -15,11 +15,12 @@ public class ListPagingDTO {
 //	검색 관련
 	private String category;
 	
+	
 	private String arraykeyword; //정렬관련 keyword desc
 	
 	private String keyword;
 	
-	private String sizeArray[];
+	private Integer sizeArray[];
 	private String colorArray[];
 //	private long price;
 
@@ -51,5 +52,6 @@ public class ListPagingDTO {
 			this.perPage= pageNum;
 		}
 		 
+		
 	}
 }
