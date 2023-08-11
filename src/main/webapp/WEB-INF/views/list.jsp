@@ -78,7 +78,7 @@
                         	<input type="checkbox" value="295">
                      -->
                     	<c:forEach var="sizeOne" begin="220" step="5" end="300" >
-                    		<c:out value="${sizeOne}"/> <input type="checkbox" value="${sizeOne}">	
+                    		<c:out value="${sizeOne}"/> <input type="checkbox" value="${sizeOne}" id="<c:out value='${sizeOne}'/>">	
                     	</c:forEach>
                     
                     </li>
@@ -190,9 +190,9 @@
                     </div> <!-- END 리스트 칸-->
                 </div><!--END 리스트칸의 wrapper  -->
                 
-                <div div="row">
-                    <ul class="pagination pagination-lg justify-content-end">
-                        <li class="page-item disabled">
+                <div div="row"><!--paing  -->
+                    <ul class="pagination pagination-lg justify-content-end mypaging">
+                        <!-- <li class="page-item disabled">
                             <a class="page-link active rounded-0 mr-3 shadow-sm border-top-0 border-left-0" href="#" tabindex="-1">1</a>
                         </li>
                         <li class="page-item">
@@ -200,9 +200,46 @@
                         </li>
                         <li class="page-item">
                             <a class="page-link rounded-0 shadow-sm border-top-0 border-left-0 text-dark" href="#">3</a>
-                        </li>
+                        </li> -->
+                    
+                    
+                    	<c:if test="${pagingCre.prev}">
+                    		<li class="page-item">
+                            	<a class="page-link rounded-0 mr-3 shadow-sm border-top-0 border-left-0 text-dark" href="1">&laquo;&laquo;</a>
+                        	</li>
+                    	</c:if>
+                    	
+                    	<c:if test="${pagingCre.prev}">
+                    		<li class="page-item">
+                            	<a class="page-link rounded-0 mr-3 shadow-sm border-top-0 border-left-0 text-dark" href="${pagingCre.startNum - 1}">&laquo;</a>
+                        	</li>
+                    	</c:if>
+                    	
+                    	<!-- 페이징 숫자 부분 -->
+                    	<c:forEach var="pageItem" begin="${pagingCre.startNum}" end="${pagingCre.endNum}" step="1">
+                    		<li class='page-item ${pagingCre.paging.pageNum == pageItem ? "active" : "" }'>
+                            	<a class="page-link rounded-0 mr-3 shadow-sm border-top-0 border-left-0 text-dark" href="${pageItem}">${pageItem}</a>
+                        	</li>
+                    	</c:forEach>
+                    	<!-- end 페이징 숫자 부분 -->
+                    	
+                    	 <c:if test="${pagingCre.next}">
+                    		<li class="page-item">
+                            	<a class="page-link rounded-0 mr-3 shadow-sm border-top-0 border-left-0 text-dark" href="1">&raquo;</a>
+                        	</li>
+                    	</c:if>
+                    	
+                    	<c:if test="${pagingCre.next}">
+                    		<li class="page-item">
+                            	<a class="page-link rounded-0 mr-3 shadow-sm border-top-0 border-left-0 text-dark" href="${pagingCre.lastNum}">&raquo;&raquo;</a>
+                        	</li>
+                    	</c:if>
+                    
+                    
+                    
+                    
                     </ul>
-                </div>
+                </div><!--End paging  -->
             </div>
 
         </div>
