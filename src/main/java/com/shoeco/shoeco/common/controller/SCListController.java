@@ -33,8 +33,11 @@ public class SCListController {
 		model.addAttribute("minPrice",scListService.MinPrice(gender,paging)); //long -> Longer 처리
 		model.addAttribute("maxPrice",scListService.MaxPrice(gender,paging));
 		
+		
+		
 		  
 		System.err.println(scListService.MinPrice(gender,paging));
+		System.err.println("=================조건에 맍는 distinct 행수: " + scListService.rowTotal(gender, paging));
 		System.err.println(scListService.MaxPrice(gender,paging));
 		
 		
