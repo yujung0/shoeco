@@ -9,37 +9,16 @@
    <insert id="memberJoin" parameterType="com.shoeco.shoeco.common.domain.SCMemberVO">
 	INSERT INTO SC_USER
 	VALUES(#{userId}, #{userPassword}, #{userEmail}, SYSDATE,
-     	   #{userAddress}, #{userPhoneNo}, SYSDATE, 0, 'Bronze', #{userName}, 0, #{userAddress2}, #{userAddress3})
+     	   #{userAddress}, #{userPhoneNo}, SYSDATE, 0, 'Bronze', #{userName}, #{userAddress2}, #{userAddress3})
   </insert>
 
-<!--  <insert id="memberJoin" parameterType="com.shoeco.shoeco.common.domain.SCMemberVO">
-        SQL 쿼리 문장 작성
-    INSERT INTO SC_USER (
-        USERID, 
-        USERPASSWORD, 
-        USEREMAIL, 
-        USERBDATE, 
-        USERADDRESSDETAIL, 
-        USERPHONENO, 
-        USERJOINDATE, 
-        MILEAGE, 
-        USERRANK, 
-        USERNAME
-    ) 
-    VALUES (
-        #{userId}, 
-        #{userPassword}, 
-        #{userEmail}, 
-		#{userBdate, jdbcType=DATE},
-        #{userAddressdetail}, 
-        #{userPhoneNo}, 
-        SYSDATE, 
-        500, 
-        'bronze', 
-        #{userName}
-    );
-</insert> -->
 
+	<!-- 2308121911 장유정_아이디 중복검사 -->
+  	<select id="idCheck" resultType="int">
+  		select count(*)
+  		from SC_USER
+  		where userId = #{userId}
+  	</select>
 
 
   <insert id="insertSCAuthoritys">

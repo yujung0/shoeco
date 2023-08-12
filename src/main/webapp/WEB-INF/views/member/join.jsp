@@ -129,18 +129,27 @@ $(".join_button").click(function(){
 
 
 //아이디 중복검사
-$('.id_input').on("propertychange change keyup paste input", function(){
+$('.id_input').on("propertychange change keyup paste input", function() {
+    var memberId = $('.id_input').val();
+    var data = { memberId: memberId };
 
-/* 	console.log("keyup 테스트"); */
-	
-	var memberId = $('.id_input').val();			// .id_input에 입력되는 값
-	var data = {memberId : memberId}				// '컨트롤에 넘길 데이터 이름' : '데이터(.id_input에 입력되는 값)'
-	
-	$.ajax({
-		type : "post",
-		url : "/member/memberIdChk",
-		data : data
-	}); // ajax 종료
+    $.ajax({
+        type: "post",
+        url: "${contextPath}/member/memberIdChk",
+        data: data,
+        success: function (result) {
+            if (result === 'success') {
+                $('.id_input_re_1').css("display", "inline-block");
+                $('.id_input_re_2').css("display", "none");
+            } else if (result === 'fail') {
+                $('.id_input_re_2').css("display", "inline-block");
+                $('.id_input_re_1').css("display", "none");
+            }
+        },
+        error: function(xhr, status, error){
+            console.error("AJAX Error:", status, error);
+        }
+    });
 
 });// function 종료
 

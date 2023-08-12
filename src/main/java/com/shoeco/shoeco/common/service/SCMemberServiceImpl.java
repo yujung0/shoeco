@@ -11,7 +11,7 @@ import com.shoeco.shoeco.common.mapper.SCMemberMapper;
 @Primary
 public class SCMemberServiceImpl implements SCMemberService{
 
-//2308091420 장유정
+	//2308091420 장유정
 	@Autowired
 	SCMemberMapper membermapper;
 
@@ -20,6 +20,14 @@ public class SCMemberServiceImpl implements SCMemberService{
 		
 		membermapper.memberJoin(member);
 		
+	}
+	
+	
+	//2308121927 장유정
+	@Override
+	public int idCheck(String userId) throws Exception {
+		
+		return membermapper.idCheck(userId);
 	}
 	
 }

@@ -10,7 +10,7 @@
 <sec:authentication property="principal" var="principal"/> --%>
 
 
-<%@include file="./include/header.jsp"%>
+<%@include file="./include/header.jsp" %>
 
 <style>
 a {
