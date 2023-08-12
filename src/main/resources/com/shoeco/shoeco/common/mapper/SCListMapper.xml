@@ -17,7 +17,7 @@
 
 <!-- 230810 아직 미완성: 카테고리, 검색어, 페이징 고려 mapper-->
 	<select id="selectCategoryList">
-	Select * from SC_PRODUCTS a join SC_PRODUCTS_OPTION b on(a.prodCode  = b.prodCode) <!-- 사진 자료 생기면 쓰고 이거대신 옵션 테이블 --> 
+	Select distinct a.prodCode from SC_PRODUCTS a join SC_PRODUCTS_OPTION b on(a.prodCode  = b.prodCode) <!-- 사진 자료 생기면 쓰고 이거대신 옵션 테이블 --> 
 								 join SC_BRAND c on(a.brandCode= c.brandCode) 
 	 <where>
 	 	 <!-- 테스트 중 -->

@@ -153,7 +153,7 @@
 	                   <div>
                         <li class="nav-item">
                           <%--  <a class="nav-link" href="${contextPath}/list?gender=남성">MEN</a> --%>
-                           <a class="nav-link" href="$">MEN</a>
+                           <a class="nav-link" href="${contextPath}/list?gender=공용">MEN</a>
 								<div class="smallCategories">
 	                        		<p>운동화</p>
 	                        		<p>구두</p>

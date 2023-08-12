@@ -9,7 +9,7 @@ import lombok.ToString;
 @ToString
 public class ListPagingCreatorDTO {
 
-	private ListPagingDTO listPagingDTO;
+	private ListPagingDTO paging;
 	  
 	private int startNum;
 	private int endNum;
@@ -20,20 +20,26 @@ public class ListPagingCreatorDTO {
 	private int lastNum;
 
 
-	public ListPagingCreatorDTO(long rowTotal,ListPagingDTO listPagingDTO) {
+	public ListPagingCreatorDTO(long rowTotal,ListPagingDTO paging) {
 	
-		this.listPagingDTO = listPagingDTO ;
+		this.paging = paging;
 		this.rowTotal = rowTotal;
 		this.pagingCount = 10;
 		
-		this.endNum = (int)Math.ceil((double)listPagingDTO.getPageNum() / pagingCount) * pagingCount ;
+		this.endNum = (int)Math.ceil((double)paging.getPageNum() / this.pagingCount) * this.pagingCount ;
 		this.startNum =  this.endNum  - (this.pagingCount - 1) ;
-		this.lastNum = (int)Math.ceil(this.rowTotal/listPagingDTO.getPerPage());
+		this.lastNum = (int)Math.ceil((double)this.rowTotal/paging.getPerPage());
 		this.prev = 1 < this.startNum ;
 		this.next = this.lastNum > this.endNum ;
 		
 		
-		System.out.println("전달된 페이징 기본데이터-listPagingDTO: " + this.listPagingDTO.toString());
+		if(this.endNum > this.lastNum) {
+			this.endNum = this.lastNum ;
+		}
+		
+		
+		
+		System.out.println("전달된 페이징 기본데이터-paging: " + this.paging.toString());
 		System.out.println("시작 페이징번호: " + this.startNum);
 		System.out.println("끝 페이징번호: " + this.endNum);
 		System.out.println("이전버튼 표시 여부: " + this.prev);
