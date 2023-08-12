@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.shoeco.shoeco.common.mapper.SCMemberMapper">
+
+<!-- 230808 장유정_회원 등록 -->
+   <insert id="memberJoin" parameterType="com.shoeco.shoeco.common.domain.SCMemberVO">
+	INSERT INTO SC_USER
+	VALUES(#{userId}, #{userPassword}, #{userEmail}, SYSDATE,
+     	   #{userAddress}, #{userPhoneNo}, SYSDATE, 0, 'Bronze', #{userName}, 0, #{userAddress2}, #{userAddress3})
+  </insert>
+
+<!--  <insert id="memberJoin" parameterType="com.shoeco.shoeco.common.domain.SCMemberVO">
+        SQL 쿼리 문장 작성
+    INSERT INTO SC_USER (
+        USERID, 
+        USERPASSWORD, 
+        USEREMAIL, 
+        USERBDATE, 
+        USERADDRESSDETAIL, 
+        USERPHONENO, 
+        USERJOINDATE, 
+        MILEAGE, 
+        USERRANK, 
+        USERNAME
+    ) 
+    VALUES (
+        #{userId}, 
+        #{userPassword}, 
+        #{userEmail}, 
+		#{userBdate, jdbcType=DATE},
+        #{userAddressdetail}, 
+        #{userPhoneNo}, 
+        SYSDATE, 
+        500, 
+        'bronze', 
+        #{userName}
+    );
+</insert> -->
+
+
+
+  <insert id="insertSCAuthoritys">
+	INSERT INTO SC_USER_AUTHORITY
+	VALUES('firstUser', 'ADMIN')
+  </insert>
+
+	
+</mapper>

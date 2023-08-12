@@ -4,13 +4,12 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
-
+<!-- 230808 장유정_로그인 페이지 -->
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="/resources/css/member/login.css">
 </head>
 <body>
 
@@ -18,7 +17,7 @@
 	
 	<div class="wrap">
 		<div class="logo_wrap">
-			<span>Book Mall</span>
+			<span>Shoeco</span>
 		</div>
 		<div class="login_wrap"> 
 			<div class="id_wrap">
