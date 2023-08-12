@@ -37,8 +37,6 @@
 			 WHERE rn >= ( ( #{pageNum} * #{rowAmountPerPage} ) - ( #{rowAmountPerPage} - 1 ) )
 		]]>
 	</select> -->
-	
-	<!-- 장바구니 목록 갯수 조회 -->
  	
 	
 </mapper>
