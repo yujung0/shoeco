@@ -23,21 +23,23 @@
 				<table class="table table-hover">
 					<thead style="text-align: center;">
 						<tr class="table-dark">
-							<th>상품명</th>
+							<th>상품</th>
 							<th>사이즈</th>
 							<th>색상</th>
 							<th>갯수</th>
 							<th>가격</th>
+							<th>선택</th>
 						</tr>
 					</thead>
 					<tbody style="text-align: center;">
 						<c:forEach var="cartItem" items="${cartList}">
 							<tr class="text-secondary-emphasis">
-								<td>${cartItem.prodName}</td>
+								<td><img class="img-fluid" src="./resources/img/white_test.jpg" alt="" width="100" height="100">${cartItem.prodName}</td>
 								<td>${cartItem.prodSize}</td>
 								<td>${cartItem.color}</td>
 								<td>${cartItem.cartCount}</td>
 								<td>${cartItem.price}</td>
+								<td><input type="checkbox"></td>
 							</tr>
 						</c:forEach>
 					</tbody>
