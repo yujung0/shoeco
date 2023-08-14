@@ -19,18 +19,18 @@ public class SCCartController {
 	private SCCartService cartService ;
 	
 	// 회원의 장바구니 목록 조회
-	@GetMapping("/cart")
-	public void showCartList(Model model){
-		
-		model.addAttribute("cartList", cartService.selectCart());
-	}
-	
-	// 회원의 장바구니 목록 조회(페이징 구현중)
 //	@GetMapping("/cart")
-//	public void showCartList(Model model, CartPagingDTO cartPagingDTO){
+//	public void showCartList(Model model){
 //		
 //		model.addAttribute("cartList", cartService.selectCart());
 //	}
+	
+	// 회원의 장바구니 목록 조회(페이징 구현중)
+	@GetMapping("/cart")
+	public void showCartList(Model model, CartPagingDTO cartPagingDTO){
+		
+		model.addAttribute("cartList", cartService.selectCart(cartPagingDTO));
+	}
 
 		
 }
