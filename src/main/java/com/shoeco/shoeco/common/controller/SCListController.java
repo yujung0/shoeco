@@ -28,7 +28,9 @@ public class SCListController {
 	
 	@GetMapping("/list")
 	public void showCategoryList(Model model,String gender,ListPagingDTO paging){
+		
 		model.addAttribute("categoryList",scListService.getCategoryList(gender,paging));
+		//System.err.println(scListService.getCategoryList(gender,paging).get(0).toString());
 		model.addAttribute("pagingCre",new ListPagingCreatorDTO(scListService.rowTotal(gender, paging),paging));
 		model.addAttribute("minPrice",scListService.MinPrice(gender,paging)); //long -> Longer 처리
 		model.addAttribute("maxPrice",scListService.MaxPrice(gender,paging));
