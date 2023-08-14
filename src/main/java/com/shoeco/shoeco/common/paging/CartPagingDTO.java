@@ -11,8 +11,8 @@ import lombok.ToString;
 @EqualsAndHashCode
 public class CartPagingDTO {
 
-	private int pageNum; //현재 페이지 번호
-	private int rowAmountPerPage; //페이지당 출력할 레코드 개수
+	private Integer pageNum; //현재 페이지 번호
+	private Integer rowAmountPerPage; //페이지당 출력할 레코드 개수
 	
 	 //생성자를 통해 표시할 페이지번호와 페이지당 출력할 레코드 개수를 컨트롤러로 전달
 	 //생성자1: list.jsp가 처음 호출 시에, 페이지번호와 행수를 각각 1과 10으로 전달

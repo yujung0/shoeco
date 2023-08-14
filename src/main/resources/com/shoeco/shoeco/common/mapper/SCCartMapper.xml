@@ -6,7 +6,7 @@
 <mapper namespace="com.shoeco.shoeco.common.mapper.SCCartMapper">
 
 
-	<!-- 회원의 장바구니 목록 조회 -->
+	<!-- 회원의 장바구니 목록 조회 --><!-- 
 	<select id="selectCartList">
 		SELECT a.prodName, b.prodSize, b.color, c.cartCount, (a.sellPrice * c.cartCount) AS price
 		FROM SC_PRODUCTS a
@@ -17,9 +17,9 @@
 		WHERE b.PRODOPTIONNO IN (SELECT PRODOPTIONNO
 		                        FROM SC_CART
 		                        WHERE userId = 'firstUser')
-	</select>
+	</select> -->
 	
-	<!-- 회원의 장바구니 목록 조회(페이징 구현중) --><!-- 
+	<!-- 회원의 장바구니 목록 조회(페이징 구현중) -->
 	<select id="selectCartList">
 		<![CDATA[
 			 SELECT a.prodName, b.prodSize, b.color, c.cartCount, (a.sellPrice * c.cartCount) AS price
@@ -36,7 +36,6 @@
 				  )
 			 WHERE rn >= ( ( #{pageNum} * #{rowAmountPerPage} ) - ( #{rowAmountPerPage} - 1 ) )
 		]]>
-	</select> -->
+	</select>
  	
-	
 </mapper>
