@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.shoeco.shoeco.common.paging.CartPagingCreatorDTO;
 import com.shoeco.shoeco.common.paging.CartPagingDTO;
 import com.shoeco.shoeco.common.service.SCCartService;
 
@@ -26,10 +27,19 @@ public class SCCartController {
 //	}
 	
 	// 회원의 장바구니 목록 조회(페이징 구현중)
-	@GetMapping("/cart")
-	public void showCartList(Model model, CartPagingDTO cartPagingDTO){
+	@GetMapping("/cart/{pageNum}")
+	public String showCartList(Model model, CartPagingDTO cartPagingDTO){
 		
 		model.addAttribute("cartList", cartService.selectCart(cartPagingDTO));
+		
+		long rowTotal = cartService.getRowTotal();
+		
+		CartPagingCreatorDTO cartPagingCreatorDTO =
+				new CartPagingCreatorDTO(rowTotal, cartPagingDTO) ;
+		
+		model.addAttribute("pagingCreator", cartPagingCreatorDTO) ;
+		
+		return "/cart";
 	}
 
 		

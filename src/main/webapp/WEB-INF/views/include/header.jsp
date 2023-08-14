@@ -104,7 +104,7 @@
          	<input type="text" placeholder="검색어 입력"><button>검색</button>
          </div>
          <div style="display: inline;">
-	         <a class="nav-icon position-relative text-decoration-none" href="${contextPath}/cart">
+	         <a class="nav-icon position-relative text-decoration-none" href="${contextPath}/cart/1">
 	             <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
 	             &nbsp;<span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">7</span>
 	         </a>
