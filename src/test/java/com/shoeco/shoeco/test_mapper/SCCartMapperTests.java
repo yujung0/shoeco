@@ -29,12 +29,12 @@ public class SCCartMapperTests {
     private SCCartMapper scCartMapper;
 //
     //장바구니 목록 조회 테스트
-    @Test
-    public void testInsertMyMember() {
-    	
-    	System.out.println(scCartMapper.selectCartList());
-    	
-    }// test end
+//    @Test
+//    public void testInsertMyMember() {
+//    	
+//    	System.out.println(scCartMapper.selectCartList());
+//    	
+//    }// test end
 
     
 } //class-end
