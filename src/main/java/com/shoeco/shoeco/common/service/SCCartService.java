@@ -10,11 +10,11 @@ public interface SCCartService {
 	
 	
 	// 회원의 장바구니 목록 조회
-	public List<SCCartVO> selectCart() ;
+//	public List<SCCartVO> selectCart() ;
 	
 	
 	// 회원의 장바구니 목록 조회(페이징 구현중)
-//	public List<SCCartVO> selectCart(CartPagingDTO cartPagingDTO) ;
+	public List<SCCartVO> selectCart(CartPagingDTO cartPagingDTO) ;
 
 	
 }
