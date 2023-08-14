@@ -31,4 +31,10 @@ public class SCCartServiceImpl implements SCCartService{
 		return cartMapper.selectCartList(cartPagingDTO);
 	}
 	
+	//장바구니 총 갯수 조회
+	public int getRowTotal() {
+		
+		return cartMapper.selectRowTotal();
+	}
+	
 }
