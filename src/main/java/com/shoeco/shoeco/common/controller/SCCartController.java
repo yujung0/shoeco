@@ -32,6 +32,8 @@ public class SCCartController {
 		
 		model.addAttribute("cartList", cartService.selectCart(cartPagingDTO));
 		
+		System.out.println(cartService.selectCart(cartPagingDTO));
+		
 		long rowTotal = cartService.getRowTotal();
 		
 		CartPagingCreatorDTO cartPagingCreatorDTO =
