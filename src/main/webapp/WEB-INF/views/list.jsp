@@ -95,16 +95,36 @@
                         
                     </li>
                     
-                      <li class="pb-3">
+                     <%--  <li class="pb-3">
                         <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
                             Price
                         </a>
                         	${minPrice}<input type="range" min="${minPrice}" max="${maxPrice}">${maxPrice}
                          
                         
-                    </li>
-                    
-                    
+                    </li> --%>
+                    <!-- 검색 결과 페이지가 뜨지 않을때  range 표시 -->
+	 				<c:choose>	
+	 					<c:when test="${minPrice} != null">
+		                     <li class="pb-3">
+		                        <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
+		                            Price
+		                        </a>
+		                        	${minPrice}<input type="range" min="${minPrice}" max="${maxPrice}">${maxPrice}
+		                    </li>
+		                </c:when>  
+
+		                <c:otherwise>
+		                     <li class="pb-3">
+		                        <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
+		                            Price
+		                        </a>
+		                        	0<input type="range" min="0" max="${totalMaxPrice}">${totalMaxPrice}
+		                    </li>
+		                
+		                
+		                </c:otherwise> 
+                    </c:choose>
                     
                     <li class="pb-3">
                         <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">

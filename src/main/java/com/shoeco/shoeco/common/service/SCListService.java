@@ -17,4 +17,6 @@ public interface SCListService {
 	//4 range 최대
 	public Long MaxPrice(@RequestParam("gender") String gender, @RequestParam("paging") ListPagingDTO paging);
 
+	//5 조건 검색시 값이 안나올때 다시 range이용할때 표시할 최대값 
+	public long totalMaxPrice();
 }
