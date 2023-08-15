@@ -43,6 +43,15 @@
  
 #mail_check_input_box_true{
     background-color:white;
+    
+     
+.correct{
+    color : green;
+}
+.incorrect{
+    color : red;
+}
+ 
 }
  
 
@@ -90,6 +99,7 @@
 					</div>
 					<div class="mail_check_button">
 						<!-- <button class="send_verification_button">인증번호 전송</button> -->
+						
 						<span>인증번호 전송</span>
 					</div>
 					<div class="clearfix"></div>
