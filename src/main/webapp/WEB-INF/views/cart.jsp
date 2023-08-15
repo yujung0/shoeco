@@ -12,36 +12,73 @@
 
 <%@include file="./include/header.jsp" %>
 
+<style>
+    .no-pointer-events {
+        pointer-events: none;
+    }
+    .hide-row {
+        display: none;
+    }
+    table {
+        border-collapse: collapse; /* 테두리를 합침 */
+        width: 100%;
+    }
+    table, th, td {
+        border: none; /* 테두리를 제거 */
+    }
+</style>
     
 
 <div id="page-wrapper">
     <!-- Start Categories of The Month -->
     <section class="container py-5">
-        <div class="row text-left pt-3">
-            <div class="col-lg-10 m-auto">
-                <h1 class="h1">장바구니 목록</h1>				
+    	<div class="row text-left pt-3">
+            <div class="col-lg-10 m-auto"><!-- 	
+      		<h1 class="h1">장바구니</h1> -->		
 				<table class="table table-hover">
 					<thead style="text-align: center;">
 						<tr class="table-dark">
+							<th>선택</th>
 							<th>상품</th>
 							<th>사이즈</th>
 							<th>색상</th>
-							<th>갯수</th>
+							<th>수량</th>
 							<th>가격</th>
-							<th>선택</th>
 						</tr>
 					</thead>
 					<tbody style="text-align: center;">
-						<c:forEach var="cartItem" items="${cartList}">
-							<tr class="text-secondary-emphasis">
-								<td><img class="img-fluid" src="${contextPath}/resources/img/white_test.jpg" alt="" width="100" height="100">${cartItem.prodName}</td>
-								<td>${cartItem.prodSize}</td>
-								<td>${cartItem.color}</td>
-								<td>${cartItem.cartCount}</td>
-								<td>${cartItem.price}</td>
-								<td><input type="checkbox"></td>
-							</tr>
+						<c:set var="totalPrice" value="0" />
+						<c:forEach var="cartItem" items="${cartList}" varStatus="loop">
+						    <tr class="text-secondary-emphasis">
+						        <td><input type="checkbox" id="checkBox_${loop.index}" onchange="calculateTotalPrice()"></td>
+						        <td><img class="img-fluid" src="${contextPath}/resources/img/white_test.jpg" alt="" width="100" height="100">${cartItem.prodName}</td>
+						        <td>${cartItem.prodSize}</td>
+						        <td>${cartItem.color}</td>
+						        <td>${cartItem.cartCount}</td>
+						        <td>
+								    <fmt:formatNumber value="${cartItem.price}" type="currency" currencyCode="KRW" />
+								</td>
+
+						    </tr>
+						    <c:set var="totalPrice" value="${totalPrice + cartItem.price * cartItem.cartCount}" />
 						</c:forEach>
+					</tbody>
+					<tbody style="text-align: center; border-bottom: none;">
+					    <tr class="no-pointer-events" style="border: none;">
+					        <td colspan="2"></td>
+					        <td colspan="2">
+							    <p style="text-align: center;">
+							        <span style="font-size: 24px; font-weight: bold;">총 결제금액: </span>
+							        <span id="totalPrice" style="font-size: 24px; font-weight: bold;">₩0</span>
+							    </p>
+							</td>
+							<td></td>
+							<td>
+							    <p style="text-align: center;">
+							        <button class="btn btn-success" onclick="performPayment()">결제</button>
+							    </p>
+							</td>
+					    </tr>
 					</tbody>
 				</table>
             </div>
@@ -91,6 +128,28 @@
 	</div><!-- Pagination - end -->    
 </div><!-- page-wrapper - end -->
 
+<script>
+
+	function formatCurrency(amount) {
+	    return new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(amount);
+	}
+	
+	function calculateTotalPrice() {
+	    var totalPrice = 0;
+	    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+	    
+	    checkboxes.forEach(function(checkbox, index) {
+	        if (checkbox.checked) {
+	            var price = parseInt('${cartList.get(index).price}');
+	            var cartCount = parseInt('${cartList.get(index).cartCount}');
+	            totalPrice += price * cartCount;
+	        }
+	    });
+	    
+	    document.getElementById('totalPrice').textContent = formatCurrency(totalPrice);
+	}
+	
+</script>
 
 <%@include file="./include/footer.jsp" %>
 
