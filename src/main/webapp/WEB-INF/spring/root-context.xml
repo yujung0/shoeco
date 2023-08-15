@@ -9,12 +9,13 @@
 
 	<!-- 2308151245 장유정 추가_mail 관련 -->
 	 <!-- navermail설정 -->
-	    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl"> 
-	     <property name="host" value="smtp.naver.com"/> <!-- 메이서버 호스트 -->
-	     <property name="port" value="465"/> <!-- 메이서버 포트번호 -->
-	     <property name="username" value="your_email"/> <!-- 자신의 이메일 아이디 -->
-	     <property name="password" value="your_password"/> <!-- 자신의 비밀번호 -->
-	       <!-- 보안연결 SSL과 관련된 설정 -->
+ <!-- 	    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl"> 
+	     <property name="host" value="smtp.naver.com"/> 메이서버 호스트
+	     <property name="port" value="587"/> 메이서버 포트번호
+	     <property name="username" value="3qnsdml1@naver.com"/> 자신의 이메일 아이디
+	     <property name="password" value="7129"/> 자신의 비밀번호
+	  
+	       보안연결 SSL과 관련된 설정
 	     <property name="javaMailProperties">
 	      <props>
 	      <prop key="mail.smtp.auth">true</prop>
@@ -25,7 +26,26 @@
 	      <prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop>
 	      </props>
 	     </property>
-	    </bean>
+	    </bean>  -->
+
+
+	<!-- 2308151529 장유정 추가_mail 관련 -->
+	 <!-- gmail설정 -->
+		<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		    <property name="host" value="smtp.gmail.com" />
+		    <property name="port" value="587" />
+		    <property name="username" value="dbwjd200491@gmail.com" /> <!-- 여기에 자신의 Gmail 이메일을 입력하세요 -->
+		    <property name="password" value="rrubfxnzxmrhcoae" /> <!-- 여기에 Gmail 비밀번호 또는 앱별 비밀번호를 입력하세요 -->
+		    <property name="javaMailProperties">
+		        <props>
+		            <prop key="mail.smtp.auth">true</prop>
+		            <prop key="mail.smtp.starttls.enable">true</prop>
+		            <prop key="mail.debug">true</prop>
+		        </props>
+		    </property>
+		</bean>
+
+	    
 
 
 </beans>
