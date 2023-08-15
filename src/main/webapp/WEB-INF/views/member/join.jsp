@@ -23,6 +23,29 @@
     display: none;
 }
 
+/* 인증번호 전송 버튼 스타일 */
+.send_verification_button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+}
+
+.send_verification_button:hover {
+    background-color: #0056b3;
+}
+
+ 
+#mail_check_input_box_false{
+    background-color:#ebebe4;
+}
+ 
+#mail_check_input_box_true{
+    background-color:white;
+}
+ 
+
 
 </style>
 
@@ -62,10 +85,11 @@
 					<input class="mail_input" name="userEmail">
 				</div>
 				<div class="mail_check_wrap">
-					<div class="mail_check_input_box">
-						<input class="mail_check_input" name="userEmail">
+					<div class="mail_check_input_box" id="mail_check_input_box_false">
+						<input class="mail_check_input" disabled="disabled">
 					</div>
 					<div class="mail_check_button">
+						<!-- <button class="send_verification_button">인증번호 전송</button> -->
 						<span>인증번호 전송</span>
 					</div>
 					<div class="clearfix"></div>
@@ -153,6 +177,25 @@ $('.id_input').on("propertychange change keyup paste input", function() {
 
 });// function 종료
 
+//2308151255 장유정_인증메일 관련 추가
+$('.send_verification_button').click(function() {
+    // 인증번호 전송 동작 구현
+    // AJAX 요청 등의 코드를 추가하여 서버로 인증번호 요청을 보내고 응답을 처리
+});
+
+
+
+/* 인증번호 이메일 전송 */
+$(".mail_check_button").click(function(){
+    var email = $(".mail_input").val(); // 입력한 이메일
+   
+    $.ajax({
+        
+        type:"GET",
+        url:"mailCheck?email=" + email
+                
+    });
+});
 </script>
 
 
