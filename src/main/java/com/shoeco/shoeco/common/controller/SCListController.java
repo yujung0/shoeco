@@ -32,8 +32,11 @@ public class SCListController {
 		model.addAttribute("categoryList",scListService.getCategoryList(gender,paging));
 		//System.err.println(scListService.getCategoryList(gender,paging).get(0).toString());
 		model.addAttribute("pagingCre",new ListPagingCreatorDTO(scListService.rowTotal(gender, paging),paging));
-		model.addAttribute("minPrice",scListService.MinPrice(gender,paging)); //long -> Longer 처리
+		model.addAttribute("minPrice",scListService.MinPrice(gender,paging)); //long -> Long 처리
 		model.addAttribute("maxPrice",scListService.MaxPrice(gender,paging));
+		
+		//검색시에 값이 아예 없을 때 다시 range검색할수 있게하는 전체 총 최댓값
+		model.addAttribute("totalMaxPrice",scListService.totalMaxPrice());
 		
 		
 		

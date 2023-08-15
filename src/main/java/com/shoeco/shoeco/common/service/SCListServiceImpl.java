@@ -34,4 +34,10 @@ public class SCListServiceImpl implements SCListService{
 	public Long MaxPrice(String gender,ListPagingDTO paging){
 		return scListMapper.selectMaxPrice(gender, paging);
 	};
+
+	public long totalMaxPrice() {
+		return scListMapper.selecTotalMaxPrice();
+				
+	}
+
 }

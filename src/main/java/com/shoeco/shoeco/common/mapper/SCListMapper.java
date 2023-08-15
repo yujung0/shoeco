@@ -17,4 +17,6 @@ public interface SCListMapper {
 	public Long selectMinPrice(@Param("gender") String gender, @Param("paging") ListPagingDTO paging);
 	
 	public Long selectMaxPrice(@Param("gender") String gender, @Param("paging") ListPagingDTO paging);
+	
+	public long selecTotalMaxPrice() ;
 }

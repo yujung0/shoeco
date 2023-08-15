@@ -640,6 +640,11 @@
 		 
 	
 	</select>
+	
+	<select id="selecTotalMaxPrice">
+		SELECT MAX(sellPrice) FROM SC_products
+	
+	</select>
 
 
 </mapper>
