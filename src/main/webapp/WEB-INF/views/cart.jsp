@@ -49,48 +49,45 @@
     </section>
     <!-- End Categories of The Month -->
 
-	<%-- Pagination 시작 --%><!-- 
-	<div class="pull-right"> -->
-	<div style="text-align:center;">
-		<ul class="pagination pagination-sm">
-		<c:if test="${pagingCreator.prev }">
-			<li class="pagination-button">
-			    <a href="${contextPath}/cart/1" aria-label="Previous">
-			      <span aria-hidden="true">&laquo;</span>
-			    </a>
-		  	</li>
-		 </c:if>
-		<c:if test="${pagingCreator.prev }">
-			<li class="pagination-button">
-			    <a href="${contextPath}/cart/${pagingCreator.startNum - 1}" aria-label="Previous">
-			      <span aria-hidden="true">Prev</span>
-			    </a>
-		  	</li>
-		 </c:if>
-		 
-		<%-- 페이징 그룹의 페이징 숫자(10개 표시) --%>
-		<c:forEach var="pageNum" begin="${pagingCreator.startNum}" end="${pagingCreator.endNum}" step="1"> 
-	 		<li class='pagination-button ${pagingCreator.cartPagingDTO.pageNum == pageNum ? "active" : ""}'>
-				<a href="${contextPath}/cart/${pageNum }">${pageNum }</a>
-			</li>
-		</c:forEach>	
-			
-		<c:if test="${pagingCreator.next }">
-			<li class="pagination-button">
-				<a href="${contextPath}/cart/${pagingCreator.endNum + 1 }" aria-label="Next">
-					<span aria-hidden="true">Next</span>
-				</a>
-			</li>
-		</c:if>
-		<c:if test="${pagingCreator.next }">
-			<li class="pagination-button">
-			  <a href="${contextPath}/cart/${pagingCreator.lastPageNum }" aria-label="Next">
-			    <span aria-hidden="true">&raquo;</span>
-			  </a>
-			</li>
-		</c:if>
-		</ul>
-	
+	<%-- Pagination 시작 --%>
+	<div style="text-align: center;">
+    	<ul class="pagination justify-content-center">
+	        <c:if test="${pagingCreator.prev}">
+	            <li class="page-item">
+	                <a class="page-link" href="${contextPath}/cart/1" aria-label="Previous">
+	                    <span aria-hidden="true">&laquo;</span>
+	                </a>
+	            </li>
+	        </c:if>
+	        <c:if test="${pagingCreator.prev}">
+	            <li class="page-item">
+	                <a class="page-link" href="${contextPath}/cart/${pagingCreator.startNum - 1}" aria-label="Previous">
+	                    <span aria-hidden="true">이전</span>
+	                </a>
+	            </li>
+	        </c:if>
+	        
+	        <c:forEach var="pageNum" begin="${pagingCreator.startNum}" end="${pagingCreator.endNum}" step="1">
+	            <li class="page-item ${pagingCreator.cartPagingDTO.pageNum == pageNum ? 'active' : ''}">
+	                <a class="page-link" href="${contextPath}/cart/${pageNum}">${pageNum}</a>
+	            </li>
+	        </c:forEach>
+	            
+	        <c:if test="${pagingCreator.next}">
+	            <li class="page-item">
+	                <a class="page-link" href="${contextPath}/cart/${pagingCreator.endNum + 1}" aria-label="Next">
+	                    <span aria-hidden="true">다음</span>
+	                </a>
+	            </li>
+	        </c:if>
+	        <c:if test="${pagingCreator.next}">
+	            <li class="page-item">
+	                <a class="page-link" href="${contextPath}/cart/${pagingCreator.lastNum}" aria-label="Next">
+	                    <span aria-hidden="true">&raquo;</span>
+	                </a>
+	            </li>
+	        </c:if>
+	    </ul>
 	</div><!-- Pagination - end -->    
 </div><!-- page-wrapper - end -->
 

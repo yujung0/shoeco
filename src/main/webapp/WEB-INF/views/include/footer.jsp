@@ -98,11 +98,11 @@
     <!-- End Footer -->
 
     <!-- Start Script -->
-    <script src="resources/js/jquery-1.11.0.min.js"></script>
-    <script src="resources/js/jquery-migrate-1.2.1.min.js"></script>
-    <script src="resources/js/bootstrap.bundle.min.js"></script>
-    <script src="resources/js/templatemo.js"></script>
-    <script src="resources/js/custom.js"></script>
+    <script src="${contextPath}/resources/js/jquery-1.11.0.min.js"></script>
+    <script src="${contextPath}/resources/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="${contextPath}/resources/js/bootstrap.bundle.min.js"></script>
+    <script src="${contextPath}/resources/js/templatemo.js"></script>
+    <script src="${contextPath}/resources/js/custom.js"></script>
     <!-- End Script -->
 
 
