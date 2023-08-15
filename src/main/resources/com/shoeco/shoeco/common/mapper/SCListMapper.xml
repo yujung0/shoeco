@@ -28,47 +28,58 @@
 									            
 									          <if test="gender != null or paging.category != null or paging.keyword !=null or
 									          paging.sizeArray != null or paging.colorArray != null or paging.brandArray != null">
-									          
+									          	
+									          	
 									             <where>  
-												 	  <if test="gender != null">	
-												 	   a.gender = #{gender}
-												 	  </if>
-												 	 
-												 
-													 <if test="paging.category != null">		 
-													 	a.category = #{paging.category} 	
-													 </if>
-													 
-													 <if test="paging.keyword !=null">
+												 	<trim prefix="(" suffix=")" suffixOverrides="AND">
+													 	  <if test="gender != null">
+													 	  	<trim prefix="(" suffix=")AND" >	
+													 	   		a.gender = #{gender}
+													 	  	</trim>
+													 	  </if>
 													 	 
-														  a.prodCode LIKE '%'||#{paging.keyword}||'%' OR 
-														  a.prodName LIKE '%'||#{paging.keyword}||'%' OR 
-														  c.brandName LIKE '%'||#{paging.keyword}||'%' OR 
-														  a.category LIKE '%'||#{paging.keyword}||'%' 
-														  
-													 </if>
-													
-													  
-												 	  <if test="paging.sizeArray != null">
-														 <foreach item="size" collection="paging.sizeArray" open="(" close=")" separator="OR">
-													 			b.prodSize = CAST (#{size} AS INTEGER) 
-														 </foreach>
-														 
-													  </if>
-													
-													
-													 <if test="paging.colorArray != null ">
-													 	<foreach item="color" collection="paging.colorArray" open="(" close=")" separator="OR">
-															a.color= #{color}
-														</foreach>
-													 </if>
 													 
-													 <if test="paging.brandArray != null ">
-													 	<foreach item="brand" collection="paging.brandArray" open="(" close=")" separator="OR">
-															a.brandName= #{brand}
-														</foreach>
-									             	</if>
-									             		
+														 <if test="paging.category != null">		 
+														 	<trim prefix="(" suffix=")AND" >
+														 		a.category = #{paging.category} 	
+														 	</trim>
+														 </if>
+														 
+														 <if test="paging.keyword !=null">
+															<trim prefix="(" suffix=")AND" > 	 
+															  a.prodCode LIKE '%'||#{paging.keyword}||'%' OR 
+															  a.prodName LIKE '%'||#{paging.keyword}||'%' OR 
+															  c.brandName LIKE '%'||#{paging.keyword}||'%' OR 
+															  a.category LIKE '%'||#{paging.keyword}||'%' 
+															 </trim> 
+														 </if>
+														
+														  
+													 	  <if test="paging.sizeArray != null">
+													 	  	<trim prefix="(" suffix=")AND" >
+																 <foreach item="size" collection="paging.sizeArray" open="(" close=")" separator="OR">
+															 			b.prodSize = CAST (#{size} AS INTEGER) 
+																 </foreach>
+															 </trim>
+														  </if>
+														
+														
+														 <if test="paging.colorArray != null ">
+															<trim prefix="(" suffix=")AND" >	
+															 	<foreach item="color" collection="paging.colorArray" open="(" close=")" separator="OR">
+																	b.color= #{color}
+																</foreach>
+															</trim> 
+														 </if>
+														 
+														 <if test="paging.brandArray != null ">
+														 	<trim prefix="(" suffix=")AND" > 
+															 	<foreach item="brand" collection="paging.brandArray" open="(" close=")" separator="OR">
+																	a.brandName= #{brand}
+																</foreach>
+															</trim>	
+										             	</if>
+										    		</trim>         		
 									             
 									             
 									             </where> </if> ) 
@@ -230,47 +241,56 @@
 									          <if test="gender != null or paging.category != null or paging.keyword !=null or
 									          paging.sizeArray != null or paging.colorArray != null or paging.brandArray != null">
 									          
-									             <where>  
-												 	  <if test="gender != null">	
-												 	   a.gender = #{gender}
-												 	  </if>
-												 	 
-												 
-													 <if test="paging.category != null">		 
-													 	a.category = #{paging.category} 	
-													 </if>
-													 
-													 <if test="paging.keyword !=null">
+									              <where>  
+												 	<trim prefix="(" suffix=")" suffixOverrides="AND">
+													 	  <if test="gender != null">
+													 	  	<trim prefix="(" suffix=")AND" >	
+													 	   		a.gender = #{gender}
+													 	  	</trim>
+													 	  </if>
 													 	 
-														  a.prodCode LIKE '%'||#{paging.keyword}||'%' OR 
-														  brand가 나중에 join하게 되면 추가 brandName LIKE '%'||#{paging.keyword}||'%' OR 
-														  a.prodName LIKE '%'||#{paging.keyword}||'%' OR 
-														  c.brandName LIKE '%'||#{paging.keyword}||'%' OR 
-														  a.category LIKE '%'||#{paging.keyword}||'%' 
-														  
-													 </if>
-													
-													  
-												 	  <if test="paging.sizeArray != null">
-														 <foreach item="size" collection="paging.sizeArray" open="(" close=")" separator="OR">
-													 			b.prodSize = CAST(#{size} AS INTEGER) 
-														 </foreach>
-														 
-													  </if>
-													
-													
-													 <if test="paging.colorArray != null ">
-													 	<foreach item="color" collection="paging.colorArray" open="(" close=")" separator="OR">
-															a.color= #{color}
-														</foreach>
-													 </if>
 													 
-													 <if test="paging.brandArray != null ">
-													 	<foreach item="brand" collection="paging.brandArray" open="(" close=")" separator="OR">
-															a.brandName= #{brand}
-														</foreach>
-									             	</if>
-									             		
+														 <if test="paging.category != null">		 
+														 	<trim prefix="(" suffix=")AND" >
+														 		a.category = #{paging.category} 	
+														 	</trim>
+														 </if>
+														 
+														 <if test="paging.keyword !=null">
+															<trim prefix="(" suffix=")AND" > 	 
+															  a.prodCode LIKE '%'||#{paging.keyword}||'%' OR 
+															  a.prodName LIKE '%'||#{paging.keyword}||'%' OR 
+															  c.brandName LIKE '%'||#{paging.keyword}||'%' OR 
+															  a.category LIKE '%'||#{paging.keyword}||'%' 
+															 </trim> 
+														 </if>
+														
+														  
+													 	  <if test="paging.sizeArray != null">
+													 	  	<trim prefix="(" suffix=")AND" >
+																 <foreach item="size" collection="paging.sizeArray" open="(" close=")" separator="OR">
+															 			b.prodSize = CAST (#{size} AS INTEGER) 
+																 </foreach>
+															 </trim>
+														  </if>
+														
+														
+														 <if test="paging.colorArray != null ">
+															<trim prefix="(" suffix=")AND" >	
+															 	<foreach item="color" collection="paging.colorArray" open="(" close=")" separator="OR">
+																	b.color= #{color}
+																</foreach>
+															</trim> 
+														 </if>
+														 
+														 <if test="paging.brandArray != null ">
+														 	<trim prefix="(" suffix=")AND" > 
+															 	<foreach item="brand" collection="paging.brandArray" open="(" close=")" separator="OR">
+																	a.brandName= #{brand}
+																</foreach>
+															</trim>	
+										             	</if>
+										    		</trim>         		
 									             
 									             
 									             </where> </if> ) 
@@ -368,45 +388,55 @@
 									          paging.sizeArray != null or paging.colorArray != null or paging.brandArray != null">
 									          
 									             <where>  
-												 	  <if test="gender != null">	
-												 	   a.gender = #{gender}
-												 	  </if>
-												 	 
-												 
-													 <if test="paging.category != null">		 
-													 	a.category = #{paging.category} 	
-													 </if>
-													 
-													 <if test="paging.keyword !=null">
+												 	<trim prefix="(" suffix=")" suffixOverrides="AND">
+													 	  <if test="gender != null">
+													 	  	<trim prefix="(" suffix=")AND" >	
+													 	   		a.gender = #{gender}
+													 	  	</trim>
+													 	  </if>
 													 	 
-														  a.prodCode LIKE '%'||#{paging.keyword}||'%' OR 
-														  a.prodName LIKE '%'||#{paging.keyword}||'%' OR 
-														  c.brandName LIKE '%'||#{paging.keyword}||'%' OR 
-														  a.category LIKE '%'||#{paging.keyword}||'%' 
-														  
-													 </if>
-													
-													  
-												 	  <if test="paging.sizeArray != null">
-														 <foreach item="size" collection="paging.sizeArray" open="(" close=")" separator="OR">
-													 			b.prodSize = CAST (#{size} AS INTEGER) 
-														 </foreach>
-														 
-													  </if>
-													
-													
-													 <if test="paging.colorArray != null ">
-													 	<foreach item="color" collection="paging.colorArray" open="(" close=")" separator="OR">
-															a.color= #{color}
-														</foreach>
-													 </if>
 													 
-													 <if test="paging.brandArray != null ">
-													 	<foreach item="brand" collection="paging.brandArray" open="(" close=")" separator="OR">
-															a.brandName= #{brand}
-														</foreach>
-									             	</if>
-									             		
+														 <if test="paging.category != null">		 
+														 	<trim prefix="(" suffix=")AND" >
+														 		a.category = #{paging.category} 	
+														 	</trim>
+														 </if>
+														 
+														 <if test="paging.keyword !=null">
+															<trim prefix="(" suffix=")AND" > 	 
+															  a.prodCode LIKE '%'||#{paging.keyword}||'%' OR 
+															  a.prodName LIKE '%'||#{paging.keyword}||'%' OR 
+															  c.brandName LIKE '%'||#{paging.keyword}||'%' OR 
+															  a.category LIKE '%'||#{paging.keyword}||'%' 
+															 </trim> 
+														 </if>
+														
+														  
+													 	  <if test="paging.sizeArray != null">
+													 	  	<trim prefix="(" suffix=")AND" >
+																 <foreach item="size" collection="paging.sizeArray" open="(" close=")" separator="OR">
+															 			b.prodSize = CAST (#{size} AS INTEGER) 
+																 </foreach>
+															 </trim>
+														  </if>
+														
+														
+														 <if test="paging.colorArray != null ">
+															<trim prefix="(" suffix=")AND" >	
+															 	<foreach item="color" collection="paging.colorArray" open="(" close=")" separator="OR">
+																	b.color= #{color}
+																</foreach>
+															</trim> 
+														 </if>
+														 
+														 <if test="paging.brandArray != null ">
+														 	<trim prefix="(" suffix=")AND" > 
+															 	<foreach item="brand" collection="paging.brandArray" open="(" close=")" separator="OR">
+																	a.brandName= #{brand}
+																</foreach>
+															</trim>	
+										             	</if>
+										    		</trim>         		
 									             
 									             
 									             </where> </if> ) 
@@ -501,46 +531,56 @@
 									          <if test="gender != null or paging.category != null or paging.keyword !=null or
 									          paging.sizeArray != null or paging.colorArray != null or paging.brandArray != null">
 									          
-									             <where>  
-												 	  <if test="gender != null">	
-												 	   a.gender = #{gender}
-												 	  </if>
-												 	 
-												 
-													 <if test="paging.category != null">		 
-													 	a.category = #{paging.category} 	
-													 </if>
-													 
-													 <if test="paging.keyword !=null">
+									              <where>  
+												 	<trim prefix="(" suffix=")" suffixOverrides="AND">
+													 	  <if test="gender != null">
+													 	  	<trim prefix="(" suffix=")AND" >	
+													 	   		a.gender = #{gender}
+													 	  	</trim>
+													 	  </if>
 													 	 
-														  a.prodCode LIKE '%'||#{paging.keyword}||'%' OR 
-														  a.prodName LIKE '%'||#{paging.keyword}||'%' OR 
-														  c.brandName LIKE '%'||#{paging.keyword}||'%' OR 
-														  a.category LIKE '%'||#{paging.keyword}||'%' 
-														  
-													 </if>
-													
-													  
-												 	  <if test="paging.sizeArray != null">
-														 <foreach item="size" collection="paging.sizeArray" open="(" close=")" separator="OR">
-													 			b.prodSize = CAST (#{size} AS INTEGER) 
-														 </foreach>
-														 
-													  </if>
-													
-													
-													 <if test="paging.colorArray != null ">
-													 	<foreach item="color" collection="paging.colorArray" open="(" close=")" separator="OR">
-															a.color= #{color}
-														</foreach>
-													 </if>
 													 
-													 <if test="paging.brandArray != null ">
-													 	<foreach item="brand" collection="paging.brandArray" open="(" close=")" separator="OR">
-															a.brandName= #{brand}
-														</foreach>
-									             	</if>
-									             		
+														 <if test="paging.category != null">		 
+														 	<trim prefix="(" suffix=")AND" >
+														 		a.category = #{paging.category} 	
+														 	</trim>
+														 </if>
+														 
+														 <if test="paging.keyword !=null">
+															<trim prefix="(" suffix=")AND" > 	 
+															  a.prodCode LIKE '%'||#{paging.keyword}||'%' OR 
+															  a.prodName LIKE '%'||#{paging.keyword}||'%' OR 
+															  c.brandName LIKE '%'||#{paging.keyword}||'%' OR 
+															  a.category LIKE '%'||#{paging.keyword}||'%' 
+															 </trim> 
+														 </if>
+														
+														  
+													 	  <if test="paging.sizeArray != null">
+													 	  	<trim prefix="(" suffix=")AND" >
+																 <foreach item="size" collection="paging.sizeArray" open="(" close=")" separator="OR">
+															 			b.prodSize = CAST (#{size} AS INTEGER) 
+																 </foreach>
+															 </trim>
+														  </if>
+														
+														
+														 <if test="paging.colorArray != null ">
+															<trim prefix="(" suffix=")AND" >	
+															 	<foreach item="color" collection="paging.colorArray" open="(" close=")" separator="OR">
+																	b.color= #{color}
+																</foreach>
+															</trim> 
+														 </if>
+														 
+														 <if test="paging.brandArray != null ">
+														 	<trim prefix="(" suffix=")AND" > 
+															 	<foreach item="brand" collection="paging.brandArray" open="(" close=")" separator="OR">
+																	a.brandName= #{brand}
+																</foreach>
+															</trim>	
+										             	</if>
+										    		</trim>         		
 									             
 									             
 									             </where> </if> ) 
