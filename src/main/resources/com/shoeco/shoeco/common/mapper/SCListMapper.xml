@@ -18,7 +18,103 @@
 <!-- 230810 아직 미완성: 카테고리, 검색어, 페이징 고려 mapper-->
 	<select id="selectCategoryList"> <!-- 230814 칼럼 전부 안넣고 일부만 우선 확인 -->
 			  
-			SELECT b.*  FROM
+			  	SELECT b.*  FROM
+			  (SELECT a.*, rowNum As rn   	 
+					FROM (SELECT distinct prodCode, prodName, sellPrice 
+		             			FROM 
+								             (SELECT  a.prodCode, a.brandCode, a.prodName, a.gender, a.sellPrice, a.material, a.country, 
+								             		   b.prodSize,b.color from sc_products a JOIN sc_products_option b ON(a.prodCode = b.prodCode)
+									            	  										join SC_BRAND c on(a.brandCode= c.brandCode)			
+									            
+									          <if test="gender != null or paging.category != null or paging.keyword !=null or
+									          paging.sizeArray != null or paging.colorArray != null or paging.brandArray != null">
+									          	
+									          	
+									             <where>  
+												 	<trim prefix="(" suffix=")" suffixOverrides="AND">
+													 	  <if test="gender != null">
+													 	  	<trim prefix="(" suffix=")AND" >	
+													 	   		a.gender = #{gender}
+													 	  	</trim>
+													 	  </if>
+													 	 
+													 
+														 <if test="paging.category != null">		 
+														 	<trim prefix="(" suffix=")AND" >
+														 		a.category = #{paging.category} 	
+														 	</trim>
+														 </if>
+														 
+														 <if test="paging.keyword !=null">
+															<trim prefix="(" suffix=")AND" > 	 
+															  a.prodCode LIKE '%'||#{paging.keyword}||'%' OR 
+															  a.prodName LIKE '%'||#{paging.keyword}||'%' OR 
+															  c.brandName LIKE '%'||#{paging.keyword}||'%' OR 
+															  a.category LIKE '%'||#{paging.keyword}||'%' 
+															 </trim> 
+														 </if>
+														
+														  
+													 	  <if test="paging.sizeArray != null">
+													 	  	<trim prefix="(" suffix=")AND" >
+																 <foreach item="size" collection="paging.sizeArray" open="(" close=")" separator="OR">
+															 			b.prodSize = CAST (#{size} AS INTEGER) 
+																 </foreach>
+															 </trim>
+														  </if>
+														
+														
+														 <if test="paging.colorArray != null ">
+															<trim prefix="(" suffix=")AND" >	
+															 	<foreach item="color" collection="paging.colorArray" open="(" close=")" separator="OR">
+																	b.color= #{color}
+																</foreach>
+															</trim> 
+														 </if>
+														 
+														 <if test="paging.brandArray != null ">
+														 	<trim prefix="(" suffix=")AND" > 
+															 	<foreach item="brand" collection="paging.brandArray" open="(" close=")" separator="OR">
+																	a.brandName= #{brand}
+																</foreach>
+															</trim>	
+										             	</if>
+										    		</trim>         		
+									             
+									             
+									             </where> </if> ) 
+								             
+							             
+							             
+					            		
+					            		<choose>
+						            		<when test="paging.array == null || paging.array == 0">
+						            			order by 1 desc <!-- 최신순  -->	
+						            		
+						            		
+						            		</when>
+						            		<otherwise>
+						            			<if test="paging.array == 1">
+						            				order by 3 asc, 1 asc <!--가격 낮은 순  -->	
+						            			</if>
+						            			
+						            			<if test="paging.array == 2">
+						            				order by 3 desc, 1 asc <!--가격 높은 순  -->	
+						            			</if>
+						            		</otherwise>
+										</choose>            		
+					            		 )a
+					            			 <![CDATA[WHERE rowNum <= ( #{paging.pageNum} * #{paging.perPage}  )
+					            		
+					            				)b
+					            				WHERE rn >= (( #{paging.pageNum} *  #{paging.perPage}  ) - ( #{paging.perPage}-1))			
+					            		]]>
+			  
+			  
+			  
+			  
+			<!--밑에는 prodCode, sellPrice 별로 가격대 오름차순 내림차순 조건 고려만 안함 --> 
+			<!-- SELECT b.*  FROM
 			  (SELECT a.*, rowNum As rn   	 
 					FROM (SELECT distinct prodCode, prodName 
 		             			FROM 
@@ -91,7 +187,8 @@
 					            		
 					            				)b
 					            				WHERE rn >= (( #{paging.pageNum} *  #{paging.perPage}  ) - ( #{paging.perPage}-1))			
-					            		]]>
+					            		]]> -->
+					            		
 					            		
 				<!-- SELECT a.*   	 
 					FROM (SELECT distinct prodCode, prodName 

@@ -22,7 +22,9 @@ public class ListPagingDTO {
 	
 	private Integer sizeArray[];
 	private String colorArray[];
-//	private long price;
+	
+	//230816 최신순, 가격별정렬 설정 
+	private int array; // 0(기본값) = 최신순, 1 = 가격낮은순, 2 = 가격높은순 
 
 	
 	private String brandArray[];
