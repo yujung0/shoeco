@@ -83,7 +83,7 @@
 										             	 
 										            	 <!--sold out 추가  -->
 								            			<if test="paging.exSoldout == 1">
-								            				<![CDATA[ NOT b.prodCount <= 1   
+								            				<![CDATA[ NOT b.prodCount <= 0   
 								                			]]>
 								                		</if>
 										             	
@@ -398,7 +398,7 @@
 										             	
 										             	
 										             	<if test="paging.exSoldout == 1">
-								            				<![CDATA[ NOT b.prodCount <= 1   
+								            				<![CDATA[ NOT b.prodCount <= 0   
 								                			]]>
 								                		</if>
 										             	
@@ -550,7 +550,7 @@
 										             	</if>
 										             	
 										             	<if test="paging.exSoldout == 1">
-								            				<![CDATA[ NOT b.prodCount <= 1   
+								            				<![CDATA[ NOT b.prodCount <= 0   
 								                			]]>
 								                		</if>
 										             	
@@ -702,7 +702,7 @@
 										             	</if>
 										             	
 										             	<if test="paging.exSoldout == 1">
-								            				<![CDATA[ NOT b.prodCount <= 1   
+								            				<![CDATA[ NOT b.prodCount <= 0   
 								                			]]>
 								                		</if>
 										             	
