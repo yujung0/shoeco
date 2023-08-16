@@ -19,6 +19,13 @@
   		from SC_USER
   		where userId = #{userId}
   	</select>
+  	
+  	<!-- 2308161428 장유정_로그인 기능 -->
+  	<select id="memberLogin" resultType="com.shoeco.shoeco.common.domain.SCMemberVO">
+  		SELECT userId, userName, adminck, mileage
+  		FROM SC_USER
+  		WHERE userId = #{userId} AND userPassword = #{userPassword}
+  	</select>
 
 
   <insert id="insertSCAuthoritys">
