@@ -88,7 +88,7 @@ a {
 				    
 				        <span>회원: ${member.userName}</span>
 				        <span>등급: ${member.userRank}</span>
-				        <span>마일리지: <fmt:formatNumber value=" ${member.mileage}" pattern="#,###"/></span>
+				        <span>마일리지: ${member.mileage} </span>
 				    </div>
 				</c:if>
 			</div>
