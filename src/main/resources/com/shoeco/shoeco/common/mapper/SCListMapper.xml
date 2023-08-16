@@ -23,11 +23,11 @@
 					FROM (SELECT distinct prodCode, prodName, sellPrice 
 		             			FROM 
 								             (SELECT  a.prodCode, a.brandCode, a.prodName, a.gender, a.sellPrice, a.material, a.country, 
-								             		   b.prodSize,b.color from sc_products a JOIN sc_products_option b ON(a.prodCode = b.prodCode)
+								             		   b.prodSize,b.color, b.prodCount from sc_products a JOIN sc_products_option b ON(a.prodCode = b.prodCode)
 									            	  										join SC_BRAND c on(a.brandCode= c.brandCode)			
 									            
 									          <if test="gender != null or paging.category != null or paging.keyword !=null or
-									          paging.sizeArray != null or paging.colorArray != null or paging.brandArray != null">
+									          paging.sizeArray != null or paging.colorArray != null or paging.brandArray != null or paging.exSoldout == 1">
 									          	
 									          	
 									             <where>  
@@ -79,6 +79,14 @@
 																</foreach>
 															</trim>	
 										             	</if>
+										             	
+										             	 
+										            	 <!--sold out 추가  -->
+								            			<if test="paging.exSoldout == 1">
+								            				<![CDATA[ NOT b.prodCount <= 1   
+								                			]]>
+								                		</if>
+										             	
 										    		</trim>         		
 									             
 									             
@@ -332,11 +340,11 @@
 					FROM (SELECT distinct prodCode, prodName
 		             			FROM 
 								             (SELECT  a.prodCode, a.brandCode, a.prodName, a.gender, a.sellPrice, a.material, a.country, 
-								             		  b.prodSize,b.color, rowNum AS rn from sc_products a JOIN sc_products_option b ON(a.prodCode = b.prodCode)
+								             		  b.prodSize,b.color, b.prodCount , rowNum AS rn from sc_products a JOIN sc_products_option b ON(a.prodCode = b.prodCode)
 									            	  										join SC_BRAND c on(a.brandCode= c.brandCode)			
 									            
 									          <if test="gender != null or paging.category != null or paging.keyword !=null or
-									          paging.sizeArray != null or paging.colorArray != null or paging.brandArray != null">
+									          paging.sizeArray != null or paging.colorArray != null or paging.brandArray != null or paging.exSoldout == 1">
 									          
 									              <where>  
 												 	<trim prefix="(" suffix=")" suffixOverrides="AND">
@@ -387,6 +395,13 @@
 																</foreach>
 															</trim>	
 										             	</if>
+										             	
+										             	
+										             	<if test="paging.exSoldout == 1">
+								            				<![CDATA[ NOT b.prodCount <= 1   
+								                			]]>
+								                		</if>
+										             	
 										    		</trim>         		
 									             
 									             
@@ -478,11 +493,11 @@
 					FROM (SELECT distinct prodCode, prodName, sellPrice 
 		             			FROM 
 								             (SELECT  a.prodCode, a.brandCode, a.prodName, a.gender, a.sellPrice, a.material, a.country, 
-								             		   b.prodSize,b.color from sc_products a JOIN sc_products_option b ON(a.prodCode = b.prodCode)
+								             		   b.prodSize,b.color, b.prodCount from sc_products a JOIN sc_products_option b ON(a.prodCode = b.prodCode)
 									            	  										join SC_BRAND c on(a.brandCode= c.brandCode)			
 									            
 									          <if test="gender != null or paging.category != null or paging.keyword !=null or
-									          paging.sizeArray != null or paging.colorArray != null or paging.brandArray != null">
+									          paging.sizeArray != null or paging.colorArray != null or paging.brandArray != null or paging.exSoldout == 1">
 									          
 									             <where>  
 												 	<trim prefix="(" suffix=")" suffixOverrides="AND">
@@ -533,6 +548,14 @@
 																</foreach>
 															</trim>	
 										             	</if>
+										             	
+										             	<if test="paging.exSoldout == 1">
+								            				<![CDATA[ NOT b.prodCount <= 1   
+								                			]]>
+								                		</if>
+										             	
+										             	
+										             	
 										    		</trim>         		
 									             
 									             
@@ -626,7 +649,7 @@
 									            	  										join SC_BRAND c on(a.brandCode= c.brandCode)			
 									            
 									          <if test="gender != null or paging.category != null or paging.keyword !=null or
-									          paging.sizeArray != null or paging.colorArray != null or paging.brandArray != null">
+									          paging.sizeArray != null or paging.colorArray != null or paging.brandArray != null or paging.exSoldout == 1">
 									          
 									              <where>  
 												 	<trim prefix="(" suffix=")" suffixOverrides="AND">
@@ -677,6 +700,12 @@
 																</foreach>
 															</trim>	
 										             	</if>
+										             	
+										             	<if test="paging.exSoldout == 1">
+								            				<![CDATA[ NOT b.prodCount <= 1   
+								                			]]>
+								                		</if>
+										             	
 										    		</trim>         		
 									             
 									             
