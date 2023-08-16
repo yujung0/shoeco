@@ -9,7 +9,7 @@
    <insert id="memberJoin" parameterType="com.shoeco.shoeco.common.domain.SCMemberVO">
 	INSERT INTO SC_USER
 	VALUES(#{userId}, #{userPassword}, #{userEmail}, SYSDATE,
-     	   #{userAddress}, #{userPhoneNo}, SYSDATE, 0, 'Bronze', #{userName}, #{userAddress2}, #{userAddress3})
+     	   #{userAddress}, #{userPhoneNo}, SYSDATE, 500, 'Bronze', #{userName}, #{userAddress2}, #{userAddress3}, 0)
   </insert>
 
 
@@ -18,6 +18,13 @@
   		select count(*)
   		from SC_USER
   		where userId = #{userId}
+  	</select>
+  	
+  	<!-- 2308161428 장유정_로그인 기능 -->
+  	<select id="memberLogin" resultType="com.shoeco.shoeco.common.domain.SCMemberVO">
+  		SELECT userId, userPassword, userName, adminck, mileage, userRank
+  		FROM SC_USER
+  		WHERE userId = #{userId}
   	</select>
 
 

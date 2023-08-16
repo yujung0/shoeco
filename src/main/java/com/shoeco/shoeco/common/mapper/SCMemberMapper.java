@@ -14,4 +14,9 @@ public interface SCMemberMapper {
 	//2308121913 장유정
 	//아이디 중복 검사
 	public int idCheck(String userId);
+	
+	//2308161432 장유정
+	//로그인
+	public SCMemberVO memberLogin(SCMemberVO member);
+	
 }

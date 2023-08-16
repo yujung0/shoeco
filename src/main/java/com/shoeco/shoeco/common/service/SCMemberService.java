@@ -12,4 +12,9 @@ public interface SCMemberService {
 	// 아이디 중복 검사
 	public int idCheck(String userId) throws Exception;
 
+	//2308161442 장유정
+	//로그인
+	public SCMemberVO memberLogin(SCMemberVO member) throws Exception;
+	
+	
 }

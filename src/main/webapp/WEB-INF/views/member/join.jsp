@@ -103,6 +103,18 @@
 .final_addr_ck{
     display: none;
 }
+
+/* 비밀번호 확인 일치 유효성 검사*/
+.pwck_input_re_1 {
+	color: green;
+	display: none;
+}
+
+.pwck_input_re_2 {
+	color: green;
+	display: none;
+}
+
  
 
 </style>
@@ -136,9 +148,11 @@
 			<div class="pwck_wrap">
 				<div class="pwck_name">비밀번호 확인</div>
 				<div class="pwck_input_box">
-					<input class="pwck_input" name="userPassword">
+					<input class="pwck_input" name="userPasswordCheck">
 				</div>
 				<span class="final_pwck_ck">비밀번호 확인을 입력해주세요.</span>
+				<span class="pwck_input_re_1">비밀번호가 일치합니다.</span>
+				<span class="pwck_input_re_2">비밀번호가 일치하지 않습니다.</span>
 			</div>
 			
 			<div class="mail_wrap">
@@ -147,6 +161,7 @@
 					<input class="mail_input" name="userEmail">
 				</div>
 				<span class="final_mail_ck">이메일을 입력해주세요.</span>
+				<span class="mail_input_box_warn"></span>
 				<div class="mail_check_wrap">
 					<div class="mail_check_input_box" id="mail_check_input_box_false">
 						<input class="mail_check_input" disabled="disabled">
@@ -248,9 +263,61 @@ $(".join_button").click(function(){
 		idCheck = true;
 	}
 	
+	//비밀번호 유효성 검사
+	if(pw == ""){
+		$('.final_pw_ck').css('display', 'block');
+		pwCheck = false;
+	} else {
+		$('.final_pw_ck').css('display', 'none');
+		pwCheck = true;
+	}
 	
-	/*     $("#join_form").attr("action", "${contextPath}/member/join");
-    $("#join_form").submit(); */
+	//비밀번호 확인 유효성 검사
+	if(pwck == "") {
+		$('.final_pwck_ck').css('display', 'block');
+		pwckCheck = false;
+	} else {
+		$('.final_pwck_ck').css('display', 'none');
+		pwckCheck = true;
+	}
+	
+	// 이름 유효성 검사
+	if(name == ""){
+		$('.final_name_ck').css('display','block');
+		nameCheck = false;
+	} else {
+		$('.final_name_ck').css('display', 'none');
+		nameCheck = true;
+	}
+	
+
+    /* 이메일 유효성 검사 */
+    if(mail == ""){
+        $('.final_mail_ck').css('display','block');
+        mailCheck = false;
+    }else{
+        $('.final_mail_ck').css('display', 'none');
+        mailCheck = true;
+    }
+	
+	
+	// 주소 유효성 검사
+	if(addr == ""){
+		$('.final_addr_ck').css('display', 'block');
+		addressCheck = false;
+	} else {
+		$('.final_addr_ck').css('display', 'none');
+		addressCheck = true;
+	}
+	
+	// 최종 유효성 검사
+	if(idCheck&&idckCheck&&pwCheck&&pwckCheck&&pwckcorCheck&&nameCheck&&mailCheck&&mailnumCheck&&addressCheck) {
+	
+		$("#join_form").attr("action", "${contextPath}/member/join");
+	    $("#join_form").submit();
+	}
+	
+	return false; //join_button click 정상 종료되지 못할 경우 대비
 });
 
 
@@ -294,6 +361,18 @@ $(".mail_check_button").click(function(){
     var email = $(".mail_input").val();            // 입력한 이메일
     var cehckBox = $(".mail_check_input");        // 인증번호 입력란
     var boxWrap = $(".mail_check_input_box");    // 인증번호 입력란 박스
+    var warnMsg = $(".mail_input_box_warn");	// 이메일 입력 경고글
+    
+    
+    // 이메일 형식 유효성 검사
+    if(mailFormCheck(email)){
+    	warnMsg.html("이메일이 전송 되었습니다. 이메일을 확인해주세요.");
+    	warnMsg.css("dispaly", "inline-block");
+    } else {
+    	warnMsg.html("올바르지 못한 이메일 형식 입니다.");
+    	warnMsg.css("display", "inline-block");
+    	return false;
+    }
     
     $.ajax({
         
@@ -320,9 +399,11 @@ $(".mail_check_input").blur(function(){
     if (inputCode === code) { // 코드 일치 시
         checkResult.html("인증번호가 일치합니다.");
         checkResult.removeClass("incorrect").addClass("correct");
+    	mailnumCheck = true;
     } else { // 코드 불일치 시
         checkResult.html("인증번호를 다시 확인해주세요.");
         checkResult.removeClass("correct").addClass("incorrect");
+        mailnumCheck = false;
     }
     
 });
@@ -381,6 +462,33 @@ function execution_daum_address(){
 		
 	}).open();
 	 
+}
+
+// 비밀번호 확인 일치 유효성 검사
+$('.pwck_input').on("propertychange change keyup paste input", function () {
+		
+	var pw = $('.pw_input').val(); // 변수를 선언하여 비밀번호 항목과 비밀번호 확인 항목란의 입력 값으로 초기화
+	var pwck = $('.pwck_input').val();
+	$('.final_pwck_ck').css('display', 'none');// 추가적으로 입력이 될 때 '비밀번호 확인을 입력해주세요' 경고글을 사라지도록 함
+	
+	if(pw == pwck) {
+		$('.pwck_input_re_1').css('display', 'blcok');
+		$('.pwck_input_re_2').css('display', 'none');
+		pwckcorCheck = true;
+		
+	} else { 
+	    $('.pwck_input_re_1').css('display', 'none');
+	    $('.pwck_input_re_2').css('display', 'block');
+	    pwckcorCheck = false; 
+	}
+
+});
+
+
+// 입력 이메일 형식 유효성 검사
+function mailFormCheck(email) {
+	var form = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+	return form.test(email);
 }
  
 

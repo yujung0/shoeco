@@ -30,4 +30,11 @@ public class SCMemberServiceImpl implements SCMemberService{
 		return membermapper.idCheck(userId);
 	}
 	
+	
+	//2308161453 장유정
+	@Override
+	public SCMemberVO memberLogin(SCMemberVO member) throws Exception {
+		return membermapper.memberLogin(member);
+	}
+	
 }
