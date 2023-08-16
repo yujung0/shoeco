@@ -34,6 +34,26 @@ a {
 	font_weight: 900;
 	cursor: pointer;
 }
+
+/* 로그인 성공 영역 */
+.login_success_area {
+    height: 62%;
+    width: 80%;
+    border: 2px solid #7474ad;
+    border-radius: 15px;
+    padding: 2%;
+    margin: 5% auto;
+    text-align: center; /* 가운데 정렬을 위해 추가 */
+    display: flex; /* flex 컨테이너로 변경 */
+    flex-direction: column; /* 항목들을 세로로 정렬 */
+    align-items: center; /* 가운데 정렬을 위해 추가 */
+}
+
+.login_success_area span {
+    display: block;
+    margin: 5px 0; /* 각 항목 아래 여백 추가 */
+}
+ 
 </style>
 
 <!-- 2308091251 장유정_로그인/회원가입 부분 -->
@@ -53,10 +73,26 @@ a {
 			<div class="search_area">
 				<h1>Search area</h1>
 			</div>
+			
 			<div class="login_area">
-				<div class="login_button"><a href="${contextPath}/member/login">로그인</a></div>
-				<span><a href="${contextPath}/member/join">회원가입</a></span>
+			
+				<!-- 로그인 X인 상태 -->
+				<c:if test="${member == null }">
+					<div class="login_button"><a href="${contextPath}/member/login">로그인</a></div>
+					<span><a href="${contextPath}/member/join">회원가입</a></span>
+				</c:if>
+				
+				<!-- 로그인 O -->
+				<c:if test="${member != null}">
+				    <div class="login_success_area">
+				    
+				        <span>회원: ${member.userName}</span>
+				        <span>등급: ${member.userRank}</span>
+				        <span>마일리지: <fmt:formatNumber value=" ${member.mileage}" pattern="#,###"/></span>
+				    </div>
+				</c:if>
 			</div>
+			
 			<div class="clearfix"></div>			
 		</div>
 		<div class="navi_bar_area">

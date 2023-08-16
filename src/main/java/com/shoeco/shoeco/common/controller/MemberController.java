@@ -3,6 +3,8 @@ package com.shoeco.shoeco.common.controller;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.shoeco.shoeco.common.domain.SCMemberVO;
 import com.shoeco.shoeco.common.service.SCMemberService;
@@ -128,7 +131,29 @@ public class MemberController {
         String num = Integer.toString(checkNum);
    
         return num;
-        
 
     }
+    
+    // 로그인
+    @RequestMapping(value = "login", method = RequestMethod.POST)
+    public String loginPOST(HttpServletRequest request, SCMemberVO member, RedirectAttributes rttr) throws Exception {
+    	
+    	System.out.println("login 메서드 진입");
+    	System.out.println("전달할 데이터 : " + member);
+    	
+    	HttpSession session = request.getSession();
+    	SCMemberVO lvo = memberservice.memberLogin(member);
+    	
+    	if (lvo == null) {	// 일치하지 않는 아이디, 비밀번호 입력할 경우
+    		
+    		int result = 0;
+    		rttr.addFlashAttribute("result", result);
+    		return "redirect:/member/login";
+    	}
+    	
+    	session.setAttribute("member", lvo);	// 일치하는 아이디, 비밀번호를 입력한 경우 (로그인 성공)
+    	
+    	return "redirect:/main";
+    }
+    
 }
