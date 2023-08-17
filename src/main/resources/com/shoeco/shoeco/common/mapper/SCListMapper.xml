@@ -676,14 +676,21 @@
 														 </if>
 														
 														  
-													 	  <if test="paging.sizeArray != null">
+													 	<!--   <if test="paging.sizeArray != null"> 수정중
 													 	  	<trim prefix="(" suffix=")AND" >
 																 <foreach item="size" collection="paging.sizeArray" open="(" close=")" separator="OR">
 															 			b.prodSize = CAST (#{size} AS INTEGER) 
 																 </foreach>
 															 </trim>
-														  </if>
-														
+														  </if> -->
+														  
+														   <if test="paging.sizeArray != null">  
+													 	  	<trim prefix="(" suffix=")AND" >
+																 <foreach item="size" collection="paging.sizeArray" open="(" close=")" separator="OR">
+															 			b.prodSize = CAST (#{size} AS INTEGER) 
+																 </foreach>
+															 </trim>
+														  </if> 
 														
 														 <if test="paging.colorArray != null ">
 															<trim prefix="(" suffix=")AND" >	

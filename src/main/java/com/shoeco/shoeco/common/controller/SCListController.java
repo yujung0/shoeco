@@ -37,9 +37,7 @@ public class SCListController {
 	
 	@GetMapping("/list")
 	public void showCategoryList(Model model,ListPagingDTO paging,
-			@RequestParam(name="sizeArray", required=false) String [] sizeArray ){
-		
-		
+			@RequestParam(name="sizeArray", required=false) String[] sizeArray ){
 		
 		
 		
@@ -59,7 +57,7 @@ public class SCListController {
 		System.err.println(scListService.MinPrice(paging));
 		System.err.println("=================조건에 맍는 distinct 행수: " + scListService.rowTotal(paging));
 		System.err.println(scListService.MaxPrice(paging));
-		
+		//System.out.println("==================" + paging.getSizeArray().toString());
 		
 		 
 		

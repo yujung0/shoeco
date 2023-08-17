@@ -433,10 +433,19 @@
         <input type="hidden" name="category" value="${pagingCre.paging.category}">
         <input type="hidden" name="keyword" value="${pagingCre.paging.keyword}">
         
-        
-         
-        <input type="hidden" name="sizeArray">
-         
+        <div id="sizeDiv">
+	        <c:choose>
+		        <c:when test="${pagingCre.paging.sizeArray != null}">
+			        <c:forEach var="size" items="${pagingCre.paging.sizeArray}">
+			        	<input type="hidden" name="sizeArray" value="${size}">
+			        </c:forEach>
+		        </c:when>
+		        
+		        <c:otherwise>
+		        	<input type="hidden" name="sizeArray">	
+		        </c:otherwise>
+	        </c:choose>
+        </div>  
              
         <c:forEach var="color" items="${pagingCre.paging.colorArray}">
         	<input type="hidden" name="colorArray" value="${color}">
@@ -458,35 +467,32 @@
 	<script>
 		
         var frmSendValue = $("#frmSendValue");
-
+    	var sizeChoice = "";
+    		
         
 
         //검색 옵션
         $("#searchTerm").on("click",function(){
         	
         	
-        	
+        	 
         	frmSendValue.find("input[name='pageNum']").val(1);
+        	frmSendValue.find("#div").empty();
         	
-        	var sizeChoice = 
-        		$(".sizeArray:checked").map(function(){
-        			return $(this).val();
-        		}).get() ;
+        	var newInput = $("<input>").attr("type","hidden").attr("name","sizeArray") ;
+        	frmSendValue.find("#div").append(newInput);
+        	
+        	
+        	
+        	sizeChoice = $(".sizeArray:checked").map(function(){
+    			return $(this).val();
+    		}).get() ;
+        
         	
         	console.log(sizeChoice);
         	
         	 
-        	
-        	
-        	 
-        			 
-        	
-        
-        
-        
-        
-        	
-         	
+        	  
         	 
         	frmSendValue.find("input[name='sizeArray']").val(sizeChoice.join(","));
         	frmSendValue.attr("method","GET");
@@ -503,8 +509,11 @@
 		//페이징
 		$(".page-item a").on("click",function(e){
             e.preventDefault();
+            
+            
             frmSendValue.find("input[name='pageNum']").val($(this).attr("href")) ;
             frmSendValue.attr("method","GET");
+             
             frmSendValue.attr("action","${contextPath}/list");
 
             frmSendValue.submit();
