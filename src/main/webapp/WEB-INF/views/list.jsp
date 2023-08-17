@@ -421,6 +421,52 @@
     <!--End Brands-->
 
 
+    <form id="frmSendValue">
+        <input type="hidden" name="pageNum" value="${pagingCre.paging.pageNum}">
+        
+        
+        <c:forEach var="size" items="${pagingCre.paging.sizeArray}">
+        	<input type="hidden" name="sizeArray" value="${size}">
+        </c:forEach>
+         
+
+    </form>
+
+
+	
+	<!-- 스크립트 시작  -->
+	<script>
+		
+        var frmSendValue = $("#frmSendValue");
+
+		//페이징
+		$(".page-item a").on("click",function(e){
+            e.preventDefault();
+            frmSendValue.find("input[name='pageNum']").val($(this).attr("href")) ;
+            frmSendValue.attr("method","GET");
+            frmSendValue.attr("action","${contextPath}/list");
+
+            frmSendValue.submit();
+
+             
+
+        })
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	</script>
 
 
 
