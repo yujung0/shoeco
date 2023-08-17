@@ -56,7 +56,73 @@
  		display: block;
  	}
 	 
+    /* 팝업 창 스타일 */
+	.popup-overlay {
+	    display: none;
+	    position: fixed;
+	    top: 50%; /* 화면 가운데로 정렬되도록 top을 50%로 설정 */
+	    left: 50%; /* 화면 가운데로 정렬되도록 left을 50%로 설정 */
+	    transform: translate(-50%, -50%); /* 정렬된 위치를 조정 */
+	    background-color: rgba(0, 0, 0, 0.7);
+	    z-index: 1000;
+	    width: 50%; /* 팝업 창의 너비를 화면의 절반으로 설정 */
+	    max-width: 520px;
+	    border-radius: 10px;
+	    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+	}
+	
+	.popup-content {
+	    background-color: #ffffff;
+	    padding: 20px;
+	    text-align: center;
+	    position: relative;
+	}
+	
+	.popup-title {
+	    font-size: 24px;
+	    margin-bottom: 10px;
+	}
+	
+	.popup-message {
+	    font-size: 16px;
+	    margin-bottom: 10px;
+	    color: #333;
+	}
+	
+	.popup-close {
+	    position: absolute;
+	    top: 10px;
+	    right: 10px;
+	    background-color: #f5f5f5;
+	    padding: 6px 12px;
+	    border-radius: 50%;
+	    cursor: pointer;
+	    border: none;
+	}
  
+    .faq-button {
+    background-color: #808080; /* 회색 배경 색상 */
+    border: none;
+    border-radius: 20px;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+
+    .faq-button:hover {
+        background-color: #666666; /* 마우스 호버 시 더 진한 회색 배경 색상 */
+        box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2);
+    }
+    .faq-buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        margin-top: 20px;
+    }
 </style>
 	
 </head>
@@ -100,23 +166,48 @@
                  </div>
              </div> 
          </div>-->
+         
+        <!-- 팝업 div -->
+		<div id="popup-overlay" class="popup-overlay">
+		    <div class="popup-content">
+		        <button id="close-popup" class="popup-close">X</button>
+		        <h2 class="popup-title">자주 묻는 질문</h2>
+		        <!-- 챗봇 div -->
+		        <div id="chatbot-window" style="display: none;">
+		            <div class="faq-buttons">
+		                <button class="faq-button">상품 정보</button>
+		                <button class="faq-button">배송 현황</button>
+		                <button class="faq-button">교환/반품/환불</button>
+		                <button class="faq-button">주문/결제/취소</button>
+		                <button class="faq-button">회원정보</button>
+		            </div>
+		        </div>
+		        <!-- 챗봇 div-end -->
+		    </div>
+		</div>
+		<!-- 팝업 div-end-->
+
+
          <div style="display: inline;">
          	<input type="text" placeholder="검색어 입력"><button>검색</button>
          </div>
          <div style="display: inline;">
-	         <a class="nav-icon position-relative text-decoration-none" href="${contextPath}/cart/1">
-	             <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
-	             &nbsp;<span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">7</span>
-	         </a>
-	         <a class="nav-icon position-relative text-decoration-none" href="${contextPath}/mypage">
-	             <i class="fa fa-fw fa-user text-dark mr-3"></i>
-	             &nbsp;<span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">+99</span>
-	         </a>
-	         <!--23.08.08 세연/ 위에 마크가 페이지 밖으로 삐져나와서 nbsp;만 썼을때는 이상하게 먹혀서 안삐져나오게 하려고 추가 했어요 -->
-	         <a>
-	             &nbsp;<span> &nbsp;  &nbsp;</span>
-	         </a>
-	         
+			<a class="nav-icon position-relative text-decoration-none" id="faq-chatbot">
+			    <button id="open-chatbot" class="faq-button">FAQ</button>
+			</a>
+			<a class="nav-icon position-relative text-decoration-none" href="${contextPath}/cart/1">
+			    <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
+			    &nbsp;<span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">7</span>
+			</a>
+			<a class="nav-icon position-relative text-decoration-none" href="${contextPath}/mypage">
+			    <i class="fa fa-fw fa-user text-dark mr-3"></i>
+			    &nbsp;<span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">+99</span>
+			</a>
+			<!--23.08.08 세연/ 위에 마크가 페이지 밖으로 삐져나와서 nbsp;만 썼을때는 이상하게 먹혀서 안삐져나오게 하려고 추가 했어요 -->
+			<a>
+			    &nbsp;<span> &nbsp;  &nbsp;</span>
+			</a>
+
          </div>
          
       </div>      
@@ -166,14 +257,6 @@
                         <div>   
                         <li class="nav-item">
                             <a class="nav-link" href="shop.html">WOMEN</a>
-	                           <!-- 초기 버전 디자인/ 글자배열때문에 div 로 바꿈
-	                           	<ul class="smallCategories" style="list-style-type: none;">
-	                        		<li>운동화</li>
-	                        		<li>구두</li>
-	                        		<li>샌들</li>
-	                        		<li>스포츠</li>
-	                        		<li>아쿠아</li>
-	                        	</ul>  -->
 	                        	<div class="smallCategories">
 	                        		<p>운동화</p>
 	                        		<p>구두</p>
@@ -220,14 +303,27 @@
     </nav>
     
     
-  <script>
-  	
-  
-  
-  
-  </script>
+<script>
+    // 팝업 창 열기 버튼 클릭 이벤트 처리
+    document.getElementById("open-chatbot").addEventListener("click", function() {
+        var popupOverlay = document.getElementById("popup-overlay");
+        popupOverlay.style.display = "block";
+
+    // 챗봇 창 열기 버튼 클릭 이벤트 처리
+    var chatbotWindow = document.getElementById("chatbot-window");
+        chatbotWindow.style.display = "block";
+        });
+
+    // 팝업 창 닫기 버튼 클릭 이벤트 처리
+    document.getElementById("close-popup").addEventListener("click", function() {
+        var popupOverlay = document.getElementById("popup-overlay");
+        popupOverlay.style.display = "none";
+
+    // 챗봇 창 닫기 버튼 클릭 이벤트 처리
+    var chatbotWindow = document.getElementById("chatbot-window");
+        chatbotWindow.style.display = "none";
+        });
+</script>
     
     
     <!-- Close Header -->
-
-
