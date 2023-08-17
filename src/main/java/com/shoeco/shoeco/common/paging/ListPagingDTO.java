@@ -13,12 +13,16 @@ public class ListPagingDTO {
 	private Integer perPage;
 	
 //	검색 관련
-	private String category;
+	
+	//급추가
+	private String gender = "" ;
+	
+	private String category = "" ;
 	
 	
 	private String arraykeyword; //정렬관련 keyword desc
 	
-	private String keyword;
+	private String keyword = "" ;
 	
 	private Integer sizeArray[];
 	private String colorArray[];

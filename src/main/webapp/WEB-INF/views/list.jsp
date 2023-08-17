@@ -421,6 +421,66 @@
     <!--End Brands-->
 
 
+    <form id="frmSendValue">
+        <input type="hidden" name="pageNum" value="${pagingCre.paging.pageNum}">
+        <input type="hidden" name="gender" value="${pagingCre.paging.gender}">
+        <input type="hidden" name="category" value="${pagingCre.paging.category}">
+        <input type="hidden" name="keyword" value="${pagingCre.paging.keyword}">
+        
+        
+        <c:forEach var="size" items="${pagingCre.paging.sizeArray}">
+        	<input type="hidden" name="sizeArray" value="${size}">
+        </c:forEach>
+        
+        <c:forEach var="color" items="${pagingCre.paging.colorArray}">
+        	<input type="hidden" name="colorArray" value="${color}">
+        </c:forEach>
+        
+        <c:forEach var="brand" items="${pagingCre.paging.brandArray}">
+        	<input type="hidden" name="brandArray" value="${brand}">
+        </c:forEach>
+        
+        <input type="hidden" name="exSoldout" value="${pagingCre.paging.exSoldout}">
+        <input type="hidden" name="array" value="${pagingCre.paging.array}">
+         
+
+    </form>
+
+
+	
+	<!-- 스크립트 시작  -->
+	<script>
+		
+        var frmSendValue = $("#frmSendValue");
+
+		//페이징
+		$(".page-item a").on("click",function(e){
+            e.preventDefault();
+            frmSendValue.find("input[name='pageNum']").val($(this).attr("href")) ;
+            frmSendValue.attr("method","GET");
+            frmSendValue.attr("action","${contextPath}/list");
+
+            frmSendValue.submit();
+
+             
+
+        })
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	</script>
 
 
 

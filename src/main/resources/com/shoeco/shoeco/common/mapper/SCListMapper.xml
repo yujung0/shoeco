@@ -26,26 +26,26 @@
 								             		   b.prodSize,b.color, b.prodCount from sc_products a JOIN sc_products_option b ON(a.prodCode = b.prodCode)
 									            	  										join SC_BRAND c on(a.brandCode= c.brandCode)			
 									            
-									          <if test="gender != null or paging.category != null or paging.keyword !=null or
+									          <if test="paging.gender != '' or paging.category != '' or paging.keyword != '' or
 									          paging.sizeArray != null or paging.colorArray != null or paging.brandArray != null or paging.exSoldout == 1">
 									          	
 									          	
 									             <where>  
 												 	<trim prefix="(" suffix=")" suffixOverrides="AND">
-													 	  <if test="gender != null">
+													 	  <if test="paging.gender != '' ">
 													 	  	<trim prefix="(" suffix=")AND" >	
-													 	   		a.gender = #{gender}
+													 	   		a.gender = #{paging.gender}
 													 	  	</trim>
 													 	  </if>
 													 	 
 													 
-														 <if test="paging.category != null">		 
+														 <if test="paging.category != '' ">		 
 														 	<trim prefix="(" suffix=")AND" >
 														 		a.category = #{paging.category} 	
 														 	</trim>
 														 </if>
 														 
-														 <if test="paging.keyword !=null">
+														 <if test="paging.keyword != '' ">
 															<trim prefix="(" suffix=")AND" > 	 
 															  a.prodCode LIKE '%'||#{paging.keyword}||'%' OR 
 															  a.prodName LIKE '%'||#{paging.keyword}||'%' OR 
@@ -343,25 +343,25 @@
 								             		  b.prodSize,b.color, b.prodCount , rowNum AS rn from sc_products a JOIN sc_products_option b ON(a.prodCode = b.prodCode)
 									            	  										join SC_BRAND c on(a.brandCode= c.brandCode)			
 									            
-									          <if test="gender != null or paging.category != null or paging.keyword !=null or
+									          <if test="paging.gender != '' or paging.category != '' or paging.keyword != '' or
 									          paging.sizeArray != null or paging.colorArray != null or paging.brandArray != null or paging.exSoldout == 1">
 									          
 									              <where>  
 												 	<trim prefix="(" suffix=")" suffixOverrides="AND">
-													 	  <if test="gender != null">
+													 	  <if test="paging.gender != '' ">
 													 	  	<trim prefix="(" suffix=")AND" >	
-													 	   		a.gender = #{gender}
+													 	   		a.gender = #{paging.gender}
 													 	  	</trim>
 													 	  </if>
 													 	 
 													 
-														 <if test="paging.category != null">		 
+														 <if test="paging.category != '' ">		 
 														 	<trim prefix="(" suffix=")AND" >
 														 		a.category = #{paging.category} 	
 														 	</trim>
 														 </if>
 														 
-														 <if test="paging.keyword !=null">
+														 <if test="paging.keyword != '' ">
 															<trim prefix="(" suffix=")AND" > 	 
 															  a.prodCode LIKE '%'||#{paging.keyword}||'%' OR 
 															  a.prodName LIKE '%'||#{paging.keyword}||'%' OR 
@@ -496,19 +496,19 @@
 								             		   b.prodSize,b.color, b.prodCount from sc_products a JOIN sc_products_option b ON(a.prodCode = b.prodCode)
 									            	  										join SC_BRAND c on(a.brandCode= c.brandCode)			
 									            
-									          <if test="gender != null or paging.category != null or paging.keyword !=null or
+									          <if test="paging.gender != '' or paging.category != '' or paging.keyword !=null or
 									          paging.sizeArray != null or paging.colorArray != null or paging.brandArray != null or paging.exSoldout == 1">
 									          
 									             <where>  
 												 	<trim prefix="(" suffix=")" suffixOverrides="AND">
-													 	  <if test="gender != null">
+													 	  <if test="paging.gender !=  '' ">
 													 	  	<trim prefix="(" suffix=")AND" >	
-													 	   		a.gender = #{gender}
+													 	   		a.gender = #{paging.gender}
 													 	  	</trim>
 													 	  </if>
 													 	 
 													 
-														 <if test="paging.category != null">		 
+														 <if test="paging.category != '' ">		 
 														 	<trim prefix="(" suffix=")AND" >
 														 		a.category = #{paging.category} 	
 														 	</trim>
@@ -648,25 +648,25 @@
 								             		   b.prodSize,b.color from sc_products a JOIN sc_products_option b ON(a.prodCode = b.prodCode)
 									            	  										join SC_BRAND c on(a.brandCode= c.brandCode)			
 									            
-									          <if test="gender != null or paging.category != null or paging.keyword !=null or
+									          <if test="paging.gender != '' or paging.category != '' or paging.keyword != '' or
 									          paging.sizeArray != null or paging.colorArray != null or paging.brandArray != null or paging.exSoldout == 1">
 									          
 									              <where>  
 												 	<trim prefix="(" suffix=")" suffixOverrides="AND">
-													 	  <if test="gender != null">
+													 	  <if test="paging.gender != null || paging.gender != '' ">
 													 	  	<trim prefix="(" suffix=")AND" >	
-													 	   		a.gender = #{gender}
+													 	   		a.gender = #{paging.gender}
 													 	  	</trim>
 													 	  </if>
 													 	 
 													 
-														 <if test="paging.category != null">		 
+														 <if test="paging.category != null || paging.category != '' ">		 
 														 	<trim prefix="(" suffix=")AND" >
 														 		a.category = #{paging.category} 	
 														 	</trim>
 														 </if>
 														 
-														 <if test="paging.keyword !=null">
+														 <if test="paging.keyword != '' ">
 															<trim prefix="(" suffix=")AND" > 	 
 															  a.prodCode LIKE '%'||#{paging.keyword}||'%' OR 
 															  a.prodName LIKE '%'||#{paging.keyword}||'%' OR 
