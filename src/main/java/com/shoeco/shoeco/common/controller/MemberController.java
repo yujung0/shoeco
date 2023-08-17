@@ -147,7 +147,7 @@ public class MemberController {
     }
     
     // 로그인
-    @RequestMapping(value = "login", method = RequestMethod.POST)
+    @RequestMapping(value = "login.do", method = RequestMethod.POST)
     public String loginPOST(HttpServletRequest request, SCMemberVO member, RedirectAttributes rttr) throws Exception {
     	
 //    	System.out.println("login 메서드 진입");
@@ -198,5 +198,31 @@ public class MemberController {
     	}
     	
     }
+    
+    // 메인페이지 로그아웃
+    @RequestMapping(value = "logout.do", method = RequestMethod.GET)
+    public String logoutMainGET(HttpServletRequest request) throws Exception {
+
+    	logger.info("logoutMainGET 메서드 진입");
+    	
+    	HttpSession session = request.getSession();
+    	
+    	session.invalidate();
+    	
+    	return "redirect:/main";
+    }
+    
+    // 비동기식 로그아웃 메서드
+    @RequestMapping(value = "logout.do", method = RequestMethod.POST)
+    @ResponseBody
+    public void logoutPOST(HttpServletRequest request) throws Exception {
+    	
+    	logger.info("비동기 로그아웃 메서드 진입");
+    	
+    	HttpSession session = request.getSession();
+    	
+    	session.invalidate();
+    }
+    
     
 }

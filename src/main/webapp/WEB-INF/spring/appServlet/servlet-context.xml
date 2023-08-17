@@ -36,4 +36,16 @@
 	<context:component-scan base-package="com.shoeco.shoeco.common.service"/>
 	<context:component-scan base-package="com.shoeco.shoeco.common.controller"/>
 	
+	<!-- 2308172157 장유정_인터셉터 적용 -->
+	<interceptors>
+		<interceptor>
+			<mapping path="/member/login.do"/>
+			<beans:bean id="loginIntreceptor" class="com.shoeco.shoeco.common.interceptor.SCLoginInterceptor"></beans:bean>
+		</interceptor>
+		<interceptor>
+			<mapping path="/admin/**"/>
+			<beans:bean id="AdminIntreceptor" class="com.shoeco.shoeco.common.interceptor.SCAdminInterceptor"></beans:bean>
+		</interceptor>
+	</interceptors>
+	
 </beans:beans>
