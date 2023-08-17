@@ -78,7 +78,7 @@
                         	<input type="checkbox" value="295">
                      -->
                     	<c:forEach var="sizeOne" begin="220" step="5" end="300" >
-                    		<c:out value="${sizeOne}"/> <input type="checkbox" value="${sizeOne}" id="<c:out value='${sizeOne}'/>">	
+                    		<c:out value="${sizeOne}"/> <input type="checkbox" class="sizeArray" value="${sizeOne}" id="<c:out value='${sizeOne}'/>">	
                     	</c:forEach>
                     
                     </li>
@@ -148,6 +148,12 @@
                          
                         
                     </li>
+                    
+                    
+                    <li>
+                    	<button type="button" id="searchTerm">검색</button>
+                    </li>
+                    
                 </ul>
             </div>
 
@@ -428,10 +434,10 @@
         <input type="hidden" name="keyword" value="${pagingCre.paging.keyword}">
         
         
-        <c:forEach var="size" items="${pagingCre.paging.sizeArray}">
-        	<input type="hidden" name="sizeArray" value="${size}">
-        </c:forEach>
-        
+         
+        <input type="hidden" name="sizeArray">
+         
+             
         <c:forEach var="color" items="${pagingCre.paging.colorArray}">
         	<input type="hidden" name="colorArray" value="${color}">
         </c:forEach>
@@ -453,6 +459,47 @@
 		
         var frmSendValue = $("#frmSendValue");
 
+        
+
+        //검색 옵션
+        $("#searchTerm").on("click",function(){
+        	
+        	
+        	
+        	frmSendValue.find("input[name='pageNum']").val(1);
+        	
+        	var sizeChoice = 
+        		$(".sizeArray:checked").map(function(){
+        			return $(this).val();
+        		}).get() ;
+        	
+        	console.log(sizeChoice);
+        	
+        	 
+        	
+        	
+        	 
+        			 
+        	
+        
+        
+        
+        
+        	
+         	
+        	 
+        	frmSendValue.find("input[name='sizeArray']").val(sizeChoice.join(","));
+        	frmSendValue.attr("method","GET");
+            frmSendValue.attr("action","${contextPath}/list");
+
+            frmSendValue.submit();
+         
+        	
+        })//$("searchTerm") end
+        
+        
+        
+        
 		//페이징
 		$(".page-item a").on("click",function(e){
             e.preventDefault();
@@ -461,10 +508,11 @@
             frmSendValue.attr("action","${contextPath}/list");
 
             frmSendValue.submit();
-
-             
-
+ 
         })
+        
+        
+        
 		
 	
 	

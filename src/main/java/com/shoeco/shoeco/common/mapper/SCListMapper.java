@@ -10,13 +10,13 @@ import com.shoeco.shoeco.common.paging.ListPagingDTO;
 public interface SCListMapper {
 //	private 
 
-	public List<SCListVO> selectCategoryList(@Param("gender") String gender, @Param("paging") ListPagingDTO paging);
+	public List<SCListVO> selectCategoryList(@Param("paging") ListPagingDTO paging);
 	
-	public long selectRowTotal(@Param("gender") String gender, @Param("paging") ListPagingDTO paging) ;
+	public long selectRowTotal(@Param("paging") ListPagingDTO paging) ;
 	
-	public Long selectMinPrice(@Param("gender") String gender, @Param("paging") ListPagingDTO paging);
+	public Long selectMinPrice(@Param("paging") ListPagingDTO paging);
 	
-	public Long selectMaxPrice(@Param("gender") String gender, @Param("paging") ListPagingDTO paging);
+	public Long selectMaxPrice(@Param("paging") ListPagingDTO paging);
 	
 	public long selecTotalMaxPrice() ;
 }
