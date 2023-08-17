@@ -20,5 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 	        logger.info("관리자 페이지 이동");
 	        
 	    }
+	    
+	
 	}	 
 

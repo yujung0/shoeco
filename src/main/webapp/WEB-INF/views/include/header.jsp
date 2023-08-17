@@ -128,6 +128,9 @@
 </head>
 <body>
 
+
+
+
 <!--  <body> 23.8.8 세연/ 위에도 하나 더 있어서 혹시나 해서 주석했어요  -->
     <!-- Start Top Nav -->
     
@@ -203,6 +206,11 @@
 			    <i class="fa fa-fw fa-user text-dark mr-3"></i>
 			    &nbsp;<span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">+99</span>
 			</a>
+			
+			
+			
+			
+			
 			<!--23.08.08 세연/ 위에 마크가 페이지 밖으로 삐져나와서 nbsp;만 썼을때는 이상하게 먹혀서 안삐져나오게 하려고 추가 했어요 -->
 			<a>
 			    &nbsp;<span> &nbsp;  &nbsp;</span>
@@ -210,7 +218,11 @@
 
          </div>
          
+         
+         
       </div>      
+      
+      
     
  	
 

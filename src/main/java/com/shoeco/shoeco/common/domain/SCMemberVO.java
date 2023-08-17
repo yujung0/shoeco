@@ -29,10 +29,9 @@ public class SCMemberVO {
     private long mileage;
     private String userRank;
     private String userName;//o
-    private int admicck; //관리자 구분 (일반 0, 관리자 1)
     private String userAddress2; //주소
     private String userAddress3; //상세 주소
-    
+    private long adminck; //관리자 권한 (일반 0, 관리자 1)
     
 
 
