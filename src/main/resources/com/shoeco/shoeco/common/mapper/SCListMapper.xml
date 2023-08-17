@@ -653,14 +653,14 @@
 									          
 									              <where>  
 												 	<trim prefix="(" suffix=")" suffixOverrides="AND">
-													 	  <if test="paging.gender != null || paging.gender != '' ">
+													 	  <if test="paging.gender != '' ">
 													 	  	<trim prefix="(" suffix=")AND" >	
 													 	   		a.gender = #{paging.gender}
 													 	  	</trim>
 													 	  </if>
 													 	 
 													 
-														 <if test="paging.category != null || paging.category != '' ">		 
+														 <if test="paging.category != '' ">		 
 														 	<trim prefix="(" suffix=")AND" >
 														 		a.category = #{paging.category} 	
 														 	</trim>

@@ -19,20 +19,20 @@ public class SCListServiceImpl implements SCListService{
 		this.scListMapper = scListMapper  ;
 	} 
 	
-	public List<SCListVO> getCategoryList(String gender, ListPagingDTO paging){
-		return scListMapper.selectCategoryList(gender, paging);
+	public List<SCListVO> getCategoryList(ListPagingDTO paging){
+		return scListMapper.selectCategoryList(paging);
 	}
 	
-	public long rowTotal(String gender,ListPagingDTO paging){
-		return scListMapper.selectRowTotal(gender, paging);
+	public long rowTotal(ListPagingDTO paging){
+		return scListMapper.selectRowTotal(paging);
 	}
 
-	public Long MinPrice(String gender,ListPagingDTO paging){
-		return scListMapper.selectMinPrice(gender, paging);
+	public Long MinPrice(ListPagingDTO paging){
+		return scListMapper.selectMinPrice(paging);
 	};
 
-	public Long MaxPrice(String gender,ListPagingDTO paging){
-		return scListMapper.selectMaxPrice(gender, paging);
+	public Long MaxPrice(ListPagingDTO paging){
+		return scListMapper.selectMaxPrice(paging);
 	};
 
 	public long totalMaxPrice() {
