@@ -7,8 +7,8 @@
 
 <c:set var="contextPath" value="${pageContext.request.contextPath }"/><%-- 
 <sec:authentication property="principal" var="principal"/> --%>
- 
-
+    
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,7 +22,7 @@
   crossorigin="anonymous"></script>
   
  <%@ include file="/WEB-INF/views/include/header.jsp" %>
-
+  
 
 <style>
 @charset "UTF-8";
@@ -71,7 +71,7 @@ ul{
     height:110px;
     line-height: 110px;
     background-color: #5080bd;
-    margin-bottom : 15px;
+    margin-bottom:15px;
 }
 .admin_top_wrap>span{
     margin-left: 30px;
@@ -108,10 +108,14 @@ ul{
     font-size: 30px;
     font-weight: bolder;
 }
-/* 
-.admin_list_01{
+.admin_navi_wrap li a:link {color: black;}
+.admin_navi_wrap li a:visited {color: black;}
+.admin_navi_wrap li a:active {color: black;}
+.admin_navi_wrap li a:hover {color: black;}
+ 
+.admin_list_04{
     background-color: #c8c8c8;
-} */
+} 
  
  
 /* 관리자페이지 컨텐츠 영역 */
@@ -122,11 +126,14 @@ ul{
     height: 700px;
     
 }
-.admin_content_wrap div{
-    margin-top: 280px;
-    text-align: center;
-    font-size: 50px;
+.admin_content_subject{            /* 관리자 컨텐츠 제목 영역 */
+    font-size: 40px;
     font-weight: bolder;
+    padding-left: 15px;
+    background-color: #6AAFE6;
+    height: 80px;
+    line-height: 80px;
+    color: white;    
 }
  
  
@@ -135,15 +142,11 @@ ul{
     clear: both;
 }
 
-.admin_navi_wrap li a:link {color: black;}
-.admin_navi_wrap li a:visited {color: black;}
-.admin_navi_wrap li a:active {color: black;}
-.admin_navi_wrap li a:hover {color: black;}
+</style>  
 
-</style>
 </head>
-
-<body> 
+<body>
+ 
     <div class="wrapper">
         <div class="wrap">
             <!-- gnv_area -->    
@@ -162,7 +165,7 @@ ul{
             <!-- contents-area -->
             <div class="admin_wrap">
                 <!-- 네비영역 -->
-                <div class="admin_navi_wrap">
+               <div class="admin_navi_wrap">
                     <ul>
                         <li >
                             <a class="admin_list_01" href="${contextPath}/admin/goodsEnroll">상품 등록</a>
@@ -192,16 +195,15 @@ ul{
                      -->
                 </div>
                 <div class="admin_content_wrap">
-                    <div>관리자 페이지 입니다.</div>
+                    <div class="admin_content_subject"><span>브랜드 관리</span></div>
                 </div>
                 <div class="clearfix"></div>
             </div>
-        </div>
-    </div>
-    
-<%@ include file="/WEB-INF/views/include/footer.jsp" %>
+
+    </div>    <!-- class="wrap" -->
+</div>    <!-- class="wrapper" -->
  
+ 
+<%@ include file="/WEB-INF/views/include/footer.jsp" %> 
 </body>
 </html>
-
- 
