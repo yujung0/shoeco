@@ -22,12 +22,12 @@ public class CartPagingDTO {
 		 this.rowAmountPerPage = 10 ;
 	 }
 	 //생성자2: 목록 화면에서 페이징번호 클릭 시, 페이지번호와 행수를 각각 사용자가 선택한 페이징번호와 10으로 전달
-		/*
-		 * public CartPagingDTO(int pageNum) {
-		 * 
-		 * if(pageNum <= 0) { this.pageNum = 1 ; } else { this.pageNum = pageNum; }
-		 * this.rowAmountPerPage = 10 ; }
-		 */
+		
+		 public CartPagingDTO(int pageNum) {
+	
+		 if(pageNum <= 0) { this.pageNum = 1 ; } else { this.pageNum = pageNum; }
+		 this.rowAmountPerPage = 10 ; }
+		 
 	 //생성자3: 목록 화면에서 사용자가 표시할 행수를 선택하고 페이징 번호 클릭 시,
 	 //페이지번호와 행수를 각각 사용자가 선택한 페이징번호와 표시행수로 전달
 	 public CartPagingDTO(int pageNum, int rowAmountPerPage) {

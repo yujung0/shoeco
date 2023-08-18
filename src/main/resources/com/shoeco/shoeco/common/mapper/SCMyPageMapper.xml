@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.shoeco.shoeco.common.mapper.SCMyPageMapper">
+
+
+	<!-- 회원의 문의내역 조회 --><!-- 
+	<select id="selectQuestionList">
+		SELECT *
+		FROM SC_QNA_QUESTIONS
+		WHERE userId = 'firstUser'
+	</select> -->
+
+
+	<!-- 회원의 문의내역 조회 (페이징 추가)-->
+	<select id="selectQuestionList">
+		<![CDATA[
+			 SELECT *
+			 FROM ( SELECT /*+ INDEX_DESC (a PK_QNAQNO_QUESTIONS) */ ROWNUM rn, a.*
+					FROM SC_QNA_QUESTIONS a
+					WHERE userId = 'firstUser'
+						  AND ROWNUM <= ( #{pageNum} * #{rowAmountPerPage} )
+				  ) a
+			 WHERE rn >= ( ( #{pageNum} * #{rowAmountPerPage} ) - ( #{rowAmountPerPage} - 1 ) )
+		]]>
+	</select>
+	
+	<!-- 회원의 문의내역 갯수 조회 -->
+	<select id="selectRowTotal">
+		SELECT COUNT(*) rowTotal
+		FROM SC_QNA_QUESTIONS
+		WHERE userId = 'firstUser'
+	</select>
+	
+	
+</mapper>

@@ -39,12 +39,12 @@ public class CartPagingCreatorDTO {
 		
 		
 		
-		System.out.println("전달된 페이징 기본데이터-paging: " + this.cartPagingDTO.toString());
-		System.out.println("시작 페이징번호: " + this.startNum);
-		System.out.println("끝 페이징번호: " + this.endNum);
-		System.out.println("이전버튼 표시 여부: " + this.prev);
-		System.out.println("다음버튼 표시 여부: " + this.next);
-		System.out.println("마지막 페이지 번호: " + this.lastNum);
+//		System.out.println("전달된 페이징 기본데이터-paging: " + this.cartPagingDTO.toString());
+//		System.out.println("시작 페이징번호: " + this.startNum);
+//		System.out.println("끝 페이징번호: " + this.endNum);
+//		System.out.println("이전버튼 표시 여부: " + this.prev);
+//		System.out.println("다음버튼 표시 여부: " + this.next);
+//		System.out.println("마지막 페이지 번호: " + this.lastNum);
 	
 	
 	

@@ -27,7 +27,7 @@
 									            	  										join SC_BRAND c on(a.brandCode= c.brandCode)			
 									            
 									          <if test="paging.gender != '' or paging.category != '' or paging.keyword != '' or
-									          paging.sizeArray != null or paging.colorArray != null or paging.brandArray != null or paging.exSoldout == 1">
+									           ( paging.sizeArray != ''  and paging.sizeArray  != null )or paging.colorArray != null or paging.brandArray != null or paging.exSoldout == 1">
 									          	
 									          	
 									             <where>  
@@ -55,13 +55,14 @@
 														 </if>
 														
 														  
-													 	  <if test="paging.sizeArray != null">
-													 	  	<trim prefix="(" suffix=")AND" >
-																 <foreach item="size" collection="paging.sizeArray" open="(" close=")" separator="OR">
-															 			b.prodSize = CAST (#{size} AS INTEGER) 
-																 </foreach>
-															 </trim>
-														  </if>
+													 	  <if test="paging.sizeArray != null and paging.sizeArray != ''">
+														    <trim prefix="(" suffix=")AND" >
+														        b.prodSize IN
+														        <foreach item="size" index="index" collection="paging.sizeArray.split(',')" open="(" close=")" separator=",">
+														            #{size}
+														        </foreach>
+														    </trim>
+														</if>
 														
 														
 														 <if test="paging.colorArray != null ">
@@ -344,7 +345,7 @@
 									            	  										join SC_BRAND c on(a.brandCode= c.brandCode)			
 									            
 									          <if test="paging.gender != '' or paging.category != '' or paging.keyword != '' or
-									          paging.sizeArray != null or paging.colorArray != null or paging.brandArray != null or paging.exSoldout == 1">
+									          ( paging.sizeArray != ''  and paging.sizeArray  != null ) or paging.colorArray != null or paging.brandArray != null or paging.exSoldout == 1">
 									          
 									              <where>  
 												 	<trim prefix="(" suffix=")" suffixOverrides="AND">
@@ -371,14 +372,15 @@
 														 </if>
 														
 														  
-													 	  <if test="paging.sizeArray != null">
-													 	  	<trim prefix="(" suffix=")AND" >
-																 <foreach item="size" collection="paging.sizeArray" open="(" close=")" separator="OR">
-															 			b.prodSize = CAST (#{size} AS INTEGER) 
-																 </foreach>
-															 </trim>
-														  </if>
-														
+														<if test="paging.sizeArray != null and paging.sizeArray != ''">
+														    <trim prefix="(" suffix=")AND" >
+														        b.prodSize IN
+														        <foreach item="size" index="index" collection="paging.sizeArray.split(',')" open="(" close=")" separator=",">
+														            #{size}
+														        </foreach>
+														    </trim>
+														</if>
+																										
 														
 														 <if test="paging.colorArray != null ">
 															<trim prefix="(" suffix=")AND" >	
@@ -496,8 +498,8 @@
 								             		   b.prodSize,b.color, b.prodCount from sc_products a JOIN sc_products_option b ON(a.prodCode = b.prodCode)
 									            	  										join SC_BRAND c on(a.brandCode= c.brandCode)			
 									            
-									          <if test="paging.gender != '' or paging.category != '' or paging.keyword !=null or
-									          paging.sizeArray != null or paging.colorArray != null or paging.brandArray != null or paging.exSoldout == 1">
+									          <if test="paging.gender != '' or paging.category != '' or (paging.keyword !=null and
+									          paging.sizeArray != null) or paging.colorArray != null or paging.brandArray != null or paging.exSoldout == 1">
 									          
 									             <where>  
 												 	<trim prefix="(" suffix=")" suffixOverrides="AND">
@@ -524,13 +526,15 @@
 														 </if>
 														
 														  
-													 	  <if test="paging.sizeArray != null">
-													 	  	<trim prefix="(" suffix=")AND" >
-																 <foreach item="size" collection="paging.sizeArray" open="(" close=")" separator="OR">
-															 			b.prodSize = CAST (#{size} AS INTEGER) 
-																 </foreach>
-															 </trim>
-														  </if>
+													 	    
+													 	 <if test="paging.sizeArray != null and paging.sizeArray != ''">
+														    <trim prefix="(" suffix=")AND" >
+														        b.prodSize IN
+														        <foreach item="size" index="index" collection="paging.sizeArray.split(',')" open="(" close=")" separator=",">
+														            #{size}
+														        </foreach>
+														    </trim>
+														</if>
 														
 														
 														 <if test="paging.colorArray != null ">
@@ -649,7 +653,7 @@
 									            	  										join SC_BRAND c on(a.brandCode= c.brandCode)			
 									            
 									          <if test="paging.gender != '' or paging.category != '' or paging.keyword != '' or
-									          paging.sizeArray != null or paging.colorArray != null or paging.brandArray != null or paging.exSoldout == 1">
+									         ( paging.sizeArray != ''  and paging.sizeArray  != null ) or paging.colorArray != null or paging.brandArray != null or paging.exSoldout == 1">
 									          
 									              <where>  
 												 	<trim prefix="(" suffix=")" suffixOverrides="AND">
@@ -684,13 +688,15 @@
 															 </trim>
 														  </if> -->
 														  
-														   <if test="paging.sizeArray != null">  
-													 	  	<trim prefix="(" suffix=")AND" >
-																 <foreach item="size" collection="paging.sizeArray" open="(" close=")" separator="OR">
-															 			b.prodSize = CAST (#{size} AS INTEGER) 
-																 </foreach>
-															 </trim>
-														  </if> 
+														    
+													 	 <if test="paging.sizeArray != null and paging.sizeArray != ''">
+														    <trim prefix="(" suffix=")AND" >
+														        b.prodSize IN
+														        <foreach item="size" index="index" collection="paging.sizeArray.split(',')" open="(" close=")" separator=",">
+														            #{size}
+														        </foreach>
+														    </trim>
+														</if>
 														
 														 <if test="paging.colorArray != null ">
 															<trim prefix="(" suffix=")AND" >	
