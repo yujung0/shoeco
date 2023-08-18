@@ -4,6 +4,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath }"/>
+
 <%@include file="./include/header.jsp" %>
 
 <style>
@@ -26,7 +27,8 @@
     <div class="bd-example">
         <nav>
             <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
-                <button class="nav-link active" id="nav-payment-tab" data-bs-toggle="tab" data-bs-target="#nav-payment" type="button" role="tab" aria-controls="nav-payment" aria-selected="true">결제내역</button>
+                <button class="nav-link active" id="nav-payment-tab" data-bs-toggle="tab" data-bs-target="#nav-mypage" type="button" role="tab" aria-controls="nav-mypage" aria-selected="true">MyPage</button>
+                <button class="nav-link" id="nav-payment-tab" data-bs-toggle="tab" data-bs-target="#nav-payment" type="button" role="tab" aria-controls="nav-payment" aria-selected="false">결제내역</button>
                 <button class="nav-link" id="nav-mileage-tab" data-bs-toggle="tab" data-bs-target="#nav-mileage" type="button" role="tab" aria-controls="nav-mileage" aria-selected="false">마일리지</button>
                 <button class="nav-link" id="nav-QNA-tab" data-bs-toggle="tab" data-bs-target="#nav-QNA" type="button" role="tab" aria-controls="nav-QNA" aria-selected="false">문의내역</button>
                 <button class="nav-link" id="nav-review-tab" data-bs-toggle="tab" data-bs-target="#nav-review" type="button" role="tab" aria-controls="nav-review" aria-selected="false">리뷰 작성내역</button>
@@ -36,6 +38,9 @@
         </nav>
         <div class="tab-content" id="nav-tabContent">
             <!-- 각 탭의 내용을 동적으로 표시할 공간 -->
+            <div class="tab-pane fade" id="nav-mypage" role="tabpanel" aria-labelledby="nav-mypage-tab">
+                <p><strong>mypage</strong> Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling. You can use it with tabs, pills, and any other <code>.nav</code>-powered navigation.</p>
+            </div>
             <div class="tab-pane fade" id="nav-payment" role="tabpanel" aria-labelledby="nav-payment-tab">
                 <p><strong>payment</strong> Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling. You can use it with tabs, pills, and any other <code>.nav</code>-powered navigation.</p>
             </div>
@@ -71,7 +76,7 @@
                     </ul>
                 </div>
                 <div style="text-align: right;">
-                    <button class="btn btn-primary"><strong>문의하기</strong></button>
+                    <button class="btn btn-primary" id="openQuestionModal" onclick="openQuestionModal()"><strong>문의하기</strong></button>
                 </div>
             </div>
         <div class="tab-pane fade" id="nav-review" role="tabpanel" aria-labelledby="nav-review-tab">
@@ -86,6 +91,35 @@
         </div>
     </div>
 </section>
+
+<!-- 모달 마크업 -->
+<div class="modal fade" id="questionModal" tabindex="-1" aria-labelledby="questionModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="questionModalLabel">문의하기</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- 작성 페이지 내용 -->
+                <form id="questionForm">
+                    <div class="mb-3">
+                        <label for="qnaQTitle" class="form-label">문의 제목</label>
+                        <input type="text" class="form-control" id="qnaQTitle" name="qnaQTitle" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="qnaQContent" class="form-label">문의 내용</label>
+                        <textarea class="form-control" id="qnaQContent" name="qnaQContent" rows="4" required></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                <button type="button" class="btn btn-primary" onclick="submitQuestion()">문의 등록</button>
+            </div>
+        </div>
+    </div>
+</div><!-- 모달 end -->
 
 <%@include file="./include/footer.jsp" %>
 
@@ -158,4 +192,41 @@
 		        }
 		    });
 		}
+	
+	//문의버튼 클릭 시 모달창 띄움
+	function openQuestionModal() {
+	    $('#questionModal').modal('show');
+	}
+	
+	// 등록 버튼 클릭 시 실행되는 함수
+	function submitQuestion() {
+	    var qnaQTitle = $("#qnaQTitle").val(); // 문의 제목 입력값 가져오기
+	    var qnaQContent = $("#qnaQContent").val(); // 문의 내용 입력값 가져오기
+
+	    var requestData = {
+	        qnaQTitle: qnaQTitle,
+	        qnaQContent: qnaQContent
+	    };
+
+	    $.ajax({
+	        url: "${contextPath}/mypage/register", // 컨트롤러의 엔드포인트 주소
+	        type: "POST", // 또는 POST 등 HTTP 메서드 선택
+	        data: requestData, // 전달할 데이터
+	        dataType: "json", // 응답 데이터 형식
+	        success: function(response) {
+	            // 성공적으로 등록되었을 때 처리
+	            console.log("문의 등록 성공");
+	            
+	            // 모달 닫기
+	            $('#questionModal').modal('hide');
+	            
+	            // 등록 후 문의 목록 다시 불러오기
+	            getQuestionList(1);
+	        },
+	        error: function(xhr, status, error) {
+	            // 오류 발생 시 처리
+	            console.error(error);
+	        }
+	    });
+	}
 </script>

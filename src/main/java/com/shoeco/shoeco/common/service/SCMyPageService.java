@@ -1,5 +1,6 @@
 package com.shoeco.shoeco.common.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.shoeco.shoeco.common.domain.SCMyPageVO;
@@ -14,6 +15,9 @@ public interface SCMyPageService {
 	
 	//회원의 문의내역 갯수 조회
 	public int getRowTotal();
+	
+	//문의 등록
+	public int putQuesetion(HashMap<String, Object> questionMap);
 	
 	
 	

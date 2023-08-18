@@ -1,5 +1,6 @@
 package com.shoeco.shoeco.common.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.context.annotation.Primary;
@@ -29,5 +30,11 @@ public class SCMyPageServiceImpl implements SCMyPageService{
 	public int getRowTotal() {
 		
 		return myPageMapper.selectRowTotal();
+	}
+	
+	//문의 등록
+	public int putQuesetion(HashMap<String, Object> questionMap) {
+		
+		return myPageMapper.insertQuestion(questionMap);
 	}
 }

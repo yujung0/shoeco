@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -27,7 +28,7 @@ public class SCMyPageController {
     
     @GetMapping
     public String showMypage(Model model) {
-        // ... 다른 코드 ...
+        
         return "/mypage";
     }
     
@@ -45,5 +46,14 @@ public class SCMyPageController {
         resultMap.put("pagingCreator", cartPagingCreatorDTO);
         
         return resultMap;
+    }
+    
+    //문의 등록
+    @ResponseBody
+    @PostMapping("/register")
+    public void registerQuestion(@RequestParam HashMap<String, Object> questionMap) {
+        // questionMap에는 qnaQTitle과 qnaQContent가 들어있습니다.
+        // 이 정보를 이용하여 문의 등록 로직 수행
+        myPageService.putQuesetion(questionMap);
     }
 }

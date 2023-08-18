@@ -34,5 +34,10 @@
 		WHERE userId = 'firstUser'
 	</select>
 	
+	<!-- 문의등록 -->
+	<insert id="insertQuestion" parameterType="map">
+		INSERT INTO SC_QNA_QUESTIONS
+		VALUES(SHOECO.SEQ_QUESTIONS.nextval, 'firstUser', #{qnaQTitle}, #{qnaQContent}, DEFAULT, DEFAULT, DEFAULT)
+	</insert>
 	
 </mapper>

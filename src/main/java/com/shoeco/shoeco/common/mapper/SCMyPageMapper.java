@@ -1,5 +1,6 @@
 package com.shoeco.shoeco.common.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.shoeco.shoeco.common.domain.SCMyPageVO;
@@ -16,5 +17,8 @@ public interface SCMyPageMapper {
     
     // 회원의 문의내역 갯수 조회
     public int selectRowTotal();
+    
+    // 문의 등록
+    public int insertQuestion(HashMap<String, Object> questionMap);
     
 }
