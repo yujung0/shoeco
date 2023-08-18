@@ -24,7 +24,8 @@ public class ListPagingDTO {
 	
 	private String keyword = "" ;
 	
-	private String[] sizeArray;
+//	private String[] sizeArray;
+	private String sizeArray;
 	
 //	public Integer[] getSizeArray() {
 //		

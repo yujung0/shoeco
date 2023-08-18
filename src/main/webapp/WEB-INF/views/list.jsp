@@ -433,7 +433,7 @@
         <input type="hidden" name="category" value="${pagingCre.paging.category}">
         <input type="hidden" name="keyword" value="${pagingCre.paging.keyword}">
         
-        <div id="sizeDiv">
+        <%-- <div id="sizeDiv">
 	        <c:choose>
 		        <c:when test="${pagingCre.paging.sizeArray != null}">
 			        <c:forEach var="size" items="${pagingCre.paging.sizeArray}">
@@ -445,7 +445,13 @@
 		        	<input type="hidden" name="sizeArray">	
 		        </c:otherwise>
 	        </c:choose>
-        </div>  
+        </div>   --%>
+             
+        <div id="sizeDiv">
+        	<input type="hidden" name="sizeArray" value="${pagingCre.paging.sizeArray}">	
+		        
+        </div>       
+             
              
         <c:forEach var="color" items="${pagingCre.paging.colorArray}">
         	<input type="hidden" name="colorArray" value="${color}">
