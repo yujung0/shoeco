@@ -21,6 +21,30 @@ import org.springframework.web.bind.annotation.RequestMethod;
 	        
 	    }
 	    
+	    // 상품 등록 페이지 접속
+	    @RequestMapping(value = "goodsManage", method = RequestMethod.GET)
+	    public void goodsManageGet() throws Exception {
+	    	logger.info("상품 등록 페이지 접속");
+	    }
+	    
+	    // 상품 등록 페이지 접속
+	    @RequestMapping(value = "goodsEnroll", method = RequestMethod.GET)
+	    public void goodsEnrollGET() throws Exception {
+	    	logger.info("상품 등록 페이지 접속");
+	    }
+	    
+	    // 브랜드 등록 페이지 접속 (author -> brand 대체)
+	    @RequestMapping(value = "brandEnroll", method = RequestMethod.GET)
+	    public void brandEnrollGET() throws Exception {
+	    	logger.info("브랜드 등록 페이지 접속");
+	    }
+	    
+	    // 브랜드 관리 페이지 접속
+	    @RequestMapping(value = "brandManage", method = RequestMethod.GET)
+	    public void brandManageGET() throws Exception {
+	    	logger.info("브랜드 관리 페이지 접속");
+	    }
+	    
 	
 	}	 
 
