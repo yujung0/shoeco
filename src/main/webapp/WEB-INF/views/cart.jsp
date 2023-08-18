@@ -39,6 +39,7 @@
 					<thead style="text-align: center;">
 						<tr class="table-dark">
 							<th>선택</th>
+							<th></th>
 							<th>상품</th>
 							<th>사이즈</th>
 							<th>색상</th>
@@ -51,7 +52,8 @@
 						<c:forEach var="cartItem" items="${cartList}" varStatus="loop">
 						    <tr class="text-secondary-emphasis">
 						        <td><input type="checkbox" id="checkBox_${loop.index}" onchange="calculateTotalPrice()"></td>
-						        <td><img class="img-fluid" src="${contextPath}/resources/img/white_test.jpg" alt="" width="100" height="100">${cartItem.prodName}</td>
+						        <td><img class="img-fluid" src="${contextPath}/resources/img/white_test.jpg" alt="" width="100" height="100"></td>
+						        <td>${cartItem.prodName}</td>
 						        <td>${cartItem.prodSize}</td>
 						        <td>${cartItem.color}</td>
 						        <td>${cartItem.cartCount}</td>
