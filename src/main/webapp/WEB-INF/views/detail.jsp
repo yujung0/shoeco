@@ -161,7 +161,7 @@
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse. Donec condimentum elementum convallis. Nunc sed orci a diam ultrices aliquet interdum quis nulla.</p>
                             <ul class="list-inline">
                                 <li class="list-inline-item">
-                                    <h6>색상 :</h6>
+                                    <h6><Strong>색상 : </Strong></h6>
                                 </li>
                                 
                                     <p class="text-muted"><strong>

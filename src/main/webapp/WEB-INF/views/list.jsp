@@ -174,7 +174,7 @@
                     </div>
                     <div class="col-md-6 pb-4">
                         <div class="d-flex">
-                            <select class="form-control">
+                            <select class="form-control" id="arraySelect">
                                 <option>Featured</option>
                                 <option>A to Z</option>
                                 <option>Item</option>
@@ -183,6 +183,12 @@
                     </div>
                 </div>
                 
+                <!--230819 arraySelect 생성  -->
+                
+                <form action="${contextPath}/list" method="get">
+                	<input type="hidden" id="arrayOption" name="array">
+                
+                </form>
                 
                 
                 <div class="row"> <!-- 리스트칸의 wrapper  -->
