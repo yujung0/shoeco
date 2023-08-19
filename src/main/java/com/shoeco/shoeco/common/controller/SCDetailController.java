@@ -3,6 +3,7 @@ package com.shoeco.shoeco.common.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.shoeco.shoeco.common.service.SCDetailService;
 
@@ -17,9 +18,12 @@ public class SCDetailController {
 	}
 	
 	@GetMapping("/detail")
-	public void showDetail(Model model,String prodCode){
+	public void showDetail(Model model,@RequestParam("prodCode") long prodCode){
 		
-		model.addAttribute("option",scDetailService.getOption(prodCode));
+		model.addAttribute("prodOption",scDetailService.getOption(prodCode));
+		model.addAttribute("prodColor",scDetailService.getColor(prodCode));
+		model.addAttribute("prodSize",scDetailService.getSize(prodCode));
+		model.addAttribute("product",scDetailService.getProduct(prodCode));
 		System.out.println("detail로가는 컨트롤러");
 	}
 	

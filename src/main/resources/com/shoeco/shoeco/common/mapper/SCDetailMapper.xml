@@ -12,6 +12,27 @@
 	   SELECT prodOptionNo, prodCode, prodSize, Color, prodCount FROM SC_PRODUCTS_OPTION
 	   WHERE prodCode = #{prodCode} 
 	</select>
+	
+	<!--1 상품코드 당 색상 -->
+	<select id="selectColor">
+	   SELECT distinct color FROM SC_PRODUCTS_OPTION
+	   WHERE prodCode = #{prodCode} 
+	</select>
+	
+	<!--1 상품코드 당 색상 -->
+	<select id="selectSize">
+	   SELECT distinct prodSize FROM SC_PRODUCTS_OPTION
+	   WHERE prodCode = #{prodCode} 
+	</select>
+	
+	<!--2 상품코드 당 상품정보 + 브랜드정보  -->	
+	<select id="selectProduct">
+	   SELECT a.PRODCODE, a.BRANDCODE, a.PRODNAME, a.GENDER, a.SELLPRICE, a.CATEGORY, a.MATERIAL, a.COUNTRY, 
+	   b.brandName,b.businessNo,b.managerName,b.brandPhoneNo,b.brandEmail FROM SC_PRODUCTS a JOIN SC_BRAND b ON (a.brandCode = b.brandCode)
+	   WHERE prodCode = #{prodCode} 
+	</select>
+	
+	
 
 
 

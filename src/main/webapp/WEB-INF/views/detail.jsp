@@ -136,23 +136,24 @@
                 <!-- col end -->
                 <div class="col-lg-7 mt-5">
                     <div class="card">
-                        <div class="card-body">
-                            <h1 class="h2">Active Wear</h1>
-                            <p class="h3 py-2">$25.00</p>
+                        <div class="card-body"> <!-- div class="card-body"  -->
+                        	<%-- <c:forEach var="prodOption" items="${prodOption}"> --%>
+                            <h1 class="h2">${product.get(0).prodName} </h1>
+                            <p class="h3 py-2">₩ <fmt:formatNumber value="${product.get(0).sellPrice}" pattern="#,###"/></p>   
                             <p class="py-2">
                                 <i class="fa fa-star text-warning"></i>
                                 <i class="fa fa-star text-warning"></i>
                                 <i class="fa fa-star text-warning"></i>
                                 <i class="fa fa-star text-warning"></i>
                                 <i class="fa fa-star text-secondary"></i>
-                                <span class="list-inline-item text-dark">Rating 4.8 | 36 Comments</span>
+                                <span class="list-inline-item text-dark"><small>리뷰평점</small> 4.8 | 36 Comments</span> <!-- 아직 리뷰정보에 관해서는 x -->
                             </p>
                             <ul class="list-inline">
                                 <li class="list-inline-item">
                                     <h6>Brand:</h6>
                                 </li>
                                 <li class="list-inline-item">
-                                    <p class="text-muted"><strong>Easy Wear</strong></p>
+                                    <p class="text-muted"><strong>${product.get(0).brandName}</strong></p>
                                 </li>
                             </ul>
 
@@ -160,11 +161,16 @@
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse. Donec condimentum elementum convallis. Nunc sed orci a diam ultrices aliquet interdum quis nulla.</p>
                             <ul class="list-inline">
                                 <li class="list-inline-item">
-                                    <h6>Avaliable Color :</h6>
+                                    <h6>색상 :</h6>
                                 </li>
-                                <li class="list-inline-item">
-                                    <p class="text-muted"><strong>White / Black</strong></p>
-                                </li>
+                                
+                                    <p class="text-muted"><strong>
+                                    <c:forEach var="color" items="${prodColor}" > 
+                                    	  ${color.color}
+                                    </c:forEach>
+                                     </strong></p>	  
+                                     
+                                
                             </ul>
 
                             <h6>Specification:</h6>
@@ -186,10 +192,13 @@
                                             <li class="list-inline-item">Size :
                                                 <input type="hidden" name="product-size" id="product-size" value="S">
                                             </li>
-                                            <li class="list-inline-item"><span class="btn btn-success btn-size">S</span></li>
-                                            <li class="list-inline-item"><span class="btn btn-success btn-size">M</span></li>
-                                            <li class="list-inline-item"><span class="btn btn-success btn-size">L</span></li>
-                                            <li class="list-inline-item"><span class="btn btn-success btn-size">XL</span></li>
+                                            
+      										<c:forEach var="size" items="${prodSize}">						                                     
+	                                            <li class="list-inline-item"><span class="btn btn-success btn-size">${size.prodSize }</span></li>
+	                       <!--                      <li class="list-inline-item"><span class="btn btn-success btn-size">M</span></li>
+	                                            <li class="list-inline-item"><span class="btn btn-success btn-size">L</span></li>
+	                                            <li class="list-inline-item"><span class="btn btn-success btn-size">XL</span></li> -->
+                                        	</c:forEach>
                                         </ul>
                                     </div>
                                     <div class="col-auto">
@@ -214,7 +223,10 @@
                                 </div>
                             </form>
 
-                        </div>
+                        </div><!--end div class="card-body"  -->
+                    
+                    
+                    
                     </div>
                 </div>
             </div>

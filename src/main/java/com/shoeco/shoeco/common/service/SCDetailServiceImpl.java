@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import com.shoeco.shoeco.common.domain.SCOptionVO;
+import com.shoeco.shoeco.common.domain.SCProductVO;
 import com.shoeco.shoeco.common.mapper.SCDetailMapper;
 
 @Service
@@ -19,8 +20,20 @@ public class SCDetailServiceImpl implements SCDetailService {
 		
 	}
 	
-	public List<SCOptionVO> getOption(String prodCode) {
+	public List<SCOptionVO> getOption(long prodCode) {
 		return scDetailMapper.selectOption(prodCode);
+	}
+	
+	public List<SCOptionVO> getColor(long prodCode){
+		return scDetailMapper.selectColor(prodCode);
+	}
+	
+	public List<SCOptionVO> getSize(long prodCode){
+		return scDetailMapper.selectSize(prodCode);
+	}
+	
+	public List<SCProductVO> getProduct(long prodCode){
+		return scDetailMapper.selectProduct(prodCode);
 	}
 	
 	

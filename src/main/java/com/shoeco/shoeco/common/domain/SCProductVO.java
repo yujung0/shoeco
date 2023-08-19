@@ -6,10 +6,12 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@ToString	
-public class SCListVO {
+@ToString
+public class SCProductVO {
+	
+	//prodCode 1개당 products 와 brand join해서 사용
 
-	//sc_products
+	//products
 	private long prodCode;
 	private long brandCode;
 	private String prodName;
@@ -19,29 +21,14 @@ public class SCListVO {
 	private String material;
 	private String country;
 	
-	//sc_products_option
-	private String prodOptionNo;
-//	private String prodCode;
-	private int prodSize;
-	private String color;
-	private long prodCount;
 	
-	
-	//sc_brand
-//	private String brandCode;
+	//brand
+//	private long prodCode;
 	private String brandName;
 	private String businessNo;
 	private String managerName;
 	private long brandPhoneNo;
 	private String brandEmail;
 	
-	
-	 
-	//sc_products_attachments
-	private String prodAttachUuid;
-	//private String prodCode;
-	private String uploadPath;
-	private String prodFileName;
-	private String prodFileType;
 	
 }

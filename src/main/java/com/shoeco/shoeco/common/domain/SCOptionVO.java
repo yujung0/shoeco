@@ -11,7 +11,7 @@ public class SCOptionVO {
 	
 	private String prodOptionNo;
 	private String prodCode;
-	private String prodSize;
+	private int prodSize;
 	private String color;
 	private long prodCount;
 
