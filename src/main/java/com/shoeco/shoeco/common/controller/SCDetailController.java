@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.shoeco.shoeco.common.service.SCDetailService;
 
@@ -27,7 +28,17 @@ public class SCDetailController {
 		System.out.println("detail로가는 컨트롤러");
 	}
 	
-	//prodCode 별로 detail 에 있는 option의 list를 꺼내려고 함 
+	//사이즈 별 재고 파익을 위한 ajax
+	@ResponseBody
+	@GetMapping("/detail/sizePerColorAjax")
+	public void showSizePerColor(Model model,@RequestParam("prodCode") long prodCode, 
+											@RequestParam("color") String color){
+		
+		model.addAttribute("sizePerColor",scDetailService.getSizePerColor(prodCode, color));
+		System.out.println("ajax로 사이즈 별 재고 파악 ");
+	}
+	
+
 
 	
 	

@@ -32,6 +32,10 @@ public class SCDetailServiceImpl implements SCDetailService {
 		return scDetailMapper.selectSize(prodCode);
 	}
 	
+	public List<SCOptionVO> getSizePerColor(long prodCode, String color){
+		return scDetailMapper.selectSize(prodCode);
+	}
+	
 	public List<SCProductVO> getProduct(long prodCode){
 		return scDetailMapper.selectProduct(prodCode);
 	}

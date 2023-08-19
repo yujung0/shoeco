@@ -25,6 +25,12 @@
 	   WHERE prodCode = #{prodCode} 
 	</select>
 	
+	<!--1 색상 당 사이즈-- // detail에서 특정 컬러의 재고 파악을 위해 -->
+	<select id="selectSizePerColor">
+	   SELECT prodCode, color, prodSize, prodCount FROM SC_PRODUCTS_OPTION
+	   WHERE prodCode = #{prodCode} AND color = #{color} 
+	</select>
+	
 	<!--2 상품코드 당 상품정보 + 브랜드정보  -->	
 	<select id="selectProduct">
 	   SELECT a.PRODCODE, a.BRANDCODE, a.PRODNAME, a.GENDER, a.SELLPRICE, a.CATEGORY, a.MATERIAL, a.COUNTRY, 

@@ -13,6 +13,8 @@ public interface SCDetailService {
 	
 	public List<SCOptionVO> getSize(long prodCodes);
 	
+	public List<SCOptionVO> getSizePerColor(long prodCodes, String color);
+	
 	public List<SCProductVO> getProduct(long prodCode);
 		
 	
