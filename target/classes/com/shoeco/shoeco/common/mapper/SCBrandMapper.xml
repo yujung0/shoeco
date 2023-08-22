@@ -5,10 +5,17 @@
   
 <mapper namespace="com.shoeco.shoeco.common.mapper.SCBrandMapper">
 
-	<!-- 브랜드 등록 -->
+<!--  브랜드 등록
 	<insert id="brandEnroll">
 		INSERT INTO SC_BRAND ( brandCode, brandName, businessNo, managerName, brandPhoneNo, brandEmail, updateDate, regDate)
 		VALUES (#{brandCode}, #{brandName}, #{businessNo}, #{managerName}, #{brandPhoneNo}, #{brandEmail}, TO_DATE(SYSDATE, 'YY/MM/DD'), TO_DATE(SYSDATE, 'YY/MM/DD'))
-	</insert> 
+	</insert>  -->
+	
+	
+	<!-- 브랜드 등록 -->
+	<insert id="brandEnroll" useGeneratedKeys="true" keyProperty="brandCode">
+		INSERT INTO SC_BRAND ( brandCode, brandName, businessNo, managerName, brandPhoneNo, brandEmail, updateDate, regDate)
+		VALUES (#{brandName}, #{businessNo}, #{managerName}, #{brandPhoneNo}, #{brandEmail}, TO_DATE(SYSDATE, 'YY/MM/DD'), TO_DATE(SYSDATE, 'YY/MM/DD'))
+	</insert>
  
 </mapper>

@@ -16,6 +16,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
+
+
  
 <script
   src="https://code.jquery.com/jquery-3.4.1.js"
@@ -36,6 +38,11 @@ a{
 ul{
     list-style: none;
 }
+
+body {
+    background-color: white; 
+}
+
 /* 화면 전체 렙 */
 .wrapper{
     width: 100%;
@@ -137,9 +144,25 @@ ul{
 }
  
  
-/* float 속성 해제 */
-.clearfix{
+/* 기존 CSS 코드
+.clearfix {
     clear: both;
+} */
+
+/* footer를 화면 하단에 고정 */
+footer {
+    clear: both;
+    text-align: center; /* 텍스트를 가운데 정렬하려면 필요할 수 있습니다. */
+    background-color: #f0f0f1; /* 원하는 배경색으로 설정하세요. */
+    padding: 10px;
+}
+
+body {
+    background-color: white; /* 이 부분을 변경하여 배경색을 조절할 수 있습니다. */
+}
+
+
+
 }
  
  </style>
@@ -190,6 +213,84 @@ ul{
                 </div>
                 <div class="admin_content_wrap">
                     <div class="admin_content_subject"><span>브랜드 등록</span></div>
+              		<div class="admin_content_main">
+              			<form action="${contextPath}/admin/brandEnroll.do" method="post" id="enrollForm">
+              				<div class="form_section">
+              					<div class="form_section_title">
+              						<label>브랜드 이름</label>
+              					</div>
+              					<div class="form_section_content">
+              						<input name="brandName">
+              					</div>
+              				</div>
+              				<div class="form_section">
+              					<div class="form_section_title">
+              						<label>브랜드 코드</label> <!-- 소속 국가 -> 브랜드 코드 대체-->
+              					</div>
+              					<div class="form_section_content">
+              						  <!-- 주석 처리된 브랜드 코드 부분 -->
+							        <!-- <select name="brandCode">
+							            <option value="none" selected>=== 선택 ===</option>
+							            <option value="301">NIKE</option>
+							            <option value="302">ADIDAS</option>
+							            <option value="303">NEW BALANCE</option>
+							            <option value="304">CONVERSE</option>
+							            <option value="305">PUMA</option>
+							            <option value="306">PROSPECS</option>
+							            <option value="307">DR.MARTENS</option>
+							            <option value="308">HUNTER</option>
+							            <option value="309">ALDO</option>
+							        </select> -->
+							        
+							        <!-- 브랜드 코드를 JavaScript로 생성하여 부여하는 부분 -->
+							        <input type="text" id="brandCode" name="brandCode" readonly>
+              					</div>
+              				</div>
+              				<div class="form_section">
+              					<div class="form_section_title">
+              						<label>담당자명</label>
+              					</div>
+              					<div class="form_section_content">
+              						<input name="managerName" type="text">
+              					</div>
+              				</div>
+              				
+					              				  
+					    <!-- 추가된 부분 -->
+					    
+					    <div class="form_section">
+					        <div class="form_section_title">
+					            <label>사업자번호</label>
+					        </div>
+					        <div class="form_section_content">
+					            <input name="businessNo" type="text" pattern="[0-9]{3}-[0-9]{2}-[0-9]{5}" title="올바른 형식(000-00-00000)으로 입력하세요." required>
+					        </div>
+					    </div>
+					    
+					    <div class="form_section">
+					        <div class="form_section_title">
+					            <label>브랜드 전화번호</label>
+					        </div>
+					        <div class="form_section_content">
+					            <input name="brandPhoneNo" type="tel" pattern="[0-9]{10}" title="숫자 10자리로 입력하세요." required>
+					        </div>
+					    </div>
+					    
+					    <div class="form_section">
+					        <div class="form_section_title">
+					            <label>브랜드 이메일</label>
+					        </div>
+					        <div class="form_section_content">
+					            <input name="brandEmail" type="email" required>
+					        </div>
+					    </div>
+					    
+    				
+              			</form>
+              					<div class="btn_section">
+              						<button id="cancelBtn" class="btn">취소</button>
+              						<button id="enrollBtn" class="btn enroll_btn">등록</button>
+              					</div>
                 </div>
                 <div class="clearfix"></div>
             </div>
@@ -197,7 +298,47 @@ ul{
     </div>    <!-- class="wrap" -->
 </div>    <!-- class="wrapper" -->
 
-<%@ include file="/WEB-INF/views/include/footer.jsp" %>
+<script>
+
+// 등록 버튼
+/* $("#enrollBtn").click(function () {
+	$("#enrollForm").submit();
+	
+});
+
+// 취소 버튼
+$("#cancelBtn").click(function () {
+	location.href="${contextPath}/admin/brandManage"
+});
+ */
+ 
+ 
+//브랜드 코드를 JavaScript로 생성하여 부여
+$(document).ready(function () {
+    // 브랜드 코드를 310부터 시작하여 1씩 증가시킴
+    var nextBrandCode = 310;
+    
+    // 브랜드 코드 필드에 부여
+    $("#brandCode").val(nextBrandCode);
+    
+    // 다음 브랜드 코드를 부여하기 위해 증가
+    $("#enrollBtn").click(function () {
+        nextBrandCode++;
+        $("#brandCode").val(nextBrandCode);
+        $("#enrollForm").submit();
+    });
+});
+ 
+//취소 버튼
+ $("#cancelBtn").click(function () {
+ 	location.href="${contextPath}/admin/brandManage"
+ });
+
+</script>
+
+
  
 </body>
 </html>
+
+<%@ include file="/WEB-INF/views/include/footer.jsp" %>
