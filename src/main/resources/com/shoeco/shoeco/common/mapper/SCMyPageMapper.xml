@@ -47,4 +47,26 @@
 		WHERE QNAQNO = #{qnaQNo}
 	</update>
 	
+	<!-- 회원의 리뷰내역 조회 -->
+	<select id="selectReview">
+		<![CDATA[
+			 SELECT revNo, prodName, revTitle, revWriteDate, userId, starGrade
+			 FROM ( SELECT /*+ INDEX_DESC (a PK_QNAQNO_QUESTIONS) */ ROWNUM rn, a.*, b.*
+					FROM SC_REV a
+					INNER JOIN SC_PRODUCTS b
+					ON a.prodCode = b.prodCode
+					WHERE userId = 'firstUser'
+						  AND ROWNUM <= ( #{pageNum} * #{rowAmountPerPage} )
+				  ) a
+			 WHERE rn >= ( ( #{pageNum} * #{rowAmountPerPage} ) - ( #{rowAmountPerPage} - 1 ) )
+		]]>
+	</select>
+	
+	<!-- 회원의 리뷰 총 갯수 조회 -->
+	<select id="selectRevTotal">
+		SELECT COUNT(*)
+		FROM SC_REV
+		WHERE userId = 'firstUser'
+	</select>
+	
 </mapper>
