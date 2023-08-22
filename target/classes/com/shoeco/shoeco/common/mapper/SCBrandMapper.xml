@@ -12,10 +12,34 @@
 	</insert>  -->
 	
 	
-	<!-- 브랜드 등록 -->
-	<insert id="brandEnroll" useGeneratedKeys="true" keyProperty="brandCode">
+ <!-- 브랜드 등록  -->
+<!-- 	<insert id="brandEnroll" useGeneratedKeys="true" keyProperty="brandCode">
 		INSERT INTO SC_BRAND ( brandCode, brandName, businessNo, managerName, brandPhoneNo, brandEmail, updateDate, regDate)
-		VALUES (#{brandName}, #{businessNo}, #{managerName}, #{brandPhoneNo}, #{brandEmail}, TO_DATE(SYSDATE, 'YY/MM/DD'), TO_DATE(SYSDATE, 'YY/MM/DD'))
+		VALUES (#{brandCode}, #{brandName}, #{businessNo}, #{managerName}, #{brandPhoneNo}, #{brandEmail}, TO_DATE(SYSDATE, 'YY/MM/DD'), TO_DATE(SYSDATE, 'YY/MM/DD'))
+	</insert> -->
+	
+	
+	<!-- 브랜드 등록 -->
+<!-- 	<insert id="brandEnroll" useGeneratedKeys="true" keyProperty="brandCode">
+		INSERT INTO SC_BRAND (brandCode, brandName, businessNo, managerName, brandPhoneNo, brandEmail, updateDate, regDate)
+		VALUES (brand_code_seq.NEXTVAL, #{brandName}, #{businessNo}, #{managerName}, #{brandPhoneNo}, #{brandEmail}, TO_DATE(SYSDATE, 'YY/MM/DD'), TO_DATE(SYSDATE, 'YY/MM/DD'));
 	</insert>
- 
+  -->
+  
+  
+  <!-- 브랜드 등록 -->
+  <insert id="brandEnroll" useGeneratedKeys="true" keyProperty="brandCode">
+    <selectKey resultType="int" keyProperty="brandCode" order="BEFORE">
+        SELECT brand_code_seq.NEXTVAL FROM DUAL
+    </selectKey>
+    INSERT INTO SC_BRAND (brandCode, brandName, businessNo, managerName, brandPhoneNo, brandEmail, regDate, updateDate)
+    VALUES (#{brandCode}, #{brandName}, #{businessNo}, #{managerName}, #{brandPhoneNo}, #{brandEmail}, SYSDATE, SYSDATE)
+</insert>
+  
+
+<select id="getMaxBrandCode" resultType="int">
+    SELECT MAX(brandCode) FROM SC_BRAND
+</select>
+  
+  
 </mapper>

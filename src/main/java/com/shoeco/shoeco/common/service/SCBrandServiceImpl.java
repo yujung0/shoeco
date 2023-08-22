@@ -1,5 +1,7 @@
 package com.shoeco.shoeco.common.service;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
@@ -15,9 +17,25 @@ public class SCBrandServiceImpl implements SCBrandService  {
 	@Autowired
 	SCBrandMapper scBrandMapper;
 	
+//	  @Autowired
+//	    BrandService brandService; // BrandService 클래스 주입
+	
 	@Override
 	public void brandEnroll(SCBrandVO brand) throws Exception {
-		scBrandMapper.brandEnroll(brand);
+		 // 브랜드 코드 설정 로직
+        int maxBrandCode = scBrandMapper.getMaxBrandCode(); // 최대 브랜드 코드 조회
+        int nextBrandCode = maxBrandCode + 1; // 다음 브랜드 코드 계산
+        brand.setBrandCode(nextBrandCode); // 브랜드 객체에 브랜드 코드 설정
+        
+        // regDate와 updateDate 필드 설정
+        Date now = new Date(); // 현재 시간 가져오기
+        brand.setRegDate(now);
+        brand.setUpdateDate(now);
+        
+        // 브랜드 등록 쿼리 수행
+        scBrandMapper.brandEnroll(brand);
+		
+
 	}
 }
 
