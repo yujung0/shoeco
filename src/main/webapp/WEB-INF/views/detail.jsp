@@ -217,25 +217,39 @@
                                 </div>
                                
                             </form> 색상/ 종류 담는 option 항목으로 변경 --%>
-							<form>
+							 
 								<div id="ProdColor">
-										<select id="selectClass">
-											<!--<option></option> -->
-												<option>색상</option>
-                                            <c:forEach var="optionColor" items="${prodColor}">
-												<option><c:out value="${optionColor.color}"/></option>
+									<select id="selectClass">
+										<!--<option></option> -->
+											<option>색상</option>
+                                           <c:forEach var="optionColor" items="${prodColor}">
+											<option><c:out value="${optionColor.color}"/></option>
 
-                                            
-                                            </c:forEach>
-										</select>
+                                           
+                                           </c:forEach>
+									</select>
 								</div>
 								<div id="ProdSize"> 
-										<select id="selectClass2">
-											<option>사이즈</option>
-										</select>
+									<select id="selectClass2">
+										<option>사이즈</option>
+									</select>
 								</div>
-							</form>
-							 <!-- 총 금액 표시  -->
+							 
+							 <!-- 옵션 골랐을때 수량뜨는 칸  -->
+								<div  class="col-auto" id="ProdCount">
+								 	  <ul class="list-inline pb-3">
+                                            <li class="list-inline-item text-right">
+                                                Quantity
+                                                <input type="hidden" name="product-quanity" id="product-quanity" value="1">
+                                            </li>
+                                            <li class="list-inline-item"><span class="btn btn-success" id="btn-minus">-</span></li>
+                                            <li class="list-inline-item"><span class="badge bg-secondary" id="var-value">1</span></li>
+                                            <li class="list-inline-item"><span class="btn btn-success" id="btn-plus">+</span></li>
+                                        </ul>
+                                </div>
+							
+							
+							
 							
 							
 							
@@ -265,7 +279,7 @@
     
 	<script> //detail 내용에 대한 script 시작
 	
-	//색상 별 재고 고르기
+	//1 색상 별 재고 고르기
 	$("#selectClass").on("change",function(){
 	
 		var prodCode = ${prodCode} ;
@@ -291,9 +305,55 @@
 				selectClass2.append(optionName);
 					$.each(response,function(index,sizePerColor){
 						var optionContent = $("<option>").text(sizePerColor.prodSize + " / 잔여수량: " + sizePerColor.prodCount ) ;
+						optionContent.val(sizePerColor.prodSize);
 						selectClass2.append(optionContent);
 					})
-				 
+				
+					
+				/* 	//내부 ajax
+					$.ajax({
+							type: "get",
+							url: "${contextPath}/detail/sizePerColorAjax",
+							data: { prodCode: prodCode, color: selectedColor},
+							dataType: "json",
+							contentType: "application/json",
+							success: function(response){
+								 
+								var selectClass2 = $("#selectClass2") ;
+								selectClass2.empty() ;
+								
+								var optionName = $("<option>").text("사이즈");
+								selectClass2.append(optionName);
+									$.each(response,function(index,sizePerColor){
+										var optionContent = $("<option>").text(sizePerColor.prodSize + " / 잔여수량: " + sizePerColor.prodCount ) ;
+										optionContent.val(sizePerColor.prodSize);
+										selectClass2.append(optionContent);
+									})
+				
+					
+					
+					
+					
+					
+									
+											},
+											error: function(xhr,status,error){
+												console.log("sizePerColor/ajax의 에러");
+												
+											}
+								 
+							
+						});//end 내부 ajax */
+						
+						
+							$("#selectClass2").on("change",function(){
+							var optionSizeV = $("#selectClass2").attr("option","selected").val();
+							console.log(optionSizeV);
+							});
+					
+					
+					
+					
 			},
 			error: function(xhr,status,error){
 				console.log("sizePerColor/ajax의 에러");
@@ -307,6 +367,21 @@
 		
 		
 	}) //end $("#selectClass").on("change" -
+			
+			
+	//1.5 변수 담기 
+	
+/* 	
+	$("#selectClass2").on("change",function(){
+	var optionSizeV = $("#selectClass2").attr("option","selected").val();
+	console.log(optionSizeV);
+	});
+					
+	 */
+	 
+	
+	//2 다 골랐으면 수량 선택 밑 총 상품금액
+	
 	
 	
 	
