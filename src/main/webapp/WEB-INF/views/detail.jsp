@@ -232,8 +232,6 @@
 								<div id="ProdSize"> 
 										<select id="selectClass2">
 											<option>사이즈</option>
-		                                    <option>ajax전</option>
-		                                    
 										</select>
 								</div>
 							</form>
@@ -267,6 +265,7 @@
     
 	<script> //detail 내용에 대한 script 시작
 	
+	//색상 별 재고 고르기
 	$("#selectClass").on("change",function(){
 	
 		var prodCode = ${prodCode} ;
@@ -285,19 +284,22 @@
 			contentType: "application/json",
 			success: function(response){
 				 
-				$("#selectClass2").empty();
-				$("#selectClass2").html("<option>사이즈</option> <option>ajax성공 후 반영</option>");
+				var selectClass2 = $("#selectClass2") ;
+				selectClass2.empty() ;
 				
+				var optionName = $("<option>").text("사이즈");
+				selectClass2.append(optionName);
+					$.each(response,function(index,sizePerColor){
+						var optionContent = $("<option>").text(sizePerColor.prodSize + " / 잔여수량: " + sizePerColor.prodCount ) ;
+						selectClass2.append(optionContent);
+					})
+				 
 			},
 			error: function(xhr,status,error){
-				console.log("sizePerColor ajax의 에러");
+				console.log("sizePerColor/ajax의 에러");
 				
 			}
-				
-			
-			
-			
-			
+				 
 			
 		});//end ajax
 		

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.shoeco.shoeco.common.domain.SCOptionVO;
 import com.shoeco.shoeco.common.domain.SCProductVO;
@@ -32,8 +33,8 @@ public class SCDetailServiceImpl implements SCDetailService {
 		return scDetailMapper.selectSize(prodCode);
 	}
 	
-	public List<SCOptionVO> getSizePerColor(long prodCode, String color){
-		return scDetailMapper.selectSize(prodCode);
+	public List<SCOptionVO> getSizePerColor(@RequestParam("prodCode") long prodCode, @RequestParam("color") String color){
+		return scDetailMapper.selectSizePerColor(prodCode, color);
 	}
 	
 	public List<SCProductVO> getProduct(long prodCode){

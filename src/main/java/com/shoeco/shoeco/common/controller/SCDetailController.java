@@ -42,7 +42,11 @@ public class SCDetailController {
 	        @RequestParam("color") String color) {
 
 	    List<SCOptionVO> sizePerColor= scDetailService.getSizePerColor(prodCode, color);
-	    System.out.println("ajax로 사이즈 별 재고 파악");
+	    
+	    System.out.println(prodCode + " : " + color);
+	    System.err.println("sizePerColor: " + sizePerColor.toString());
+	    
+	    
 
 	    return new ResponseEntity<List<SCOptionVO>>(sizePerColor,HttpStatus.OK);
 	}
