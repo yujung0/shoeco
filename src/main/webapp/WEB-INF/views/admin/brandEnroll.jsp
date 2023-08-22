@@ -243,7 +243,7 @@ body {
 							        </select> -->
 							        
 							        <!-- 브랜드 코드를 JavaScript로 생성하여 부여하는 부분 -->
-							        <input type="text" id="brandCode" name="brandCode" readonly>
+							        <!-- <input type="text" id="brandCode" name="brandCode" readonly> -->
               					</div>
               				</div>
               				<div class="form_section">
@@ -300,21 +300,45 @@ body {
 
 <script>
 
-// 등록 버튼
-/* $("#enrollBtn").click(function () {
+/* // 등록 버튼
+ $("#enrollBtn").click(function () {
 	$("#enrollForm").submit();
 	
+}); */
+
+//등록 버튼
+$("#enrollBtn").click(function () {
+    // 여기에서 브랜드 등록을 수행하고, 등록이 성공하면 원하는 페이지로 이동하도록 구현
+    // 예를 들어, 서버로 데이터를 전송하여 브랜드 등록을 수행하고, 성공 시 페이지 이동
+    $.ajax({
+        type: "POST",
+        url: "${contextPath}/admin/brandEnroll.do",
+        data: $("#enrollForm").serialize(), // 폼 데이터를 전송
+        success: function (response) {
+            // 등록이 성공한 경우
+            if (response.success) {
+                alert("브랜드 등록이 완료되었습니다.");
+                location.href = "${contextPath}/admin/brandManage"; // 원하는 페이지로 이동
+            } else {
+                alert("브랜드 등록에 실패했습니다. 다시 시도하세요.");
+            }
+        },
+        error: function () {
+            alert("브랜드 등록 중 오류가 발생했습니다. 다시 시도하세요.");
+        }
+    });
 });
+
 
 // 취소 버튼
 $("#cancelBtn").click(function () {
 	location.href="${contextPath}/admin/brandManage"
 });
- */
+ 
  
  
 //브랜드 코드를 JavaScript로 생성하여 부여
-$(document).ready(function () {
+/* $(document).ready(function () {
     // 브랜드 코드를 310부터 시작하여 1씩 증가시킴
     var nextBrandCode = 310;
     
@@ -327,12 +351,8 @@ $(document).ready(function () {
         $("#brandCode").val(nextBrandCode);
         $("#enrollForm").submit();
     });
-});
+}); */
  
-//취소 버튼
- $("#cancelBtn").click(function () {
- 	location.href="${contextPath}/admin/brandManage"
- });
 
 </script>
 

@@ -56,7 +56,7 @@ import com.shoeco.shoeco.common.service.SCBrandService;
 	    // 브랜드 등록
 	    @RequestMapping (value = "brandEnroll.do", method = RequestMethod.POST)
 	    public String brandEnrollPOST(SCBrandVO brand, RedirectAttributes rttr) throws Exception { 
-	    	
+//	    	
 //	    	logger.info("brandEnroll : " + brand);
 //	    	
 //	    	scBrandService.brandEnroll(brand);// 브랜드 등록 쿼리 수행
@@ -64,22 +64,35 @@ import com.shoeco.shoeco.common.service.SCBrandService;
 //	    	rttr.addFlashAttribute("enroll_result", brand.getBrandName()); // 등록 성공 메시지 (브랜드 이름)
 //	    	
 //	    	return "redirect:/admin/brandManage";
+//	    	
+
+	    	
+//	    	   logger.info("brandEnroll : " + brand);
+//	    	    
+//	    	    // 브랜드 코드 설정 로직
+//	    	    int maxBrandCode = scBrandService.getMaxBrandCode(); // 최대 브랜드 코드 조회
+//	    	    int nextBrandCode = maxBrandCode + 1; // 다음 브랜드 코드 계산
+//	    	    brand.setBrandCode(nextBrandCode); // 브랜드 객체에 브랜드 코드 설정
+//	    	    
+//	    	    // 브랜드 등록 쿼리 수행
+//	    	    scBrandService.brandEnroll(brand);
+//	    	    
+//	    	    rttr.addFlashAttribute("enroll_result", brand.getBrandName()); // 등록 성공 메시지 (브랜드 이름)
+//	    	    
+//	    	    return "redirect:/admin/brandManage";
 	    	
 	    	
-	    	   logger.info("brandEnroll : " + brand);
-	    	    
-	    	    // 브랜드 코드 설정 로직
-	    	    int maxBrandCode = scBrandService.getMaxBrandCode(); // 최대 브랜드 코드 조회
-	    	    int nextBrandCode = maxBrandCode + 1; // 다음 브랜드 코드 계산
-	    	    brand.setBrandCode(nextBrandCode); // 브랜드 객체에 브랜드 코드 설정
-	    	    
-	    	    // 브랜드 등록 쿼리 수행
-	    	    scBrandService.brandEnroll(brand);
-	    	    
+	    	
+	    	    logger.info("brandEnroll : " + brand);
+
+	    	    scBrandService.brandEnroll(brand); // 브랜드 등록 쿼리 수행
+
 	    	    rttr.addFlashAttribute("enroll_result", brand.getBrandName()); // 등록 성공 메시지 (브랜드 이름)
-	    	    
+
 	    	    return "redirect:/admin/brandManage";
-	    }
+	    	}
+
+	    
 	    
 	
 	}	 
