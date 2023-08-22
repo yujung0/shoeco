@@ -56,4 +56,13 @@ public class SCMyPageController {
         // 이 정보를 이용하여 문의 등록 로직 수행
         myPageService.putQuesetion(questionMap);
     }
+    
+    //문의내용 수정
+    @ResponseBody
+    @PostMapping("/modify")
+    public void updateContent(@RequestParam HashMap<String, Object> modifyMap) {
+        
+        
+        myPageService.modifyContent(modifyMap);
+    }
 }

@@ -37,4 +37,10 @@ public class SCMyPageServiceImpl implements SCMyPageService{
 		
 		return myPageMapper.insertQuestion(questionMap);
 	}
+	
+	//문의내용 수정
+	public int modifyContent(HashMap<String, Object> modifyMap) {
+		
+		return myPageMapper.updatecontent(modifyMap);
+	}
 }

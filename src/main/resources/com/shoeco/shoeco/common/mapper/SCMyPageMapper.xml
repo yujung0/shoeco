@@ -40,4 +40,11 @@
 		VALUES(SHOECO.SEQ_QUESTIONS.nextval, 'firstUser', #{qnaQTitle}, #{qnaQContent}, DEFAULT, DEFAULT, DEFAULT)
 	</insert>
 	
+	<!-- 문의내용 수정 -->
+	<update id="updatecontent" parameterType="map">
+		UPDATE SC_QNA_QUESTIONS
+		SET QNAQCONTENT = #{qnaQContent}, QNAQMODIFYDATE = sysdate
+		WHERE QNAQNO = #{qnaQNo}
+	</update>
+	
 </mapper>

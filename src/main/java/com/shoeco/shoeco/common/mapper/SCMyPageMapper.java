@@ -21,4 +21,7 @@ public interface SCMyPageMapper {
     // 문의 등록
     public int insertQuestion(HashMap<String, Object> questionMap);
     
+    // 문의내용 수정
+    public int updatecontent(HashMap<String, Object> modifyMap);
+    
 }

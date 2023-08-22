@@ -19,6 +19,9 @@ public interface SCMyPageService {
 	//문의 등록
 	public int putQuesetion(HashMap<String, Object> questionMap);
 	
+	//문의내용 수정
+	public int modifyContent(HashMap<String, Object> modifyMap);
+	
 	
 	
 

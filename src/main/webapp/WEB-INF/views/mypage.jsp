@@ -21,6 +21,8 @@
     table, th, td {
         border: none; /* 테두리를 제거 */
     }
+    
+    
 </style>
 
 <section class="container py-5">
@@ -57,8 +59,8 @@
                                     <tr class="table-dark">
                                         <th>문의번호</th>
                                         <th>제목</th>
-                                        <th>작성일</th>
-                                        <th>수정일</th>
+                                        <th>작성일시</th>
+                                        <th>수정일시</th>
                                         <th>작성자</th>
                                         <th>답변여부</th>
                                     </tr>
@@ -121,16 +123,85 @@
     </div>
 </div><!-- 모달 end -->
 
+<!-- 문의 상세 모달 -->
+<div class="modal fade" id="questionDetailModal" tabindex="-1" aria-labelledby="questionDetailModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="questionDetailModalLabel">Q&A</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <strong>문의 제목: </strong><span id="qnaQTitleModal"></span>
+                </div>
+                <div class="text-center">
+                    <strong>작성자: </strong><span id="qnaQWriterModal"></span>
+                </div>
+                <div class="text-center">
+                    <strong>작성일시: </strong><span id="qnaQWriteDateModal"></span>
+                </div>
+                <div class="text-center">
+                    <strong>수정일시: </strong><span id="qnaQModifyDateModal"></span>
+                </div>
+                <div class="text-center">
+                    <strong>답변여부: </strong><span id="qnaQAnswerStatusModal"></span>
+                </div>
+                <div class="text-center">
+                    <strong>문의 내용: </strong><span id="qnaQContentModal"></span>
+                </div>
+                <!-- 추가적인 내용 표시 가능 -->
+            </div>
+            <div class="modal-footer">
+            	<button type="button" class="btn btn-secondary" id="btnEditQuestion">수정</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+            </div>
+        </div>
+    </div>
+</div><!-- 문의 상세 모달 end -->
+
+<!-- 문의 수정 모달 -->
+<div class="modal fade" id="editQuestionModal" tabindex="-1" aria-labelledby="editQuestionModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editQuestionModalLabel">문의 수정</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- 수정 폼 내용 -->
+                <form id="editQuestionForm">
+                    <div class="mb-3">
+                        <label for="modifyQnaQTitle" class="form-label">문의 제목</label>
+                        <input type="text" class="form-control" id="modifyQnaQTitle" name="modifyQnaQTitle" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="modifyQnaQContent" class="form-label">문의 내용</label>
+                        <textarea class="form-control" id="modifyQnaQContent" name="modifyQnaQContent" rows="4" required></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                <button type="button" class="btn btn-primary" id="btnSaveModifiedQuestion">저장</button>
+            </div>
+        </div>
+    </div>
+</div><!-- 문의 수정 모달 end -->
+
 <%@include file="./include/footer.jsp" %>
 
 <script>
 
+	//작성일과 수정일을 2023/08/22 14:00 형식으로 변환하는 함수
 	function formatDate(timestamp) {
 	    var date = new Date(timestamp);
 	    var year = date.getFullYear();
 	    var month = ('0' + (date.getMonth() + 1)).slice(-2);
 	    var day = ('0' + date.getDate()).slice(-2);
-	    return year + '/' + month + '/' + day;
+	    var hours = ('0' + date.getHours()).slice(-2);
+	    var minutes = ('0' + date.getMinutes()).slice(-2);
+	    return year + '/' + month + '/' + day + ' ' + hours + ':' + minutes;
 	}
 	
 	$(document).ready(function() {
@@ -160,13 +231,14 @@
 
 	            for (var i = 0; i < data.questionList.length; i++) {
 	                var question = data.questionList[i];
-	                var row = "<tr class='text-secondary-emphasis'>" +
+	                var answerStatus = question.qnaDelFlag === 0 ? '대기중' : '답변완료';
+	                var row = "<tr class='text-secondary-emphasis question-row' data-question='" + JSON.stringify(question) + "'>" +
 	                          "<td>" + question.qnaQNo + "</td>" +
 	                          "<td>" + question.qnaQTitle + "</td>" +
 	                          "<td>" + formatDate(question.qnaQWriteDate) + "</td>" +
 	                          "<td>" + formatDate(question.qnaQModifyDate) + "</td>" +
 	                          "<td>" + question.userId + "</td>" +
-	                          "<td>" + question.qnaDelFlag + "</td>" +
+	                          "<td>" + answerStatus + "</td>" +
 	                          "</tr>";
 	                questionTable.append(row);
 	            }
@@ -186,12 +258,37 @@
 		            if (data.pagingCreator.next) {
 		                pagination.append("<li class='page-item'><a class='page-link' href='javascript:getQuestionList(" + (data.pagingCreator.endNum + 1) + ")'>다음</a></li>");
 		            }
+		            
+		         	// 문의 클릭 시 모달 창 띄우기
+		            $(".question-row").click(function() {
+		                var questionData = JSON.parse($(this).attr("data-question"));
+		                showQuestionModal(questionData);
+		            });
 		        },
 		        error: function(xhr, status, error) {
 		            console.error(error);
 		        }
 		    });
 		}
+	
+	// 문의 모달 띄우기
+	function showQuestionModal(questionData) {
+	    $("#qnaQTitleModal").text(questionData.qnaQTitle);
+	    $("#qnaQWriterModal").text(questionData.userId);
+	    $("#qnaQWriteDateModal").text(formatDate(questionData.qnaQWriteDate));
+	    $("#qnaQModifyDateModal").text(formatDate(questionData.qnaQModifyDate));
+	    var answerStatus = questionData.qnaDelFlag === 0 ? '대기중' : '답변완료';
+	    $("#qnaQAnswerStatusModal").text(answerStatus);
+	    $("#qnaQContentModal").text(questionData.qnaQContent);
+
+	    $('#questionDetailModal').modal('show');
+	    
+	 // 수정 버튼 클릭 시 수정 모달 열기
+	    $("#btnEditQuestion").click(function() {
+	        $('#questionDetailModal').modal('hide'); // 상세 모달 닫기
+	        openEditQuestionModal(questionData); // 수정 모달 열기
+	    });
+	}
 	
 	//문의버튼 클릭 시 모달창 띄움
 	function openQuestionModal() {
@@ -229,4 +326,51 @@
 	        }
 	    });
 	}
+	
+	// 수정 모달 열기
+	function openEditQuestionModal(questionData) {
+	    // 선택한 문의의 정보를 수정 모달 폼에 채움
+	    $("#modifyQnaQTitle").val(questionData.qnaQTitle);
+	    $("#modifyQnaQContent").val(questionData.qnaQContent);
+
+	    // 수정 모달 열기
+	    $('#editQuestionModal').modal('show');
+
+	    // 저장 버튼 클릭 시 처리
+	    $("#btnSaveModifiedQuestion").click(function() {
+	        // 수정된 문의 정보 가져오기
+	        var modifiedQnaQTitle = $("#modifyQnaQTitle").val();
+	        var modifiedQnaQContent = $("#modifyQnaQContent").val();
+
+	        // 서버로 수정된 데이터 전송
+	        var requestData = {
+	            qnaQNo: questionData.qnaQNo,
+	            qnaQTitle: modifiedQnaQTitle,
+	            qnaQContent: modifiedQnaQContent
+	        };
+
+	        $.ajax({
+	            url: "${contextPath}/mypage/modify", // 수정 엔드포인트 주소
+	            type: "POST",
+	            data: requestData,
+	            dataType: "json",
+	            success: function(response) {
+	                // 성공적으로 수정되었을 때 처리
+	                console.log("문의 내용 수정 성공");
+
+	                // 모달 닫기
+	                $('#editQuestionModal').modal('hide');
+
+	                // 수정 후 문의 목록 다시 불러오기
+	                getQuestionList(1);
+	            },
+	            error: function(xhr, status, error) {
+	                // 오류 발생 시 처리
+	                console.error(error);
+	            }
+	        });
+	    });
+	}
+
+	
 </script>
