@@ -9,9 +9,6 @@ import com.shoeco.shoeco.common.paging.CartPagingDTO;
 public interface SCMyPageMapper {
 	
 	
-    // 회원의 문의내역 조회
-//    public List<SCMyPageVO> selectQuestionList();
-	
     // 회원의 문의내역 조회(페이징 추가)
     public List<SCMyPageVO> selectQuestionList(CartPagingDTO cartPagingDTO);
     
@@ -23,5 +20,11 @@ public interface SCMyPageMapper {
     
     // 문의내용 수정
     public int updatecontent(HashMap<String, Object> modifyMap);
+    
+    // 회원의 리뷰내역 조회
+    public List<SCMyPageVO> selectReview(CartPagingDTO cartPagingDTO);
+    
+    // 회원의 리뷰 총 갯수 조회
+    public int selectRevTotal();
     
 }

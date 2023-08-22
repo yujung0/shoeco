@@ -15,6 +15,7 @@ import lombok.ToString;
 public class SCMyPageVO {
 
 	//230818 동현 작성
+	//QNA
     private long qnaQNo;
     private String userId ;
     private String qnaQTitle;
@@ -22,4 +23,15 @@ public class SCMyPageVO {
     private Date qnaQWriteDate;
     private Date qnaQModifyDate;
     private int qnaDelFlag;
+    
+    //리뷰
+    private long revNo;
+    private long prodCode;
+    private String prodName;
+    private int starGrade;
+    private String revTitle;
+    private String revContent;
+    private Date revWriteDate;
+    private int revDelFlag;
+    
 }

@@ -82,7 +82,34 @@
                 </div>
             </div>
         <div class="tab-pane fade" id="nav-review" role="tabpanel" aria-labelledby="nav-review-tab">
-            <p><strong>review</strong> Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling. You can use it with tabs, pills, and any other <code>.nav</code>-powered navigation.</p>
+			<!-- 리뷰 탭 내용 -->
+                <section class="container py-5">
+                    <div class="row text-left pt-3">
+                        <div class="col-lg-10 m-auto">
+                            <table class="table table-hover" id="reviewTable">
+                                <thead style="text-align: center;">
+                                    <tr class="table-dark">
+                                        <th>리뷰번호</th>
+                                        <th>상품명</th>
+                                        <th>제목</th>
+                                        <th>작성일시</th>
+                                        <th>작성자</th>
+                                        <th>별점</th>
+                                    </tr>
+                                </thead>
+                                <tbody style="text-align: center;">
+                                    <!-- 리뷰내역 데이터를 동적으로 추가할 공간 -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+                <div style="text-align: center;">
+                    <ul class="pagination justify-content-center" id="reviewPagination">
+                        <!-- 페이징 버튼을 동적으로 추가할 공간 -->
+                    </ul>
+                </div>
+			
         </div>
         <div class="tab-pane fade" id="nav-modify" role="tabpanel" aria-labelledby="nav-modify-tab">
             <p><strong>modify</strong> Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling. You can use it with tabs, pills, and any other <code>.nav</code>-powered navigation.</p>
@@ -369,6 +396,43 @@
 	                console.error(error);
 	            }
 	        });
+	    });
+	}
+	
+	// 리뷰 탭 클릭 시
+	$('#nav-review').on('click', function() {
+	    // 리뷰 목록을 가져오는 함수 호출
+	    selectReview();
+	});
+
+	// 리뷰 목록을 가져오는 함수
+	function selectReview() {
+	    $.ajax({
+	        url: "${contextPath}/mypage/review", // 리뷰 목록을 가져오는 엔드포인트 주소
+	        type: "GET",
+	        dataType: "json",
+	        success: function(data) {
+	        	
+	            var reviewTable = $("#reviewTable tbody");
+	            reviewTable.empty();
+
+	            // 리뷰 데이터를 테이블에 추가
+	            for (var i = 0; i < data.length; i++) {
+	                var review = data[i];
+	                var row = "<tr>" +
+	                          "<td>" + review.revNo + "</td>" +
+	                          "<td>" + review.prodName + "</td>" +
+	                          "<td>" + review.revTitle + "</td>" +
+	                          "<td>" + formatDate(new Date(review.revWriteDate)) + "</td>" +
+	                          "<td>" + review.userId + "</td>" +
+	                          "<td>" + review.starGrade + "</td>" +
+	                          "</tr>";
+	                reviewTable.append(row);
+	            }
+	        },
+	        error: function(xhr, status, error) {
+	            console.error(error);
+	        }
 	    });
 	}
 

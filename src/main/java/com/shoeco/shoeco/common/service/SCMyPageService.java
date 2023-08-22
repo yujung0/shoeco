@@ -22,6 +22,12 @@ public interface SCMyPageService {
 	//문의내용 수정
 	public int modifyContent(HashMap<String, Object> modifyMap);
 	
+	//회원의 리뷰내역 조회
+	public List<SCMyPageVO> showReview(CartPagingDTO cartPagingDTO);
+	
+	//회원의 리뷰내역 갯수 조회
+	public int getRevTotal();
+	
 	
 	
 

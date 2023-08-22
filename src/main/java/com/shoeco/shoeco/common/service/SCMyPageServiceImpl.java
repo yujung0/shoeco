@@ -27,7 +27,7 @@ public class SCMyPageServiceImpl implements SCMyPageService{
 	}
 	
 	//회원의 문의내역 갯수 조회
-	public int getRowTotal() {
+	public int getRowTotal() { 
 		
 		return myPageMapper.selectRowTotal();
 	}
@@ -43,4 +43,17 @@ public class SCMyPageServiceImpl implements SCMyPageService{
 		
 		return myPageMapper.updatecontent(modifyMap);
 	}
+	
+	//회원의 리뷰내역 조회
+	public List<SCMyPageVO> showReview(CartPagingDTO cartPagingDTO) {
+		
+		return myPageMapper.selectReview(cartPagingDTO);
+	}
+	
+	//회원의 리뷰내역 갯수 조회
+	public int getRevTotal() {
+		
+		return myPageMapper.selectRevTotal();
+	}
+	
 }
