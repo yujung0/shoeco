@@ -202,7 +202,23 @@ ul{
 
     </div>    <!-- class="wrap" -->
 </div>    <!-- class="wrapper" -->
- 
+
+<script>
+// 2308211533 장유정
+$(document).ready(function () { //페이지가 로드될 때 반드시 실행이 되는 익명 함수를 추가
+	let result = '<c:out value= "${enroll_result}"/>' ;
+	
+	checkResult(result);
+	
+	function checkResult(result) {
+		if(result === '') {
+			return;
+		}
+		
+		alert("브랜드 '${enroll_result}' 을 등록하였습니다.");
+	}
+});
+</script> 
  
 <%@ include file="/WEB-INF/views/include/footer.jsp" %> 
 </body>
