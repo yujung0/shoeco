@@ -219,26 +219,21 @@
                             </form> 색상/ 종류 담는 option 항목으로 변경 --%>
 							<form>
 								<div id="ProdColor">
-										<select class="selectClass">
+										<select id="selectClass">
 											<!--<option></option> -->
-												<option>종류</option>
+												<option>색상</option>
                                             <c:forEach var="optionColor" items="${prodColor}">
 												<option><c:out value="${optionColor.color}"/></option>
 
                                             
                                             </c:forEach>
-
-
-
-											 
 										</select>
 								</div>
 								<div id="ProdSize"> 
-										<select class="selectClass">
-											<option></option>
-											<option></option>
-											<option></option>
-											<option></option>
+										<select id="selectClass2">
+											<option>사이즈</option>
+		                                    <option>ajax전</option>
+		                                    
 										</select>
 								</div>
 							</form>
@@ -247,9 +242,9 @@
 							
 							
 							
+							<!-- end/ 총 금액 표시  -->
 							
-							
-							</div>
+							 <!-- 구매버튼 / add 장바구니 -->
 								 <div class="row pb-3">
                                     <div class="col d-grid">
                                         <button type="submit" class="btn btn-success btn-lg" name="submit" value="buy">Buy</button>
@@ -257,37 +252,8 @@
                                     <div class="col d-grid">
                                         <button type="submit" class="btn btn-success btn-lg" name="submit" value="addtocard">Add To Cart</button>
                                     </div>
-                                
-							
-							
-								 
-							
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                                </div>
+							 
 
                         </div>  <!--end div class="card-body"  -->
                     
@@ -300,13 +266,56 @@
     </section> <!-- Close Content -->
     
 	<script> //detail 내용에 대한 script 시작
-
+	
+	$("#selectClass").on("change",function(){
+	
+		var prodCode = ${prodCode} ;
+		var selectedColor = $("#selectClass").attr("option","selected").val();
+		
+		console.log(prodCode);
+		console.log(selectedColor);
+		// 변수 담긴것 확인 alert(selectedColor);
+		
+		
+		$.ajax({
+			type: "get",
+			url: "${contextPath}/detail/sizePerColorAjax",
+			data: { prodCode: prodCode, color: selectedColor},
+			dataType: "json",
+			contentType: "application/json",
+			success: function(response){
+				 
+				$("#selectClass2").empty();
+				$("#selectClass2").html("<option>사이즈</option> <option>ajax성공 후 반영</option>");
+				
+			},
+			error: function(xhr,status,error){
+				console.log("sizePerColor ajax의 에러");
+				
+			}
+				
+			
+			
+			
+			
+			
+		});//end ajax
+		
+		
+		
+		
+	}) //end $("#selectClass").on("change" -
+	
+	
+	
+	
+		
 	
 	
 	
 	
 	</script>
-
+	
 
 
 

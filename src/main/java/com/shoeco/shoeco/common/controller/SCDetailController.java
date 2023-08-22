@@ -1,11 +1,16 @@
 package com.shoeco.shoeco.common.controller;
 
+import java.util.List;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.shoeco.shoeco.common.domain.SCOptionVO;
 import com.shoeco.shoeco.common.service.SCDetailService;
 
 @Controller
@@ -30,14 +35,19 @@ public class SCDetailController {
 	}
 	
 	//사이즈 별 재고 파익을 위한 ajax
-	@ResponseBody
+	@ResponseBody 
 	@GetMapping("/detail/sizePerColorAjax")
-	public void showSizePerColor(Model model,@RequestParam("prodCode") long prodCode, 
-											@RequestParam("color") String color){
-		
-		model.addAttribute("sizePerColor",scDetailService.getSizePerColor(prodCode, color));
-		System.out.println("ajax로 사이즈 별 재고 파악 ");
+	public ResponseEntity<List<SCOptionVO>> showSizePerColor(
+	        @RequestParam("prodCode") long prodCode, 
+	        @RequestParam("color") String color) {
+
+	    List<SCOptionVO> sizePerColor= scDetailService.getSizePerColor(prodCode, color);
+	    System.out.println("ajax로 사이즈 별 재고 파악");
+
+	    return new ResponseEntity<List<SCOptionVO>>(sizePerColor,HttpStatus.OK);
 	}
+	
+	
 	
 
 
