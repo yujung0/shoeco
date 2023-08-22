@@ -17,8 +17,8 @@ public class SCBrandServiceImpl implements SCBrandService  {
 	@Autowired
 	SCBrandMapper scBrandMapper;
 	
-	  @Autowired
-	    BrandService brandService; // BrandService 클래스 주입
+//	  @Autowired
+//	    BrandService brandService; // BrandService 클래스 주입
 	
 	@Override
 	public void brandEnroll(SCBrandVO brand) throws Exception {
