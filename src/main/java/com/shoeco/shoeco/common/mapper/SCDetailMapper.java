@@ -16,5 +16,6 @@ public interface SCDetailMapper {
 	public List<SCOptionVO> selectSizePerColor(long prodCode, String color);
 
 	public List<SCProductVO> selectProduct(long prodCode);
+	
 }
 

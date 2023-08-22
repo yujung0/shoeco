@@ -173,8 +173,10 @@
                                 
                             </ul>
 
-                            <h6>Specification:</h6>
-                            <ul class="list-unstyled pb-3">
+                            <h6><strong>배송 관련 정보: <br></strong></h6>
+                            <p>-추 후 업뎃</p>
+                            <hr>
+                       <!-- <ul class="list-unstyled pb-3">
                                 <li>Lorem ipsum dolor sit</li>
                                 <li>Amet, consectetur</li>
                                 <li>Adipiscing elit,set</li>
@@ -182,9 +184,9 @@
                                 <li>Ut enim ad minim</li>
                                 <li>Dolore magna aliqua</li>
                                 <li>Excepteur sint</li>
-                            </ul>
+                            </ul>   -->
 
-                            <form action="" method="GET">
+                           <%--  <form action="" method="GET">
                                 <input type="hidden" name="product-title" value="Activewear">
                                 <div class="row">
                                     <div class="col-auto">
@@ -213,17 +215,81 @@
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="row pb-3">
+                               
+                            </form> 색상/ 종류 담는 option 항목으로 변경 --%>
+							<form>
+								<div id="ProdColor">
+										<select class="selectClass">
+											<!--<option></option> -->
+												<option>종류</option>
+                                            <c:forEach var="optionColor" items="${prodColor}">
+												<option><c:out value="${optionColor.color}"/></option>
+
+                                            
+                                            </c:forEach>
+
+
+
+											 
+										</select>
+								</div>
+								<div id="ProdSize"> 
+										<select class="selectClass">
+											<option></option>
+											<option></option>
+											<option></option>
+											<option></option>
+										</select>
+								</div>
+							</form>
+							 <!-- 총 금액 표시  -->
+							
+							
+							
+							
+							
+							
+							</div>
+								 <div class="row pb-3">
                                     <div class="col d-grid">
                                         <button type="submit" class="btn btn-success btn-lg" name="submit" value="buy">Buy</button>
                                     </div>
                                     <div class="col d-grid">
                                         <button type="submit" class="btn btn-success btn-lg" name="submit" value="addtocard">Add To Cart</button>
                                     </div>
-                                </div>
-                            </form>
+                                
+							
+							
+								 
+							
 
-                        </div><!--end div class="card-body"  -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        </div>  <!--end div class="card-body"  -->
                     
                     
                     
@@ -231,8 +297,28 @@
                 </div>
             </div>
         </div>
-    </section>
-    <!-- Close Content -->
+    </section> <!-- Close Content -->
+    
+	<script> //detail 내용에 대한 script 시작
+
+	
+	
+	
+	
+	</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <!-- Start Article -->
     <section class="py-5">
