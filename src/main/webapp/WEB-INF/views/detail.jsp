@@ -281,7 +281,8 @@
 	
 	//1 색상 별 재고 고르기
 	$("#selectClass").on("change",function(){
-	
+		
+		
 		var prodCode = ${prodCode} ;
 		var selectedColor = $("#selectClass").attr("option","selected").val();
 		
@@ -304,10 +305,27 @@
 				var optionName = $("<option>").text("사이즈");
 				selectClass2.append(optionName);
 					$.each(response,function(index,sizePerColor){
-						var optionContent = $("<option>").text(sizePerColor.prodSize + " / 잔여수량: " + sizePerColor.prodCount ) ;
-						optionContent.val(sizePerColor.prodSize);
-						selectClass2.append(optionContent);
-					})
+					
+						if(sizePerColor.prodCount <=  0 ){
+							var optionContent = $("<option>").text(sizePerColor.prodSize + " / 잔여수량: " + sizePerColor.prodCount ).attr("disabled","true") ;
+							optionContent.val(sizePerColor.prodSize);
+							selectClass2.append(optionContent);
+						}else{
+							var optionContent = $("<option>").text(sizePerColor.prodSize + " / 잔여수량: " + sizePerColor.prodCount ) ;
+							optionContent.val(sizePerColor.prodSize);
+							selectClass2.append(optionContent);
+							
+							
+							
+						}
+					
+					
+					
+					
+					
+					
+					
+					}) //each end
 				
 					
 				/* 	//내부 ajax
@@ -349,7 +367,23 @@
 							$("#selectClass2").on("change",function(){
 							var optionSizeV = $("#selectClass2").attr("option","selected").val();
 							console.log(optionSizeV);
-							});
+							//prodCode, selectedColor 변수명 
+							
+								
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							}); // change function,  end
 					
 					
 					
