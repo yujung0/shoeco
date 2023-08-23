@@ -316,8 +316,6 @@ $("#enrollBtn").click(function () {
         data: $("#enrollForm").serialize(), // 폼 데이터를 전송
         success: function (response) {
         	
-        	console.log(response);
-        	
                 alert("브랜드 등록이 완료되었습니다.");
                 location.href = "${contextPath}/admin/brandManage";
         },
