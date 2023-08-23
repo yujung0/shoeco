@@ -234,15 +234,14 @@
 										<option>사이즈</option>
 									</select>
 								</div>
-								<hr>
-								<br>
+								
 						   <!--selectClass2 까지 골랐을 때 나온는 div -->
 						   	   <div id="optionEvent" style="display: none;" >
 									 
 								
 								
-							 
-									<div  class="col-auto" id="ProdCount">
+							 		 
+									<!-- <div  class="col-auto" id="ProdCount">
 									 	  <ul class="list-inline pb-3">
 	                                            <li class="list-inline-item text-right">
 	                                                Quantity
@@ -252,7 +251,7 @@
 	                                            <li class="list-inline-item"><span class="badge bg-secondary" id="var-value">1</span></li>
 	                                            <li class="list-inline-item"><span class="btn btn-success" id="btn-plus">+</span></li>
 	                                        </ul>
-	                                </div>
+	                                </div> -->
 									
 								</div>
 								  
@@ -269,6 +268,7 @@
 							<!-- end/ 총 금액 표시  -->
 							<hr>
 							 <!-- 구매버튼 / add 장바구니 -->
+							 	<span>총 상품 금액</span><br><br>
 								 <div class="row pb-3">
                                     <div class="col d-grid">
                                         <button type="submit" class="btn btn-success btn-lg" name="submit" value="buy">Buy</button>
@@ -290,12 +290,13 @@
     </section> <!-- Close Content -->
     
 	<script> //detail 내용에 대한 script 시작
-	
+	var prodCode = ${prodCode} ;
+	var selectedColor = $("#selectClass").attr("option","selected").val();
 	//1 색상 별 재고 고르기
 	$("#selectClass").on("change",function(){
 		
 		
-		var prodCode = ${prodCode} ;
+		
 		var selectedColor = $("#selectClass").attr("option","selected").val();
 		
 		console.log(prodCode);
@@ -338,69 +339,9 @@
 					
 					}) //each end
 				
-					
-				/* 	//내부 ajax
-					$.ajax({
-							type: "get",
-							url: "${contextPath}/detail/sizePerColorAjax",
-							data: { prodCode: prodCode, color: selectedColor},
-							dataType: "json",
-							contentType: "application/json",
-							success: function(response){
-								 
-								var selectClass2 = $("#selectClass2") ;
-								selectClass2.empty() ;
-								
-								var optionName = $("<option>").text("사이즈");
-								selectClass2.append(optionName);
-									$.each(response,function(index,sizePerColor){
-										var optionContent = $("<option>").text(sizePerColor.prodSize + " / 잔여수량: " + sizePerColor.prodCount ) ;
-										optionContent.val(sizePerColor.prodSize);
-										selectClass2.append(optionContent);
-									})
-				
-					
-					
-					
-					
-					
-									
-											},
-											error: function(xhr,status,error){
-												console.log("sizePerColor/ajax의 에러");
-												
-											}
-								 
-							
-						});//end 내부 ajax */
+					 
 						
-						
-							$("#selectClass2").on("change",function(){
-							var optionSizeV = $("#selectClass2").attr("option","selected").val();
-							console.log(optionSizeV);
-							//prodCode, selectedColor 변수명 
 							
-							
-							
-							$("#optionEvent").attr("style","display: block;") ;
-							
-							
-							
-								
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							}); // change function,  end
 					
 					
 					
@@ -418,6 +359,52 @@
 		
 		
 	}) //end $("#selectClass").on("change" -
+			
+			
+			
+	$("#selectClass2").on("change",function(){
+		var optionSizeV = $("#selectClass2").attr("option","selected").val();
+		console.log(optionSizeV);
+		//prodCode, selectedColor 변수명 
+		
+		$("#optionEvent").attr("style","display: block;") ;
+		 /* <div  class="col-auto" id="ProdCount">
+				 	  <ul class="list-inline pb-3">
+                            <li class="list-inline-item text-right">
+                                Quantity
+                                <input type="hidden" name="product-quanity" id="product-quanity" value="1">
+                            </li>
+                            <li class="list-inline-item"><span class="btn btn-success" id="btn-minus">-</span></li>
+                            <li class="list-inline-item"><span class="badge bg-secondary" id="var-value">1</span></li>
+                            <li class="list-inline-item"><span class="btn btn-success" id="btn-plus">+</span></li>
+                        </ul>
+                </div> */
+                
+                //모달 추가 할 예정
+		var modalContain = "" ;
+        modalContain = "<hr><h6>"+ prodCode + "/ 색상 : " + selectedColor + "- "   + optionSizeV +"</6h>" 
+						+ '<div  class="col-auto" id="ProdCount">'
+			 	  		+ '<ul class="list-inline pb-3">'
+                        + '<li class="list-inline-item text-right">'
+                        + 'Quantity'
+                        + '<input type="hidden" name="product-quanity" id="product-quanity" value="1"></li>'
+                        +'<li class="list-inline-item"><span class="btn btn-success" id="btn-minus">-</span></li>'
+                        +'<li class="list-inline-item"><span class="badge bg-secondary" id="var-value">1</span></li>'
+                        +'<li class="list-inline-item"><span class="btn btn-success" id="btn-plus">+</span></li></ul></div>' ;
+                         
+		
+		
+                            $("#optionEvent").append(modalContain);
+			
+		
+		
+		
+                            $("#selectClass").removeAttr("option","selected");
+                            $("#selectClass2").removeAttr("option","selected");
+		
+     	
+		}); // change function,  end
+			
 			
 			
 	//1.5 변수 담기 
