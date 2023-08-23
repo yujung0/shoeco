@@ -399,9 +399,8 @@
 	    });
 	}
 	
-	// 리뷰 탭 클릭 시
+	// "리뷰" 탭에 대한 클릭 이벤트 핸들러 내에서
 	$('#nav-review').on('click', function() {
-	    // 리뷰 목록을 가져오는 함수 호출
 	    selectReview();
 	});
 
@@ -412,23 +411,21 @@
 	        type: "GET",
 	        dataType: "json",
 	        success: function(data) {
-	        	
 	            var reviewTable = $("#reviewTable tbody");
 	            reviewTable.empty();
 
-	            // 리뷰 데이터를 테이블에 추가
-	            for (var i = 0; i < data.length; i++) {
-	                var review = data[i];
+	            // 각 리뷰를 순환하며 테이블에 추가
+	            data.reviewList.forEach(function(review) {
 	                var row = "<tr>" +
-	                          "<td>" + review.revNo + "</td>" +
-	                          "<td>" + review.prodName + "</td>" +
-	                          "<td>" + review.revTitle + "</td>" +
-	                          "<td>" + formatDate(new Date(review.revWriteDate)) + "</td>" +
-	                          "<td>" + review.userId + "</td>" +
-	                          "<td>" + review.starGrade + "</td>" +
-	                          "</tr>";
+	                    "<td>" + review.revNo + "</td>" +
+	                    "<td>" + review.prodName + "</td>" +
+	                    "<td>" + review.revTitle + "</td>" +
+	                    "<td>" + formatDate(new Date(review.revWriteDate)) + "</td>" +
+	                    "<td>" + review.userId + "</td>" +
+	                    "<td>" + review.starGrade + "</td>" +
+	                    "</tr>";
 	                reviewTable.append(row);
-	            }
+	            });
 	        },
 	        error: function(xhr, status, error) {
 	            console.error(error);

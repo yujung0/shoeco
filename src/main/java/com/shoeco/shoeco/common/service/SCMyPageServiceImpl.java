@@ -47,6 +47,7 @@ public class SCMyPageServiceImpl implements SCMyPageService{
 	//회원의 리뷰내역 조회
 	public List<SCMyPageVO> showReview(CartPagingDTO cartPagingDTO) {
 		
+		
 		return myPageMapper.selectReview(cartPagingDTO);
 	}
 	
