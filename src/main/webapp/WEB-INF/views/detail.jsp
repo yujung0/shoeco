@@ -291,13 +291,13 @@
     
 	<script> //detail 내용에 대한 script 시작
 	var prodCode = ${prodCode} ;
-	var selectedColor = $("#selectClass").attr("option","selected").val();
+	var selectedColor = "";
 	//1 색상 별 재고 고르기
 	$("#selectClass").on("change",function(){
 		
 		
 		
-		var selectedColor = $("#selectClass").attr("option","selected").val();
+		selectedColor = $("#selectClass").attr("option","selected").val();
 		
 		console.log(prodCode);
 		console.log(selectedColor);
@@ -341,10 +341,7 @@
 				
 					 
 						
-							
-					
-					
-					
+							 
 					
 			},
 			error: function(xhr,status,error){
@@ -382,7 +379,8 @@
                 
                 //모달 추가 할 예정
 		var modalContain = "" ;
-        modalContain = "<hr><h6>"+ prodCode + "/ 색상 : " + selectedColor + "- "   + optionSizeV +"</6h>" 
+        modalContain =   '<hr><div><span style="margin:right" id="closeModal" class="close">&times;</span>'
+        				+"<h6>"+ prodCode + " / " +  selectedColor + " / "   + optionSizeV +"</6h>" 
 						+ '<div  class="col-auto" id="ProdCount">'
 			 	  		+ '<ul class="list-inline pb-3">'
                         + '<li class="list-inline-item text-right">'
@@ -390,7 +388,7 @@
                         + '<input type="hidden" name="product-quanity" id="product-quanity" value="1"></li>'
                         +'<li class="list-inline-item"><span class="btn btn-success" id="btn-minus">-</span></li>'
                         +'<li class="list-inline-item"><span class="badge bg-secondary" id="var-value">1</span></li>'
-                        +'<li class="list-inline-item"><span class="btn btn-success" id="btn-plus">+</span></li></ul></div>' ;
+                        +'<li class="list-inline-item"><span class="btn btn-success" id="btn-plus">+</span></li></ul></div></div>' ;
                          
 		
 		
@@ -398,10 +396,26 @@
 			
 		
 		
-		
+                       /*      $("#selectClass").attr("option","selected").val("색상");
+                            $("#selectClass2").attr("option","selected").val("사이즈"); */
+                            $("#selectClass").prop("selectedIndex",0);
+                            $("#selectClass2").prop("selectedIndex",0);
                             $("#selectClass").removeAttr("option","selected");
-                            $("#selectClass2").removeAttr("option","selected");
+                            $("#selectClass2").removeAttr("option","selected");  
 		
+                            
+                            $(document).ready(function() {
+                            	  
+
+                            	$("#selectClass2").html("<option>사이즈</option>");
+                            	
+                            	/*  $("#selectClass").html("<option>색상</option>
+                                          <c:forEach var="optionColor" items="${prodColor}">
+											<option><c:out value="${optionColor.color}"/></option>
+ 
+                                         </c:forEach>");
+  */                           	});
+                            
      	
 		}); // change function,  end
 			

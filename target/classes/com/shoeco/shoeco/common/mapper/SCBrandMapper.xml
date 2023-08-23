@@ -29,7 +29,7 @@
   
   <!-- 브랜드 등록 -->
   <insert id="brandEnroll" useGeneratedKeys="true" keyProperty="brandCode">
-    <selectKey resultType="int" keyProperty="brandCode" order="BEFORE">
+    <selectKey resultType="int" keyProperty="brandCode" order="AFTER">
         SELECT brand_code_seq.NEXTVAL FROM DUAL
     </selectKey>
     INSERT INTO SC_BRAND (brandCode, brandName, businessNo, managerName, brandPhoneNo, brandEmail, regDate, updateDate)
