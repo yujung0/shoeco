@@ -234,19 +234,31 @@
 										<option>사이즈</option>
 									</select>
 								</div>
+								<hr>
+								<br>
+						   <!--selectClass2 까지 골랐을 때 나온는 div -->
+						   	   <div id="optionEvent" style="display: none;" >
+									 
+								
+								
 							 
-							 <!-- 옵션 골랐을때 수량뜨는 칸  -->
-								<div  class="col-auto" id="ProdCount">
-								 	  <ul class="list-inline pb-3">
-                                            <li class="list-inline-item text-right">
-                                                Quantity
-                                                <input type="hidden" name="product-quanity" id="product-quanity" value="1">
-                                            </li>
-                                            <li class="list-inline-item"><span class="btn btn-success" id="btn-minus">-</span></li>
-                                            <li class="list-inline-item"><span class="badge bg-secondary" id="var-value">1</span></li>
-                                            <li class="list-inline-item"><span class="btn btn-success" id="btn-plus">+</span></li>
-                                        </ul>
-                                </div>
+									<div  class="col-auto" id="ProdCount">
+									 	  <ul class="list-inline pb-3">
+	                                            <li class="list-inline-item text-right">
+	                                                Quantity
+	                                                <input type="hidden" name="product-quanity" id="product-quanity" value="1">
+	                                            </li>
+	                                            <li class="list-inline-item"><span class="btn btn-success" id="btn-minus">-</span></li>
+	                                            <li class="list-inline-item"><span class="badge bg-secondary" id="var-value">1</span></li>
+	                                            <li class="list-inline-item"><span class="btn btn-success" id="btn-plus">+</span></li>
+	                                        </ul>
+	                                </div>
+									
+								</div>
+								  
+								
+							 
+							
 							
 							
 							
@@ -255,7 +267,7 @@
 							
 							
 							<!-- end/ 총 금액 표시  -->
-							
+							<hr>
 							 <!-- 구매버튼 / add 장바구니 -->
 								 <div class="row pb-3">
                                     <div class="col d-grid">
@@ -304,6 +316,11 @@
 				
 				var optionName = $("<option>").text("사이즈");
 				selectClass2.append(optionName);
+				
+			/* 	response.sort(function(a, b) {
+					  return b. - a; // 내림차순 정렬
+					}); */
+ 
 					$.each(response,function(index,sizePerColor){
 					
 						if(sizePerColor.prodCount <=  0 ){
@@ -314,16 +331,10 @@
 							var optionContent = $("<option>").text(sizePerColor.prodSize + " / 잔여수량: " + sizePerColor.prodCount ) ;
 							optionContent.val(sizePerColor.prodSize);
 							selectClass2.append(optionContent);
-							
-							
-							
+							 
 						}
 					
-					
-					
-					
-					
-					
+					 
 					
 					}) //each end
 				
@@ -368,6 +379,12 @@
 							var optionSizeV = $("#selectClass2").attr("option","selected").val();
 							console.log(optionSizeV);
 							//prodCode, selectedColor 변수명 
+							
+							
+							
+							$("#optionEvent").attr("style","display: block;") ;
+							
+							
 							
 								
 							
