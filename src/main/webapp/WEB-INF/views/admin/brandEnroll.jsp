@@ -225,7 +225,15 @@ body {
     margin-left:15px;
 }
 
-
+/* 입력란 공란 경고 태그 */
+.form_section_content span{    
+    display: none;
+    padding-top: 10px;
+    text-align: center;
+    color: #e05757;
+    font-weight: 300;    
+}
+ 
 }
  
  </style>
@@ -280,41 +288,21 @@ body {
               			<form action="${contextPath}/admin/brandEnroll.do" method="post" id="enrollForm">
               				<div class="form_section">
               					<div class="form_section_title">
-              						<label>브랜드 이름</label>
+              						<label>상호명</label>
               					</div>
               					<div class="form_section_content">
               						<input name="brandName">
+              						<span id="warn_brandName">상호명을 입력해주세요.</span>
               					</div>
               				</div>
-              				<div class="form_section">
-              					<div class="form_section_title">
-              						<label>브랜드 코드</label> <!-- 소속 국가 -> 브랜드 코드 대체-->
-              					</div>
-              					<div class="form_section_content">
-              						  <!-- 주석 처리된 브랜드 코드 부분 -->
-							        <!-- <select name="brandCode">
-							            <option value="none" selected>=== 선택 ===</option>
-							            <option value="301">NIKE</option>
-							            <option value="302">ADIDAS</option>
-							            <option value="303">NEW BALANCE</option>
-							            <option value="304">CONVERSE</option>
-							            <option value="305">PUMA</option>
-							            <option value="306">PROSPECS</option>
-							            <option value="307">DR.MARTENS</option>
-							            <option value="308">HUNTER</option>
-							            <option value="309">ALDO</option>
-							        </select> -->
-							        
-							        <!-- 브랜드 코드를 JavaScript로 생성하여 부여하는 부분 -->
-							        <!-- <input type="text" id="brandCode" name="brandCode" readonly> -->
-              					</div>
-              				</div>
+
               				<div class="form_section">
               					<div class="form_section_title">
               						<label>담당자명</label>
               					</div>
               					<div class="form_section_content">
               						<input name="managerName" type="text">
+              						<span id="warn_managerName">담당자의 이름을 입력해주세요.</span>
               					</div>
               				</div>
               				
@@ -323,28 +311,31 @@ body {
 					    
 					    <div class="form_section">
 					        <div class="form_section_title">
-					            <label>사업자번호</label>
+					            <label>사업자 등록번호</label>
 					        </div>
 					        <div class="form_section_content">
 					            <input name="businessNo" type="text" pattern="[0-9]{3}-[0-9]{2}-[0-9]{5}" title="올바른 형식(000-00-00000)으로 입력하세요." required>
+					        	<span id="warn_businessNo">사업자 등록번호를 입력해주세요. (ex. OOO-OO-OOOOO, 숫자 기입)</span>
 					        </div>
 					    </div>
 					    
 					    <div class="form_section">
 					        <div class="form_section_title">
-					            <label>브랜드 전화번호</label>
+					            <label>대표전화</label>
 					        </div>
 					        <div class="form_section_content">
 					            <input name="brandPhoneNo" type="tel" pattern="[0-9]{10}" title="숫자 10자리로 입력하세요." required>
+					        	<span id="warn_brandPhoneNo">대표 전화번호를 입력해주세요. (숫자 10자리)</span>
 					        </div>
 					    </div>
 					    
 					    <div class="form_section">
 					        <div class="form_section_title">
-					            <label>브랜드 이메일</label>
+					            <label>대표 이메일</label>
 					        </div>
 					        <div class="form_section_content">
 					            <input name="brandEmail" type="email" required>
+					        	<span id="warn_brandEmail">대표 이메일 주소를 입력해주세요. (이메일 형식)</span>
 					        </div>
 					    </div>
 					    
@@ -363,11 +354,15 @@ body {
 
 <script>
 
-/* // 등록 버튼
- $("#enrollBtn").click(function () {
-	$("#enrollForm").submit();
-	
-}); */
+$(document).ready(function () {
+    // 페이지 로딩 시 각 인풋 필드 아래에 있는 경고 메시지 표시
+    $('#warn_brandName').css('display', 'block');
+    $('#warn_managerName').css('display', 'block');
+    $('#warn_businessNo').css('display', 'block');
+    $('#warn_brandPhoneNo').css('display', 'block');
+    $('#warn_brandEmail').css('display', 'block');
+});
+
 
 //등록 버튼
 $("#enrollBtn").click(function () {
@@ -386,6 +381,83 @@ $("#enrollBtn").click(function () {
             alert("브랜드 등록 중 오류가 발생했습니다. 다시 시도하세요.");
         }
     });
+    
+    // 202308231702 장유정 추가
+    // 검사 통과 유무 변수
+    let brandNameCheck = false; // 브랜드 이름
+    let managerNameCheck = false; // 담당자명
+    let businessNoCheck = false; // 사업자 등록번호
+    let brandPhoneNoCheck = false; // 대표 전화번호
+    let brandEmailCheck = false; // 대표 이메일 주소
+    
+    // 입력 값 변수
+    let brandName = $('input[name=brandName]').val();
+    let managerName = $('input[name=managerName]').val();
+    let businessNo = $('input[name=businessNo]').val();
+    let brandPhoneNo = $('input[name=brandPhoneNo]').val();
+    let brandEmail = $('input[name=brandEmail]').val();
+    
+    // 공란 경고 span 태그
+    let wBrandName = $('#warn_brandName');
+    let wManagerName = $('#warn_managerName');
+    let wBusinessNo = $('#warn_businessNo');
+    let wBrandPhoneNo = $('#warn_brandPhoneNo');
+    let wBrandEmail = $('#warn_brandEmail');
+    
+    // 브랜드 이름 공란 체크
+    if (brandName === '') {
+    	wBrandName.css('display', 'block');
+    	brandNameCheck = false;
+    } else {
+    	wBrandName.css('display', 'none');
+    	brandNameCheck = true;
+    }
+    
+    // 담당자명 공란 체크
+    if (managerName === '') {
+    	wManagerName.css('display', 'block');
+    	managerNameCheck = false;
+    } else {
+    	wManagerName.css('display', 'none');
+    	managerNameCheck = true;
+    }
+    
+    // 사업자 등록 번호 공란 체크
+    if (businessNo === '') {
+    	wBusinessNo.css('display', 'block');
+    	businessNoCheck = false;
+    } else {
+    	wBusinessNo.css('display', 'none');
+    	businessNoCheck = true;
+    }
+    
+    // 대표 번호 공란 체크
+    if (brandPhoneNo === '') {
+    	wBrandPhoneNo.css('display', 'block');
+    	brandPhoneNoCheck = false;
+    } else {
+    	wBrandPhoneNo.css('display', 'none');
+    	brandPhoneNoCheck = true;
+    }
+    
+    // 대표 이메일 공란 체크
+    if (brandEmail === '') {
+    	wBrandEmail.css('display', 'block');
+    	brandEmailCheck = false;
+    } else {
+    	wBrandEmail.css('display', 'none');
+    	brandEmailCheck = true;
+    }
+    
+    // 최종 검사
+    if (brandNameCheck && managerNameCheck && managerNameCheck && businessNoCheck && brandPhoneNoCheck && brandEmailCheck) {
+    	$("#enrollForm").submit();	
+    } else {
+    	return;
+    }
+    
+    
+    
 });
 
 
@@ -396,21 +468,7 @@ $("#cancelBtn").click(function () {
  
  
  
-//브랜드 코드를 JavaScript로 생성하여 부여
-/* $(document).ready(function () {
-    // 브랜드 코드를 310부터 시작하여 1씩 증가시킴
-    var nextBrandCode = 310;
-    
-    // 브랜드 코드 필드에 부여
-    $("#brandCode").val(nextBrandCode);
-    
-    // 다음 브랜드 코드를 부여하기 위해 증가
-    $("#enrollBtn").click(function () {
-        nextBrandCode++;
-        $("#brandCode").val(nextBrandCode);
-        $("#enrollForm").submit();
-    });
-}); */
+
  
 
 </script>
