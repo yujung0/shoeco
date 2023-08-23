@@ -305,10 +305,27 @@
 				var optionName = $("<option>").text("사이즈");
 				selectClass2.append(optionName);
 					$.each(response,function(index,sizePerColor){
-						var optionContent = $("<option>").text(sizePerColor.prodSize + " / 잔여수량: " + sizePerColor.prodCount ) ;
-						optionContent.val(sizePerColor.prodSize);
-						selectClass2.append(optionContent);
-					})
+					
+						if(sizePerColor.prodCount <=  0 ){
+							var optionContent = $("<option>").text(sizePerColor.prodSize + " / 잔여수량: " + sizePerColor.prodCount ).attr("disabled","true") ;
+							optionContent.val(sizePerColor.prodSize);
+							selectClass2.append(optionContent);
+						}else{
+							var optionContent = $("<option>").text(sizePerColor.prodSize + " / 잔여수량: " + sizePerColor.prodCount ) ;
+							optionContent.val(sizePerColor.prodSize);
+							selectClass2.append(optionContent);
+							
+							
+							
+						}
+					
+					
+					
+					
+					
+					
+					
+					}) //each end
 				
 					
 				/* 	//내부 ajax
