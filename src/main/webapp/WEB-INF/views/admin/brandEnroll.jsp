@@ -315,13 +315,9 @@ $("#enrollBtn").click(function () {
         url: "${contextPath}/admin/brandEnroll.do",
         data: $("#enrollForm").serialize(), // 폼 데이터를 전송
         success: function (response) {
-            // 등록이 성공한 경우
-            if (response.success) {
+        	
                 alert("브랜드 등록이 완료되었습니다.");
-                location.href = "${contextPath}/admin/brandManage"; // 원하는 페이지로 이동
-            } else {
-                alert("브랜드 등록에 실패했습니다. 다시 시도하세요.");
-            }
+                location.href = "${contextPath}/admin/brandManage";
         },
         error: function () {
             alert("브랜드 등록 중 오류가 발생했습니다. 다시 시도하세요.");
