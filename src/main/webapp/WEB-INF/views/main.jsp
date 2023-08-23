@@ -121,13 +121,13 @@ a {
 			</ul>
 		</div>
 		<div class="top_area">
-			<div class="logo_area">
+		<!-- 	<div class="logo_area">
 				<h1>logo area</h1>
 			</div>
 			<div class="search_area">
 				<h1>Search area</h1>
 			</div>
-			
+			 -->
 			<div class="login_area">
 			
 				<!-- 로그인 X인 상태 -->
@@ -150,12 +150,12 @@ a {
 			
 			<div class="clearfix"></div>			
 		</div>
-		<div class="navi_bar_area">
+<!-- 		<div class="navi_bar_area">
 			<h1>navi area</h1>
 		</div>
 		<div class="content_area">
 			<h1>content area</h1>
-		</div>
+		</div> -->
 	</div>
 </div>
 

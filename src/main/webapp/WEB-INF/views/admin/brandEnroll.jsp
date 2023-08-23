@@ -151,16 +151,79 @@ body {
 
 /* footer를 화면 하단에 고정 */
 footer {
-    clear: both;
-    text-align: center; /* 텍스트를 가운데 정렬하려면 필요할 수 있습니다. */
-    background-color: #f0f0f1; /* 원하는 배경색으로 설정하세요. */
+    position: fixed; /* 고정 위치로 설정 */
+    bottom: 0; /* 화면 하단에 배치 */
+    width: 100%; /* 화면 너비만큼 폭을 가짐 */
+    text-align: center; /* 텍스트를 가운데 정렬 */
+    background-color: #f0f0f1; /* 배경색 설정 */
     padding: 10px;
+    z-index: 1; /* 다른 요소 위에 표시 */
 }
 
 body {
     background-color: white; /* 이 부분을 변경하여 배경색을 조절할 수 있습니다. */
 }
 
+/* 관리자 컨텐츠 메인 영역 */
+.form_section{
+    width: 95%;
+    margin-left: 2%;
+    margin-top: 20px;
+    border: 1px solid #dbdde2;
+    background-color: #efefef;    
+}
+.form_section_title{
+    padding: 20px 35px;    
+}
+.form_section_title label{
+    display: block;
+    font-size: 20px;
+    font-weight: 800;
+}
+.form_section_content{
+    padding: 20px 35px;
+    border-top: 1px solid #dbdde2;    
+}
+.form_section_content input{
+    width: 98%;
+    height: 25px;
+    font-size: 20px;
+    padding: 5px 1%;
+}
+.form_section_content select{
+    width: 98%;
+    height: 35px;
+    font-size: 20px;
+    text-align-last: center;
+}
+ 
+/* 입력란 공란 경고 태그 */
+.form_section_content span{    
+    display: none;
+    padding-top: 10px;
+    text-align: center;
+    color: #e05757;
+    font-weight: 300;    
+}
+ 
+ 
+ 
+/* 버튼 영역 */
+.btn_section{
+    text-align: center;
+    margin: 80px 0;
+}
+.btn{
+    min-width: 180px;
+    padding: 4px 30px;
+    font-size: 25px;
+    font-weight: 600;
+    line-height: 40px;
+}
+.enroll_btn{
+    background-color: #dbdde2;
+    margin-left:15px;
+}
 
 
 }
@@ -357,4 +420,3 @@ $("#cancelBtn").click(function () {
 </body>
 </html>
 
-<%@ include file="/WEB-INF/views/include/footer.jsp" %>

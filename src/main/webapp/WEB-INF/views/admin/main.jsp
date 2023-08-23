@@ -119,7 +119,6 @@ ul{
     width: 80%;
     float:left;
     height: 100%;
-    height: 700px;
     
 }
 .admin_content_wrap div{
