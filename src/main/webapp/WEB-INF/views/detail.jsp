@@ -281,7 +281,8 @@
 	
 	//1 색상 별 재고 고르기
 	$("#selectClass").on("change",function(){
-	
+		
+		
 		var prodCode = ${prodCode} ;
 		var selectedColor = $("#selectClass").attr("option","selected").val();
 		
@@ -349,7 +350,23 @@
 							$("#selectClass2").on("change",function(){
 							var optionSizeV = $("#selectClass2").attr("option","selected").val();
 							console.log(optionSizeV);
-							});
+							//prodCode, selectedColor 변수명 
+							
+								
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							}); // change function,  end
 					
 					
 					
