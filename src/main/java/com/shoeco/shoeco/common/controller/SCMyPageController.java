@@ -74,13 +74,15 @@ public class SCMyPageController {
         
     	Map<String, Object> resultMap = new HashMap<>();
         
-        // 문의내역 데이터와 페이징 정보를 가져와서 resultMap에 저장
+        // 리뷰내역 데이터와 페이징 정보를 가져와서 resultMap에 저장
         List<SCMyPageVO> reviewList = myPageService.showReview(new CartPagingDTO(pageNum));
         long revTotal = myPageService.getRevTotal();
         CartPagingCreatorDTO cartPagingCreatorDTO = new CartPagingCreatorDTO(revTotal, new CartPagingDTO(pageNum));
         
+        
         resultMap.put("reviewList", reviewList);
         resultMap.put("pagingCreator", cartPagingCreatorDTO);
+        
         
         return resultMap;
     }
