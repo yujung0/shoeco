@@ -1,5 +1,6 @@
 package com.shoeco.shoeco.common.service;
 
+import java.sql.SQLException;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,26 +18,33 @@ public class SCBrandServiceImpl implements SCBrandService  {
 	@Autowired
 	SCBrandMapper scBrandMapper;
 	
-//	  @Autowired
-//	    BrandService brandService; // BrandService 클래스 주입
-	
-	@Override
-	public void brandEnroll(SCBrandVO brand) throws Exception {
-		 // 브랜드 코드 설정 로직
-        int maxBrandCode = scBrandMapper.getMaxBrandCode(); // 최대 브랜드 코드 조회
-        int nextBrandCode = maxBrandCode + 1; // 다음 브랜드 코드 계산
-        brand.setBrandCode(nextBrandCode); // 브랜드 객체에 브랜드 코드 설정
-        
-        // regDate와 updateDate 필드 설정
-        Date now = new Date(); // 현재 시간 가져오기
-        brand.setRegDate(now);
-        brand.setUpdateDate(now);
-        
-        // 브랜드 등록 쿼리 수행
-        scBrandMapper.brandEnroll(brand);
-		
 
+	@Override
+	public void brandEnroll(SCBrandVO brand) {
+	    try {
+	        int maxBrandCode = scBrandMapper.getMaxBrandCode(); // 최대 브랜드 코드 조회
+
+	        // 다음 브랜드 코드가 313보다 작으면 313으로 설정
+	        int nextBrandCode = Math.max(maxBrandCode + 1, 313);
+
+	        brand.setBrandCode(nextBrandCode); // 브랜드 객체에 브랜드 코드 설정
+
+	        Date now = new Date();
+	        brand.setRegDate(now);
+	        brand.setUpdateDate(now);
+
+	        scBrandMapper.brandEnroll(brand); // 브랜드 등록 쿼리 수행
+	        System.out.println("maxBrandCode: " + maxBrandCode);
+	        
+	    } catch (Exception e) {
+	        // 예외 처리
+	        // 예: logger.error("브랜드 등록 중 오류 발생", e);
+	        // 또는 예외를 다시 던질 수도 있습니다.
+	        throw new RuntimeException("브랜드 등록 중 오류 발생", e);
+	    }
 	}
+
+
 }
 
 	
