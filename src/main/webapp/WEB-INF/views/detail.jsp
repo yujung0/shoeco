@@ -8,8 +8,31 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath }"/>
 <%@include file="./include/header.jsp" %>
  
+<!-- 상품 추가 관련 모달  -->
+ <style> 
+	.modalContain  {
+	   position : relative ;
+	}
 
-    
+	.closeModal  {
+	   position : absolute ;
+	   top: 0px;
+	   right: 30px;
+	
+	}
+	
+	.prodCount{
+	  top: 5px;
+	}
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ </style>
  
  
  
@@ -379,12 +402,13 @@
                 
                 //모달 추가 할 예정
 		var modalContain = "" ;
-        modalContain =   '<hr><div><span style="margin:right" id="closeModal" class="close">&times;</span>'
+        modalContain =   '<hr><div class="modalContain"><span style="margin:right" class="closeModal">&times;</span>'
         				+"<h6>"+ prodCode + " / " +  selectedColor + " / "   + optionSizeV +"</6h>" 
-						+ '<div  class="col-auto" id="ProdCount">'
+						+ '<div  class="col-auto" class="prodCount">'
 			 	  		+ '<ul class="list-inline pb-3">'
                         + '<li class="list-inline-item text-right">'
-                        + 'Quantity'
+                        + '수량: ' 
+                        + '<input type="number" class="prodQuantity">'
                         + '<input type="hidden" name="product-quanity" id="product-quanity" value="1"></li>'
                         +'<li class="list-inline-item"><span class="btn btn-success" id="btn-minus">-</span></li>'
                         +'<li class="list-inline-item"><span class="badge bg-secondary" id="var-value">1</span></li>'
@@ -420,6 +444,8 @@
 		}); // change function,  end
 			
 			
+		
+	
 			
 	//1.5 변수 담기 
 	
