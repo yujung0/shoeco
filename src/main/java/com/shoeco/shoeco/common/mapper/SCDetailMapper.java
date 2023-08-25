@@ -19,5 +19,6 @@ public interface SCDetailMapper {
 
 	public List<SCProductVO> selectProduct(long prodCode);
 	
+	public long selectOneProdCount(@Param("prodCode") long prodCode, @Param("color") String color, @Param("prodSize") long prodSize);
 }
 

@@ -51,6 +51,24 @@ public class SCDetailController {
 	    return new ResponseEntity<List<SCOptionVO>>(sizePerColor,HttpStatus.OK);
 	}
 	
+	//val이 하나 씩 늘어날 때마다 selectedSize에 해당하는 하나의 재고수를 꺼내옴
+	@ResponseBody 
+	@GetMapping("/detail/oneSizePerColorAjax")
+	public  ResponseEntity<Boolean> showOneSizePerColor(
+	        @RequestParam("prodCode") long prodCode, 
+	        @RequestParam("color") String color,@RequestParam("prodsizeStr") String prodSizeStr, @RequestParam("prodQuantityStr") String prodQuantityStr) {
+
+	    int prodSize = Integer.parseInt(prodSizeStr);
+	    long prodCount = scDetailService.getOneProdCount(prodCode, color, prodSize);
+	    long prodQuantity  = Long.parseLong(prodQuantityStr);
+	    
+	    if(prodQuantity > prodCount ) {
+	    	return new ResponseEntity<>(false,HttpStatus.OK);	
+	    	
+	    }
+	    	return new ResponseEntity<>(true,HttpStatus.OK);	
+	}
+	
 	
 	
 

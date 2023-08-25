@@ -387,6 +387,9 @@
 		console.log(optionSizeV);
 		//prodCode, selectedColor 변수명 
 		
+		
+		
+		
 		$("#optionEvent").attr("style","display: block;") ;
 		 /* <div  class="col-auto" id="ProdCount">
 				 	  <ul class="list-inline pb-3">
@@ -408,15 +411,13 @@
 			 	  		+ '<ul class="list-inline pb-3">'
                         + '<li class="list-inline-item text-right">'
                         + '수량: ' 
-                        + '<input type="number" class="prodQuantity">'
+                        + '<input type="text" class="prodQuantity" value="1" >'
                         + '<input type="hidden" name="product-quanity" id="product-quanity" value="1"></li>'
                         +'<li class="list-inline-item"><span class="btn btn-success" id="btn-minus">-</span></li>'
                         +'<li class="list-inline-item"><span class="badge bg-secondary" id="var-value">1</span></li>'
                         +'<li class="list-inline-item"><span class="btn btn-success" id="btn-plus">+</span></li></ul></div></div>' ;
-                         
 		
-		
-                            $("#optionEvent").append(modalContain);
+							$("#optionEvent").append(modalContain);
 			
 		
 		
@@ -444,6 +445,43 @@
 		}); // change function,  end
 			
 			
+		
+		
+		
+		//수량에 관해 입력할때 유효성 체크
+		//ajax로 선택된 재고별 수량 받음 
+        				
+      /*   $.ajax({
+        	url: "${contextPath}/detail/oneSizePerColorAjax",
+        	type: "get",
+        	data: jSON.stringify({prodCode: , 
+    	       					color: ,
+    	       					prodsizeStr: ,
+    	       					prodQuantityStr: ,
+    		dataType: "json",
+    		success: function(response){
+    			
+    		}
+    		
+    		
+    	       					
+        	}) */
+        	
+        	
+      //  }) ajax end 뭔가 이상하게 남아서 일단 주석
+		
+		
+		
+		
+	//prodQuantity 관련 스크립트 숫자만 입력가능하게 하기 
+	/* var prodQuantityVal = $(".prodQuantity").val();
+	
+	if(!prodQuantityVal.match(d)){
+		alert("수량을 정확히 입력해주세요.");
+		prodQuantityVal = 1;	
+	} */
+		
+		
 		
 	
 			

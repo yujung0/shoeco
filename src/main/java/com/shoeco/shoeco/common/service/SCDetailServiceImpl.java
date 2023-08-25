@@ -2,6 +2,7 @@ package com.shoeco.shoeco.common.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,6 +40,10 @@ public class SCDetailServiceImpl implements SCDetailService {
 	
 	public List<SCProductVO> getProduct(long prodCode){
 		return scDetailMapper.selectProduct(prodCode);
+	}
+	
+	public long getOneProdCount(@RequestParam("prodCode") long prodCode, @RequestParam("color") String color, @RequestParam("prodSize") long prodSize){
+		return scDetailMapper.selectOneProdCount(prodCode,color,prodSize);
 	}
 	
 	
