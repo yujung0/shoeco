@@ -361,10 +361,7 @@
 					 
 					
 					}) //each end
-				
-					 
-						
-							 
+				 
 					
 			},
 			error: function(xhr,status,error){
@@ -403,10 +400,12 @@
                         </ul>
                 </div> */
                 
-                //모달 추가 할 예정
+                //********************************************* 대표 모달안의 id값을 '색상-사이즈' 이형태로 함 , '색상-사이즈'
 		var modalContain = "" ;
-        modalContain =   '<hr><div class="modalContain"><span style="margin:right" class="closeModal">&times;</span>'
+        modalContain =   '<hr><div class="modalContain" id="'+selectedColor+'-'+optionSizeV+'"><span style="margin:right" class="closeModal">&times;</span>'
         				+"<h6>"+ prodCode + " / " +  selectedColor + " / "   + optionSizeV +"</6h>" 
+        				+ '<input type="hidden" class="selectedColor" value="'+selectedColor+'">'
+        				+ '<input type="hidden" class="optionSizeV" value="'+optionSizeV+'">'
 						+ '<div  class="col-auto" class="prodCount">'
 			 	  		+ '<ul class="list-inline pb-3">'
                         + '<li class="list-inline-item text-right">'
@@ -447,26 +446,47 @@
 			
 		
 		
-		
 		//수량에 관해 입력할때 유효성 체크
 		//ajax로 선택된 재고별 수량 받음 
-        				
-      /*   $.ajax({
-        	url: "${contextPath}/detail/oneSizePerColorAjax",
-        	type: "get",
-        	data: jSON.stringify({prodCode: , 
-    	       					color: ,
-    	       					prodsizeStr: ,
-    	       					prodQuantityStr: ,
-    		dataType: "json",
-    		success: function(response){
-    			
-    		}
-    		
-    		
-    	       					
-        	}) */
+		$("#optionEvent").on("input", ".prodQuantity", function() {
+			
+			//var prodQuantity = $(this)
+		 alert("일단 input change가 먹음");
+		
+
+	        				
+	      	/*   $.ajax({
+	        	url: "${contextPath}/detail/oneSizePerColorAjax",
+	        	type: "get",
+	        	data: jSON.stringify({prodCode: , 
+	    	       					color: ,
+	    	       					prodsizeStr: ,
+	    	       					prodQuantityStr: ,
+	    		dataType: "json",
+	    		success: function(response){
+	    			
+	    			if(!response){
+	    				
+	    				//재고가 없으면 실행문	
+	    				
+	    				
+	    			}else{
+	    				
+	    				//재고가 있으면 실행문
+	    			}
+	    			
+	    			
+	    		}
+	    		
+	    		
+	    	       					
+	        	}) //ajax end
+	        	 */
         	
+      	}); // end $(".prodQuantity").on("change",function()
+      			
+      			
+      			
         	
       //  }) ajax end 뭔가 이상하게 남아서 일단 주석
 		
