@@ -14,7 +14,8 @@ public interface SCBrandService {
 	// 브랜드 목록
 	public List<SCBrandVO> brandGetList(SCCriteria cri) throws Exception;
 	
-	
+	// 브랜드 총 수 
+	public int brandGetTotal(SCCriteria cri) throws Exception;
 	
 	
 	

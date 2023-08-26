@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.shoeco.shoeco.common.model.SCBrandVO;
 import com.shoeco.shoeco.common.model.SCCriteria;
+import com.shoeco.shoeco.common.model.SCPageDTO;
 import com.shoeco.shoeco.common.service.SCBrandService;
 
 @Controller
@@ -60,6 +61,13 @@ import com.shoeco.shoeco.common.service.SCBrandService;
 	    	List list = scBrandService.brandGetList(cri);
 	    	
 	    	model.addAttribute("list", list);
+	    	
+	    	// 페이지 이동 인터페이스 데이터
+	    	int total = scBrandService.brandGetTotal(cri);
+	    	
+	    	SCPageDTO pageMaker = new SCPageDTO(cri, total);
+	    	
+	    	model.addAttribute("pageMaker", pageMaker);
 	    }
 	    
 	    // 2308211425 장유정

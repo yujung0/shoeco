@@ -40,6 +40,15 @@
 	
 	</select>
 	
+	
+	<!-- 브랜드 수 -->
+	<select id="brandGetTotal" resultType="int">
+		select count(*) from SC_Brand
+		
+		<if test="keyword !=null">
+			where brandName like '%' ||#{keyword} || '%'
+		</if>
+	</select>
   
   
 </mapper>

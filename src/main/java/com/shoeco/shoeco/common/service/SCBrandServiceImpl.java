@@ -57,9 +57,18 @@ public class SCBrandServiceImpl implements SCBrandService  {
 
 	@Override
 	public List<SCBrandVO> brandGetList(SCCriteria cri) throws Exception {
+		
+		log.info("(service)brandGetList()..." + cri);
+		
 		return scBrandMapper.brandGetList(cri);
 	}
 
+	// 작가 총 수
+	@Override
+	public int brandGetTotal(SCCriteria cri) throws Exception {
+		log.info("(service)brandGetTotal()..." + cri);
+		return scBrandMapper.brandGetTotal(cri);
+	}
 
 }
 
