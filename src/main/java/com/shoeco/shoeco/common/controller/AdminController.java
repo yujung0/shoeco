@@ -60,7 +60,13 @@ import com.shoeco.shoeco.common.service.SCBrandService;
 	    	// 브랜드 목록 출력 데이터
 	    	List list = scBrandService.brandGetList(cri);
 	    	
-	    	model.addAttribute("list", list);
+//	    	model.addAttribute("list", list);
+	    	
+	    	if(!list.isEmpty()) {
+	    		model.addAttribute("list", list); //브랜드 존재함
+	    	} else {
+	    		model.addAttribute("listCheck", "empty"); // 브랜드 존재 x
+	    	}
 	    	
 	    	// 페이지 이동 인터페이스 데이터
 	    	int total = scBrandService.brandGetTotal(cri);

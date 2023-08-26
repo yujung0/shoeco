@@ -91,6 +91,38 @@
 	border : 2px solid black;
 	font-weight:400;
 }
+
+/* 검색 영역 */
+.search_wrap{
+	margin-top:15px;
+}
+.search_input{
+    position: relative;
+    text-align:center;	
+}
+.search_input input[name='keyword']{
+	padding: 4px 10px;
+    font-size: 15px;
+    height: 20px;
+    line-height: 20px;
+}
+.search_btn{
+	height: 32px;
+    width: 80px;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 20px;
+    position: absolute;
+    margin-left: 15px;
+    background-color: #c3daf7;
+}
+
+.table_empty{
+	height: 50px;
+    text-align: center;
+    margin: 200px 0 215px 0px;
+    font-size: 25px;
+}
 </style>
 
 
@@ -98,6 +130,9 @@
                     <div class="admin_content_subject"><span>브랜드 관리</span></div>
                     
                     <div class="brand_table_wrap">
+                    
+                    <!-- 게시물 O -->
+                    <c:if test="${listCheck != 'empty' }">
                     	<table class="brand_table">
                     		<thead>
                     			<tr>
@@ -124,7 +159,33 @@
                     		</tr>
                     		</c:forEach>
                     	</table>
+                    </c:if>
+                    
+                    <!-- 게시물 X -->
+                    <c:if test="${listCheck == 'empty' }">
+                    	<div class="table_empty">
+                    		등록된 작가가 없습니다.
+                    	</div>
+                    </c:if>
+                    
+                    
+                    
                     </div>
+                    
+                    <!-- 검색 영역 -->
+                    <div class="search_wrap">
+                    	<form id="searchForm" action="${contextPath }/admin/brandManage" method="get">
+                    		<div class="search_input">
+                    			<input type="text" name="keyword" value='<c:out value="${pageMaker.cri.keyword }"></c:out>'>
+                    			<input type="hidden" name="pageNum" value='<c:out value="${pageMaker.cri.pageNum }"></c:out>'>
+   			                    <input type="hidden" name="amount" value='${pageMaker.cri.amount }'>
+              			        <button class="btn search_btn">검색</button>             			                    			                    			 
+                    		</div>
+                    	
+                    	</form>
+                    </div>
+                    
+                    
                     <!-- 페이지 이동 인터페이스 영역 -->
                     <div class="pageMaker_wrap">
                     	<ul class="pageMaker">
@@ -190,6 +251,24 @@ $(".pageMaker_btn a").on("click", function (e) {
     moveForm.find("input[name='pageNum']").val($(this).attr("href"));
     moveForm.submit();
 });
+
+let searchForm = $('#searchForm');
+
+// 브랜드 검색 버튼 동작
+$("#searchForm button").on("click", function (e) {
+	e.preventDefault();
+	
+	//검색 키워드 유효성 검사
+	if(!searchForm.find("input[name='keyword']").val()) {
+		alert("키워드를 입력하십시오.");
+		return false;
+	}
+	
+	searchForm.find("input[name='pageNum']").val("1");
+	
+	searchForm.submit();
+});
+
 
 </script> 
   
