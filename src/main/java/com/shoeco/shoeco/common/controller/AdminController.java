@@ -1,15 +1,19 @@
 package com.shoeco.shoeco.common.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.shoeco.shoeco.common.model.SCBrandVO;
+import com.shoeco.shoeco.common.model.SCCriteria;
+import com.shoeco.shoeco.common.model.SCPageDTO;
 import com.shoeco.shoeco.common.service.SCBrandService;
 
 @Controller
@@ -49,8 +53,27 @@ import com.shoeco.shoeco.common.service.SCBrandService;
 	    
 	    // 브랜드 관리 페이지 접속
 	    @RequestMapping(value = "brandManage", method = RequestMethod.GET)
-	    public void brandManageGET() throws Exception {
-	    	logger.info("브랜드 관리 페이지 접속");
+	    public void brandManageGET(SCCriteria cri, Model model) throws Exception {
+	    
+	    	logger.info("브랜드 관리 페이지 접속 - " + cri);
+	    	
+	    	// 브랜드 목록 출력 데이터
+	    	List list = scBrandService.brandGetList(cri);
+	    	
+//	    	model.addAttribute("list", list);
+	    	
+	    	if(!list.isEmpty()) {
+	    		model.addAttribute("list", list); //브랜드 존재함
+	    	} else {
+	    		model.addAttribute("listCheck", "empty"); // 브랜드 존재 x
+	    	}
+	    	
+	    	// 페이지 이동 인터페이스 데이터
+	    	int total = scBrandService.brandGetTotal(cri);
+	    	
+	    	SCPageDTO pageMaker = new SCPageDTO(cri, total);
+	    	
+	    	model.addAttribute("pageMaker", pageMaker);
 	    }
 	    
 	    // 2308211425 장유정

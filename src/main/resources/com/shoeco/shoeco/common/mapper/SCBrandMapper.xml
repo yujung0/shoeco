@@ -5,41 +5,50 @@
   
 <mapper namespace="com.shoeco.shoeco.common.mapper.SCBrandMapper">
 
-<!--  브랜드 등록
-	<insert id="brandEnroll">
-		INSERT INTO SC_BRAND ( brandCode, brandName, businessNo, managerName, brandPhoneNo, brandEmail, updateDate, regDate)
-		VALUES (#{brandCode}, #{brandName}, #{businessNo}, #{managerName}, #{brandPhoneNo}, #{brandEmail}, TO_DATE(SYSDATE, 'YY/MM/DD'), TO_DATE(SYSDATE, 'YY/MM/DD'))
-	</insert>  -->
-	
-	
- <!-- 브랜드 등록  -->
-<!-- 	<insert id="brandEnroll" useGeneratedKeys="true" keyProperty="brandCode">
-		INSERT INTO SC_BRAND ( brandCode, brandName, businessNo, managerName, brandPhoneNo, brandEmail, updateDate, regDate)
-		VALUES (#{brandCode}, #{brandName}, #{businessNo}, #{managerName}, #{brandPhoneNo}, #{brandEmail}, TO_DATE(SYSDATE, 'YY/MM/DD'), TO_DATE(SYSDATE, 'YY/MM/DD'))
-	</insert> -->
-	
-	
 	<!-- 브랜드 등록 -->
-<!-- 	<insert id="brandEnroll" useGeneratedKeys="true" keyProperty="brandCode">
-		INSERT INTO SC_BRAND (brandCode, brandName, businessNo, managerName, brandPhoneNo, brandEmail, updateDate, regDate)
-		VALUES (brand_code_seq.NEXTVAL, #{brandName}, #{businessNo}, #{managerName}, #{brandPhoneNo}, #{brandEmail}, TO_DATE(SYSDATE, 'YY/MM/DD'), TO_DATE(SYSDATE, 'YY/MM/DD'));
+	<insert id="brandEnroll" useGeneratedKeys="true" keyProperty="brandCode">
+	    <selectKey resultType="int" keyProperty="brandCode" order="AFTER">
+	        SELECT brand_code_seq.NEXTVAL FROM DUAL
+	    </selectKey>
+	    
+    	INSERT INTO SC_BRAND (brandCode, brandName, businessNo, managerName, brandPhoneNo, brandEmail, regDate, updateDate)
+    	VALUES (#{brandCode}, #{brandName}, #{businessNo}, #{managerName}, #{brandPhoneNo}, #{brandEmail}, SYSDATE, SYSDATE)
 	</insert>
-  -->
   
-  
-  <!-- 브랜드 등록 -->
-  <insert id="brandEnroll" useGeneratedKeys="true" keyProperty="brandCode">
-    <selectKey resultType="int" keyProperty="brandCode" order="AFTER">
-        SELECT brand_code_seq.NEXTVAL FROM DUAL
-    </selectKey>
-    INSERT INTO SC_BRAND (brandCode, brandName, businessNo, managerName, brandPhoneNo, brandEmail, regDate, updateDate)
-    VALUES (#{brandCode}, #{brandName}, #{businessNo}, #{managerName}, #{brandPhoneNo}, #{brandEmail}, SYSDATE, SYSDATE)
-</insert>
-  
+	<select id="getMaxBrandCode" resultType="int">
+	    SELECT MAX(brandCode) FROM SC_BRAND
+	</select>
 
-<select id="getMaxBrandCode" resultType="int">
-    SELECT MAX(brandCode) FROM SC_BRAND
-</select>
+	<!-- 브랜드 목록 -->
+	<select id="brandGetList" resultType="com.shoeco.shoeco.common.model.SCBrandVO">
+	
+	<![CDATA[
+		select * from (
+			select /*+INDEX_DESC(SC_Brand PK_BRANDCODE_BRAND)*/
+				rownum as rn, brandCode, brandName, businessNo, managerName, brandPhoneNo, brandEmail, regDate, updateDate
+				from SC_Brand
+				where
+	]]>
+			<if test="keyword != null">
+				brandName like '%'||#{keyword}||'%' and
+			</if>
+	<![CDATA[
+			rownum <= #{pageNum}*#{amount}
+			)
+		where rn > (#{pageNum} - 1) * #{amount}
+	]]>		
+	
+	</select>
+	
+	
+	<!-- 브랜드 수 -->
+	<select id="brandGetTotal" resultType="int">
+		select count(*) from SC_Brand
+		
+		<if test="keyword !=null">
+			where brandName like '%' ||#{keyword} || '%'
+		</if>
+	</select>
   
   
 </mapper>

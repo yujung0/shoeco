@@ -2,18 +2,28 @@ package com.shoeco.shoeco.common.service;
 
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import com.shoeco.shoeco.common.mapper.SCBrandMapper;
 import com.shoeco.shoeco.common.model.SCBrandVO;
+import com.shoeco.shoeco.common.model.SCCriteria;
+
+import lombok.extern.log4j.Log4j;
 
 @Service
 @Primary // @Primary 어노테이션을 사용하여 우선적으로 주입할 빈을 지정
+@Log4j
 public class SCBrandServiceImpl implements SCBrandService  {
 
+	// 2308261435 장유정 - 브랜드 목록 페이징 처리
+	private static final Logger log = LoggerFactory.getLogger(SCBrandServiceImpl.class);
+	
 	// 2308181601 장유정
 	@Autowired
 	SCBrandMapper scBrandMapper;
@@ -44,6 +54,21 @@ public class SCBrandServiceImpl implements SCBrandService  {
 	    }
 	}
 
+
+	@Override
+	public List<SCBrandVO> brandGetList(SCCriteria cri) throws Exception {
+		
+		log.info("(service)brandGetList()..." + cri);
+		
+		return scBrandMapper.brandGetList(cri);
+	}
+
+	// 작가 총 수
+	@Override
+	public int brandGetTotal(SCCriteria cri) throws Exception {
+		log.info("(service)brandGetTotal()..." + cri);
+		return scBrandMapper.brandGetTotal(cri);
+	}
 
 }
 
