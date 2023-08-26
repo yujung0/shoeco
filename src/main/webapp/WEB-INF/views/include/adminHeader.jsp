@@ -170,7 +170,7 @@ body {
     margin-left: 2%;
     margin-top: 20px;
     border: 1px solid #dbdde2;
-    background-color: #efefef;    
+    background-color: #efefef;
 }
 .form_section_title{
     padding: 20px 35px;    
@@ -277,7 +277,7 @@ body {
                           <a class="admin_list_05" href="${contextPath}/admin/brandManage">브랜드 관리</a>                            
                       </li>
                        <li>
-                            <a class="admin_list_06" >Q&A</a>                            
+                            <a class="admin_list_06" href="${contextPath}/admin/QNAManage">Q&A</a>                            
                        </li>
                        <li>
                             <a class="admin_list_07">매출 관리</a>                            
