@@ -114,16 +114,19 @@ body {
     cursor: pointer;
     font-size: 30px;
     font-weight: bolder;
+    color: black; /* 기본 텍스트 색상 */
 }
+
+.admin_navi_wrap li a.active {
+    background-color: #c8c8c8; /* 클릭된 링크의 배경색을 회색으로 변경 */
+    color: white; /* 클릭된 링크의 텍스트 색상을 흰색으로 변경 */
+}
+
 .admin_navi_wrap li a:link {color: black;}
 .admin_navi_wrap li a:visited {color: black;}
 .admin_navi_wrap li a:active {color: black;}
 .admin_navi_wrap li a:hover {color: black;}
- 
-.admin_list_03{
-    background-color: #c8c8c8;
-} 
- 
+
  
 /* 관리자페이지 컨텐츠 영역 */
 .admin_content_wrap{
@@ -262,19 +265,19 @@ body {
                 <div class="admin_navi_wrap">
                   <ul>
                       <li>
-                          <a class="admin_list_01" href="${contextPath}/admin/main">관리자 홈</a>
+                          <a class="admin_list_01" href="${contextPath}/admin/main" data-active="true">관리자 홈</a>
                       </li>
                       <li>
-                          <a class="admin_list_02" href="${contextPath}/admin/goodsEnroll">상품 등록</a>
+                          <a class="admin_list_02" href="${contextPath}/admin/goodsEnroll" data-active="true">상품 등록</a>
                       </li>
                       <li>
-                          <a class="admin_list_03" href="${contextPath}/admin/goodsManage">상품 관리</a>
+                          <a class="admin_list_03" href="${contextPath}/admin/goodsManage" data-active="true">상품 관리</a>
                       </li>
                       <li>
-                          <a class="admin_list_04" href="${contextPath}/admin/brandEnroll">브랜드 등록</a>                            
+                          <a class="admin_list_04" href="${contextPath}/admin/brandEnroll" data-active="true">브랜드 등록</a>                            
                       </li>
                       <lI>
-                          <a class="admin_list_05" href="${contextPath}/admin/brandManage">브랜드 관리</a>                            
+                          <a class="admin_list_05" href="${contextPath}/admin/brandManage" data-active="true">브랜드 관리</a>                            
                       </li>
                        <li>
                             <a class="admin_list_06" href="${contextPath}/admin/QNAManage">Q&A</a>                            
@@ -287,3 +290,23 @@ body {
                        </li>                                                                                   
                   </ul>
                 </div><!-- Close Header -->
+                
+                
+<script>
+$(document).ready(function () {
+    // 현재 페이지 URL을 가져옴
+    var currentUrl = window.location.pathname;
+
+    // 네비게이션 메뉴의 각 링크를 순회하며 data-active 속성을 확인하여 active 클래스를 추가
+    $(".admin_navi_wrap li a").each(function () {
+        var linkUrl = $(this).attr("href");
+        var isActive = $(this).data("active"); // data-active 속성 값을 가져옴
+
+        if (isActive === true && currentUrl === linkUrl) {
+            $(this).addClass("active");
+        }
+    });
+});
+</script>
+
+                
