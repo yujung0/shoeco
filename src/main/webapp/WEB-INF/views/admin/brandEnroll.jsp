@@ -6,11 +6,10 @@
 
 <c:set var="contextPath" value="${pageContext.request.contextPath }"/><%-- 
 <sec:authentication property="principal" var="principal"/> --%>
- 
-    
-    
-    
+   
 <%@ include file="/WEB-INF/views/include/adminHeader.jsp" %>
+
+
                 <div class="admin_content_wrap">
                     <div class="admin_content_subject"><span>브랜드 등록</span></div>
               		<div class="admin_content_main">
@@ -185,20 +184,12 @@ $("#enrollBtn").click(function () {
     	return;
     }
     
-    
-    
 });
-
 
 // 취소 버튼
 $("#cancelBtn").click(function () {
 	location.href="${contextPath}/admin/brandManage"
 });
- 
- 
- 
-
- 
 
 </script>
 <%@ include file="/WEB-INF/views/include/adminFooter.jsp" %>
