@@ -23,9 +23,6 @@
   
 <%@ include file="/WEB-INF/views/include/adminHeader.jsp" %>
 
-<h2 class="h5 text-center mt-3 mb-3">admin main</h2>
+<h2 class="h5 text-center mt-3 mb-3">관리자 홈</h2>
 
 <%@ include file="/WEB-INF/views/include/adminFooter.jsp" %>
- 
-</body>
-</html>
