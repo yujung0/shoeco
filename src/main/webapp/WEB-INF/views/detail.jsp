@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!-- //230827 499부터 해야함 / 옵션 x 일때 div 자체를 없애는것 /-->
+<!-- 230827 499부터 해야함 / 옵션 x 일때 div 자체를 없애는것  -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
@@ -25,7 +25,13 @@
 	  top: 5px;
 	}
  
-  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  </style>
  
  
@@ -490,13 +496,13 @@
        	}); // end $(".prodQuantity").on("change",function() 
       			 
       			
-      	$("#optionEvent").on("click", "#btn-plus", function() {
-      		// $(this).closest("")
+      /* 	$("#optionEvent").on("click", ".btn-plus", function() {
+		 	if($(this).("#d"))
       	}); // end $("#optionEvent").on("click", ".btn-plus", function() {
       			
-      	$("#optionEvent").on("click", "#btn-minus", function() {
-		 	//if($(this).("#d"))
-      	}); // end $("#optionEvent").on("click", ".btn-minus", function() {
+      	$("#optionEvent").on("click", ".btn-minus", function() {
+		 	if($(this).("#d"))
+      	}); */ // end 
       			
       			
       			
