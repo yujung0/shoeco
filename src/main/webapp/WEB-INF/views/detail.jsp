@@ -384,64 +384,92 @@
 		console.log(optionSizeV);
 		//prodCode, selectedColor 변수명 
 		
-		
-		
-		
-		$("#optionEvent").attr("style","display: block;") ;
-		 /* <div  class="col-auto" id="ProdCount">
-				 	  <ul class="list-inline pb-3">
-                            <li class="list-inline-item text-right">
-                                Quantity
-                                <input type="hidden" name="product-quanity" id="product-quanity" value="1">
-                            </li>
-                            <li class="list-inline-item"><span class="btn btn-success" id="btn-minus">-</span></li>
-                            <li class="list-inline-item"><span class="badge bg-secondary" id="var-value">1</span></li>
-                            <li class="list-inline-item"><span class="btn btn-success" id="btn-plus">+</span></li>
-                        </ul>
-                </div> */
-                
-                //********************************************* 대표 모달안의 id값을 '색상-사이즈' 이형태로 함 , '색상-사이즈'
-		var modalContain = "" ;
-        modalContain =   '<hr><div class="modalContain" id="'+selectedColor+'-'+optionSizeV+'"><span style="margin:right" class="closeModal">&times;</span>'
-        				+"<h6>"+ prodCode + " / " +  selectedColor + " / "   + optionSizeV +"</6h>" 
-        				+ '<input type="hidden" class="selectedColor" value="'+selectedColor+'">'
-        				+ '<input type="hidden" class="optionSizeV" value="'+optionSizeV+'">'
-						+ '<div  class="col-auto" class="prodCount">'
-			 	  		+ '<ul class="list-inline pb-3">'
-                        + '<li class="list-inline-item text-right">'
-                        
-                    /*     + '<input type="hidden" name="product-quanity" id="product-quanity" value="1"></li>' */
-                        +'<li class="list-inline-item"><span class="btn btn-success" id="btn-minus">-</span></li>'
-                       /*  + '수량: '  */
-                        +'<span><input type="text" class="prodQuantity" value="1"> &nbsp;</span>'
-                        /* +'<li class="list-inline-item"><span class="badge bg-secondary" id="var-value">1</span></li>' */
-                        +'<li class="list-inline-item"><span class="btn btn-success" id="btn-plus">+</span></li></ul></div></div>' ;
-		
-							$("#optionEvent").append(modalContain);
 			
-		
-		
-                       /*      $("#selectClass").attr("option","selected").val("색상");
-                            $("#selectClass2").attr("option","selected").val("사이즈"); */
-                            $("#selectClass").prop("selectedIndex",0);
-                            $("#selectClass2").prop("selectedIndex",0);
-                            $("#selectClass").removeAttr("option","selected");
-                            $("#selectClass2").removeAttr("option","selected");  
-		
-                            
-                            $(document).ready(function() {
-                            	  
+		var str = selectedColor+ "-" +optionSizeV ;
+		console.log(str);
+			if( $("#" + selectedColor+ "-" +optionSizeV ).val() == selectedColor+ "-" +optionSizeV){
+				
+				
+				
+				
+			
+		//	if($(".selectedColor").val() == selectedColor && $(".optionSizeV").val() == optionSizeV ){
+				alert("이미 추가된 옵션 입니다.");
+				   $("#selectClass").prop("selectedIndex",0);
+                   $("#selectClass2").prop("selectedIndex",0);
+                   $("#selectClass").removeAttr("option","selected");
+                   $("#selectClass2").removeAttr("option","selected");  
+                   $(document).ready(function() {
+                 	  
 
-                            	$("#selectClass2").html("<option>사이즈</option>");
-                            	
-                            	/*  $("#selectClass").html("<option>색상</option>
-                                          <c:forEach var="optionColor" items="${prodColor}">
-											<option><c:out value="${optionColor.color}"/></option>
- 
-                                         </c:forEach>");
-  */                           	});
+                   	$("#selectClass2").html("<option>사이즈</option>");
+                   	
+                   	/*  $("#selectClass").html("<option>색상</option>
+                                 <c:forEach var="optionColor" items="${prodColor}">
+									<option><c:out value="${optionColor.color}"/></option>
+
+                                </c:forEach>");
+*/                           	});
+			}else{
+		
+		 
+					$("#optionEvent").attr("style","display: block;") ;
+					 /* <div  class="col-auto" id="ProdCount">
+							 	  <ul class="list-inline pb-3">
+			                            <li class="list-inline-item text-right">
+			                                Quantity
+			                                <input type="hidden" name="product-quanity" id="product-quanity" value="1">
+			                            </li>
+			                            <li class="list-inline-item"><span class="btn btn-success" id="btn-minus">-</span></li>
+			                            <li class="list-inline-item"><span class="badge bg-secondary" id="var-value">1</span></li>
+			                            <li class="list-inline-item"><span class="btn btn-success" id="btn-plus">+</span></li>
+			                        </ul>
+			                </div> */
+			                
+			                //********************************************* 대표 모달안의 id값을 '색상-사이즈' 이형태로 함 , '색상-사이즈'
+					var modalContain = "" ;
+			        modalContain =   '<hr><div class="modalContain"><span style="margin:right" class="closeModal">&times;</span>'
+			        				+"<h6>"+ prodCode + " / " +  selectedColor + " / "   + optionSizeV +"</6h>" 
+			        				+'<input type="hidden" id="'+selectedColor+'-'+optionSizeV+'" value="'+selectedColor+'-'+optionSizeV + '">'
+			        				+ '<input type="hidden" class="selectedColor" value="'+selectedColor+'">'
+			         				+ '<input type="hidden" class="optionSizeV" value="'+optionSizeV+'">'
+									+ '<div  class="col-auto" class="prodCount">'
+						 	  		+ '<ul class="list-inline pb-3">'
+			                        + '<li class="list-inline-item text-right">'
+			                        
+			                    /*     + '<input type="hidden" name="product-quanity" id="product-quanity" value="1"></li>' */
+			                        +'<li class="list-inline-item"><span class="btn btn-success" id="btn-minus">-</span></li>'
+			                       /*  + '수량: '  */
+			                        +'<span><input type="text" class="prodQuantity" value="1"> &nbsp;</span>'
+			                        /* +'<li class="list-inline-item"><span class="badge bg-secondary" id="var-value">1</span></li>' */
+			                        +'<li class="list-inline-item"><span class="btn btn-success" id="btn-plus">+</span></li></ul></div></div>' ;
+					
+										$("#optionEvent").append(modalContain);
+						
+					
+					
+			                       /*      $("#selectClass").attr("option","selected").val("색상");
+			                            $("#selectClass2").attr("option","selected").val("사이즈"); */
+			                            $("#selectClass").prop("selectedIndex",0);
+			                            $("#selectClass2").prop("selectedIndex",0);
+			                            $("#selectClass").removeAttr("option","selected");
+			                            $("#selectClass2").removeAttr("option","selected");  
+					
+			                            
+			                            $(document).ready(function() {
+			                            	  
+			
+			                            	$("#selectClass2").html("<option>사이즈</option>");
+			                            	
+			                            	/*  $("#selectClass").html("<option>색상</option>
+			                                          <c:forEach var="optionColor" items="${prodColor}">
+														<option><c:out value="${optionColor.color}"/></option>
+			 
+			                                         </c:forEach>");
+			  */                           	});
                             
-     	
+			}//end 이미 선택된 옵션입니다의 else문  
+                            
 		}); // change function,  end
 			
 			
@@ -465,7 +493,8 @@
 		 		$(".prodQuantity").val(1);
 		 	}
 		 
-		 
+		  
+		 	
 		 	/* 참고
 		 	
 		 	modalContain =   '<hr><div class="modalContain" id="'+selectedColor+'-'+optionSizeV+'"><span style="margin:right" class="closeModal">&times;</span>'
@@ -478,11 +507,23 @@
 		 	*/
 		 	
 		 	
+ 
+      	}); // end $(".prodQuantity").on("change",function() 
+      			 
+      			
+      	$("#optionEvent").on("click", ".btn-success", function() {
+ 
+		 	alert("버튼 누름")
+		 	
 
 	        				
 	      	
         	
-      	}); // end $(".prodQuantity").on("change",function() 
+      	}); // end $("#optionEvent").on("click", ".btn-success","btn btn-success", function() {
+      			
+      			
+      			
+      			
       			
       			
       			
