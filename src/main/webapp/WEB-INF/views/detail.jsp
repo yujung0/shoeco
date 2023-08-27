@@ -435,13 +435,14 @@
 			        modalContain =   '<hr><div class="modalContain"><span style="margin:right" class="closeModal">&times;</span>'
 			        				+"<h6>"+ prodCode + " / " +  selectedColor + " / "   + optionSizeV +"</6h>" 
 			        				+'<input type="hidden" id="'+selectedColor+'-'+optionSizeV+'" value="'+selectedColor+'-'+optionSizeV + '">'
-			        				+ '<input type="hidden" class="selectedColor" value="'+selectedColor+'">'
-			         				+ '<input type="hidden" class="optionSizeV" value="'+optionSizeV+'">'
+			        				
 									+ '<div  class="col-auto" class="prodCount">'
 						 	  		+ '<ul class="list-inline pb-3">'
 			                        + '<li class="list-inline-item text-right">'
 			                        
-			                    /*     + '<input type="hidden" name="product-quanity" id="product-quanity" value="1"></li>' */
+			                    /*     + '<input type="hidden" name="product-quanity" id="product-quanity" value="1">' */
+			                    	+ '<input type="hidden" class="selectedColor" value="'+selectedColor+'">'
+			         				+ '<input type="hidden" class="optionSizeV" value="'+optionSizeV+'"></li>'
 			                        +'<li class="list-inline-item"><span class="btn btn-success btn-minus" >-</span></li>'
 			                       /*  + '수량: '  */
 			                        +'<span><input type="text" class="prodQuantity" value="1"> &nbsp;</span>'
@@ -507,26 +508,63 @@
       			 
       		
       /*   modalContain =   '<hr><div class="modalContain"><span style="margin:right" class="closeModal">&times;</span>'
-			+"<h6>"+ prodCode + " / " +  selectedColor + " / "   + optionSizeV +"</6h>" 
-			+'<input type="hidden" id="'+selectedColor+'-'+optionSizeV+'" value="'+selectedColor+'-'+optionSizeV + '">'
-			+ '<input type="hidden" class="selectedColor" value="'+selectedColor+'">'
-				+ '<input type="hidden" class="optionSizeV" value="'+optionSizeV+'">'
-			+ '<div  class="col-auto" class="prodCount">'
- 	  		+ '<ul class="list-inline pb-3">'
-            + '<li class="list-inline-item text-right">'
-            
-            +'<li class="list-inline-item"><span class="btn btn-success" id="btn-minus">-</span></li>'
-            +'<span><input type="text" class="prodQuantity" value="1"> &nbsp;</span>'
-            +'<li class="list-inline-item"><span class="btn btn-success" id="btn-plus">+</span></li><br>'
-            +'<span class="perPrice"><small>원</small></span></ul></div></div>';
-
-				$("#optionEvent").append(modalContain);	 */	
+			        				+"<h6>"+ prodCode + " / " +  selectedColor + " / "   + optionSizeV +"</6h>" 
+			        				+'<input type="hidden" id="'+selectedColor+'-'+optionSizeV+'" value="'+selectedColor+'-'+optionSizeV + '">'
+			        				
+									+ '<div  class="col-auto" class="prodCount">'
+						 	  		+ '<ul class="list-inline pb-3">'
+			                        + '<li class="list-inline-item text-right">'
+			                        
+			                    	+ '<input type="hidden" class="selectedColor" value="'+selectedColor+'">'
+			         				+ '<input type="hidden" class="optionSizeV" value="'+optionSizeV+'">'
+			                        +'<li class="list-inline-item"><span class="btn btn-success btn-minus" >-</span></li>'
+			                        +'<span><input type="text" class="prodQuantity" value="1"> &nbsp;</span>'
+			                        /* +'<li class="list-inline-item"><span class="badge bg-secondary" id="var-value">1</span></li>'  
+			                        +'<li class="list-inline-item"><span class="btn btn-success btn-plus" >+</span></li><br>'
+			                        +'<span class="perPrice"><small>원</small></span></ul></div></div>'; */	
        			
        			
        	$("#optionEvent").on("click", ".btn-plus", function() {
        		var beforeVal = parseInt($(this).closest("li").siblings("span").find(".prodQuantity").val()) ;
+       		var color = $(this).closest("li").siblings("li").find(".selectedColor").val() ;
+       		var prodSizeStr = $(this).closest("li").siblings("li").find(".optionSizeV").val() ;
+			var prodQuantityStr =  beforeVal + 1 ;	
+			console.log(color + "<-컬러 " );
+			console.log(prodSizeStr + "<-사이즈 ");
+			console.log(prodQuantityStr + "<-수량" );
+			       		
+			       	 $.ajax({
+				        	url: "${contextPath}/detail/oneSizePerColorAjax",
+				        	type: "get",
+				        	data: {prodCode: prodCode , 
+				    	       					color: color,
+				    	       					prodSizeStr: prodSizeStr ,
+				    	       					prodQuantityStr:  prodQuantityStr },
+				    		dataType: "json",
+				    		contentType: "application/json",
+				    		success: (response) => {
+
+				    			if(!response){
+				    				
+				    				//재고가 없으면 실행문
+				    				alert("재고가 부족합니다.");
+				    				$(this).closest("li").siblings("span").find(".prodQuantity").val(beforeVal);
+				    				
+				    				
+				    			}else{
+				    				
+				    				//재고가 있으면 실행문
+				    				$(this).closest("li").siblings("span").find(".prodQuantity").val(prodQuantityStr);
+				    			}
+				    			
+				    			
+				    		}
+				    		
+				    		
+				    	       					
+				        	}) //ajax end
        		
-		 	$(this).closest("li").siblings("span").find(".prodQuantity").val(beforeVal + 1);
+		 	
 		 	//console.log("시블링 값: " + ( beforeVal + 1));
 		 	//console.log( beforeVal);
 		 	
@@ -535,8 +573,14 @@
       	$("#optionEvent").on("click", ".btn-minus", function() {
 			var beforeVal = parseInt($(this).closest("li").siblings("span").find(".prodQuantity").val()) ;
        		
-		 	$(this).closest("li").siblings("span").find(".prodQuantity").val(beforeVal - 1);
-      	});  // end $("#optionEvent").on("click", ".btn-minus", function() 
+				if(beforeVal <= 1){
+					alert("수량을 확인 해 주세요.")
+					$(this).closest("li").siblings("span").find(".prodQuantity").val(1);	
+				}else{
+				
+			 		$(this).closest("li").siblings("span").find(".prodQuantity").val(beforeVal - 1);
+				}
+			});  // end $("#optionEvent").on("click", ".btn-minus", function() 
       			
       			
       			
