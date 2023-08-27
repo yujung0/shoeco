@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!-- //230826 447부터 해야함 -->
+<!-- //230827 499부터 해야함 / 옵션 x 일때 div 자체를 없애는것 /-->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
@@ -25,13 +25,7 @@
 	  top: 5px;
 	}
  
- 
- 
- 
- 
- 
- 
- 
+  
  </style>
  
  
@@ -493,34 +487,16 @@
 		 		$(".prodQuantity").val(1);
 		 	}
 		 
-		  
-		 	
-		 	/* 참고
-		 	
-		 	modalContain =   '<hr><div class="modalContain" id="'+selectedColor+'-'+optionSizeV+'"><span style="margin:right" class="closeModal">&times;</span>'
-        				+"<h6>"+ prodCode + " / " +  selectedColor + " / "   + optionSizeV +"</6h>" 
-        				+ '<input type="hidden" class="selectedColor" value="'+selectedColor+'">'
-        				+ '<input type="hidden" class="optionSizeV" value="'+optionSizeV+'">'
-						+ '<div  class="col-auto" class="prodCount">'
-			 	  		+ '<ul class="list-inline pb-3">'
-                        + '<li class="list-inline-item text-right">'
-		 	*/
-		 	
-		 	
- 
-      	}); // end $(".prodQuantity").on("change",function() 
+       	}); // end $(".prodQuantity").on("change",function() 
       			 
       			
-      	$("#optionEvent").on("click", ".btn-success", function() {
- 
-		 	alert("버튼 누름")
-		 	
-
-	        				
-	      	
-        	
-      	}); // end $("#optionEvent").on("click", ".btn-success","btn btn-success", function() {
+      	$("#optionEvent").on("click", "#btn-plus", function() {
+      		// $(this).closest("")
+      	}); // end $("#optionEvent").on("click", ".btn-plus", function() {
       			
+      	$("#optionEvent").on("click", "#btn-minus", function() {
+		 	//if($(this).("#d"))
+      	}); // end $("#optionEvent").on("click", ".btn-minus", function() {
       			
       			
       			
