@@ -319,6 +319,8 @@
 	<script> //detail 내용에 대한 script 시작
 	var prodCode = ${prodCode} ;
 	var selectedColor = "";
+	var sellPrice = ${product.get(0).sellPrice};
+	var oneRowPrice = "";
 	//1 색상 별 재고 고르기
 	$("#selectClass").on("change",function(){
 		
@@ -448,7 +450,8 @@
 			                        +'<span><input type="text" class="prodQuantity" value="1"> &nbsp;</span>'
 			                        /* +'<li class="list-inline-item"><span class="badge bg-secondary" id="var-value">1</span></li>' */
 			                        +'<li class="list-inline-item"><span class="btn btn-success btn-plus" >+</span></li><br>'
-			                        +'<span class="perPrice"><small>원</small></span></ul></div></div>';
+			                        +'<div class="perPrice"><span class="rowPrice">'+sellPrice+'</span>'
+			                        +'<small>원</small></div></ul></div></div>';
 					
 										$("#optionEvent").append(modalContain);
 						
@@ -528,13 +531,15 @@
 				    				
 				    				//재고가 없으면 실행문
 				    				alert("재고가 부족합니다. 현재 재고: " + response.prodCount + "개");
-				    				$(this).closest("li").siblings("span").find(".prodQuantity").val(1);
+				    				$(this).val(1);
+				    				$(this).closest("span").siblings(".perPrice").find(".rowPrice").html(1 * sellPrice);
 				    				
 				    				
 				    			}else{
 				    				
 				    				//재고가 있으면 실행문
-				    				$(this).closest("li").siblings("span").find(".prodQuantity").val(beforeVal);
+				    				$(this).val(beforeVal);
+				    				$(this).closest("span").siblings(".perPrice").find(".rowPrice").html(beforeVal * sellPrice);
 				    			}
 				    			
 				    			
@@ -546,7 +551,8 @@
        		 
 		 	//end input 버전으로 수량 막는 거 추가 
 		 	
-		 	
+				        	
+		 					console.log(beforeVal * sellPrice);
        	}); // end $(".prodQuantity").on("change",function() 
       			 
       		 
@@ -576,12 +582,14 @@
 				    				//재고가 없으면 실행문
 				    				alert("재고가 부족합니다. 현재 재고: " + response.prodCount + "개");
 				    				$(this).closest("li").siblings("span").find(".prodQuantity").val(beforeVal);
+				    				$(this).closest("li").siblings(".perPrice").find(".rowPrice").html(beforeVal * sellPrice);
 				    				
 				    				
 				    			}else{
 				    				
 				    				//재고가 있으면 실행문
 				    				$(this).closest("li").siblings("span").find(".prodQuantity").val(prodQuantityStr);
+				    				$(this).closest("li").siblings(".perPrice").find(".rowPrice").html(prodQuantityStr * sellPrice);
 				    			}
 				    			
 				    			
@@ -603,9 +611,11 @@
 				if(beforeVal <= 1){
 					alert("수량을 확인 해 주세요.")
 					$(this).closest("li").siblings("span").find(".prodQuantity").val(1);	
+					$(this).closest("li").siblings(".perPrice").find(".rowPrice").html(1 * sellPrice);
 				}else{
 				
 			 		$(this).closest("li").siblings("span").find(".prodQuantity").val(beforeVal - 1);
+			 		$(this).closest("li").siblings(".perPrice").find(".rowPrice").html((beforeVal - 1) * sellPrice);
 				}
 			});  // end $("#optionEvent").on("click", ".btn-minus", function() 
       			
