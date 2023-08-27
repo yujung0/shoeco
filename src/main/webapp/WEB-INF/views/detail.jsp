@@ -442,11 +442,11 @@
 			                        + '<li class="list-inline-item text-right">'
 			                        
 			                    /*     + '<input type="hidden" name="product-quanity" id="product-quanity" value="1"></li>' */
-			                        +'<li class="list-inline-item"><span class="btn btn-success" id="btn-minus">-</span></li>'
+			                        +'<li class="list-inline-item"><span class="btn btn-success btn-minus" >-</span></li>'
 			                       /*  + '수량: '  */
 			                        +'<span><input type="text" class="prodQuantity" value="1"> &nbsp;</span>'
 			                        /* +'<li class="list-inline-item"><span class="badge bg-secondary" id="var-value">1</span></li>' */
-			                        +'<li class="list-inline-item"><span class="btn btn-success" id="btn-plus">+</span></li><br>'
+			                        +'<li class="list-inline-item"><span class="btn btn-success btn-plus" >+</span></li><br>'
 			                        +'<span class="perPrice"><small>원</small></span></ul></div></div>';
 					
 										$("#optionEvent").append(modalContain);
@@ -486,6 +486,7 @@
 		
 		
 /*		//인풋 값이 숫자가 아니면 숫자이도록 하는 것 ->readonly써서 필요없어짐-> 대량구매시 잇어야할듯*/
+		//++++++++ 가격도 변동하도록 해야함 
  		$("#optionEvent").on("input", ".prodQuantity", function() {
 //			var prodQuantityVal = $(".prodQuantity").val();
 			var prodQuantityVal = $(this).val();
@@ -493,21 +494,49 @@
 			
 		 //alert("일단 input change가 먹음");
 		
-		 	if(!prodQuantityVal.match(/^\d+$/)){
-		 		alert("적절한 수량을 입력해주세요.")
-		 		$(".prodQuantity").val(1);
+		 	if(prodQuantityVal != ""){
+			 	if(!prodQuantityVal.match(/^\d+$/)){
+			 		alert("적절한 수량을 입력해주세요.")
+//			 		$(".prodQuantity").val(1);
+			 		$(this).val(1);
+			 	}
+		 	}else{
+		 		$(this).val(0);
 		 	}
-		 
        	}); // end $(".prodQuantity").on("change",function() 
       			 
-      			
-      /* 	$("#optionEvent").on("click", ".btn-plus", function() {
-		 	if($(this).("#d"))
-      	}); // end $("#optionEvent").on("click", ".btn-plus", function() {
+      		
+      /*   modalContain =   '<hr><div class="modalContain"><span style="margin:right" class="closeModal">&times;</span>'
+			+"<h6>"+ prodCode + " / " +  selectedColor + " / "   + optionSizeV +"</6h>" 
+			+'<input type="hidden" id="'+selectedColor+'-'+optionSizeV+'" value="'+selectedColor+'-'+optionSizeV + '">'
+			+ '<input type="hidden" class="selectedColor" value="'+selectedColor+'">'
+				+ '<input type="hidden" class="optionSizeV" value="'+optionSizeV+'">'
+			+ '<div  class="col-auto" class="prodCount">'
+ 	  		+ '<ul class="list-inline pb-3">'
+            + '<li class="list-inline-item text-right">'
+            
+            +'<li class="list-inline-item"><span class="btn btn-success" id="btn-minus">-</span></li>'
+            +'<span><input type="text" class="prodQuantity" value="1"> &nbsp;</span>'
+            +'<li class="list-inline-item"><span class="btn btn-success" id="btn-plus">+</span></li><br>'
+            +'<span class="perPrice"><small>원</small></span></ul></div></div>';
+
+				$("#optionEvent").append(modalContain);	 */	
+       			
+       			
+       	$("#optionEvent").on("click", ".btn-plus", function() {
+       		var beforeVal = parseInt($(this).closest("li").siblings("span").find(".prodQuantity").val()) ;
+       		
+		 	$(this).closest("li").siblings("span").find(".prodQuantity").val(beforeVal + 1);
+		 	//console.log("시블링 값: " + ( beforeVal + 1));
+		 	//console.log( beforeVal);
+		 	
+      	}); // end $("#optionEvent").on("click", ".btn-plus", function() 
       			
       	$("#optionEvent").on("click", ".btn-minus", function() {
-		 	if($(this).("#d"))
-      	}); */ // end 
+			var beforeVal = parseInt($(this).closest("li").siblings("span").find(".prodQuantity").val()) ;
+       		
+		 	$(this).closest("li").siblings("span").find(".prodQuantity").val(beforeVal - 1);
+      	});  // end $("#optionEvent").on("click", ".btn-minus", function() 
       			
       			
       			
