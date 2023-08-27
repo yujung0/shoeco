@@ -409,11 +409,12 @@
 						+ '<div  class="col-auto" class="prodCount">'
 			 	  		+ '<ul class="list-inline pb-3">'
                         + '<li class="list-inline-item text-right">'
-                        + '수량: ' 
-                        + '<input type="text" class="prodQuantity" value="1" >'
-                        + '<input type="hidden" name="product-quanity" id="product-quanity" value="1"></li>'
+                        
+                    /*     + '<input type="hidden" name="product-quanity" id="product-quanity" value="1"></li>' */
                         +'<li class="list-inline-item"><span class="btn btn-success" id="btn-minus">-</span></li>'
-                        +'<li class="list-inline-item"><span class="badge bg-secondary" id="var-value">1</span></li>'
+                       /*  + '수량: '  */
+                        +'<span><input type="text" class="prodQuantity" value="1"> &nbsp;</span>'
+                        /* +'<li class="list-inline-item"><span class="badge bg-secondary" id="var-value">1</span></li>' */
                         +'<li class="list-inline-item"><span class="btn btn-success" id="btn-plus">+</span></li></ul></div></div>' ;
 		
 							$("#optionEvent").append(modalContain);
@@ -448,14 +449,47 @@
 		
 		//수량에 관해 입력할때 유효성 체크
 		//ajax로 선택된 재고별 수량 받음 
-		$("#optionEvent").on("input", ".prodQuantity", function() {
-			
-			//var prodQuantity = $(this)
-		 alert("일단 input change가 먹음");
 		
+		
+		
+/*		//인풋 값이 숫자가 아니면 숫자이도록 하는 것 ->readonly써서 필요없어짐-> 대량구매시 잇어야할듯*/
+ 		$("#optionEvent").on("input", ".prodQuantity", function() {
+//			var prodQuantityVal = $(".prodQuantity").val();
+			var prodQuantityVal = $(this).val();
+			console.log(prodQuantityVal);
+			
+		 //alert("일단 input change가 먹음");
+		
+		 	if(!prodQuantityVal.match(/^\d+$/)){
+		 		alert("적절한 수량을 입력해주세요.")
+		 		$(".prodQuantity").val(1);
+		 	}
+		 
+		 
+		 	/* 참고
+		 	
+		 	modalContain =   '<hr><div class="modalContain" id="'+selectedColor+'-'+optionSizeV+'"><span style="margin:right" class="closeModal">&times;</span>'
+        				+"<h6>"+ prodCode + " / " +  selectedColor + " / "   + optionSizeV +"</6h>" 
+        				+ '<input type="hidden" class="selectedColor" value="'+selectedColor+'">'
+        				+ '<input type="hidden" class="optionSizeV" value="'+optionSizeV+'">'
+						+ '<div  class="col-auto" class="prodCount">'
+			 	  		+ '<ul class="list-inline pb-3">'
+                        + '<li class="list-inline-item text-right">'
+		 	*/
+		 	
+		 	
 
 	        				
-	      	/*   $.ajax({
+	      	
+        	
+      	}); // end $(".prodQuantity").on("change",function() 
+      			
+      			
+      			
+        	
+      //  }) ajax end 뭔가 이상하게 남아서 일단 주석
+		
+		/*   $.ajax({
 	        	url: "${contextPath}/detail/oneSizePerColorAjax",
 	        	type: "get",
 	        	data: jSON.stringify({prodCode: , 
@@ -482,15 +516,6 @@
 	    	       					
 	        	}) //ajax end
 	        	 */
-        	
-      	}); // end $(".prodQuantity").on("change",function()
-      			
-      			
-      			
-        	
-      //  }) ajax end 뭔가 이상하게 남아서 일단 주석
-		
-		
 		
 		
 	//prodQuantity 관련 스크립트 숫자만 입력가능하게 하기 
