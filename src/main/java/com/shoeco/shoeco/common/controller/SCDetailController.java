@@ -1,5 +1,6 @@
 package com.shoeco.shoeco.common.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -55,7 +56,7 @@ public class SCDetailController {
 	@ResponseBody 
 	@GetMapping("/detail/oneSizePerColorAjax")
 //	public  ResponseEntity<Boolean> showOneSizePerColor(
-	public  ResponseEntity<Boolean> showOneSizePerColor(
+	public  ResponseEntity<HashMap<String, Object>> showOneSizePerColor(
 	        @RequestParam("prodCode") long prodCode, 
 	        @RequestParam("color") String color,@RequestParam("prodSizeStr") String prodSizeStr, @RequestParam("prodQuantityStr") String prodQuantityStr) {
 
@@ -63,13 +64,18 @@ public class SCDetailController {
 	    long prodCount = scDetailService.getOneProdCount(prodCode, color, prodSize);
 	    long prodQuantity  = Long.parseLong(prodQuantityStr);
 	    
+	    HashMap<String, Object> response = new HashMap<String, Object>();
+	    
 	    if(prodQuantity > prodCount ) {
 	    	System.out.println("수량 부족");
-	    	return new ResponseEntity<>(false,HttpStatus.OK);	
+	    	response.put("boolVal", false);
+	    	response.put("prodCount", prodCount);
+	    	return new ResponseEntity<>(response,HttpStatus.OK);	
 	    	
 	    }else {
 	    	System.out.println("수량 안부족");
-	    	return new ResponseEntity<>(true,HttpStatus.OK);}	
+	    	response.put("boolVal", true);
+	    	return new ResponseEntity<>(response,HttpStatus.OK);}	
 	}
 	
 	

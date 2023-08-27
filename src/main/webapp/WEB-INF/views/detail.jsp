@@ -544,10 +544,10 @@
 				    		contentType: "application/json",
 				    		success: (response) => {
 
-				    			if(!response){
+				    			if(!response.boolVal){
 				    				
 				    				//재고가 없으면 실행문
-				    				alert("재고가 부족합니다.");
+				    				alert("재고가 부족합니다. 현재 재고: " + response.prodCount + "개");
 				    				$(this).closest("li").siblings("span").find(".prodQuantity").val(beforeVal);
 				    				
 				    				
