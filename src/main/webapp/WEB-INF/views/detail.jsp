@@ -504,25 +504,52 @@
 		 	}else{
 		 		$(this).val(0);
 		 	}
+		 	
+		 	//input 버전으로 수량 막는 거 추가 
+		 	var beforeVal = parseInt($(this).val());
+       		var color = $(this).closest("span").siblings("li").find(".selectedColor").val() ;
+       		var prodSizeStr = $(this).closest("span").siblings("li").find(".optionSizeV").val() ;
+			console.log(color + "<-컬러 " );
+			console.log(prodSizeStr + "<-사이즈 ");
+			console.log(beforeVal + "<-수량" );
+			       		
+			       	 $.ajax({
+				        	url: "${contextPath}/detail/oneSizePerColorAjax",
+				        	type: "get",
+				        	data: {prodCode: prodCode , 
+				    	       					color: color,
+				    	       					prodSizeStr: prodSizeStr ,
+				    	       					prodQuantityStr:  beforeVal },
+				    		dataType: "json",
+				    		contentType: "application/json",
+				    		success: (response) => {
+
+				    			if(!response.boolVal){
+				    				
+				    				//재고가 없으면 실행문
+				    				alert("재고가 부족합니다. 현재 재고: " + response.prodCount + "개");
+				    				$(this).closest("li").siblings("span").find(".prodQuantity").val(1);
+				    				
+				    				
+				    			}else{
+				    				
+				    				//재고가 있으면 실행문
+				    				$(this).closest("li").siblings("span").find(".prodQuantity").val(beforeVal);
+				    			}
+				    			
+				    			
+				    		}
+				    		
+				    		
+				    	       					
+				        	}) //ajax end
+       		 
+		 	//end input 버전으로 수량 막는 거 추가 
+		 	
+		 	
        	}); // end $(".prodQuantity").on("change",function() 
       			 
-      		
-      /*   modalContain =   '<hr><div class="modalContain"><span style="margin:right" class="closeModal">&times;</span>'
-			        				+"<h6>"+ prodCode + " / " +  selectedColor + " / "   + optionSizeV +"</6h>" 
-			        				+'<input type="hidden" id="'+selectedColor+'-'+optionSizeV+'" value="'+selectedColor+'-'+optionSizeV + '">'
-			        				
-									+ '<div  class="col-auto" class="prodCount">'
-						 	  		+ '<ul class="list-inline pb-3">'
-			                        + '<li class="list-inline-item text-right">'
-			                        
-			                    	+ '<input type="hidden" class="selectedColor" value="'+selectedColor+'">'
-			         				+ '<input type="hidden" class="optionSizeV" value="'+optionSizeV+'">'
-			                        +'<li class="list-inline-item"><span class="btn btn-success btn-minus" >-</span></li>'
-			                        +'<span><input type="text" class="prodQuantity" value="1"> &nbsp;</span>'
-			                        /* +'<li class="list-inline-item"><span class="badge bg-secondary" id="var-value">1</span></li>'  
-			                        +'<li class="list-inline-item"><span class="btn btn-success btn-plus" >+</span></li><br>'
-			                        +'<span class="perPrice"><small>원</small></span></ul></div></div>'; */	
-       			
+      		 
        			
        	$("#optionEvent").on("click", ".btn-plus", function() {
        		var beforeVal = parseInt($(this).closest("li").siblings("span").find(".prodQuantity").val()) ;
