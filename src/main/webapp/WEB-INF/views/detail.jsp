@@ -25,6 +25,10 @@
 	  top: 5px;
 	}
  
+ 	.perPrice{
+ 	position : absolute ;
+ 	right: 28px;
+ 	}
  
  
  
@@ -442,7 +446,8 @@
 			                       /*  + '수량: '  */
 			                        +'<span><input type="text" class="prodQuantity" value="1"> &nbsp;</span>'
 			                        /* +'<li class="list-inline-item"><span class="badge bg-secondary" id="var-value">1</span></li>' */
-			                        +'<li class="list-inline-item"><span class="btn btn-success" id="btn-plus">+</span></li></ul></div></div>' ;
+			                        +'<li class="list-inline-item"><span class="btn btn-success" id="btn-plus">+</span></li><br>'
+			                        +'<span class="perPrice"><small>원</small></span></ul></div></div>';
 					
 										$("#optionEvent").append(modalContain);
 						
