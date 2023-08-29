@@ -55,6 +55,11 @@ public class SCBrandServiceImpl implements SCBrandService  {
 
 
 	@Override
+	public int getMaxBrandCode() throws Exception {
+	    return scBrandMapper.getMaxBrandCode();
+	}
+	
+	@Override
 	public List<SCBrandVO> brandGetList(SCCriteria cri) throws Exception {
 		
 		log.info("(service)brandGetList()..." + cri);
@@ -67,6 +72,14 @@ public class SCBrandServiceImpl implements SCBrandService  {
 	public int brandGetTotal(SCCriteria cri) throws Exception {
 		log.info("(service)brandGetTotal()..." + cri);
 		return scBrandMapper.brandGetTotal(cri);
+	}
+	
+	// 2308291603 장유정
+	// 작가 상세 페이지
+	@Override
+	public SCBrandVO brandGetDetail (int brandCode) throws Exception {
+		log.info("brandGetDetail - " + brandCode);
+		return scBrandMapper.brandGetDetail(brandCode);
 	}
 
 }

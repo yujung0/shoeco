@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 
 
+
+
     <!-- Start Footer -->
     <footer class="bg-dark" id="tempaltemo_footer">
         <div class="container">
@@ -112,11 +114,11 @@
 
     
 
-<div class="container text-center">
+<!-- <div class="container text-center">
 
 	&copy: 2023 All rights reserved by <a href="/travelapp/">Booknow Inc</a>
 
-</div> 
+</div>  -->
 
 </body>
 </html>

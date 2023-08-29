@@ -94,21 +94,7 @@ $(document).ready(function () {
 
 //등록 버튼
 $("#enrollBtn").click(function () {
-    // 여기에서 브랜드 등록을 수행하고, 등록이 성공하면 원하는 페이지로 이동하도록 구현
-    // 예를 들어, 서버로 데이터를 전송하여 브랜드 등록을 수행하고, 성공 시 페이지 이동
-    $.ajax({
-        type: "POST",
-        url: "${contextPath}/admin/brandEnroll.do",
-        data: $("#enrollForm").serialize(), // 폼 데이터를 전송
-        success: function (response) {
-        	
-                alert("브랜드 등록이 완료되었습니다.");
-                location.href = "${contextPath}/admin/brandManage";
-        },
-        error: function () {
-            alert("브랜드 등록 중 오류가 발생했습니다. 다시 시도하세요.");
-        }
-    });
+ 
     
     // 202308231702 장유정 추가
     // 검사 통과 유무 변수
@@ -116,7 +102,7 @@ $("#enrollBtn").click(function () {
     let managerNameCheck = false; // 담당자명
     let businessNoCheck = false; // 사업자 등록번호
     let brandPhoneNoCheck = false; // 대표 전화번호
-    let brandEmailCheck = false; // 대표 이메일 주소
+    let brandEmailCheck = false; // 대표 이메일 주소 
     
     // 입력 값 변수
     let brandName = $('input[name=brandName]').val();
@@ -179,7 +165,23 @@ $("#enrollBtn").click(function () {
     
     // 최종 검사
     if (brandNameCheck && managerNameCheck && managerNameCheck && businessNoCheck && brandPhoneNoCheck && brandEmailCheck) {
-    	$("#enrollForm").submit();	
+    	/* $("#enrollForm").submit(); */
+    	 
+    	// 여기에서 브랜드 등록을 수행하고, 등록이 성공하면 원하는 페이지로 이동하도록 구현
+        // 예를 들어, 서버로 데이터를 전송하여 브랜드 등록을 수행하고, 성공 시 페이지 이동
+        $.ajax({
+            type: "POST",
+            url: "${contextPath}/admin/brandEnroll.do",
+            data: $("#enrollForm").serialize(), // 폼 데이터를 전송
+            success: function (response) {
+            	
+                    alert("브랜드 등록이 완료되었습니다.");
+                    location.href = "${contextPath}/admin/brandManage";
+            },
+            error: function () {
+                alert("브랜드 등록 중 오류가 발생했습니다. 다시 시도하세요.");
+            }
+        });
     } else {
     	return;
     }

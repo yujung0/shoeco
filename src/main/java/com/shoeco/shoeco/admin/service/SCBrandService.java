@@ -17,6 +17,10 @@ public interface SCBrandService {
 	// 브랜드 총 수 
 	public int brandGetTotal(SCCriteria cri) throws Exception;
 	
+    // 가장 큰 브랜드 코드 조회
+    int getMaxBrandCode() throws Exception;
 	
+    // 브랜드 상세 페이지
+    public SCBrandVO brandGetDetail(int brandCode) throws Exception;
 	
 }
