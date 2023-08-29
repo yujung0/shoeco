@@ -433,7 +433,7 @@
 			                
 			                //********************************************* 대표 모달안의 id값을 '색상-사이즈' 이형태로 함 , '색상-사이즈'
 					var modalContain = "" ;
-			        modalContain =   '<div class="modalContain"><hr><span style="margin:right" class="closeModal">&times;</span>'
+			        modalContain =   '<div class="modalContain"><hr><span type="button" class="closeModal">x</span>'
 			        				+"<h6>"+ prodCode + " / " +  selectedColor + " / "   + optionSizeV +"</6h>" 
 			        				+'<input type="hidden" id="'+selectedColor+'-'+optionSizeV+'" value="'+selectedColor+'-'+optionSizeV + '">'
 			        				
