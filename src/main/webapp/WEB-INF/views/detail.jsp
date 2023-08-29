@@ -298,7 +298,7 @@
 							<!-- end/ 총 금액 표시  -->
 							<hr>
 							 <!-- 구매버튼 / add 장바구니 -->
-							 	<span>총 상품 금액: </span><span id="totalPrice"> </span><br><br>
+							 	<span>총 상품 금액: </span><span id="totalPrice">0 원</span><br><br>
 								 <div class="row pb-3">
                                     <div class="col d-grid">
                                         <button type="submit" class="btn btn-success btn-lg" name="submit" value="buy">Buy</button>
@@ -483,7 +483,7 @@
 			}//end 이미 선택된 옵션입니다의 else문  
                             
 			totalPrice();
-			console.log("총가격 " + totalPrice2);
+			$("#totalPrice").html(totalPrice2 +" 원");
 		
 			}); // change function,  end
 			
@@ -540,7 +540,7 @@
 				    				$(this).val(1);
 				    				$(this).closest("span").siblings(".perPrice").find(".rowPrice").html(1 * sellPrice);
 				    				totalPrice();
-									console.log("총가격 " + totalPrice2);
+				    				$("#totalPrice").html(totalPrice2 +" 원");
 				    				
 				    				
 				    			}else{
@@ -549,7 +549,7 @@
 				    				$(this).val(beforeVal);
 				    				$(this).closest("span").siblings(".perPrice").find(".rowPrice").html(beforeVal * sellPrice);
 				    				totalPrice();
-									console.log("총가격 " + totalPrice2);
+				    				$("#totalPrice").html(totalPrice2 +" 원");
 				    			}
 				    			
 				    			
@@ -593,7 +593,7 @@
 				    				$(this).closest("li").siblings("span").find(".prodQuantity").val(beforeVal);
 				    				$(this).closest("li").siblings(".perPrice").find(".rowPrice").html(beforeVal * sellPrice);
 				    				 totalPrice();
-									 console.log("총가격 " + totalPrice2);
+				    				 $("#totalPrice").html(totalPrice2 +" 원");
 				    				
 				    			}else{
 				    				
@@ -601,7 +601,7 @@
 				    				$(this).closest("li").siblings("span").find(".prodQuantity").val(prodQuantityStr);
 				    				$(this).closest("li").siblings(".perPrice").find(".rowPrice").html(prodQuantityStr * sellPrice);
 				    				 totalPrice();
-									 console.log("총가격 " + totalPrice2);
+				    				 $("#totalPrice").html(totalPrice2 +" 원");
 				    			}
 				    			
 				    			
@@ -627,17 +627,16 @@
 					$(this).closest("li").siblings("span").find(".prodQuantity").val(1);	
 					$(this).closest("li").siblings(".perPrice").find(".rowPrice").html(1 * sellPrice);
 	   				 totalPrice();
-					 console.log("총가격 " + totalPrice2);
+	   				$("#totalPrice").html(totalPrice2 +" 원");
 				}else{
 				
 			 		$(this).closest("li").siblings("span").find(".prodQuantity").val(beforeVal - 1);
 			 		$(this).closest("li").siblings(".perPrice").find(".rowPrice").html((beforeVal - 1) * sellPrice);
 	   				 totalPrice();
-					 console.log("총가격 " + totalPrice2);
+	   				$("#totalPrice").html(totalPrice2 +" 원");
 				}
 				
-				totalPrice();
-				console.log("총가격 " + totalPrice2);
+				 
 			});  // end $("#optionEvent").on("click", ".btn-minus", function() 
       			
         
@@ -654,7 +653,6 @@
 					var rowPrice2 = parseInt($(this).text()) ;
 						
 					totalPrice2 += rowPrice2 ; 
-					console.log("함수안에서 totalPrice2 : " + totalPrice2);
 					
 				}) // end $(".rowPrice").each(function(){
 				
