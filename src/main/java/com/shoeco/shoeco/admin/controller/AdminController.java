@@ -1,5 +1,6 @@
 package com.shoeco.shoeco.admin.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -7,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -82,16 +84,37 @@ import com.shoeco.shoeco.admin.service.SCBrandService;
 	    @RequestMapping (value = "brandEnroll.do", method = RequestMethod.POST)
 	    public String brandEnrollPOST(SCBrandVO brand, RedirectAttributes rttr) throws Exception { 
 
-    	
-    	    logger.info("brandEnroll : " + brand);
+	        logger.info("brandEnroll : " + brand);
 
-    	    scBrandService.brandEnroll(brand); // 브랜드 등록 쿼리 수행
+	        int maxBrandCode = scBrandService.getMaxBrandCode(); // 최대 브랜드 코드 조회
+	        int nextBrandCode = Math.max(maxBrandCode + 1, 313); // 다음 브랜드 코드 설정
 
-    	    rttr.addFlashAttribute("enroll_result", brand.getBrandName()); // 등록 성공 메시지 (브랜드 이름)
+	        brand.setBrandCode(nextBrandCode); // 브랜드 코드 설정
 
-    	    return "redirect:/admin/brandManage";
+	        Date now = new Date();
+	        brand.setRegDate(now);
+	        brand.setUpdateDate(now);
+
+	        scBrandService.brandEnroll(brand); // 브랜드 등록 쿼리 수행
+
+	        rttr.addFlashAttribute("enroll_result", brand.getBrandName()); // 등록 성공 메시지 (브랜드 이름)
+
+	        return "redirect:/admin/brandManage";
     	}
 
+	    // 2308291608 장유정
+	    // 브랜드 상세 페이지
+	    @GetMapping("/brandDetail")
+	    public void brandGetInfoGET(int brandCode, SCCriteria cri, Model model) throws Exception {
+	    	
+	    	logger.info("brandDetail - " + brandCode);
+	    	
+	    	// 브랜드 관리 페이지 정보
+	    	model.addAttribute("cri", cri);
+	    	
+	    	// 선택 브랜드 정보
+	    	model.addAttribute("brandInfo", scBrandService.brandGetDetail(brandCode));
+	    }
 	    
 	    
 	
