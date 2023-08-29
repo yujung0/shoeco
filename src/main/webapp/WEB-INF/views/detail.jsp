@@ -30,7 +30,10 @@
  	right: 28px;
  	}
  
- 
+ 	#totalPrice{
+ 	position : absolute ;
+ 	right: 28px;
+ 	}
  
  
  
@@ -295,7 +298,7 @@
 							<!-- end/ 총 금액 표시  -->
 							<hr>
 							 <!-- 구매버튼 / add 장바구니 -->
-							 	<span>총 상품 금액</span><br><br>
+							 	<span>총 상품 금액: </span><span id="totalPrice"> </span><br><br>
 								 <div class="row pb-3">
                                     <div class="col d-grid">
                                         <button type="submit" class="btn btn-success btn-lg" name="submit" value="buy">Buy</button>
