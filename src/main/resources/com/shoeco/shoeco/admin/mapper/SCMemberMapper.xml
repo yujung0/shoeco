@@ -3,10 +3,10 @@
   PUBLIC "//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="com.shoeco.shoeco.common.mapper.SCMemberMapper">
+<mapper namespace="com.shoeco.shoeco.admin.mapper.SCMemberMapper">
 
 <!-- 230808 장유정_회원 등록 -->
-   <insert id="memberJoin" parameterType="com.shoeco.shoeco.common.domain.SCMemberVO">
+   <insert id="memberJoin" parameterType="com.shoeco.shoeco.admin.domain.SCMemberVO">
 	INSERT INTO SC_USER
 	VALUES(#{userId}, #{userPassword}, #{userEmail}, SYSDATE,
      	   #{userAddress}, #{userPhoneNo}, SYSDATE, 500, 'Bronze', #{userName}, #{userAddress2}, #{userAddress3}, 0)
@@ -21,7 +21,7 @@
   	</select>
   	
   	<!-- 2308161428 장유정_로그인 기능 -->
-  	<select id="memberLogin" resultType="com.shoeco.shoeco.common.domain.SCMemberVO">
+  	<select id="memberLogin" resultType="com.shoeco.shoeco.admin.domain.SCMemberVO">
   		SELECT userId, userPassword, userName, adminck, mileage, userRank
   		FROM SC_USER
   		WHERE userId = #{userId}

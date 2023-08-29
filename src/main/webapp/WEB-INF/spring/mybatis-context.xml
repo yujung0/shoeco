@@ -35,8 +35,8 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="mapperLocations" >
 			<list>
-				<value>classpath:com/shoeco/shoeco/common/mapper/SCMemberMapper.xml</value> <!-- 2308091518 장유정 추가 -->
-				<value>classpath:com/shoeco/shoeco/common/mapper/SCBrandMapper.xml</value> <!-- 2308181543 장유정 추가 -->
+				<value>classpath:com/shoeco/shoeco/admin/mapper/SCMemberMapper.xml</value> <!-- 2308091518 장유정 추가 -->
+				<value>classpath:com/shoeco/shoeco/admin/mapper/SCBrandMapper.xml</value> <!-- 2308181543 장유정 추가 -->
 			</list>
 		</property>
 	</bean>

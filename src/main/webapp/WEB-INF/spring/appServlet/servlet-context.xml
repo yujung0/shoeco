@@ -33,6 +33,8 @@
 	</beans:bean>
 	
 	<!-- @Service 어노테이션이 명시된 클래스의 패키지를 설정 -->
+	<context:component-scan base-package="com.shoeco.shoeco.admin.service"/>
+	<context:component-scan base-package="com.shoeco.shoeco.admin.controller"/>
 	<context:component-scan base-package="com.shoeco.shoeco.common.service"/>
 	<context:component-scan base-package="com.shoeco.shoeco.common.controller"/>
 	
@@ -40,11 +42,11 @@
 	<interceptors>
 		<interceptor>
 			<mapping path="/member/login.do"/>
-			<beans:bean id="loginIntreceptor" class="com.shoeco.shoeco.common.interceptor.SCLoginInterceptor"></beans:bean>
+			<beans:bean id="loginIntreceptor" class="com.shoeco.shoeco.admin.interceptor.SCLoginInterceptor"></beans:bean>
 		</interceptor>
 		<interceptor>
 			<mapping path="/admin/**"/>
-			<beans:bean id="AdminIntreceptor" class="com.shoeco.shoeco.common.interceptor.SCAdminInterceptor"></beans:bean>
+			<beans:bean id="AdminIntreceptor" class="com.shoeco.shoeco.admin.interceptor.SCAdminInterceptor"></beans:bean>
 		</interceptor>
 	</interceptors>
 	

@@ -1,4 +1,4 @@
-package com.shoeco.shoeco.common.mapper;
+package com.shoeco.shoeco.admin.mapper;
 
 public interface SCUsersMapper {
 	

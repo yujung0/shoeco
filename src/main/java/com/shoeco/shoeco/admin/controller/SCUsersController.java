@@ -1,10 +1,10 @@
-package com.shoeco.shoeco.common.controller;
+package com.shoeco.shoeco.admin.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.shoeco.shoeco.common.service.SCUsersService;
+import com.shoeco.shoeco.admin.service.SCUsersService;
 
 import lombok.AllArgsConstructor;
 

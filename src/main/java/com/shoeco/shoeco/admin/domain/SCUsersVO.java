@@ -1,4 +1,4 @@
-package com.shoeco.shoeco.common.domain;
+package com.shoeco.shoeco.admin.domain;
 
 import java.util.Date;
 

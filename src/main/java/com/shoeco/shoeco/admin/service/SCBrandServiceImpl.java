@@ -1,6 +1,5 @@
-package com.shoeco.shoeco.common.service;
+package com.shoeco.shoeco.admin.service;
 
-import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
@@ -10,9 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
-import com.shoeco.shoeco.common.mapper.SCBrandMapper;
-import com.shoeco.shoeco.common.model.SCBrandVO;
-import com.shoeco.shoeco.common.model.SCCriteria;
+import com.shoeco.shoeco.admin.mapper.SCBrandMapper;
+import com.shoeco.shoeco.admin.model.SCBrandVO;
+import com.shoeco.shoeco.admin.model.SCCriteria;
 
 import lombok.extern.log4j.Log4j;
 

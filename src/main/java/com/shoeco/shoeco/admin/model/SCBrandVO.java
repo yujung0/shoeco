@@ -1,4 +1,4 @@
-package com.shoeco.shoeco.common.model;
+package com.shoeco.shoeco.admin.model;
 
 import java.util.Date;
 

@@ -1,4 +1,4 @@
-package com.shoeco.shoeco.common.service;
+package com.shoeco.shoeco.admin.service;
 
 //230628 1254 동현 수정
 public interface SCUsersService {
