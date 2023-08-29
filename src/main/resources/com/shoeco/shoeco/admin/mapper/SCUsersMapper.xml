@@ -3,7 +3,7 @@
   PUBLIC "//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="com.shoeco.shoeco.common.mapper.SCUsersMapper">
+<mapper namespace="com.shoeco.shoeco.admin.mapper.SCUsersMapper">
 
   <insert id="insertSCUser">
 	INSERT INTO SC_USER

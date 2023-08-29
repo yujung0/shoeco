@@ -1,8 +1,8 @@
-package com.shoeco.shoeco.common.mapper;
+package com.shoeco.shoeco.admin.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.shoeco.shoeco.common.domain.SCMemberVO;
+import com.shoeco.shoeco.admin.domain.SCMemberVO;
 
 @Mapper
 public interface SCMemberMapper {

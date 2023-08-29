@@ -1,6 +1,6 @@
-package com.shoeco.shoeco.common.service;
+package com.shoeco.shoeco.admin.service;
 
-import com.shoeco.shoeco.common.domain.SCMemberVO;
+import com.shoeco.shoeco.admin.domain.SCMemberVO;
 
 public interface SCMemberService {
 

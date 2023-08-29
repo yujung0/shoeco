@@ -1,11 +1,11 @@
-package com.shoeco.shoeco.common.service;
+package com.shoeco.shoeco.admin.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
-import com.shoeco.shoeco.common.domain.SCMemberVO;
-import com.shoeco.shoeco.common.mapper.SCMemberMapper;
+import com.shoeco.shoeco.admin.domain.SCMemberVO;
+import com.shoeco.shoeco.admin.mapper.SCMemberMapper;
 
 @Service
 @Primary

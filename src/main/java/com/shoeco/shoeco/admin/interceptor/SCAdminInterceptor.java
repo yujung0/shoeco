@@ -1,4 +1,4 @@
-package com.shoeco.shoeco.common.interceptor;
+package com.shoeco.shoeco.admin.interceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -6,7 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.web.servlet.HandlerInterceptor;
 
-import com.shoeco.shoeco.common.domain.SCMemberVO;
+import com.shoeco.shoeco.admin.domain.SCMemberVO;
 
 // 2308172252 장유정 - 인터셉터
 public class SCAdminInterceptor implements HandlerInterceptor {

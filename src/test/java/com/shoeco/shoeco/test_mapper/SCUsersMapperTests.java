@@ -7,9 +7,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import com.shoeco.shoeco.common.mapper.SCCartMapper;
-import com.shoeco.shoeco.common.mapper.SCUsersMapper;
-import com.shoeco.shoeco.common.paging.CartPagingDTO;
+import com.shoeco.shoeco.admin.mapper.SCUsersMapper;
 
 import lombok.Setter;
 

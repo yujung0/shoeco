@@ -1,9 +1,9 @@
-package com.shoeco.shoeco.common.service;
+package com.shoeco.shoeco.admin.service;
 
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
-import com.shoeco.shoeco.common.mapper.SCUsersMapper;
+import com.shoeco.shoeco.admin.mapper.SCUsersMapper;
 
 import lombok.AllArgsConstructor;
 

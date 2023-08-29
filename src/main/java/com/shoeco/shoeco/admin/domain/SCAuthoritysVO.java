@@ -1,4 +1,4 @@
-package com.shoeco.shoeco.common.domain;
+package com.shoeco.shoeco.admin.domain;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.util.Assert;

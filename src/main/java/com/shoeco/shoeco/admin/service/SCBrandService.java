@@ -1,9 +1,9 @@
-package com.shoeco.shoeco.common.service;
+package com.shoeco.shoeco.admin.service;
 
 import java.util.List;
 
-import com.shoeco.shoeco.common.model.SCBrandVO;
-import com.shoeco.shoeco.common.model.SCCriteria;
+import com.shoeco.shoeco.admin.model.SCBrandVO;
+import com.shoeco.shoeco.admin.model.SCCriteria;
 
 public interface SCBrandService {
 

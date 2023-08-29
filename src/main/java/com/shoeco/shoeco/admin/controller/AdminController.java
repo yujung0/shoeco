@@ -1,4 +1,4 @@
-package com.shoeco.shoeco.common.controller;
+package com.shoeco.shoeco.admin.controller;
 
 import java.util.List;
 
@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.shoeco.shoeco.common.model.SCBrandVO;
-import com.shoeco.shoeco.common.model.SCCriteria;
-import com.shoeco.shoeco.common.model.SCPageDTO;
-import com.shoeco.shoeco.common.service.SCBrandService;
+import com.shoeco.shoeco.admin.model.SCBrandVO;
+import com.shoeco.shoeco.admin.model.SCCriteria;
+import com.shoeco.shoeco.admin.model.SCPageDTO;
+import com.shoeco.shoeco.admin.service.SCBrandService;
 
 @Controller
 @RequestMapping("/admin")

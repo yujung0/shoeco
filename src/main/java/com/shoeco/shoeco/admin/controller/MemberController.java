@@ -1,4 +1,4 @@
-package com.shoeco.shoeco.common.controller;
+package com.shoeco.shoeco.admin.controller;
 
 import java.util.Random;
 
@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.shoeco.shoeco.common.domain.SCMemberVO;
-import com.shoeco.shoeco.common.service.SCMemberService;
+import com.shoeco.shoeco.admin.domain.SCMemberVO;
+import com.shoeco.shoeco.admin.service.SCMemberService;
 
 @Controller
 @RequestMapping(value = "/member")
