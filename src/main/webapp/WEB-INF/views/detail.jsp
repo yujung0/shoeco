@@ -287,11 +287,7 @@
 								  
 								
 							 
-							
-							
-							
-							
-							
+							 
 							
 							
 							
@@ -324,7 +320,7 @@
 	var selectedColor = "";
 	var sellPrice = ${product.get(0).sellPrice};
 	var oneRowPrice = "";
-	//1 색상 별 재고 고르기
+	//*첫번째 옵션 선택시
 	$("#selectClass").on("change",function(){
 		
 		
@@ -387,7 +383,7 @@
 	}) //end $("#selectClass").on("change" -
 			
 			
-			
+	//*두번째 옵션 선택시		
 	$("#selectClass2").on("change",function(){
 		var optionSizeV = $("#selectClass2").attr("option","selected").val();
 		console.log(optionSizeV);
@@ -437,7 +433,7 @@
 			                
 			                //********************************************* 대표 모달안의 id값을 '색상-사이즈' 이형태로 함 , '색상-사이즈'
 					var modalContain = "" ;
-			        modalContain =   '<hr><div class="modalContain"><span style="margin:right" class="closeModal">&times;</span>'
+			        modalContain =   '<div class="modalContain"><hr><span style="margin:right" class="closeModal">&times;</span>'
 			        				+"<h6>"+ prodCode + " / " +  selectedColor + " / "   + optionSizeV +"</6h>" 
 			        				+'<input type="hidden" id="'+selectedColor+'-'+optionSizeV+'" value="'+selectedColor+'-'+optionSizeV + '">'
 			        				
@@ -494,9 +490,8 @@
 		//ajax로 선택된 재고별 수량 받음 
 		
 		
-		
+		//*input입력하여 수량 바꿀때
 /*		//인풋 값이 숫자가 아니면 숫자이도록 하는 것 ->readonly써서 필요없어짐-> 대량구매시 잇어야할듯*/
-		//++++++++ 가격도 변동하도록 해야함 
  		$("#optionEvent").on("input", ".prodQuantity", function() {
 //			var prodQuantityVal = $(".prodQuantity").val();
 			var prodQuantityVal = $(this).val();
@@ -565,7 +560,7 @@
        	}); // end $(".prodQuantity").on("change",function() 
       			 
       		 
-       			
+      //*+ 버튼 눌렀을때		
        	$("#optionEvent").on("click", ".btn-plus", function() {
        		var beforeVal = parseInt($(this).closest("li").siblings("span").find(".prodQuantity").val()) ;
        		var color = $(this).closest("li").siblings("li").find(".selectedColor").val() ;
@@ -619,6 +614,7 @@
 		 	
       	}); // end $("#optionEvent").on("click", ".btn-plus", function() 
       			
+      	//*- 버튼 눌렀을때		
       	$("#optionEvent").on("click", ".btn-minus", function() {
 			var beforeVal = parseInt($(this).closest("li").siblings("span").find(".prodQuantity").val()) ;
        		
@@ -643,7 +639,7 @@
 			var totalPrice2 = "" ;
 			
 			
-					
+			//*총가격	표시하는 함수	
     		function totalPrice(){
 				
     			totalPrice2 = 0;
@@ -656,82 +652,25 @@
 					
 				}) // end $(".rowPrice").each(function(){
 				
-				
-				
-				
-				
-				
+				  
 				
 			} //totalPrice end
 					
 					
 					
+      	 //*품목 모달 삭제
+      	 $("#optionEvent").on("click", ".closeModal", function() {
+			 
+      		 
+      		$(this).closest(".modalContain").html("") ;
+      		totalPrice();
+			$("#totalPrice").html(totalPrice2 +" 원");
+      		   
+				 
+			});  // end  $("#optionEvent").on("click", ".closeModal", function() {
+      	 
       			
-      			
-      			
-        	
-      //  }) ajax end 뭔가 이상하게 남아서 일단 주석
-		
-		/*   $.ajax({
-	        	url: "${contextPath}/detail/oneSizePerColorAjax",
-	        	type: "get",
-	        	data: jSON.stringify({prodCode: , 
-	    	       					color: ,
-	    	       					prodsizeStr: ,
-	    	       					prodQuantityStr: ,
-	    		dataType: "json",
-	    		success: function(response){
-	    			
-	    			if(!response){
-	    				
-	    				//재고가 없으면 실행문	
-	    				
-	    				
-	    			}else{
-	    				
-	    				//재고가 있으면 실행문
-	    			}
-	    			
-	    			
-	    		}
-	    		
-	    		
-	    	       					
-	        	}) //ajax end
-	        	 */
-		
-		
-	//prodQuantity 관련 스크립트 숫자만 입력가능하게 하기 
-	/* var prodQuantityVal = $(".prodQuantity").val();
-	
-	if(!prodQuantityVal.match(d)){
-		alert("수량을 정확히 입력해주세요.");
-		prodQuantityVal = 1;	
-	} */
-		
-		
-		
-	
-			
-	//1.5 변수 담기 
-	
-/* 	
-	$("#selectClass2").on("change",function(){
-	var optionSizeV = $("#selectClass2").attr("option","selected").val();
-	console.log(optionSizeV);
-	});
-					
-	 */
-	 
-	
-	//2 다 골랐으면 수량 선택 밑 총 상품금액
-	
-	
-	
-	
-	
-		
-	
+      			 
 	
 	
 	

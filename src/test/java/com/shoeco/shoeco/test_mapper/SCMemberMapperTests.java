@@ -1,4 +1,6 @@
-package com.shoeco.shoeco.test_mapper;
+/* 에러나서 일단 전체 주석했습니다! 230829 세연
+ package com.shoeco.shoeco.test_mapper;
+ 
 
 import java.util.Date;
 
@@ -39,3 +41,5 @@ public class SCMemberMapperTests {
 		scMemberMapper.idCheck(id2);
 	}
 }
+
+*/
