@@ -482,7 +482,10 @@
                             
 			}//end 이미 선택된 옵션입니다의 else문  
                             
-		}); // change function,  end
+			totalPrice();
+			console.log("총가격 " + totalPrice2);
+		
+			}); // change function,  end
 			
 			
 		
@@ -536,6 +539,8 @@
 				    				alert("재고가 부족합니다. 현재 재고: " + response.prodCount + "개");
 				    				$(this).val(1);
 				    				$(this).closest("span").siblings(".perPrice").find(".rowPrice").html(1 * sellPrice);
+				    				totalPrice();
+									console.log("총가격 " + totalPrice2);
 				    				
 				    				
 				    			}else{
@@ -543,6 +548,8 @@
 				    				//재고가 있으면 실행문
 				    				$(this).val(beforeVal);
 				    				$(this).closest("span").siblings(".perPrice").find(".rowPrice").html(beforeVal * sellPrice);
+				    				totalPrice();
+									console.log("총가격 " + totalPrice2);
 				    			}
 				    			
 				    			
@@ -553,9 +560,8 @@
 				        	}) //ajax end
        		 
 		 	//end input 버전으로 수량 막는 거 추가 
+
 		 	
-				        	
-		 					console.log(beforeVal * sellPrice);
        	}); // end $(".prodQuantity").on("change",function() 
       			 
       		 
@@ -586,13 +592,16 @@
 				    				alert("재고가 부족합니다. 현재 재고: " + response.prodCount + "개");
 				    				$(this).closest("li").siblings("span").find(".prodQuantity").val(beforeVal);
 				    				$(this).closest("li").siblings(".perPrice").find(".rowPrice").html(beforeVal * sellPrice);
-				    				
+				    				 totalPrice();
+									 console.log("총가격 " + totalPrice2);
 				    				
 				    			}else{
 				    				
 				    				//재고가 있으면 실행문
 				    				$(this).closest("li").siblings("span").find(".prodQuantity").val(prodQuantityStr);
 				    				$(this).closest("li").siblings(".perPrice").find(".rowPrice").html(prodQuantityStr * sellPrice);
+				    				 totalPrice();
+									 console.log("총가격 " + totalPrice2);
 				    			}
 				    			
 				    			
@@ -602,9 +611,11 @@
 				    	       					
 				        	}) //ajax end
        		
+				        	
 		 	
 		 	//console.log("시블링 값: " + ( beforeVal + 1));
 		 	//console.log( beforeVal);
+				       
 		 	
       	}); // end $("#optionEvent").on("click", ".btn-plus", function() 
       			
@@ -615,15 +626,48 @@
 					alert("수량을 확인 해 주세요.")
 					$(this).closest("li").siblings("span").find(".prodQuantity").val(1);	
 					$(this).closest("li").siblings(".perPrice").find(".rowPrice").html(1 * sellPrice);
+	   				 totalPrice();
+					 console.log("총가격 " + totalPrice2);
 				}else{
 				
 			 		$(this).closest("li").siblings("span").find(".prodQuantity").val(beforeVal - 1);
 			 		$(this).closest("li").siblings(".perPrice").find(".rowPrice").html((beforeVal - 1) * sellPrice);
+	   				 totalPrice();
+					 console.log("총가격 " + totalPrice2);
 				}
+				
+				totalPrice();
+				console.log("총가격 " + totalPrice2);
 			});  // end $("#optionEvent").on("click", ".btn-minus", function() 
       			
-      			
-      			
+        
+			var totalPrice2 = "" ;
+			
+			
+					
+    		function totalPrice(){
+				
+    			totalPrice2 = 0;
+				
+				$(".rowPrice").each(function(){
+					
+					var rowPrice2 = parseInt($(this).text()) ;
+						
+					totalPrice2 += rowPrice2 ; 
+					console.log("함수안에서 totalPrice2 : " + totalPrice2);
+					
+				}) // end $(".rowPrice").each(function(){
+				
+				
+				
+				
+				
+				
+				
+			} //totalPrice end
+					
+					
+					
       			
       			
       			
