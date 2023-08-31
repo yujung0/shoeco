@@ -310,6 +310,11 @@
                 </div>
             </div>
         </div>
+        
+        <form id="goOrderPage" action="${contextPath}/orderPage" method="get">
+        
+        </form>
+    	
     </section> <!-- Close Content -->
     
 	<script> //detail 내용에 대한 script 시작
@@ -326,9 +331,27 @@
 		
 		/* href="${contextPath}/orderPage"; */
 		
+		var selectedColor2 = "";
+		var optionSizeV2 = "";
+		var perPrice2 = "" ;
 		
+		$(".modalContain").each(function(index,modal){
+					
+			var modal = $(modal);
+			selectedColor2 = modal.find(".selectedColor").val() ;
+			optionSizeV2 = modal.find(".optionSizeV").val();
+			perPrice2 = modal.find(".rowPrice").text() ;
+			console.log(selectedColor2); 
+			console.log(optionSizeV2); 
+			console.log(perPrice2); 
+			
+			
+			 		
+			 
+			
+		})//end $(".modalContain").each(function(){  
 		
-	}); //$("#buyBtn")on.("clikc",function(){
+	}); //end $("#buyBtn")on.("clikc",function(){
 	
 	
 	
@@ -698,7 +721,8 @@
       	 $("#optionEvent").on("click", ".closeModal", function() {
 			 
       		 
-      		$(this).closest(".modalContain").html("") ;
+      		/* $(this).closest(".modalContain").html("") ; */
+      		$(this).closest(".modalContain").remove();
       		totalPrice();
 			$("#totalPrice").html(totalPrice2 +" 원");
       		   
