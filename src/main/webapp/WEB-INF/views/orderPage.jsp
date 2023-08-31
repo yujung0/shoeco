@@ -316,7 +316,7 @@
 	
 	//232:  결제 버튼 눌렀을때 관련 script----------------------
 	
-	$("#buyBtn").on("click",function(){
+	$("#buyBtn")on.("click",function(){
 		
 		//로그인이 안되었을때
 		/* if(){
@@ -324,11 +324,11 @@
 		} 
 		 */
 		
-		/* href="${contextPath}/orderPage"; */
 		
 		
 		
-	}); //$("#buyBtn")on.("clikc",function(){
+		
+	}) //$("#buyBtn")on.("clikc",function(){
 	
 	
 	
