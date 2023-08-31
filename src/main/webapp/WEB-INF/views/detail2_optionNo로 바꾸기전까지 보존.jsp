@@ -310,6 +310,19 @@
                 </div>
             </div>
         </div>
+        
+        <form id="goOrderPage" action="${contextPath}/orderPage" method="get">
+        	<input type="hidden" name="prodCode" id="prodCode">
+        	<input type="hidden" name="colorStr" id="colorStr">
+        	<input type="hidden" name="sizeStr" id="sizeStr">
+        	
+        	<!-- 위에 두줄 없어도 될듯  optionV 때문에 -->
+        	<input type="hidden" name="optionNoStr" id="optionNoStr">
+        	
+        	<input type="hidden" name="countStr" id="countStr">	  <!-- 개당 가격 -->
+        	<input type="hidden" name="countStr2" id="countStr2"> <!-- 수량  -->
+        </form>
+    	
     </section> <!-- Close Content -->
     
 	<script> //detail 내용에 대한 script 시작
@@ -324,11 +337,46 @@
 		} 
 		 */
 		
+		/* href="${contextPath}/orderPage"; */
 		
+		var selectedColor2 = "";
+		var optionSizeV2 = "";
+		var perPrice2 = "" ;
+		var perCount2 = "";
 		
+		var prodColorArray = "";
+		var prodSizeArray = "";
+		var countArray = "";
+		var perCountArray =""
 		
-		
-	}) //$("#buyBtn")on.("clikc",function(){
+		$(".modalContain").each(function(index,modal){
+					
+			var modal = $(modal);
+			selectedColor2 = modal.find(".selectedColor").val() ;
+			optionSizeV2 = modal.find(".optionSizeV").val();
+			perPrice2 = modal.find(".rowPrice").text() ;
+			perCount2 = modal.find(".prodQuantity").val();
+			
+			console.log(selectedColor2 + " / " + optionSizeV2 + " / " + perPrice2); 
+			prodColorArray+=selectedColor2 +"," ;
+			prodSizeArray+=optionSizeV2 + ","  ;
+			countArray+=perPrice2 + ",";
+			perCountArray+=perCount2 + ",";
+			console.log(perCount2);
+			
+			
+			
+		})//end $(".modalContain").each(function(){  
+		 
+			$("#colorStr").val(prodColorArray.slice(0,-1));
+			$("#sizeStr").val(prodSizeArray.slice(0,-1));
+			$("#countStr").val(countArray.slice(0,-1));
+			$("#countStr2").val(perCountArray.slice(0,-1));
+			console.log(perCountArray.slice(0,-1));
+			
+			//$("#goOrderPage").submit();
+			
+	}); //end $("#buyBtn")on.("clikc",function(){
 	
 	
 	
@@ -352,7 +400,8 @@
 	//end  232-----------------------------------------
 	
 	
-	//var prodCode = ${prodCode} ;
+	var prodCode = ${prodCode} ;
+	$("#prodCode").val(prodCode);
 	var selectedColor = "";
 	var sellPrice = ${product.get(0).sellPrice};
 	var oneRowPrice = "";
@@ -389,12 +438,13 @@
 					$.each(response,function(index,sizePerColor){
 					
 						if(sizePerColor.prodCount <=  0 ){
-							var optionContent = $("<option>").text(sizePerColor.prodSize + " / 잔여수량: " + sizePerColor.prodCount ).attr("disabled","true") ;
-							optionContent.val(sizePerColor.prodSize);
+		//optionNo 넣어서 수정중 
+							var optionContent = $("<option>").text(sizePerColor.prodSize + " / 잔여수량: " + sizePerColor.prodCount + "/ 옵션번호: " + sizePerColor.prodOptionNo).attr("disabled","true") ;
+							optionContent.val(sizePerColor.prodSize+"/"+sizePerColor.prodOptionNo);
 							selectClass2.append(optionContent);
 						}else{
-							var optionContent = $("<option>").text(sizePerColor.prodSize + " / 잔여수량: " + sizePerColor.prodCount ) ;
-							optionContent.val(sizePerColor.prodSize);
+							var optionContent = $("<option>").text(sizePerColor.prodSize + " / 잔여수량: " + sizePerColor.prodCount + "/ 옵션번호: " + sizePerColor.prodOptionNo) ;
+							optionContent.val(sizePerColor.prodSize+"/"+sizePerColor.prodOptionNo);
 							selectClass2.append(optionContent);
 							 
 						}
@@ -421,13 +471,21 @@
 			
 	//*두번째 옵션 선택시		
 	$("#selectClass2").on("change",function(){
-		var optionSizeV = $("#selectClass2").attr("option","selected").val();
+		/* var optionSizeV = $("#selectClass2").attr("option","selected").val(); * optionSizeV를 optionNo로 변경 */
+//		var optionSizeV = $("#selectClass2").attr("option","selected").val();
+		var optionDetail = $("#selectClass2").attr("option","selected").val();
+		var index = optionDetail.indexOf("/") ;
+		console.log(index);
+		var optionSizeV = optionDetail.substring(0,index);
+		var optionNoV = optionDetail.substring(index + 1);
 		console.log(optionSizeV);
+		console.log(optionNoV);
 		//prodCode, selectedColor 변수명 
 		
 			
 		var str = selectedColor+ "-" +optionSizeV ;
 		console.log(str);
+		
 			if( $("#" + selectedColor+ "-" +optionSizeV ).val() == selectedColor+ "-" +optionSizeV){
 				
 				
@@ -480,6 +538,7 @@
 			                    /*     + '<input type="hidden" name="product-quanity" id="product-quanity" value="1">' */
 			                    	+ '<input type="hidden" class="selectedColor" value="'+selectedColor+'">'
 			         				+ '<input type="hidden" class="optionSizeV" value="'+optionSizeV+'"></li>'
+			         				+ '<input type="hidden" class="optionNoV" value="'+optionNoV+'"></li>'
 			                        +'<li class="list-inline-item"><span class="btn btn-success btn-minus" >-</span></li>'
 			                       /*  + '수량: '  */
 			                        +'<span><input type="text" class="prodQuantity" value="1"> &nbsp;</span>'
@@ -536,13 +595,14 @@
 		 //alert("일단 input change가 먹음");
 		
 		 	if(prodQuantityVal != ""){
-			 	if(!prodQuantityVal.match(/^\d+$/)){
+			 	if(!prodQuantityVal.match(/^\d+$/) || parseInt(prodQuantityVal) == 0){
 			 		alert("적절한 수량을 입력해주세요.")
 //			 		$(".prodQuantity").val(1);
 			 		$(this).val(1);
 			 	}
 		 	}else{
 		 		$(this).val(0);
+		 		 
 		 	}
 		 	
 		 	//input 버전으로 수량 막는 거 추가 
@@ -698,7 +758,8 @@
       	 $("#optionEvent").on("click", ".closeModal", function() {
 			 
       		 
-      		$(this).closest(".modalContain").html("") ;
+      		/* $(this).closest(".modalContain").html("") ; */
+      		$(this).closest(".modalContain").remove();
       		totalPrice();
 			$("#totalPrice").html(totalPrice2 +" 원");
       		   
