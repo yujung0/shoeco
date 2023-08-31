@@ -35,10 +35,7 @@
  	right: 28px;
  	}
  
- 
- 
- 
- 
+  	 
  </style>
  
  
@@ -672,7 +669,10 @@
       			
       			 
 	
+	//****************************************************** 상품 상세 sectino의 script 문은 뒤에 
 	
+		
+		
 	
 	</script>
 	
@@ -684,6 +684,43 @@
 
 
 
+
+
+    <!-- 상품 관련 정보 Article -->
+	 <section>
+        
+        <div class="container pb-5 bg-white">
+	        <nav><br>
+	            <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
+	                <button class="nav-link active" id="nav-prodInfo-tab" data-bs-toggle="tab" data-bs-target="#nav-prodInfo" type="button" role="tab" aria-controls="nav-prodInfo" aria-selected="true">상세정보</button>
+	                <button class="nav-link" id="nav-review-tab" data-bs-toggle="tab" data-bs-target="#nav-review" type="button" role="tab" aria-controls="nav-review" aria-selected="false">리뷰</button>
+	                <button class="nav-link" id="nav-qna-tab" data-bs-toggle="tab" data-bs-target="#nav-qna" type="button" role="tab" aria-controls="nav-qna" aria-selected="false">QnA</button>
+	                <button class="nav-link" id="nav-refund-tab" data-bs-toggle="tab" data-bs-target="#nav-refund" type="button" role="tab" aria-controls="nav-refund" aria-selected="false">반품/교환 정보</button>
+	            </div>
+	        </nav>
+	        <div class="tab-content" id="nav-tabContent">
+	            <!-- 각 탭의 내용을 동적으로 표시할 공간 -->
+	            <div class="tab-pane active" id="nav-prodInfo" role="tabpanel" aria-labelledby="nav-prodInfo-tab">
+	                <p><strong>상품상세</strong> 첨부파일 테이블에서 직접 가져와야 할 듯 </p>
+	            </div>
+	            
+	              
+	            
+	            <div class="tab-pane" id="nav-review" role="tabpanel" aria-labelledby="nav-review-tab">
+	                <p><strong>리뷰</strong> Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling. You can use it with tabs, pills, and any other <code>.nav</code>-powered navigation.</p>
+	            </div>
+	            <div class="tab-pane" id="nav-qna" role="tabpanel" aria-labelledby="nav-qna-tab">
+	                <p><strong>QnA</strong> Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling. You can use it with tabs, pills, and any other <code>.nav</code>-powered navigation.</p>
+	            </div>
+		        <div class="tab-pane" id="nav-refund" role="tabpanel" aria-labelledby="nav-modify-tab">
+		            <p><strong>반품/교환 정보</strong> Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling. You can use it with tabs, pills, and any other <code>.nav</code>-powered navigation.</p>
+		        </div>
+	        </div>
+	    </div>
+	 </section>
+	 <!-- END 상품 관련 정보 Article -->
+
+ 
 
 
 
@@ -1159,7 +1196,8 @@
 
 
         </div>
-    </section>
+        
+   	 </section>
     <!-- End Article -->
  
  
@@ -1273,6 +1311,7 @@
 
     <!-- Start Slider Script -->
     <script src="assets/js/slick.min.js"></script>
+    <!-- <script src="resources/js/slick.min.js"></script> -->
     <script>
         $('#carousel-related-product').slick({
             infinite: true,
