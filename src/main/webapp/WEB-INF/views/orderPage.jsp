@@ -38,7 +38,7 @@
 	  	            		
 	  	            		
 	  	            			<thead>
-	  	            				<td style="width: 45%">상품정보</td>
+	  	            				<td style="width: 45%">주문정보</td>
 	  	            				<td style="width: 10%">브랜드</td>
 	  	            				<td style="width: 10%">수량</td>
 	  	            				<td style="width: 15%">차감금액</td>
@@ -54,11 +54,16 @@
 			  	            				<td>차감금액</td>
 			  	            				<td>상품금액</td> -->
 			  	            				
-			  	            				<td>${orderOne.prodCode}</td>
-			  	            				<td>${orderOne.prodOptionNo}</td>
+			  	            				<td>
+			  	            				상품코드 ${orderOne.prodCode}
+			  	            				옵션숫자 ${orderOne.prodOptionNo}
+			  	            				 
+			  	            				
+			  	            				</td>
+			  	            				<td>${orderBrand.brandName}</td>
 			  	            				<td>${orderOne.rowCount}</td>
+			  	            				<td>차감금액</td>
 			  	            				<td>${orderOne.rowPrice}</td>
-			  	            				<td>상품금액</td>
 			  	            			</tr>
 			  	            		</c:forEach>	  	
 	                			</tbody>	

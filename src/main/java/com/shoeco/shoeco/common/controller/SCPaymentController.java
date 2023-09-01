@@ -9,15 +9,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.shoeco.shoeco.common.domain.SCOrderList;
+import com.shoeco.shoeco.common.service.SCDetailService;
 import com.shoeco.shoeco.common.service.SCPaymentService;
 
 @Controller
 public class SCPaymentController {
 
 	SCPaymentService scPaymentService ;
+	SCDetailService scDetailService;
 	
-	SCPaymentController(SCPaymentService scPaymentService){
+	SCPaymentController(SCPaymentService scPaymentService, SCDetailService scDetailService){
 		this.scPaymentService = scPaymentService;
+		this.scDetailService = scDetailService;
 	}
 	
 	/* 노쓸모 됨 optionNo에 담으면 되니 
@@ -49,14 +52,15 @@ public class SCPaymentController {
 		String[] optionNoArray = optionNoStr.split(",");
 		String[] countArray = countStr.split(",");
 		String[] countArray2 = countStr2.split(",");
-		
+		long prodCode2 = Long.parseLong(prodCode);
 		
 		List<SCOrderList> orderList = new ArrayList<>();
 		 for(int i = 0 ; i < optionNoArray.length ; i ++) {
-			 	orderList.add(new SCOrderList(prodCode, optionNoArray[i], countArray[i], countArray2[i]) );
+			 	orderList.add(new SCOrderList(prodCode2, optionNoArray[i], countArray[i], countArray2[i]) );
 		 }
 		
 		 model.addAttribute("orderList",orderList);
+		 model.addAttribute("orderBrand",scDetailService.getProduct(prodCode2).get(0)); //한 prodCode에 대해서만 나오는 brandCode
 		 
 		 
 	}
