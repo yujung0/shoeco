@@ -9,7 +9,7 @@ import lombok.ToString;
 @ToString
 public class SCProductVO {
 	
-	//prodCode 1개당 products 와 brand join해서 사용
+	//detail , orderpage에 쓰는 VO
 
 	//products
 	private long prodCode;
@@ -29,6 +29,17 @@ public class SCProductVO {
 	private String managerName;
 	private long brandPhoneNo;
 	private String brandEmail;
+	
+	
+	//option
+	private long prodOptionNo;
+//	private long prodCode;
+	private int prodSize;
+	private String color;
+	private long prodCount;
+	
+	
+	//추후 product_Attach 추가 예정
 	
 	
 }
