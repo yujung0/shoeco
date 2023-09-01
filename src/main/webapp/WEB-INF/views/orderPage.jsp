@@ -43,28 +43,32 @@
 	  	            				<td style="width: 10%">수량</td>
 	  	            				<td style="width: 15%">차감금액</td>
 	  	            				<td style="width: 20%">상품금액</td>
+	  	            				<td style="width: 10%">x칸</td>
 	  	            			</thead>
 	  	            			
 	  	            			<tbody class="orderListBody">
 		  	            			<c:forEach var="orderOne" items="${orderList}"> 
-			  	            			<tr>
-			  	            				<!-- <td>상품정보</td>
-			  	            				<td>브랜드</td>
-			  	            				<td>수량</td>
-			  	            				<td>차감금액</td>
-			  	            				<td>상품금액</td> -->
-			  	            				
-			  	            				<td>
-			  	            				상품코드 ${orderOne.prodCode}
-			  	            				옵션숫자 ${orderOne.prodOptionNo}
-			  	            				 
-			  	            				
-			  	            				</td>
-			  	            				<td>${orderBrand.brandName}</td>
-			  	            				<td>${orderOne.rowCount}</td>
-			  	            				<td>차감금액</td>
-			  	            				<td>${orderOne.rowPrice}</td>
-			  	            			</tr>
+			  	            			<div class=oderOneModal>
+				  	            			<tr>
+				  	            				<!-- <td>상품정보</td>
+				  	            				<td>브랜드</td>
+				  	            				<td>수량</td>
+				  	            				<td>차감금액</td>
+				  	            				<td>상품금액</td> -->
+				  	            				
+				  	            				<td>
+				  	            				상품코드 ${orderOne.prodCode}
+				  	            				옵션숫자 ${orderOne.prodOptionNo}
+				  	            				 
+				  	            				
+				  	            				</td>
+				  	            				<td>${orderBrand.brandName}</td>
+				  	            				<td>${orderOne.rowCount}</td>
+				  	            				<td>차감금액</td>
+				  	            				<td>${orderOne.rowPrice}</td>
+				  	            				<td>x</td>
+				  	            			</tr>
+			  	            			</div>
 			  	            		</c:forEach>	  	
 	                			</tbody>	
 	                		
@@ -75,8 +79,42 @@
 		</div>
 		
 		</section>	<!--end start section-->	
-	
-	
+		
+		<section class="bg-white">
+	        <div class="container pb-5">
+	            <div class="row">
+	                <div class="col-lg-5 mt-5">
+						배송 정보
+					
+					</div>
+					
+					
+				
+				</div>
+				<div class="row">
+	                <div class="col-lg-5 mt-5">
+						마일리지 사용
+					
+					</div>
+					
+					
+				
+				</div>
+				<div class="row">
+	                <div class="col-lg-5 mt-5">
+						결제
+					
+					</div>
+					
+					
+				
+				</div>
+					
+				
+				
+			</div>
+		</section>
+		
 	
 	</div><!-- END 전체 담는 div  -->  
 	
