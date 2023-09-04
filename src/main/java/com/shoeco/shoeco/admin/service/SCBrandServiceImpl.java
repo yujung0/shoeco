@@ -67,7 +67,7 @@ public class SCBrandServiceImpl implements SCBrandService  {
 		return scBrandMapper.brandGetList(cri);
 	}
 
-	// 작가 총 수
+	// 브랜드 총 수
 	@Override
 	public int brandGetTotal(SCCriteria cri) throws Exception {
 		log.info("(service)brandGetTotal()..." + cri);
@@ -75,7 +75,7 @@ public class SCBrandServiceImpl implements SCBrandService  {
 	}
 	
 	// 2308291603 장유정
-	// 작가 상세 페이지
+	// 브랜드 상세 페이지
 	@Override
 	public SCBrandVO brandGetDetail (int brandCode) throws Exception {
 		log.info("brandGetDetail - " + brandCode);
