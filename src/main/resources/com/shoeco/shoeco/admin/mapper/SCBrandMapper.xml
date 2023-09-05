@@ -51,7 +51,7 @@
 	</select>
 	
 	<!-- 2308291602 장유정 - 브랜드 디테일 페이지 -->
-	<select id="brandGetDetail" resultType="com.shoeco.shoeco.admin.domain.SCMemberVO">
+	<select id="brandGetDetail" resultType="com.shoeco.shoeco.admin.model.SCBrandVO">
 		SELECT *
 		FROM SC_BRAND
 		WHERE brandCode = #{brandCode}
