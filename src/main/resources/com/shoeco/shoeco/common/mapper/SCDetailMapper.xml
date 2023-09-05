@@ -45,7 +45,12 @@
 	   WHERE prodCode = #{prodCode} AND color = #{color} AND prodSize = #{prodSize}
 	</select>
 	
-	 
+	<!-- user 정보를 orderPage로 가져오기 위해 -->
+	<select id="selectMember">
+	  SELECT userId,userName, userEmail, mileage, userRank, userBDate, userAddress, userPhoneNo, userName, userAddress2, userAddress3
+  		FROM SC_USER
+  		WHERE userId = #{userId}
+	</select>
  
 	
 	

@@ -206,8 +206,8 @@
 			                                    </ul>
 			                                </div>
 			                            </div>
-			                            <div class="card-body">
-			                                <a href="shop-single.html" class="h3 text-decoration-none">${one.prodCode} 의 ${one.prodName}</a>
+			                            <div class="card-body listOne">
+			                                <a href="${contextPath}/detail?prodCode=${one.prodCode}" class="h3 text-decoration-none">${one.prodCode} 의 ${one.prodName}</a>
 			                                <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
 			                                    <li>M/L/X/XL</li>
 			                                    <li class="pt-2">
@@ -533,7 +533,7 @@
         })
         
         
-        
+        //클릭시 페이지 이동
 		
 	
 	

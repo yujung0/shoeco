@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.shoeco.shoeco.admin.domain.SCMemberVO;
 import com.shoeco.shoeco.common.domain.SCOptionVO;
 import com.shoeco.shoeco.common.domain.SCProductVO;
 
@@ -20,5 +21,7 @@ public interface SCDetailMapper {
 	public List<SCProductVO> selectProduct(long prodCode);
 	
 	public long selectOneProdCount(@Param("prodCode") long prodCode, @Param("color") String color, @Param("prodSize") long prodSize);
+	
+	public List<SCMemberVO> selectMember(String userId);
 }
 

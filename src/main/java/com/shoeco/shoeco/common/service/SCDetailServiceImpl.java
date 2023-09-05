@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.shoeco.shoeco.admin.domain.SCMemberVO;
 import com.shoeco.shoeco.common.domain.SCOptionVO;
 import com.shoeco.shoeco.common.domain.SCProductVO;
 import com.shoeco.shoeco.common.mapper.SCDetailMapper;
@@ -46,6 +47,10 @@ public class SCDetailServiceImpl implements SCDetailService {
 		return scDetailMapper.selectOneProdCount(prodCode,color,prodSize);
 	}
 	
+	
+	public List<SCMemberVO> getMember(String userId){
+		return scDetailMapper.selectMember(userId);
+	}
 	
 	
 	

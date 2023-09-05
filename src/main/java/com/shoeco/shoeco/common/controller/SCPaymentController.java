@@ -3,6 +3,9 @@ package com.shoeco.shoeco.common.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,7 +42,7 @@ public class SCPaymentController {
 	
 	//countStr : 개당가격, countStr2 : 수량
 	@GetMapping(value="/orderPage") 
-    //@PreAuthorize("isAuthenticated()") 시큐리티가 아니라 안먹음 , 새로운 법 강구, 이전 페이지에서 로그인 팝업 뜨게 하기 
+//    @PreAuthorize("isAuthenticated()") 시큐리티가 아니라 안먹음 , 새로운 법 강구, 이전 페이지에서 로그인 팝업 뜨게 하기 
 	public void showOrderPage(Model model,
 								@RequestParam("prodCode") String prodCode,
 								@RequestParam("optionNoStr") String optionNoStr,
@@ -61,6 +64,19 @@ public class SCPaymentController {
 		
 		 model.addAttribute("orderList",orderList);
 		 model.addAttribute("orderBrand",scDetailService.getProduct(prodCode2).get(0)); //한 prodCode에 대해서만 나오는 brandCode
+		 
+
+		//현재 로그인한 사용자의 Id값
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+		
+		
+		
+		//String username = ((UserDetails)principal).getUsername();
+		// System.err.println(username);
+		// model.addAttribute("user",scDetailService.getMember(username));
+		 
+		 
 		 
 		 
 	}

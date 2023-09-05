@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.shoeco.shoeco.admin.domain.SCMemberVO;
 import com.shoeco.shoeco.common.domain.SCOptionVO;
 import com.shoeco.shoeco.common.domain.SCProductVO;
 
@@ -21,6 +22,6 @@ public interface SCDetailService {
 	
 	public long getOneProdCount( long prodCode,  String color, long prodSize); 
 		
-	
+	public List<SCMemberVO> getMember(String userId) ;
 
 }
