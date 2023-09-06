@@ -104,7 +104,7 @@ import com.shoeco.shoeco.admin.service.SCBrandService;
 
 	    // 2308291608 장유정
 	    // 브랜드 상세 페이지
-	    @GetMapping("/brandDetail")
+	    @GetMapping({"/brandDetail" , "/brandModify"})
 	    public void brandGetInfoGET(int brandCode, SCCriteria cri, Model model) throws Exception {
 	    	
 	    	logger.info("brandDetail - " + brandCode);
