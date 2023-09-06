@@ -22,6 +22,6 @@ public interface SCDetailService {
 	
 	public long getOneProdCount( long prodCode,  String color, long prodSize); 
 		
-	public List<SCMemberVO> getMember(String userId) ;
+	public SCMemberVO getMember(String userId) ;
 
 }

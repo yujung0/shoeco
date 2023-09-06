@@ -1,5 +1,6 @@
 package com.shoeco.shoeco.common.controller;
 
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,15 +67,13 @@ public class SCPaymentController {
 		 model.addAttribute("orderBrand",scDetailService.getProduct(prodCode2).get(0)); //한 prodCode에 대해서만 나오는 brandCode
 		 
 
-		//현재 로그인한 사용자의 Id값
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
+		//현재 로그인한 사용자의 Id값 ->일단 admin으로 적용시키기/ContextHolder는 나중문제 
+		 
 		
-		
-		
-		//String username = ((UserDetails)principal).getUsername();
-		// System.err.println(username);
-		// model.addAttribute("user",scDetailService.getMember(username));
+		String username = "admin" ;
+		 
+		model.addAttribute("user",scDetailService.getMember(username));
+//		System.out.println(scDetailService.getMember(username).get(0).getUserAddress2());
 		 
 		 
 		 

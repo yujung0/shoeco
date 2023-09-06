@@ -84,7 +84,26 @@
 	        <div class="container pb-5">
 	            <div class="row">
 	                <div class="col-lg-5 mt-5">
-						배송 정보
+						<p>배송 정보</p><br>
+						
+						<p><small>기본정보</small></p>
+						수령인 :
+						${user.userName} <br>
+						전화번호 : 
+						${user.userPhoneNo} <br>
+						배송주소: ${user.userAddress}
+						${user.userAddress2}
+						${user.userAddress3}
+						<br>
+						배송메모 :
+						<select id="deliverMemo">
+							<option>배송메모를 선택해주세요.</option>
+							<option id="optMy" value="1">요청사랑을 직접입력합니다.</option>
+							<option>배송 전에 미리 연락해주세요.</option>
+							<option>부재시 경비실에 맡겨주세요.</option>
+						</select>
+						
+						
 					
 					</div>
 					
@@ -120,7 +139,18 @@
 	
 	
  
+ <script>
+ 	$("#deliverMemo").on("change",function(){
+ 		
+ 		if($(this).val() == "1" ){
+ 		alert("두번재");
+ 		}
+ 		
+ 	})
+ 	
+ 	
  
+ </script>
   
 
 </body>

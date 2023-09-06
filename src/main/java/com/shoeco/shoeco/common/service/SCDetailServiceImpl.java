@@ -2,7 +2,6 @@ package com.shoeco.shoeco.common.service;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -48,7 +47,7 @@ public class SCDetailServiceImpl implements SCDetailService {
 	}
 	
 	
-	public List<SCMemberVO> getMember(String userId){
+	public SCMemberVO getMember(String userId){
 		return scDetailMapper.selectMember(userId);
 	}
 	
