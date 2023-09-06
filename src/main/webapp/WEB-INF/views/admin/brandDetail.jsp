@@ -213,14 +213,52 @@
 				<input class="input_block" name="brandCode" readonly="readonly" value='<c:out value="${brandInfo.brandCode }"></c:out>'>
 			</div>
 		</div>
+		
 		<div class="form_section">
 			<div class="form_section_title">
-				<label>브랜드 소개</label>
+				<label>브랜드명 (상호명)</label>
 			</div>
 			<div class="form_section_content">
-				<textarea class="input_block" name="brandIntro" readonly="readonly"><c:out value="${brandInfo.brandIntro }"/></textarea>
+				<textarea class="input_block" name="brandName" readonly="readonly"><c:out value="${brandInfo.brandName }"/></textarea>
 			</div>
 		</div>
+		
+		<div class="form_section">
+			<div class="form_section_title">
+				<label>사업자 등록 번호</label>
+			</div>
+			<div class="form_section_content">
+				<textarea class="input_block" name="businessNo" readonly="readonly"><c:out value="${brandInfo.businessNo }"/></textarea>
+			</div>
+		</div>		
+				
+		<div class="form_section">
+			<div class="form_section_title">
+				<label>담당자명</label>
+			</div>
+			<div class="form_section_content">
+				<textarea class="input_block" name="managerName" readonly="readonly"><c:out value="${brandInfo.managerName }"/></textarea>
+			</div>
+		</div>
+
+		<div class="form_section">
+			<div class="form_section_title">
+				<label>대표 전화 번호</label>
+			</div>
+			<div class="form_section_content">
+				<textarea class="input_block" name="brandPhoneNo" readonly="readonly"><c:out value="${brandInfo.brandPhoneNo }"/></textarea>
+			</div>
+		</div>
+				
+		<div class="form_section">
+			<div class="form_section_title">
+				<label>대표 메일</label>
+			</div>
+			<div class="form_section_content">
+				<textarea class="input_block" name="brandEmail" readonly="readonly"><c:out value="${brandInfo.brandEmail }"/></textarea>
+			</div>
+		</div>		
+				
 		<div class="form_section">
 			<div class="form_section_title">
 				<label>등록 날짜</label>
@@ -230,13 +268,14 @@
 			</div>
 		</div>
 		
+		<div class="form_section">
 			<div class="form_section_title">
-				<label>수정 날짜</label>
+					<label>수정 날짜</label>
 			</div>
 			<div class="form_section_content">
-				<input class="input_block" type="text" readonly="readonly" value='<fmt:formatDate value="${brandInfo.updateDate} " pattern="yyyy-MM-dd" />'>
+				<input class="input_block" type="text" readonly="readonly" value='<fmt:formatDate value="${brandInfo.updateDate}" pattern="yyyy-MM-dd HH:mm:ss" />'>
 			</div>
-			
+		</div>	
 			<div class="btn_section">
 				<button id="cancelBtn" class="btn">브랜드 목록</button>
 				<button id="modifyBtn" class="btn modify_btn">수정</button>
@@ -263,7 +302,7 @@ $("#cancelBtn").on("click", function (e) {
 	e.preventDefault();
 	
 	$("input[name=brandCode]").remove();
-	moveForm.attr("action", "${contextPath}/admin/brandManage")
+	moveForm.attr("action", "${contextPath}/admin/brandManage");
 	moveForm.submit();
 });
 
