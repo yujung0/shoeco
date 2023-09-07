@@ -306,7 +306,7 @@ ul{
 
 <script>
 let moveForm = $("#moveForm");
-let modifyForm = $("modifyForm");
+let modifyForm = $("#modifyForm");
 
 // 브랜드 상세 페이지 이동 버튼
 $("#cancelBtn").on("click", function (e) {

@@ -56,6 +56,18 @@
 		FROM SC_BRAND
 		WHERE brandCode = #{brandCode}
 	</select>
+	
+	<!-- 2309071343 장유정 - 브랜드 정보 수정 -->
+	<update id="brandModify">
+		UPDATE SC_BRAND
+		SET brandName = #{brandName},
+			businessNo = #{businessNo},
+			managerName = #{managerName},
+			brandPhoneNo = #{brandPhoneNo},
+			brandEmail = #{brandEmail},
+			updateDate = SYSDATE
+		WHERE brandCode = #{brandCode}	
+	</update>
   
   
 </mapper>

@@ -81,6 +81,13 @@ public class SCBrandServiceImpl implements SCBrandService  {
 		log.info("brandGetDetail - " + brandCode);
 		return scBrandMapper.brandGetDetail(brandCode);
 	}
+	
+	// 2309071345 장유정
+	// 브랜드 정보 수정
+	public int brandModify(SCBrandVO brand) throws Exception {
+		log.info("(service) brandModify 실행 : " + brand);
+		return scBrandMapper.brandModify(brand); // 메서드가 int형을 반환해야 하기 때문에 return에서 mapper 메서드 호출
+	}
 
 }
 

@@ -23,4 +23,7 @@ public interface SCBrandService {
     // 브랜드 상세 페이지
     public SCBrandVO brandGetDetail(int brandCode) throws Exception;
 	
+    // 2309071344 장유정
+    // 브랜드 정보 수정
+    public int brandModify(SCBrandVO brand) throws Exception;
 }
