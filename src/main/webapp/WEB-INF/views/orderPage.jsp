@@ -47,7 +47,7 @@
 	  	            			</thead>
 	  	            			
 	  	            			<tbody class="orderListBody">
-		  	            			<c:forEach var="orderOne" items="${orderList}"> 
+		  	            			
 			  	            			<div class=oderOneModal>
 				  	            			<tr>
 				  	            				<!-- <td>상품정보</td>
@@ -57,19 +57,22 @@
 				  	            				<td>상품금액</td> -->
 				  	            				
 				  	            				<td>
-				  	            				상품코드 ${orderOne.prodCode}
-				  	            				옵션숫자 ${orderOne.prodOptionNo}
-				  	            				 
+					  	            				<c:forEach var="orderOne" items="${orderList}"> 
+					  	            					상품코드 ${orderOne.prodCode}/ <input type="hidden" id="rowPrice" value="${orderOne.rowPrice}" >
+					  	            					옵션숫자 ${orderOne.prodOptionNo}/ 
+					  	            					수량 	  ${orderOne.rowCount}/
+					  	            					항목가격 ${orderOne.rowPrice} <br>
+				  	            					</c:forEach>			 
 				  	            				
 				  	            				</td>
 				  	            				<td>${orderBrand.brandName}</td>
-				  	            				<td>${orderOne.rowCount}</td>
+				  	            				<td>.</td>
 				  	            				<td>차감금액</td>
-				  	            				<td>${orderOne.rowPrice}</td>
+				  	            				<td>rowPrice를 합한 총 가격</td>
 				  	            				<td>x</td>
 				  	            			</tr>
 			  	            			</div>
-			  	            		</c:forEach>	  	
+			  	            			  	
 	                			</tbody>	
 	                		
 	                		</table>
@@ -84,31 +87,50 @@
 	        <div class="container pb-5">
 	            <div class="row">
 	                <div class="col-lg-5 mt-5">
-						<p>배송 정보</p><br>
-						
-						<p><small>기본정보</small></p>
-						수령인 :
-						${user.userName} <br>
-						전화번호 : 
-						${user.userPhoneNo} <br>
-						배송주소: ${user.userAddress}
-						${user.userAddress2}
-						${user.userAddress3}
-						<br>
-						배송메모 :
-						<select id="deliverMemo">
-							<option>배송메모를 선택해주세요.</option>
-							<option id="optMy" value="1">요청사랑을 직접입력합니다.</option>
-							<option>배송 전에 미리 연락해주세요.</option>
-							<option>부재시 경비실에 맡겨주세요.</option>
-						</select>
-						
-						
-					
+						<p>배송 정보<br>
+							<input type="radio" value="userInfo" class="deliveryArrType" name="deliveryArrType"  checked>기본정보&nbsp; 
+							<input type="radio" value="otherInfo" class="deliveryArrType" name="deliveryArrType">새로입력
+						</p>
+						 	<!-- <p><small>기본정보</small></p> -->
+							<div id="userInfo">	
+								*기본정보
+								수령인 :
+								${user.userName} <br>
+								전화번호 : 
+								${user.userPhoneNo} <br>
+								배송주소: ${user.userAddress}
+								${user.userAddress2}
+								${user.userAddress3}
+								<br>
+								배송메모 :
+								<select class="deliverMemo">
+									<option>배송메모를 선택해주세요.</option>
+									<option class="optMy" value="1">요청사랑을 직접입력합니다.</option>
+									<option>배송 전에 미리 연락해주세요.</option>
+									<option>부재시 경비실에 맡겨주세요.</option>
+								</select>
+									<textarea rows="3" cols="80" style="display: none;" class="deliverTxt"></textarea>								
+							</div>
+							<div id="otherInfo" style="display: none;">	
+								<p><small>새로입력</small></p>
+								수령인 :
+								${user.userName} <br>
+								전화번호 : 
+								${user.userPhoneNo} <br>
+								배송주소: ${user.userAddress}
+								${user.userAddress2}
+								${user.userAddress3}
+								<br>
+								배송메모 :
+								<select class="deliverMemo">
+									<option>배송메모를 선택해주세요.</option>
+									<option class="optMy" value="1">요청사랑을 직접입력합니다.</option>
+									<option>배송 전에 미리 연락해주세요.</option>
+									<option>부재시 경비실에 맡겨주세요.</option>
+								</select>
+									<textarea rows="3" cols="80" style="display: none;" class="deliverTxt"></textarea>								
+							</div>
 					</div>
-					
-					
-				
 				</div>
 				<div class="row">
 	                <div class="col-lg-5 mt-5">
@@ -140,15 +162,33 @@
 	
  
  <script>
- 	$("#deliverMemo").on("change",function(){
+ 	$(".deliverMemo").on("change",function(){
  		
  		if($(this).val() == "1" ){
- 		alert("두번재");
+ 			$(this).siblings(".deliverTxt").attr("style","display: block") ;
+
+ 		}else{
+ 			$(this).siblings(".deliverTxt").val("");
+ 			$(this).siblings(".deliverTxt").attr("style","display: none");
  		}
  		
  	})
  	
  	
+ 	
+ 	$(".deliveryArrType").on("change",function(){
+ 		if($(this).val() == "userInfo"){
+            $("#otherInfo").attr("style","display: none");
+            $("#userInfo").attr("style","display: block");
+            return;
+ 		}
+ 		
+ 		if($(this).val() == "otherInfo"){
+            $("#userInfo").attr("style","display: none");
+            $("#otherInfo").attr("style","display: block");
+				return;
+		}
+ 	})
  
  </script>
   
