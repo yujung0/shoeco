@@ -114,12 +114,12 @@
 							<div id="otherInfo" style="display: none;">	
 								<p><small>새로입력</small></p>
 								수령인 :
-								${user.userName} <br>
+								<input type="text" class="receiver"> <br>
 								전화번호 : 
-								${user.userPhoneNo} <br>
-								배송주소: ${user.userAddress}
-								${user.userAddress2}
-								${user.userAddress3}
+								<input type="text" class="receiverPhone"> <br>
+								배송주소: <input type="text" class="receiverAddr"> 
+								 
+								 
 								<br>
 								배송메모 :
 								<select class="deliverMemo">
@@ -162,6 +162,8 @@
 	
  
  <script>
+ 	
+ 	//배송 메모적는칸 활성화
  	$(".deliverMemo").on("change",function(){
  		
  		if($(this).val() == "1" ){
@@ -175,7 +177,7 @@
  	})
  	
  	
- 	
+ 	//배송지 기본/새입력 선택
  	$(".deliveryArrType").on("change",function(){
  		if($(this).val() == "userInfo"){
             $("#otherInfo").attr("style","display: none");
@@ -189,6 +191,12 @@
 				return;
 		}
  	})
+ 	
+ 	
+ 	//주소	
+    
+ 	
+ 	
  
  </script>
   
