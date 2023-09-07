@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -106,6 +107,7 @@ import com.shoeco.shoeco.admin.service.SCBrandService;
 	    // 브랜드 상세 페이지
 	    @GetMapping({"/brandDetail" , "/brandModify"})
 	    public void brandGetInfoGET(int brandCode, SCCriteria cri, Model model) throws Exception {
+	    // RedirectAttributes : 스프링 MVC 에서 리다이렉트 후에도 데이터를 유지하고 싶을 때 사용되는 인터페이스
 	    	
 	    	logger.info("brandDetail - " + brandCode);
 	    	
@@ -116,6 +118,20 @@ import com.shoeco.shoeco.admin.service.SCBrandService;
 	    	model.addAttribute("brandInfo", scBrandService.brandGetDetail(brandCode));
 	    }
 	    
+	    
+	    // 2309071348 장유정
+	    // 브랜드 정보 수정
+	    @PostMapping ("/brandModify")
+	    public String brandModifyPOST(SCBrandVO brand, RedirectAttributes rttr) throws Exception {
+	    	
+	    	logger.info("brandModifyPOST (컨트롤러) : " + brand);
+	    	
+	    	int result = scBrandService.brandModify(brand);
+	    	
+	    	rttr.addFlashAttribute("modify_result", result); // addFlashAttribute : 리다이렉트 시, 데이터를 세션에 저장하고 이후 리다이렉트 된 페이지에서 이 데이터를 읽어올 수 있게 함. 주로, 리다이렉트 후에 사용자에게 메시지를 표시
+	    	
+	    	return "redirect:/admin/brandManage";
+	    }
 	    
 	
 	}	 
