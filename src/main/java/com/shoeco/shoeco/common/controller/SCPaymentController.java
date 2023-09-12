@@ -41,7 +41,7 @@ public class SCPaymentController {
 	*/
 	
 	
-	//countStr : 개당가격, countStr2 : 수량
+	//countStr : 한줄당가격, countStr2 : 수량
 	@GetMapping(value="/orderPage") 
 //    @PreAuthorize("isAuthenticated()") 시큐리티가 아니라 안먹음 , 새로운 법 강구, 이전 페이지에서 로그인 팝업 뜨게 하기 
 	public void showOrderPage(Model model,
@@ -62,7 +62,7 @@ public class SCPaymentController {
 		List<SCOrderList> orderList = new ArrayList<>();
 		 for(int i = 0 ; i < optionNoArray.length ; i ++) {
 			 	orderList.add(new SCOrderList(prodCode2, optionNoArray[i], countArray[i], countArray2[i]) );
-			 	totalPrice += Long.parseLong(countArray[i]) * Long.parseLong(countArray2[i]);
+			 	totalPrice += Long.parseLong(countArray[i]);
 		 }
 		
 		 model.addAttribute("orderList",orderList);
