@@ -23,4 +23,7 @@ public interface SCBrandMapper {
     // 2308291606 장유정
     // 브랜드 상세
     public SCBrandVO brandGetDetail (int brandCode);
+
+    //세연: pull받고 serviceImpl오류나서 임시로 추가
+	public int brandModify(SCBrandVO brand);
 }

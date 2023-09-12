@@ -57,15 +57,17 @@ public class SCPaymentController {
 		String[] countArray = countStr.split(",");
 		String[] countArray2 = countStr2.split(",");
 		long prodCode2 = Long.parseLong(prodCode);
+		long totalPrice = 0;
 		
 		List<SCOrderList> orderList = new ArrayList<>();
 		 for(int i = 0 ; i < optionNoArray.length ; i ++) {
 			 	orderList.add(new SCOrderList(prodCode2, optionNoArray[i], countArray[i], countArray2[i]) );
+			 	totalPrice += Long.parseLong(countArray[i]) * Long.parseLong(countArray2[i]);
 		 }
 		
 		 model.addAttribute("orderList",orderList);
 		 model.addAttribute("orderBrand",scDetailService.getProduct(prodCode2).get(0)); //한 prodCode에 대해서만 나오는 brandCode
-		 
+		 model.addAttribute("totalPrice",totalPrice);
 
 		//현재 로그인한 사용자의 Id값 ->일단 admin으로 적용시키기/ContextHolder는 나중문제 
 		 

@@ -68,7 +68,7 @@
 				  	            				<td>${orderBrand.brandName}</td>
 				  	            				<td>.</td>
 				  	            				<td>차감금액</td>
-				  	            				<td>rowPrice를 합한 총 가격</td>
+				  	            				<td>rowPrice를 합한 총 가격 : ${totalPrice}</td> <!--마일리지 차감금액 나중에  -->
 				  	            				<td>x</td>
 				  	            			</tr>
 			  	            			</div>
@@ -93,7 +93,7 @@
 						</p>
 						 	<!-- <p><small>기본정보</small></p> -->
 							<div id="userInfo">	
-								*기본정보
+								<p><small>기본정보</small></p>
 								수령인 :
 								${user.userName} <br>
 								전화번호 : 
