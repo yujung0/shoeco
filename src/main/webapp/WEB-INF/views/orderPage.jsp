@@ -27,6 +27,22 @@
 		width:78%; 
 		
 		}
+		#container {
+		  display: grid;
+		  grid-template-columns: 2fr 1fr; /* 두 개의 열을 생성, 각각 1fr만큼의 너비를 가짐 */
+		}
+		
+		.leftContainer {
+		  grid-column: 1; /* 왼쪽 열에 배치 */
+		}
+		
+		.rightContainer {
+		  grid-column: 2; /* 오른쪽 열에 배치 */
+		}	
+		 
+		
+		
+		
 	</style>
 	
 	
@@ -91,82 +107,91 @@
 		</section>	<!--end start section-->	
 		
 		<section class="bg-white">
-	        <div class="container pb-5">
-	            <div class="row">
-	                <div class="col-lg-5 mt-5">
-						<p>배송 정보<br>
-							<input type="radio" value="userInfo" class="deliveryArrType" name="deliveryArrType"  checked>기본정보&nbsp; 
-							<input type="radio" value="otherInfo" class="deliveryArrType" name="deliveryArrType">새로입력
-						</p>
-						 	<!-- <p><small>기본정보</small></p> -->
-							<div id="userInfo">	
-								<p><small>기본정보</small></p>
-								수령인 :
-								<input type="text" readonly="readonly" class="receiver" value="${user.userName}"><br>
-								전화번호 : 
-								<input type="text" readonly="readonly" class="receiverPhone" value="${user.userPhoneNo}"><br>
-								배송주소: <input type="text" readonly="readonly" class="receiverAddr" value="${user.userAddress} ${user.userAddress2} ${user.userAddress3}"><br>   
-								배송메모 :
-								<select class="deliverMemo">
-									<option value="0">배송메모를 선택해주세요.</option>
-									<option class="optMy" value="1">요청사랑을 직접입력합니다.</option>
-									<option>배송 전에 미리 연락해주세요.</option>
-									<option>부재시 경비실에 맡겨주세요.</option>
-								</select>
-								<textarea rows="3" cols="80" style="display: none;" class="deliverTxt"></textarea>								
-								<input type="hidden" readonly="readonly" class="receiverNotify">
+	        <div class="container pb-5" id="container">
+	            <div class="leftContainer"> 
+		            <div class="row">
+		                <div class="col-lg-5 mt-5">
+							<h4>배송 정보</h4> 
+								<input type="radio" value="userInfo" class="deliveryArrType" name="deliveryArrType"  checked>기본정보&nbsp; 
+								<input type="radio" value="otherInfo" class="deliveryArrType" name="deliveryArrType">새로입력
 							
-							</div>
-							
-							<div id="otherInfo" style="display: none;">	
-								<p><small>새로입력</small></p>
-								수령인 :
-								<input type="text" class="receiver"> <br>
-								전화번호 : 
-								<input type="text" class="receiverPhone"> <br>
-								배송주소: <input type="text" id="sample4_postcode" placeholder="우편번호">
-										<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
-										<input type="text" id="sample4_roadAddress" placeholder="도로명주소">
-										<input type="text" id="sample4_jibunAddress" placeholder="지번주소">
-										<span id="guide" style="color:#999;display:none"></span>
-										<input type="text" id="sample4_detailAddress" placeholder="상세주소">
-										<input type="text" id="sample4_extraAddress" placeholder="참고항목">
-								 
-								 
-								<br>
-								배송메모 :
-								<select class="deliverMemo">
-									<option>배송메모를 선택해주세요.</option>
-									<option class="optMy" value="1">요청사랑을 직접입력합니다.</option>
-									<option>배송 전에 미리 연락해주세요.</option>
-									<option>부재시 경비실에 맡겨주세요.</option>
-								</select>
+							 	<!-- <p><small>기본정보</small></p> -->
+								<div id="userInfo">	
+									<p><small>기본정보</small></p>
+									수령인 :
+									<input type="text" readonly="readonly" class="receiver" value="${user.userName}"><br>
+									전화번호 : 
+									<input type="text" readonly="readonly" class="receiverPhone" value="${user.userPhoneNo}"><br>
+									배송주소: <input type="text" readonly="readonly" class="receiverAddr" value="${user.userAddress} ${user.userAddress2} ${user.userAddress3}"><br>   
+									배송메모 :
+									<select class="deliverMemo">
+										<option value="0">배송메모를 선택해주세요.</option>
+										<option class="optMy" value="1">요청사랑을 직접입력합니다.</option>
+										<option>배송 전에 미리 연락해주세요.</option>
+										<option>부재시 경비실에 맡겨주세요.</option>
+									</select>
 									<textarea rows="3" cols="80" style="display: none;" class="deliverTxt"></textarea>								
-							</div>
+									<input type="hidden" readonly="readonly" class="receiverNotify">
+								
+								</div>
+								
+								<div id="otherInfo" style="display: none;">	
+									<p><small>새로입력</small></p>
+									수령인 :
+									<input type="text" class="receiver"> <br>
+									전화번호 : 
+									<input type="text" class="receiverPhone"> <br>
+									배송주소: <input type="text" id="sample4_postcode" placeholder="우편번호">
+											<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
+											<input type="text" id="sample4_roadAddress" placeholder="도로명주소">
+											<input type="text" id="sample4_jibunAddress" placeholder="지번주소">
+											<span id="guide" style="color:#999;display:none"></span>
+											<input type="text" id="sample4_detailAddress" placeholder="상세주소">
+											<input type="text" id="sample4_extraAddress" placeholder="참고항목">
+									 
+									 
+									<br>
+									배송메모 :
+									<select class="deliverMemo">
+										<option>배송메모를 선택해주세요.</option>
+										<option class="optMy" value="1">요청사랑을 직접입력합니다.</option>
+										<option>배송 전에 미리 연락해주세요.</option>
+										<option>부재시 경비실에 맡겨주세요.</option>
+									</select>
+										<textarea rows="3" cols="80" style="display: none;" class="deliverTxt"></textarea>								
+								</div>
+						</div>
 					</div>
-				</div>
-				<div class="row">
-	                <div class="col-lg-5 mt-5">
-						마일리지 사용
-					
+					<div class="row">
+		                <div class="col-lg-5 mt-5">
+							<h4>마일리지 사용</h4>
+						</div>
 					</div>
 					
+					<div class="row">
+		                <div class="col-lg-5 mt-5">
+								<h4>결제</h4><br>
+							<button>결제하기</button>
+						</div>
+					</div>
+				</div> <!-- end leftContainer -->	
 					
-				
-				</div>
-				<div class="row">
-	                <div class="col-lg-5 mt-5">
-						결제
+				<div class="rightContainer"> <!-- 오른쪽 부분 마일리지 차감 및 총 가격 크게 표시  -->
+					<div>
+						<h4>결제 상세</h4>
+					
+					
 					
 					</div>
-					
-					
-				
-				</div>
-					
+				</div> <!-- end rightContainer -->
 				
 				
-			</div>
+					
+				
+				
+			</div> <!--end  <div class="container pb-5">  -->
+			
+		
 		</section>
 		
 	
