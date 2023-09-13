@@ -82,4 +82,17 @@ public class SCPaymentController {
 		 
 	}
 	
+	
+	
+	@GetMapping(value="/payment")
+	public void activePay() {
+		
+		
+		
+	}
+	
+	//결제 컨트롤러
+	
+	
+	
 }

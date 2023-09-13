@@ -171,12 +171,17 @@
 					<div class="row">
 		                <div class="col-lg-5 mt-5">
 								<h4>결제</h4><br>
-							<button>결제하기</button>
+							<button type="button" id="paymentButton">결제하기</button>
 						</div>
 					</div>
 				</div> <!-- end leftContainer -->	
 					
-				<div class="rightContainer"> <!-- 오른쪽 부분 마일리지 차감 및 총 가격 크게 표시  -->
+					
+					
+					
+					
+					
+				<div class="rightContainer"> <!-- 오른쪽 section -->
 					<div>
 						<h4>결제 상세</h4>
 					
@@ -199,6 +204,7 @@
 	
 	
  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+ <script type="text/javascript"	src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
  <script>
  	
  	//배송 메모적는칸 활성화
@@ -286,6 +292,40 @@
             }
         }).open();
     }
+ 	
+ 	
+ 	var IMP = window.IMP;
+    IMP.init("imp04866888");
+    function requestPay() {
+        IMP.request_pay(
+          {
+            pg: "html5_inicis",
+            pay_method: "card",
+            merchant_uid: "5705522-33004",
+            name: "당근 10kg",
+            amount: 100,
+            buyer_email: "Iamport@chai.finance",
+            buyer_name: "포트원 기술지원팀",
+            buyer_tel: "010-1234-5678",
+            buyer_addr: "서울특별시 강남구 삼성동",
+            buyer_postcode: "123-456",
+            display: {
+                card_quota: [6]   
+            }
+          },
+          function (rsp) {
+             if(rsp.success){alert("결제 성공");
+             }
+          }
+        );
+      }
+ 	
+ 	//결제 버튼 눌렀을때 
+ 	$("#paymentButton").on("click",function(){
+ 		requestPay(); 	
+ 	}) //end $("#paymentButton").on("click"
+ 	
+ 	
 </script>
   
   
