@@ -298,6 +298,26 @@
  	var IMP = window.IMP;
     IMP.init("imp04866888");
     var pg = "";
+    var merchant_uid = "";   
+    var name = "" ;
+    var amount = "" ;
+    var buyer_email = "${user.userEmail}";
+    var buyer_name = "${user.userName}";
+    var buyer_tel = "${user.userPhoneNo}";
+    var buyer_addr = "${user.userAddress2} ${user.userAddress3}";
+    var buyer_postcode = "${user.userAddress}";
+    	/* pg: pg ,
+        pay_method: "card",
+        merchant_uid: "5702565-33004",
+        name: "당근 10kg",
+        amount: 100,
+        buyer_email: "Iamport@chai.finance",
+        buyer_name: "포트원 기술지원팀",
+        buyer_tel: "010-1234-5678",
+        buyer_addr: "서울특별시 강남구 삼성동",
+        buyer_postcode: "123-456" */
+        
+    
     function requestPay1(pg) {  
         IMP.request_pay(
           {
@@ -306,11 +326,11 @@
             merchant_uid: "5702565-33004",
             name: "당근 10kg",
             amount: 100,
-            buyer_email: "Iamport@chai.finance",
-            buyer_name: "포트원 기술지원팀",
-            buyer_tel: "010-1234-5678",
-            buyer_addr: "서울특별시 강남구 삼성동",
-            buyer_postcode: "123-456"
+            buyer_email: buyer_email,
+            buyer_name: buyer_name,
+            buyer_tel: buyer_tel,
+            buyer_addr: buyer_addr,
+            buyer_postcode: buyer_postcode
             
           },
           function (rsp) {
