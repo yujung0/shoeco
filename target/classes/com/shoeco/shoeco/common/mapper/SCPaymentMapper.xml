@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.shoeco.shoeco.common.mapper.SCPaymentMapper">
+
+<!-- detail -> 결제 -->
+	 
+	<!-- 한번에 결제 했을때 생기는 sell_total  -->
+		<insert id="insertSellTotal"> 		 
+				INSERT INTO SC_PRODUCTS_SELL_TOTAL
+				VALUES(SHOECO.SEQ_sellTotalNo_SELL_TOTAL.nextval,#{userId}) 
+		</inssert>
+	
+	<!--해당 옵션 재고랑 감소  -->
+		<!--SC_PRODUCTS_OPTIONS -->
+		<update id="updateProdCount">
+			<foreach collection="">
+				UPDATE SC_PRODUCTS_OPTIONS 
+				SET prodCount = ( #{prodCount} - #{rowCount})
+				WHETE prodOptionNo = #{PRODOPTIONNO}
+			</foreach>
+		</update>
+	  
+		<!-- sell_total안에 구성요소 -->
+		<insert id="insertProdSell">
+			<foreach collection="">
+				INSERT INTO SC_PRODUCTS_SELL
+				VALUES(SHOECO.SEQ_sellNo.nextval,#{userId},#{PRODOPTIONNO},default,'입금완료',#{SELLPAYMENT},#{TOTALPRICE},SHOECO.SEQ_sellTotalNo_SELL_TOTAL.currval)
+			</foreach> 
+		</inssert>
+	 
+		
+
+
+
+</mapper>

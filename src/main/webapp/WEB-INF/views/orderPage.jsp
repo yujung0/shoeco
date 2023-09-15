@@ -317,7 +317,12 @@
         	    
              if(rsp.success){alert("결제 성공");
              
-             
+             $.ajax({
+            	
+            	url:"{contexPath}/",
+            	type:,
+            		
+            	data: 
             		
             	 
             	 

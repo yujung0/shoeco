@@ -27,20 +27,6 @@ public class SCPaymentController {
 		this.scDetailService = scDetailService;
 	}
 	
-	/* 노쓸모 됨 optionNo에 담으면 되니 
-	@GetMapping(value="/orderPage")
-	public void showOrderPage(Model model,
-			@RequestParam("prodCode") String prodCode,
-			@RequestParam("colorStr") String colorStr,
-			@RequestParam("sizeStr") String sizeStr,
-			@RequestParam("countStr") String countStr,
-			@RequestParam("countStr2") String countStr2) {
-		System.out.println("주문 페이지 접근");
-	}
-	
-	*/
-	
-	
 	//countStr : 한줄당가격, countStr2 : 수량
 	@GetMapping(value="/orderPage") 
 //    @PreAuthorize("isAuthenticated()") 시큐리티가 아니라 안먹음 , 새로운 법 강구, 이전 페이지에서 로그인 팝업 뜨게 하기 
@@ -87,6 +73,7 @@ public class SCPaymentController {
 	@GetMapping(value="/payment")
 	public void executePay() {
 		 
+		
 		
 		
 	}
