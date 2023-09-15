@@ -11,7 +11,7 @@
 		<insert id="insertSellTotal"> 		 
 				INSERT INTO SC_PRODUCTS_SELL_TOTAL
 				VALUES(SHOECO.SEQ_sellTotalNo_SELL_TOTAL.nextval,#{userId}) 
-		</inssert>
+		</insert>
 	
 	<!--해당 옵션 재고랑 감소  -->
 		<!--SC_PRODUCTS_OPTIONS -->
@@ -29,7 +29,7 @@
 				INSERT INTO SC_PRODUCTS_SELL
 				VALUES(SHOECO.SEQ_sellNo.nextval,#{userId},#{PRODOPTIONNO},default,'입금완료',#{SELLPAYMENT},#{TOTALPRICE},SHOECO.SEQ_sellTotalNo_SELL_TOTAL.currval)
 			</foreach> 
-		</inssert>
+		</insert>
 	 
 		
 
