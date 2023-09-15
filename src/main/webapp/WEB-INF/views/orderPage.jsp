@@ -171,7 +171,8 @@
 					<div class="row">
 		                <div class="col-lg-5 mt-5">
 								<h4>결제</h4><br>
-							<button type="button" id="paymentButton">결제하기</button>
+							<button type="button" id="paymentButton1">카드/일반 결제</button>
+							<button type="button" id="paymentButton2">카카오 페이</button>
 						</div>
 					</div>
 				</div> <!-- end leftContainer -->	
@@ -293,39 +294,80 @@
         }).open();
     }
  	
- 	
+ 	//결제 
  	var IMP = window.IMP;
     IMP.init("imp04866888");
-    function requestPay() {
+    var pg = "";
+    function requestPay1(pg) {  
         IMP.request_pay(
           {
-            pg: "html5_inicis",
+            pg: pg ,
             pay_method: "card",
-            merchant_uid: "5705522-33004",
+            merchant_uid: "5702565-33004",
             name: "당근 10kg",
             amount: 100,
             buyer_email: "Iamport@chai.finance",
             buyer_name: "포트원 기술지원팀",
             buyer_tel: "010-1234-5678",
             buyer_addr: "서울특별시 강남구 삼성동",
-            buyer_postcode: "123-456",
-            display: {
-                card_quota: [6]   
-            }
+            buyer_postcode: "123-456"
+            
           },
           function (rsp) {
+        	    
              if(rsp.success){alert("결제 성공");
+             
+             
+            		
+            	 
+            	 
+            	 
+             })
+             
+             
+             return;
              }
           }
         );
-      }
+      } //end func requesyPay1 
  	
- 	//결제 버튼 눌렀을때 
- 	$("#paymentButton").on("click",function(){
- 		requestPay(); 	
+ 	
+    
+ /*    function requestPay2() { //카카오페이(테스트버전)
+        IMP.request_pay(
+          {
+            pg: "kakaopay",
+            pay_method: "card",
+            merchant_uid: "5702565-33004",
+            name: "당근 10kg",
+            amount: 100,
+            buyer_email: "Iamport@chai.finance",
+            buyer_name: "포트원 기술지원팀",
+            buyer_tel: "010-1234-5678",
+            buyer_addr: "서울특별시 강남구 삼성동",
+            buyer_postcode: "123-456" 
+          },
+          function (rsp) {
+             if(rsp.success){alert("결제 성공");
+             return;
+             }
+          }
+        );
+      } //end func requesyPay2  */
+ 	
+    
+    //결제 버튼 눌렀을때 
+ 	$("#paymentButton1").on("click",function(){
+ 		pg = "html5_inicis" ;
+ 		requestPay1(pg); 	
  	}) //end $("#paymentButton").on("click"
  	
- 	
+ 	$("#paymentButton2").on("click",function(){
+ 		pg = "kakaopay" ;
+ 		requestPay1(pg); 	
+ 	}) //end $("#paymentButton").on("click"
+ 			
+ 			
 </script>
   
   

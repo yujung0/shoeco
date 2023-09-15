@@ -85,8 +85,8 @@ public class SCPaymentController {
 	
 	
 	@GetMapping(value="/payment")
-	public void activePay() {
-		
+	public void executePay() {
+		 
 		
 		
 	}
