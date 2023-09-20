@@ -123,6 +123,12 @@
     margin: 200px 0 215px 0px;
     font-size: 25px;
 }
+
+.brand_table a {
+	color:#1088ed;
+	font-weight: 500;
+}
+
 </style>
 
 
@@ -149,7 +155,12 @@
                     		<c:forEach items="${list }" var="list">
                     		<tr>
                     			<td><c:out value="${list.brandCode }"/></td>
-                    			<td><c:out value="${list.brandName }"/></td>
+                    			<td>
+                    				<a class="move" href='<c:out value="${list.brandCode }"/>'>
+                    					<c:out value="${list.brandName }"></c:out>
+                    				</a>
+                    			</td>
+                    			<%-- <td><c:out value="${list.brandName }"/></td> --%>
                     			<td><c:out value="${list.businessNo }"/></td>
                     			<td><c:out value="${list.managerName }"/></td>
                     			<td><c:out value="${list.brandPhoneNo }"/></td>
@@ -164,7 +175,7 @@
                     <!-- 게시물 X -->
                     <c:if test="${listCheck == 'empty' }">
                     	<div class="table_empty">
-                    		등록된 작가가 없습니다.
+                    		등록된 브랜드가 없습니다.
                     	</div>
                     </c:if>
                     
@@ -231,8 +242,10 @@
 // 2308211533 장유정
 $(document).ready(function () { //페이지가 로드될 때 반드시 실행이 되는 익명 함수를 추가
 	let result = '<c:out value= "${enroll_result}"/>' ;
+	let mresult = '<c:out value = "${modify_result}"/>';
 	
 	checkResult(result);
+	checkmResult(mresult);
 	
 	function checkResult(result) {
 		if(result === '') {
@@ -240,6 +253,15 @@ $(document).ready(function () { //페이지가 로드될 때 반드시 실행이
 		}
 		
 		alert("브랜드 '${enroll_result}' 을 등록하였습니다.");
+	}
+	
+	function checkmResult(mresult) {
+		
+		if(mresult === '1') {
+			alert("브랜드 정보 수정을 완료했습니다.");
+		} else if(mresult === '0') {
+			alert ("브랜드 정보 수정을 실패했습니다.");
+		}
 	}
 });
 
@@ -269,8 +291,16 @@ $("#searchForm button").on("click", function (e) {
 	searchForm.submit();
 });
 
+// 2309041441 장유정
+// 브랜드 상세 페이지 이동
+$(".move").on("click", function (e) {
+	
+	e.preventDefault();
+	
+	moveForm.append("<input type='hidden' name='brandCode' value='" + $(this).attr("href") + "'>'");
+	moveForm.attr("action", "${contextPath}/admin/brandDetail");
+	moveForm.submit();
+});
 
 </script> 
-  
-</body>
-</html>
+

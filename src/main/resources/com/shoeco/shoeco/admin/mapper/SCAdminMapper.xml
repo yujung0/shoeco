@@ -7,7 +7,21 @@
   
 <!-- 상품 등록 -->
 <insert id="shoesEnroll">
-	insert into SC_PRODUCTS
+	INSERT INTO SHOECO.SC_PRODUCTS(prodName, gender, sellPrice, category, material, country, regDate, updateDate, prodDiscount, prodContents, prodStock, brandCode)
+	VALUES (
+   #{prodName},    
+   #{gender},      
+   #{sellPrice},   
+   #{category},  
+   #{material},  
+   #{country},  
+   SYSDATE,     
+   SYSDATE,     
+   #{prodDiscount},   
+   #{prodContents},
+   #{prodStock},   
+   #{brandCode}
+)
 </insert>
  
   

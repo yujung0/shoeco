@@ -17,6 +17,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.shoeco.shoeco.admin.model.SCBrandVO;
 import com.shoeco.shoeco.admin.model.SCCriteria;
 import com.shoeco.shoeco.admin.model.SCPageDTO;
+import com.shoeco.shoeco.admin.model.SCShoesVO;
+import com.shoeco.shoeco.admin.service.SCAdminService;
 import com.shoeco.shoeco.admin.service.SCBrandService;
 
 @Controller
@@ -28,6 +30,10 @@ import com.shoeco.shoeco.admin.service.SCBrandService;
 	    @Autowired
 	    private SCBrandService scBrandService; // 서비스 인터페이스를 의존성 주입
 	    
+	    // 2309192206 장유정 - 추가
+	    @Autowired
+	    private SCAdminService scAdminService;
+	    
 	    /* 관리자 메인 페이지 이동 */
 	    @RequestMapping(value="main", method = RequestMethod.GET)
 	    public void adminMainGET() throws Exception{
@@ -36,7 +42,7 @@ import com.shoeco.shoeco.admin.service.SCBrandService;
 	        
 	    }
 	    
-	    // 상품 등록 페이지 접속
+	    // 상품 관리 페이지 접속
 	    @RequestMapping(value = "goodsManage", method = RequestMethod.GET)
 	    public void goodsManageGet() throws Exception {
 	    	logger.info("상품 등록 페이지 접속");
@@ -46,6 +52,23 @@ import com.shoeco.shoeco.admin.service.SCBrandService;
 	    @RequestMapping(value = "goodsEnroll", method = RequestMethod.GET)
 	    public void goodsEnrollGET() throws Exception {
 	    	logger.info("상품 등록 페이지 접속");
+	    }
+	    
+	    // 2309192209 장유정
+	    // 상품 등록
+	    @PostMapping("/goodsEnroll")
+	    public String goodsEnrollPOST(SCShoesVO shoes, RedirectAttributes rttr) {
+	    	
+	    	logger.info("goodsEnrollPOST 실행 : " + shoes);
+	    	
+	    	scAdminService.shoesEnroll(shoes);
+	    	
+	    	rttr.addFlashAttribute("enroll_result", shoes.getProdName());
+	    	
+	    	return "redirect:/admin/goodsManage";
+	    	
+	    	// 상품 등록이 완료 되었음을 사용자에게 피드백 하기 위해 등록 후 상품 관리 페이지에 이동했을 때 경고창을 뜨도록 하기 위해,
+	    	// redirectattribute 의 addflashattribute 메서드를 활용해 등록한 상품 이름을 enroll_result 속성에 저장
 	    }
 	    
 	    // 브랜드 등록 페이지 접속 (author -> brand 대체)
