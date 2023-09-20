@@ -71,6 +71,30 @@ import com.shoeco.shoeco.admin.service.SCBrandService;
 	    	// redirectattribute 의 addflashattribute 메서드를 활용해 등록한 상품 이름을 enroll_result 속성에 저장
 	    }
 	    
+	    // 2309201735 장유정
+	    // 등록 페이지 브랜드 검색 팝업창 기능
+	    @GetMapping("/brandPop")
+	    public void brandPopGET(SCCriteria cri, Model model) throws Exception{ 
+	    	logger.info("brandPopGET 실행");
+	    	
+	    	cri.setAmount(5); // 팝업창 크기가 작기 때문에 데이터 크기를 더 작은 단위로 변경 후 전송
+	    	
+	    	// 브랜드 목록 출력 데이터
+	    	List list = scBrandService.brandGetList(cri);
+	    	
+	    	// 게시물 출력 데이터
+	    	if(!list.isEmpty()) {
+	    		model.addAttribute("list", list); //브랜드 존재함
+	    	} else {
+	    		model.addAttribute("listCheck", "empty"); // 브랜드 존재 x
+	    	}
+	    	
+	    	// 페이지 이동 인터페이스 데이터
+	    	model.addAttribute("pageMaker", new SCPageDTO(cri, scBrandService.brandGetTotal(cri)));
+	    }
+	    
+	    
+	    
 	    // 브랜드 등록 페이지 접속 (author -> brand 대체)
 	    @RequestMapping(value = "brandEnroll", method = RequestMethod.GET)
 	    public void brandEnrollGET() throws Exception {

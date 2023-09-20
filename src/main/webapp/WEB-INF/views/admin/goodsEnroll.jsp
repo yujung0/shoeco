@@ -9,6 +9,14 @@
    
 <%@ include file="/WEB-INF/views/include/adminHeader.jsp" %>
 
+<!-- 2309201640 장유정 - 위지윅 에디터 적용 -->
+<script src="https://cdn.ckeditor.com/ckeditor5/39.0.2/classic/ckeditor.js"></script>
+
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
 <style>
 @charset "UTF-8";
 *{
@@ -157,7 +165,10 @@ ul{
     text-align-last: center;
 }
 
-
+/* ckeditor 높이 */
+.ck-content {
+	height: 170px;
+}
 
 
 /* 버튼 영역 */
@@ -178,6 +189,21 @@ ul{
 }
 #enrollBtn:hover {
     background-color: #c9cbd0;
+}
+
+/* 브랜드 선택 css 설정 */
+.brandCode_btn {						
+    margin-left: 20px;
+    width: 14%;
+    height: 38px;
+    font-weight: 600;
+    background-color: #dfe8f5;
+    font-size: 15px;
+    cursor:pointer;
+}
+#brandName_input {
+    width: 80%;
+    text-align: center;
 }
 </style>
 
@@ -250,10 +276,10 @@ ul{
 					    
 					    <div class="form_section">
 					        <div class="form_section_title">
-					            <label>제품 내용</label>
+					            <label>상품 내용</label>
 					        </div>
 					        <div class="form_section_content">
-					            <input name="prodContents">
+					            <textarea name="prodContents" id="prodContents_textarea"></textarea>
 					        </div>
 					    </div>
 					    
@@ -271,7 +297,9 @@ ul{
 					            <label>브랜드 코드</label>
 					        </div>
 					        <div class="form_section_content">
-					            <input name="brandCode">
+					        	<input id="brandName_input" readonly="readonly">
+					            <input id="brandCode_input" name="brandCode" type="hidden">
+					       		<button class="brandCode_btn">브랜드 선택</button>
 					        </div>
 					    </div>    				
    
@@ -307,6 +335,26 @@ ul{
 	
 		enrollForm.submit();
 	});
+	
+	/* 위지윅 적용*/
+	
+	/* 상품 소개 */
+	ClassicEditor
+				.create(document.querySelector('#prodContents_textarea'))
+				.catch(error=>{
+						console.error(error);	
+				});
+	
+	// 브랜드 선택 버튼
+	$('.brandCode_btn').on("click", function (e) {
+		e.preventDefault();
+	
+		let popUrl = "${contextPath}/admin/brandPop";
+		let popOption = "width = 650px, height=550px, top=300px, left=300px, scollbars=yes";
+		
+		window.open(popUrl, "브랜드 찾기", popOption);
+	});
+				
 </script>
 
 </body>
