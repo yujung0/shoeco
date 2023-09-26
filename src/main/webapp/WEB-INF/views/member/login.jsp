@@ -55,7 +55,10 @@
 				
 				<div class="login_button_wrap">
 					<input type="button" class="login_button" value="로그인">
-				</div>			
+				</div>
+				
+				<!-- <a href="#" class="btn btn-primary btn-user btn-block" onclick="return frmCheck();"></a> -->
+				<a href="/"></a>			
 			</div>
 		</form>		
 		

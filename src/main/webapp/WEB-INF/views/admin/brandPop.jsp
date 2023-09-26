@@ -201,7 +201,8 @@
                     		<tr>
                     			<td><c:out value="${list.brandCode }"/></td>
                     			<td>
-                    				<a class="move" href='<c:out value="${list.brandCode }"/>' data-name='<c:out value="${list.brandName} "/>'>
+                    				<a class="move" href='<c:out value="${list.brandCode }"/>' data-name='<c:out value="${list.brandName} "/>'> <!-- a 태그에 브랜드 이름 데이터를 저장 -->
+                    				<!-- 해당 데이터를 자바 스크립트에서 꺼내 쓰기 위해서는 '선택자.data("name") 코드 사용' -->
                     					<c:out value="${list.brandName }"></c:out>
                     				</a>
                     			</td>
@@ -310,6 +311,22 @@ $(".pageMaker_btn a").on("click", function (e) {
 	moveForm.find("input[name='pageNum']").val($(this).attr("href")); 
 });
 
+// 브랜드 선택 및 팝업창 닫기
+$(".move").on("click", function (e) {
+	e.preventDefault();
+
+	let brandCode = $(this).attr("href"); // 제이쿼리에서 $(this)는 이벤트 핸들러 내에서 이벤트가 발생한 요소를 가리키는 역할 
+	let brandName = $(this).data("name");
+	$(opener.document).find("#brandCode_input").val(brandCode);
+	$(opener.document).find("#brandName_input").val(brandName);
+	// window 인터페이스의 opener 속성은 open()을 사용해 현재 창을 열었던 창의 참조를 반환
+	
+	window.close();
+});
+
+// 09261816 WARN : org.springframework.web.servlet.PageNotFound - No mapping for GET /shoeco/admin/318
+// mybatis-context.xml 에 새 xml 경로 기입 안 해서 생김
+// -> 이거 추가도 안 했지만, data("name"); 에서 ; 안 찍음 -> 해결 완
 
 </script> 
 
