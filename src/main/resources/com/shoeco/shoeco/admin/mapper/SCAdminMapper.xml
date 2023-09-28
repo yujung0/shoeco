@@ -24,5 +24,12 @@
 )
 </insert>
  
+<!-- 2309281606 장유정 - 카테고리 리스트 -->
+<!-- resultType 은 반환타입으로 클래스 자체를 가져와 참조 -->
+<select id="cateList" resultType="com.shoeco.shoeco.admin.model.SCCateVO">
+	SELECT *
+	FROM SC_BCATE
+	ORDER BY cateCode
+</select>
   
 </mapper>
