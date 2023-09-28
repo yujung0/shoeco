@@ -340,10 +340,11 @@ ul{
 	
 	/* 상품 소개 */
 	ClassicEditor
-				.create(document.querySelector('#prodContents_textarea'))
-				.catch(error=>{
-						console.error(error);	
-				});
+	    .create(document.querySelector('#prodContents_textarea'))
+	    .catch(error => {
+	        console.error(error);	
+	    });
+
 	
 	// 브랜드 선택 버튼
 	$('.brandCode_btn').on("click", function (e) {
@@ -353,6 +354,12 @@ ul{
 		let popOption = "width = 650px, height=550px, top=300px, left=300px, scollbars=yes";
 		
 		window.open(popUrl, "브랜드 찾기", popOption);
+	});
+	
+	// 2309282112 장유정
+	// 서버로 부터 데이터를 전달받는지 확인
+	$(document).ready(function () {
+		console.log('${cateList}');
 	});
 				
 </script>
