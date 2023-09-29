@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shoeco.shoeco.admin.model.SCBrandVO;
 import com.shoeco.shoeco.admin.model.SCCriteria;
 import com.shoeco.shoeco.admin.model.SCPageDTO;
@@ -50,8 +51,24 @@ import com.shoeco.shoeco.admin.service.SCBrandService;
 	    
 	    // 상품 등록 페이지 접속
 	    @RequestMapping(value = "goodsEnroll", method = RequestMethod.GET)
-	    public void goodsEnrollGET() throws Exception {
+	    public void goodsEnrollGET(Model model) throws Exception {
 	    	logger.info("상품 등록 페이지 접속");
+	    	
+	    	// 사용할 Jackson-databind의 메서드는 static 메서드가 아니기 때문에 바로 사용할 수는 없음. objectMapper 클래스를 인스턴스화 하여 사용해야 함. 따라서 objectMapper 타입의 'mapper' 변수를 선언한 후 objectMapper 객체로 초기화
+	    	ObjectMapper objm = new ObjectMapper();
+	    	
+	    	// 2309282051 장유정
+	    	// 카테고리 리스트 데이터를 'goodsEnroll.jsp'에 전달해주어야 하기 때문에, 해당 url 매핑 메서드에 카테고리 리스트 데이터를 반환하는 Service 메서드를 호출하여 List 타입의 변수 'list'에 저장
+	    	List list= scAdminService.cateList();
+	    	
+	    	// java 객체를 String 타입의 JSON 형식 데이터로 변환
+	    	String cateList = objm.writeValueAsString(list);
+	    
+	    	// 뷰로 데이터를 넘겨주기 위해서 URL 매핑 메서드의 파라미터에 model 을 부여해준 후 addAttribute()를 사용하여 cateList 속성에 String 타입의 cateList 변수의 값을 저장
+	    	model.addAttribute("cateList", cateList);
+	    	
+	    	logger.info("JSON 형식 변경 전 - " + list);
+	    	logger.info("JSON 형식 변경 후 - " + cateList);
 	    }
 	    
 	    // 2309192209 장유정

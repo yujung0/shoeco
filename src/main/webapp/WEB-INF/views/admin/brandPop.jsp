@@ -1,24 +1,184 @@
+<%-- <%@ include file="/WEB-INF/views/include/adminHeader.jsp" %> --%><%-- 왠만하면 위에 올리자 이거 위에 body에 있어야 할 값이 있으면 doc 생성시 오류가 생길수도 있음 --%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>    
+<!-- jstl 사용을 위한 라이브러리 추가 -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath }"/><%-- 
 <sec:authentication property="principal" var="principal"/> --%>
-   
-<%-- <%@ include file="/WEB-INF/views/include/adminHeader.jsp" %> --%>
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>  
 
-<title>브랜드 선택 pop 페이지</title>
+<!-- 2309261426 장유정 - 상품 등록 페이지에서 브랜드 선택 시 뜨는 팝업창 -->
+<style>
+/* 브랜드 목록 영역 */
+.brand_table_wrap{
+	padding: 20px 35px
+}
+.brand_table{
+	width: 100%;
+    border: 1px solid #d3d8e1;
+    text-align: center;
+    border-collapse: collapse;
+}
+.brand_table td{
+	padding: 10px 5px;
+	border : 1px solid #e9ebf0;
+}
+.brand_table thead{
+	background-color: #f8f9fd;	
+	font-weight: 600;
+}
+.th_column_1{
+	width:120px;
+}
+.th_column_3{
+	width:110px;
+}
+.th_column_4{
+	width:140px;
+}
+.th_column_5{
+	width:140px;
+}
+.th_column_6{
+	width:140px;
+}
+.th_column_7{
+	width:140px;
+}
+.th_column_8{
+	width:140px;
+}
 
 
-<h1>브랜드 선택 pop 페이지</h1>
+
+
+/* 전체 wrap */
+.wrapper{
+	width:100%;
+	height:535px;
+}
+.subject_name_warp{
+	font-size: 33px;
+    font-weight: bolder;
+    padding-left: 15px;
+    background-color: #6AAFE6;
+    height: 13%;
+    line-height: 70px;
+    color: white;
+}
+.content_wrap{
+	height:87%;
+}
+
+
+
+
+	/* 작가 목록 영역 */
+.author_table_wrap{
+	padding: 20px 35px
+}
+.table_exist{
+	height:251px;
+}
+.author_table{
+	width: 100%;
+    border: 1px solid #d3d8e1;
+    text-align: center;
+    border-collapse: collapse;
+}
+.author_table td{
+	padding: 10px 5px;
+	border : 1px solid #e9ebf0;
+}
+.author_table thead{
+	background-color: #f8f9fd;	
+	font-weight: 600;
+}
+.author_table a{
+	color:#1088ed;
+	font-weight: 500;
+}
+.th_column_1{
+	width:120px;
+}
+.th_column_3{
+	width:110px;
+}
+
+
+.table_empty{
+	text-align: center;
+    margin: 101px 0 130px 0;
+    font-size: 25px;
+}
+
+	/* 검색 영역 */
+.search_wrap{
+	margin-top:25px;
+}
+.search_input{
+    position: relative;
+    text-align:center;	
+}
+.search_input input[name='keyword']{
+	padding: 4px 10px;
+    font-size: 15px;
+    height: 20px;
+    line-height: 20px;
+}
+.search_btn{
+	height: 32px;
+    width: 80px;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 20px;
+    position: absolute;
+    margin-left: 15px;
+    background-color: #c3daf7;
+}
+
+	/* 페이지 버튼 인터페이스 */
+.pageMaker_wrap{
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+.pageMaker{
+    list-style: none;
+    display: inline-block;
+}	
+.pageMaker_btn {
+	text-align: center;	
+	float: left;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    margin-left: 8px;
+    font-size: 15px;
+}
+.active{
+	border : 2px solid black;
+	font-weight:400;
+}
+.next, .prev {
+    border: 1px solid #ccc;
+    padding: 0 10px;
+}
+.next a, .prev a {
+    color: #ccc;
+}
+
+</style>
+
 
 			<div class="subject_name_warp">
 				<span>브랜드 선택</span>
 			</div>
 				 <div class="admin_content_wrap">
-                    <div class="admin_content_subject"><span>브랜드 관리</span></div>
+                    <!-- <div class="admin_content_subject"><span>브랜드 관리</span></div> -->
                     
                     <div class="brand_table_wrap">
                     
@@ -41,7 +201,8 @@
                     		<tr>
                     			<td><c:out value="${list.brandCode }"/></td>
                     			<td>
-                    				<a class="move" href='<c:out value="${list.brandCode }"/>'>
+                    				<a class="move" href='<c:out value="${list.brandCode }"/>' data-name='<c:out value="${list.brandName} "/>'> <!-- a 태그에 브랜드 이름 데이터를 저장 -->
+                    				<!-- 해당 데이터를 자바 스크립트에서 꺼내 쓰기 위해서는 '선택자.data("name") 코드 사용' -->
                     					<c:out value="${list.brandName }"></c:out>
                     				</a>
                     			</td>
@@ -70,7 +231,7 @@
                     
                     <!-- 검색 영역 -->
                     <div class="search_wrap">
-                    	<form id="searchForm" action="${contextPath }/admin/brandManage" method="get">
+                    	<form id="searchForm" action="${contextPath }/admin/brandPop" method="get">
                     		<div class="search_input">
                     			<input type="text" name="keyword" value='<c:out value="${pageMaker.cri.keyword }"></c:out>'>
                     			<input type="hidden" name="pageNum" value='<c:out value="${pageMaker.cri.pageNum }"></c:out>'>
@@ -110,7 +271,7 @@
                     </div>
                     
                     
-                    <form id="moveForm" action="${contextPath }/admin/brandManage" method="get">
+                    <form id="moveForm" action="${contextPath }/admin/brandPop" method="get">
                     	<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
                     	<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
                     	<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
@@ -124,49 +285,16 @@
 </div>    <!-- class="wrapper" -->
 
 <script>
-// 2308211533 장유정
-$(document).ready(function () { //페이지가 로드될 때 반드시 실행이 되는 익명 함수를 추가
-	let result = '<c:out value= "${enroll_result}"/>' ;
-	let mresult = '<c:out value = "${modify_result}"/>';
-	
-	checkResult(result);
-	checkmResult(mresult);
-	
-	function checkResult(result) {
-		if(result === '') {
-			return;
-		}
-		
-		alert("브랜드 '${enroll_result}' 을 등록하였습니다.");
-	}
-	
-	function checkmResult(mresult) {
-		
-		if(mresult === '1') {
-			alert("브랜드 정보 수정을 완료했습니다.");
-		} else if(mresult === '0') {
-			alert ("브랜드 정보 수정을 실패했습니다.");
-		}
-	}
-});
-
-let moveForm = $('#moveForm');
-
-//페이지 이동 버튼
-$(".pageMaker_btn a").on("click", function (e) {
-    e.preventDefault(); // 올바른 메서드 이름 사용
-    moveForm.find("input[name='pageNum']").val($(this).attr("href"));
-    moveForm.submit();
-});
 
 let searchForm = $('#searchForm');
+let moveForm = $('#moveForm');
 
 // 브랜드 검색 버튼 동작
-$("#searchForm button").on("click", function (e) {
-	e.preventDefault();
-	
-	//검색 키워드 유효성 검사
-	if(!searchForm.find("input[name='keyword']").val()) {
+$('#searchForm button').on("click", function (e) {
+	e.preventDefault(); //Event 인터페이스의 preventDefault() 메서드는 어떤 이벤트를 명시적으로 처리하지 않은 경우, 해당 이벤트에 대한 사용자 에이전트의 기본 동작을 실행하지 않도록 지정
+
+	// 검색 키워드 유효성 검사
+	if(!searchForm.find("input[name='keyword']").val()) {//.val()은 양식(form)의 값을 가져온다 (name이 keyword인 input 요소의 값을 변수에 저장함)
 		alert("키워드를 입력하십시오.");
 		return false;
 	}
@@ -176,16 +304,29 @@ $("#searchForm button").on("click", function (e) {
 	searchForm.submit();
 });
 
-// 2309041441 장유정
-// 브랜드 상세 페이지 이동
-$(".move").on("click", function (e) {
-	
+// 페이지 이동 버튼
+$(".pageMaker_btn a").on("click", function (e) {
 	e.preventDefault();
-	
-	moveForm.append("<input type='hidden' name='brandCode' value='" + $(this).attr("href") + "'>'");
-	moveForm.attr("action", "${contextPath}/admin/brandDetail");
-	moveForm.submit();
+	console.log($(this).attr("href"));
+	moveForm.find("input[name='pageNum']").val($(this).attr("href")); 
 });
+
+// 브랜드 선택 및 팝업창 닫기
+$(".move").on("click", function (e) {
+	e.preventDefault();
+
+	let brandCode = $(this).attr("href"); // 제이쿼리에서 $(this)는 이벤트 핸들러 내에서 이벤트가 발생한 요소를 가리키는 역할 
+	let brandName = $(this).data("name");
+	$(opener.document).find("#brandCode_input").val(brandCode);
+	$(opener.document).find("#brandName_input").val(brandName);
+	// window 인터페이스의 opener 속성은 open()을 사용해 현재 창을 열었던 창의 참조를 반환
+	
+	window.close();
+});
+
+// 09261816 WARN : org.springframework.web.servlet.PageNotFound - No mapping for GET /shoeco/admin/318
+// mybatis-context.xml 에 새 xml 경로 기입 안 해서 생김
+// -> 이거 추가도 안 했지만, data("name"); 에서 ; 안 찍음 -> 해결 완
 
 </script> 
 

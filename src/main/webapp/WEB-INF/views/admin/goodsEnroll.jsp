@@ -13,7 +13,7 @@
 <script src="https://cdn.ckeditor.com/ckeditor5/39.0.2/classic/ckeditor.js"></script>
 
  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="/resources/demos/style.css">
+  <!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
   <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 
@@ -205,6 +205,21 @@ ul{
     width: 80%;
     text-align: center;
 }
+
+/* 카테고리 */
+.form_section_content select {
+	width: 92%;
+	height: 35px;
+	font-size: 20px;
+	text-align: center;
+	margin-left: 5px;
+}
+.cate_wrap span {
+	font-weight: 600;
+}
+.cate_wrap:not(:first-child) {
+	margin-top: 20px;
+}
 </style>
 
 <div class="admin_content_wrap">
@@ -243,7 +258,28 @@ ul{
 					            <label>카테고리</label>
 					        </div>
 					        <div class="form_section_content">
-					            <input name="category">
+					            
+					            <div class="cate_wrap">
+					            	<span>대분류</span>
+					            	<select class="cate1">
+					            		<option selected="none">선택</option>
+					            	</select>
+					            </div>
+					            
+					            <div class="cate_wrap">
+					            	<span>중분류</span>
+					            	<select class="cate2">
+					            		<option selected="none">선택</option>
+					            	</select>
+					            </div>
+					            
+					            <div class="cate_wrap">
+					            	<span>소분류</span>
+					            	<select class="cate3" name="cateCode"> <!-- 최종적으로 '소분류'를 선택하는 것은 상품 등록에 필요로한 cateCode 데이터를 선택하는 것이기 때문에 select 태그에 name 속성 부여 -->
+					            		<option selected="none">선택</option>
+					            	</select>
+					            </div>
+					            
 					        </div>
 					    </div>
 					    
@@ -340,10 +376,11 @@ ul{
 	
 	/* 상품 소개 */
 	ClassicEditor
-				.create(document.querySelector('#prodContents_textarea'))
-				.catch(error=>{
-						console.error(error);	
-				});
+	    .create(document.querySelector('#prodContents_textarea'))
+	    .catch(error => {
+	        console.error(error);	
+	    });
+
 	
 	// 브랜드 선택 버튼
 	$('.brandCode_btn').on("click", function (e) {
@@ -354,6 +391,55 @@ ul{
 		
 		window.open(popUrl, "브랜드 찾기", popOption);
 	});
+	
+	// 2309282112 장유정
+	// 서버로 부터 데이터를 전달받는지 확인
+/* 	$(document).ready(function () {
+		console.log('${cateList}');
+	}); */
+	
+	// 카테고리
+	let cateList = JSON.parse('${cateList}'); // 'cateList' 속성에 담긴 JSON 데이터를 객체로 변환해주어 'cateList' 변수에 저장
+	
+	let cate1Array = new Array();
+	let cate2Array = new Array();
+	let cate3Array = new Array();
+	
+	let cate1Obj = new Object();
+	let cate2Obj = new Object();
+	let cate3Obj = new Object();
+	
+	let cateSelect1 = $(".cate1");
+	let cateSelect2 = $(".cate2");
+	let cateSelect3 = $(".cate3");
+	
+	// cateList 데이터 중 tier = 1인 데이터들만 꺼내 cate1Array 변수에 저장
+	// 테스트 후 재사용을 위해 카테고리 배열 초기화 메서드
+	function makeCateArray(obj, array, cateList, tier) {
+		for (let i = 0; i < cateList.length; i++){
+			if(cateList[i].tier === tier) {
+				obj = new Object();
+				
+				obj.cateName = cateList[i].cateName;
+				obj.cateCode = cateList[i].cateCode;
+				obj.cateParent = cateList[i].cateParent;
+				
+				array.push(obj);
+			}
+		}
+	}	
+	
+	// 배열 초기화
+	makeCateArray(cate1Obj, cate1Array, cateList, 1);
+	makeCateArray(cate2Obj, cate2Array, cateList, 2);
+	makeCateArray(cate3Obj, cate3Array, cateList, 3);
+	
+	$(document).ready(function () {
+		console.log(cate1Array);
+		console.log(cate2Array);
+		console.log(cate3Array);
+	});
+
 				
 </script>
 
