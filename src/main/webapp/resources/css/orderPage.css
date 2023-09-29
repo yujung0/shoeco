@@ -1,0 +1,30 @@
+		#orederListTable{
+		}
+		
+		.orderListBody{
+		background-color: white;
+		border-color: black;  
+		}
+	
+	  	#userInfo input{
+		background-color: #dcdcdc;
+		} 
+	
+		.receiverAddr{  
+		width: 150%; 
+		
+		}
+		#container {
+		  display: grid;
+		  grid-template-columns: 5fr 1fr;  
+		}
+		
+		.leftContainer {
+		  grid-column: 1;  
+		}
+		
+		.rightContainer {
+		  grid-column: 2;  
+		}	
+		 
+		

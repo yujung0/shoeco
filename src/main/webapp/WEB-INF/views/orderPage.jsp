@@ -1,49 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!-- 230827 499부터 해야함 / 옵션 x 일때 div 자체를 없애는것  -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@include file="./include/header.jsp" %>
+
+<!-- 심세연 - 결제 페이지 -->
 
 <c:set var="contextPath" value="${pageContext.request.contextPath }"/>
-<%@include file="./include/header.jsp" %>
- 
+<link rel="stylesheet" href="${contextPath}/resources/css/orderPage.css">
 	
-	
-	<style>
-		#orederListTable{
-		}
-		
-		.orderListBody{
-		background-color: white;
-		border-color: black; /* 추후 선 보이게 보완 */
-		}
-	
-	  	#userInfo input{
-		background-color: #dcdcdc;
-		} 
-	
-		.receiverAddr{ /*input의 width 넘어가도 배송정보 띄어쓰기 안되게 하기  */
-		width:78%; 
-		
-		}
-		#container {
-		  display: grid;
-		  grid-template-columns: 2fr 1fr; /* 두 개의 열을 생성, 각각 1fr만큼의 너비를 가짐 */
-		}
-		
-		.leftContainer {
-		  grid-column: 1; /* 왼쪽 열에 배치 */
-		}
-		
-		.rightContainer {
-		  grid-column: 2; /* 오른쪽 열에 배치 */
-		}	
-		 
-		
-		
-		
-	</style>
+	 
 	
 	
 	<div><!-- 전체 담는 div  --> 
@@ -89,9 +56,9 @@
 				  	            				
 				  	            				</td>
 				  	            				<td>${orderBrand.brandName}</td>
-				  	            				<td>.</td>
-				  	            				<td>차감금액</td>
-				  	            				<td>rowPrice를 합한 총 가격 : ${totalPrice}</td> <!--마일리지 차감금액 나중에  -->
+				  	            				<td>${totalAmount}</td>
+				  	            				<td>행사/할인</td>
+				  	            				<td>총 가격 : ${totalPrice}</td> <!--마일리지 차감금액 나중에  -->
 				  	            				<td>x</td>
 				  	            			</tr>
 			  	            			</div>
@@ -165,27 +132,32 @@
 					<div class="row">
 		                <div class="col-lg-5 mt-5">
 							<h4>마일리지 사용</h4>
+							<p>보유한 총 마일리지 (<c:out value="${user.mileage}"/>)</p>
+							<p></p>
+							<input type="text" id="inputMileage" placeholder="0"><button type="button" id="btnMileage" onclick="fnMileage()">사용</button>
+							<input type="hidden" value="0" id="usedMileageHidden">
+							<br><span id="restMileage" style="display: none"><small id="restMileage2"></small></span>
+							<button type="button" id="btnMileageReset" style="display: none">초기화</button>
 						</div>
 					</div>
 					
 					<div class="row">
 		                <div class="col-lg-5 mt-5">
-								<h4>결제</h4><br>
-							<button type="button" id="paymentButton1">카드/일반 결제</button>
-							<button type="button" id="paymentButton2">카카오 페이</button>
+								<h4>결제</h4>
+							<button type="button" class="paymentBtn" id="paymentButton1">카드/일반 결제</button>
+							<button type="button" class="paymentBtn" id="paymentButton2">카카오 페이</button>
 						</div>
 					</div>
 				</div> <!-- end leftContainer -->	
 					
-					
-					
-					
-					
-					
+					  
 				<div class="rightContainer"> <!-- 오른쪽 section -->
-					<div>
+					<div class="col-lg-5 mt-5">
 						<h4>결제 상세</h4>
-					
+							<br>상품금액: <br>
+							차감금액: <br>
+							배송비: <br>
+							총금액
 					
 					
 					</div>
@@ -242,33 +214,24 @@
     function sample4_execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
-                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
-                // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
-                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-                var roadAddr = data.roadAddress; // 도로명 주소 변수
-                var extraRoadAddr = ''; // 참고 항목 변수
+                var roadAddr = data.roadAddress;  
+                var extraRoadAddr = '';  
 
-                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
                 if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
                     extraRoadAddr += data.bname;
                 }
-                // 건물명이 있고, 공동주택일 경우 추가한다.
                 if(data.buildingName !== '' && data.apartment === 'Y'){
                    extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
                 }
-                // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
                 if(extraRoadAddr !== ''){
                     extraRoadAddr = ' (' + extraRoadAddr + ')';
                 }
 
-                // 우편번호와 주소 정보를 해당 필드에 넣는다.
                 document.getElementById('sample4_postcode').value = data.zonecode;
                 document.getElementById("sample4_roadAddress").value = roadAddr;
                 document.getElementById("sample4_jibunAddress").value = data.jibunAddress;
                 
-                // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
                 if(roadAddr !== ''){
                     document.getElementById("sample4_extraAddress").value = extraRoadAddr;
                 } else {
@@ -276,7 +239,6 @@
                 }
 
                 var guideTextBox = document.getElementById("guide");
-                // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
                 if(data.autoRoadAddress) {
                     var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
                     guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
@@ -294,6 +256,8 @@
         }).open();
     }
  	
+ 	var usedMileage = 0 ;
+ 	
  	//결제 
  	var IMP = window.IMP;
     IMP.init("imp04866888");
@@ -306,6 +270,8 @@
     var buyer_tel = "${user.userPhoneNo}";
     var buyer_addr = "${user.userAddress2} ${user.userAddress3}";
     var buyer_postcode = "${user.userAddress}";
+    
+    
     	/* pg: pg ,
         pay_method: "card",
         merchant_uid: "5702565-33004",
@@ -318,14 +284,17 @@
         buyer_postcode: "123-456" */
         
     
-    function requestPay1(pg) {  
+ 
+        
+    
+    function requestPay(pg, merchant_uid) {  
         IMP.request_pay(
           {
             pg: pg ,
             pay_method: "card",
-            merchant_uid: "5702565-33004",
-            name: "당근 10kg",
-            amount: 100,
+            merchant_uid: merchant_uid,
+            name: name,
+            amount: amount,
             buyer_email: buyer_email,
             buyer_name: buyer_name,
             buyer_tel: buyer_tel,
@@ -336,18 +305,22 @@
           function (rsp) {
         	    
              if(rsp.success){alert("결제 성공");
-             
-             /* $.ajax({
+             	//옵션 당 나눠서 하는게 좋을 듯 / sellpayment는 결제 방식인것 같음
+                $.ajax({
+            	url:"${contextPath}/payment",
+            	type: "post",
+	           	data: { usedMileage: usedMileage }, 
+ 	           	success: function(response){
+            		alert("결제후 서버단에 처리완료"); 
+            	},
+            	error: function(xhr,status,error){
+            		 console.log(xhr);
+            		 console.log(status);
+            	}
             	
-            	url:"{contexPath}/",
-            	type:,
-            		
-            	data: 
-            		
             	 
             	 
-            	 
-             }) */
+             })  
              
              
              return;
@@ -358,17 +331,97 @@
  	
  	 
     //결제 버튼 눌렀을때 
- 	$("#paymentButton1").on("click",function(){
- 		pg = "html5_inicis" ;
- 		requestPay1(pg); 	
- 	}) //end $("#paymentButton").on("click"
+ 	$(".paymentBtn").on("click",function(){
+ 		
+ 		if($(this).attr("id") == "paymentButton1"){
+	 		pg = "html5_inicis" ;
+ 		}
+ 		if($(this).attr("id") == "paymentButton2"){
+ 	 		pg = "kakaopay" ;
+ 	 	}
+ 		
+ 	 	usedMileage = parseInt($("#usedMileageHidden").val()) ;
+ 		name = "${name}";
+ 		amount = parseInt(${totalPrice}) - usedMileage ;
+ 	      $.ajax({
+ 			url: "${contextPath}/payment/before",
+ 			type: "post",
+ 			dataType: "json",
+  			success: function(rsp){
+ 				merchant_uid = rsp.uid ;
+ 				console.log(rsp.uid);
+ 				requestPay(pg, merchant_uid); 
+ 			},
+ 			error: function(xhr,status,error){
+ 				console.log(error);
+ 				console.log(status);
+ 				alert("결제 요청에 실패했습니다. 다시 시도해주세요.");
+ 			}
+ 			 
+ 		})  
+ 		
+ 		/* //t2
+ 			merchant_uid = "324___3424_342" ;
+			requestPay(pg, merchant_uid); 
+ 		 */	
+
+ 	}) //end $("#paymentBlutton").on("click"
  	
- 	$("#paymentButton2").on("click",function(){
+ 	/* $("#paymentButton2").on("click",function(){
+ 		
  		pg = "kakaopay" ;
- 		requestPay1(pg); 	
- 	}) //end $("#paymentButton").on("click"
+ 		requestPay1(pg, merchant_uid); 	
+ 	}) */ //end $("#paymentButton").on("click"
  			
- 			
+ 	//230923 
+		//마일리지 사용 버튼 누를때 1 금액있나 확인 2확인되면 금액고정및 span창활성화 3 
+	
+	$("#inputMileage").on("input",function(){
+		
+		if($("#inputMileage").val()==""){
+			return;
+		}
+		
+		if(!$("#inputMileage").val().match(/^\d+$/)){
+			
+			
+			alert("숫자만 입력해주세요.");
+			$("#inputMileage").val("");
+			return;
+		}
+	
+	})	
+		
+	function fnMileage(){
+		var totalMile = parseInt("${user.mileage}") ;
+		var inputMile = $("#inputMileage").val();
+
+		if(inputMile > totalMile){
+			alert("보유한 마일리지를 확인해주세요.");
+			return;
+		}
+		
+		if(inputMile ==""){
+			inputMile = "0";
+		}
+		
+		$("#usedMileageHidden").val(inputMile);
+		$("#restMileage").attr("style","display: block");
+		$("#restMileage2").html("잔여금액: " + ( totalMile - inputMile));
+		$("#btnMileageReset").attr("style","display: block");
+		$("#inputMileage").attr("placeholder",inputMile);
+		
+	
+	}
+ 	
+ 	$("#btnMileageReset").on("click",function(){
+ 		$("#usedMileageHidden").val("0");
+ 		$("#inputMileage").val(""); 		
+ 		$("#restMileage").attr("style","display: none");
+ 		$("#restMileage2").html("");
+		$("#btnMileageReset").attr("style","display: none");
+		$("#inputMileage").attr("placeholder","0");
+ 	})
 </script>
   
   

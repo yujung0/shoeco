@@ -6,33 +6,42 @@
 <mapper namespace="com.shoeco.shoeco.common.mapper.SCPaymentMapper">
 
 <!-- detail -> 결제 -->
-	 
-	<!-- 한번에 결제 했을때 생기는 sell_total  -->
+	<!-- 한번에 결제했을때 상품들을 하나로 묶는 sellTotal 테이블 -->
+	  
 		<insert id="insertSellTotal"> 		 
 				INSERT INTO SC_PRODUCTS_SELL_TOTAL
-				VALUES(SHOECO.SEQ_sellTotalNo_SELL_TOTAL.nextval,#{userId}) 
+				VALUES(SHOECO.SEQ_sellTotalNo_SELL_TOTAL.nextval,#{userId},default,#{usedMileage}) 
 		</insert>
 	
-	<!--해당 옵션 재고랑 감소  -->
-		<!--SC_PRODUCTS_OPTIONS -->
-		<update id="updateProdCount">
-			<foreach collection="">
-				UPDATE SC_PRODUCTS_OPTIONS 
-				SET prodCount = ( #{prodCount} - #{rowCount})
-				WHETE prodOptionNo = #{PRODOPTIONNO}
+<!-- 	해당 옵션 재고랑 감소 
+		SC_PRODUCTS_OPTIONS -->
+		<update id="updateProdCount" parameterType="java.util.List">
+			<foreach collection="scOrderList" item="list"  index="index" separator=";" open="DECLARE BEGIN" close="; END;" >
+				UPDATE SC_PRODUCTS_OPTION
+				SET prodCount = ( prodCount - #{list.rowCount})
+				WHERE prodOptionNo = #{list.prodOptionNo} 
 			</foreach>
 		</update>
 	  
-		<!-- sell_total안에 구성요소 -->
-		<insert id="insertProdSell">
-			<foreach collection="">
+<!-- 	sell_total안에 구성요소 -->
+		<insert id="insertProdSell" parameterType="java.util.List">
+			<foreach collection="scOrderList" item="list" index="index" separator=";" open="DECLARE BEGIN" close="; END;" >
 				INSERT INTO SC_PRODUCTS_SELL
-				VALUES(SHOECO.SEQ_sellNo.nextval,#{userId},#{PRODOPTIONNO},default,'입금완료',#{SELLPAYMENT},#{TOTALPRICE},SHOECO.SEQ_sellTotalNo_SELL_TOTAL.currval)
+				VALUES(SHOECO.SEQ_sellNo_sell.nextval,#{userId},#{list.prodOptionNo},default,'입금완료','카드(임시)',#{list.rowPrice},SHOECO.SEQ_sellTotalNo_SELL_TOTAL.currval)
 			</foreach> 
 		</insert>
 	 
-		
+		<select id="selectProdStock">
+			SELECT prodCount FROM SC_PRODUCTS_OPTION 
+			WHERE prodOptionNo = #{prodOptionNo}
+		</select>
 
-
+ 		<!-- 마일리지 관련 -->
+ 		<update id="updateMileage">
+ 			UPDATE SC_USER
+ 			SET mileage = mileage - #{usedMileage}
+ 			WHERE userId = #{userId}
+ 		</update>
+ 		 
 
 </mapper>

@@ -339,14 +339,13 @@
 		
 		/* href="${contextPath}/orderPage"; */
 		
+		
+		
 		var selectedColor2 = "";
 		var optionSizeV2 = "";
 		var perPrice2 = "" ;
 		var perCount2 = "";
-		
-/* 		var prodColorArray = "";
-		var prodSizeArray = "";
- */		var optionNoVArray = "";
+ 		var optionNoVArray = "";
 		var countArray = "";
 		var perCountArray =""
 		
