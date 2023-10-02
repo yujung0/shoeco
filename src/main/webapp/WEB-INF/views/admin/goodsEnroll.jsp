@@ -434,12 +434,19 @@ ul{
 	makeCateArray(cate2Obj, cate2Array, cateList, 2);
 	makeCateArray(cate3Obj, cate3Array, cateList, 3);
 	
-	$(document).ready(function () {
+	/* $(document).ready(function () {
 		console.log(cate1Array);
 		console.log(cate2Array);
 		console.log(cate3Array);
 	});
+	 */
+	
+	 for(let i = 0; i < cate1Array.length; i++) {//<select> 테그 내부에 <option> 태그 추가
+		cateSelect1.append("<option value ='" + cate1Array[i].cateCode + "'>" + cate1Array[i].cateName + "</option>");	 
+	 
+	 }
 
+	 // 중분류 <option> 태그
 				
 </script>
 
