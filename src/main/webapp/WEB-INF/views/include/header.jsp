@@ -237,7 +237,7 @@
                     <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
                        <div>
                        		<li class="nav-item">
-	                            <a class="nav-link" href="index.html">BRAND</a>
+	                            <a class="nav-link" href="${contextPath}/list?gender=공용">BRAND</a>
 	                             	<div class="smallCategories">
 		                        		<p>아디다스</p>
 		                        		<p>나이키</p>
