@@ -8,7 +8,7 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath }"/>
 <%@include file="./include/header.jsp" %>
  
-
+<!-- 심세연 - list페이지 -->
  
 
   <!-- Modal -->
@@ -37,101 +37,35 @@
             <div class="col-lg-3">
                 <h1 class="h2 pb-4">Categories</h1> <!--  -->
                 <ul class="list-unstyled templatemo-accordion">
-                 <!--    <li class="pb-3">
-                        <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
-                            Size
-                            <i class="fa fa-fw fa-chevron-circle-down mt-1"></i>
-                        </a>
-                        <ul class="collapse show list-unstyled pl-3">
-                            <li><a class="text-decoration-none" href="#">Men</a></li>
-                            <li><a class="text-decoration-none" href="#">Women</a></li>
-                        </ul>
-                    </li>
-                    <li class="pb-3">
-                        <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
-                            Color
-                            <i class="pull-right fa fa-fw fa-chevron-circle-down mt-1"></i>
-                        </a>
-                        <ul id="collapseTwo" class="collapse list-unstyled pl-3">
-                            <li><a class="text-decoration-none" href="#">Sport</a></li>
-                            <li><a class="text-decoration-none" href="#">Luxury</a></li>
-                        </ul>
-                    </li> -->
+                 
                     <li class="pb-3">
                         <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
                             Size
                         </a>
-                    <!--     	220<input type="checkbox" value="220" >
-                        	225<input type="checkbox" value="225">
-                        	225<input type="checkbox" value="235">
-                        	<input type="checkbox" value="240">
-                        	<input type="checkbox" value="245">
-                        	<input type="checkbox" value="250">
-                        	<input type="checkbox" value="255">
-                        	<input type="checkbox" value="260">
-                        	<input type="checkbox" value="265">
-                        	<input type="checkbox" value="270">
-                        	<input type="checkbox" value="275">
-                        	<input type="checkbox" value="280">
-                        	<input type="checkbox" value="285">
-                        	<input type="checkbox" value="290">
-                        	<input type="checkbox" value="295">
-                     -->
+                   
                     	<c:forEach var="sizeOne" begin="220" step="5" end="300" >
-                    		<c:out value="${sizeOne}"/> <input type="checkbox" class="sizeArray" value="${sizeOne}" id="<c:out value='${sizeOne}'/>">	
+                    		<c:out value="${sizeOne}"/> 
+                    		<input type="checkbox" class="sizeArray" value="${sizeOne}" ${pagingCre.paging.sizeArray.contains(String.valueOf(sizeOne)) ? 'checked' : ''}>	
                     	</c:forEach>
-                    
+                     
                     </li>
                      <li class="pb-3">
                         <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
                             Color
                         </a>
-                        	red<input type="checkbox" value="red" >
-                        	blue<input type="checkbox" value="blue">
-                        	yellow<input type="checkbox" value="yellow">
-                        	white<input type="checkbox" value="white">
-                        	black<input type="checkbox" value="black">
-                         
-                        
+                        	red<input type="checkbox" class="colorArray" value="빨강" ${pagingCre.paging.colorArray.contains("빨강") ? 'checked' : ''}>
+                        	blue<input type="checkbox" class="colorArray" value="파랑" ${pagingCre.paging.colorArray.contains("파랑") ? 'checked' : ''}>
+                        	yellow<input type="checkbox" class="colorArray" value="노랑" ${pagingCre.paging.colorArray.contains("노랑") ? 'checked' : ''}>
+                        	white<input type="checkbox" class="colorArray" value="흰색" ${pagingCre.paging.colorArray.contains("흰색") ? 'checked' : ''}>
+                        	black<input type="checkbox" class="colorArray" value="검정" ${pagingCre.paging.colorArray.contains("검정") ? 'checked' : ''}>
                     </li>
                     
-                     <%--  <li class="pb-3">
+                    <li class="pb-3">
                         <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
                             Price
                         </a>
                         	${minPrice}<input type="range" min="${minPrice}" max="${maxPrice}">${maxPrice}
-                         
-                        
-                    </li> --%>
-                    <!-- 검색 결과 페이지가 뜨지 않을때  range 표시 -->
-	 			<%-- 	<c:choose>	
-	 					<c:when test="${minPrice} != null">
-		                     <li class="pb-3">
-		                        <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
-		                            Price
-		                        </a>
-		                        	${minPrice}<input type="range" min="${minPrice}" max="${maxPrice}">${maxPrice}
-		                    </li>
-		                </c:when>  
-
-		                <c:otherwise>
-		                     <li class="pb-3">
-		                        <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
-		                            Price
-		                        </a>
-		                        	0<input type="range" min="0" max="${totalMaxPrice}">${totalMaxPrice}
-		                    </li>
-		                
-		                
-		                </c:otherwise> 
-                    </c:choose> --%>
-                    
-		                     <li class="pb-3">
-		                        <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
-		                            Price
-		                        </a>
-		                        	${minPrice}<input type="range" min="${minPrice}" max="${maxPrice}">${maxPrice}
-		                    </li>
+                    </li>
 		               
                     
                     
@@ -139,19 +73,25 @@
                         <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
                             Brand
                         </a>
-                        	아디다스<input type="checkbox" value="아디다스" >
-                        	나이키<input type="checkbox" value="나이키">
-                        	뉴발란스<input type="checkbox" value="뉴발란스">
-                        	컨버스<input type="checkbox" value="컨버스">
-                        	퓨마<input type="checkbox" value="퓨마">
-                        	닥터마틴<input type="checkbox" value="닥터마틴">
+                        	아디다스<input type="checkbox" class="brandArray" value="ADIDAS" ${pagingCre.paging.brandArray.contains("ADIDAS")? 'checked' :''}>
+                        	나이키<input type="checkbox" class="brandArray"  value="NIKE" ${pagingCre.paging.brandArray.contains("NIKE")? 'checked' :''}>
+                        	뉴발란스<input type="checkbox" class="brandArray" value="NEWBALANCE" ${pagingCre.paging.brandArray.contains("NEWBALANCE")? 'checked' :''}>
+                        	퓨마<input type="checkbox" class="brandArray" value="PUMA" ${pagingCre.paging.brandArray.contains("PUMA")? 'checked' :''}>
+                        	컨버스<input type="checkbox" class="brandArray" value="CONVERSE" ${pagingCre.paging.brandArray.contains("CONVERSE")? 'checked' :''}>
+                        	닥터마틴<input type="checkbox" class="brandArray" value="DRMARTENS" ${pagingCre.paging.brandArray.contains("DRMARTENS")? 'checked' :''}>
                          
                         
                     </li>
                     
+                     <li class="pb-3">
+                        <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
+                            품절
+                        </a>
+                        	품절 제외<input type="checkbox" id="exSoldout" value="1" ${pagingCre.paging.exSoldout == 1 ? 'checked' : ''}  >
+                    </li>
                     
                     <li>
-                    	<button type="button" id="searchTerm">검색</button>
+                    	<button type="button" id="searchTerm" class="services-icon-wap">검색</button>
                     </li>
                     
                 </ul>
@@ -175,21 +115,13 @@
                     <div class="col-md-6 pb-4">
                         <div class="d-flex">
                             <select class="form-control" id="arraySelect">
-                                <option>Featured</option>
-                                <option>A to Z</option>
-                                <option>Item</option>
+                                <option value="0" ${pagingCre.paging.array == 0 ? 'selected' : ''}>최신순</option>
+                                <option value="1" ${pagingCre.paging.array == 1 ? 'selected' : ''}>가격 낮은순</option>
+                                <option value="2" ${pagingCre.paging.array == 2 ? 'selected' : ''}>가격 높은순</option>
                             </select>
                         </div>
                     </div>
                 </div>
-                
-                <!--230819 arraySelect 생성  -->
-                
-                <form action="${contextPath}/list" method="get">
-                	<input type="hidden" id="arrayOption" name="array">
-                
-                </form>
-                
                 
                 <div class="row"> <!-- 리스트칸의 wrapper  -->
                 	<%--  <c:if test="${not empty categoryList}">--%>
@@ -231,43 +163,7 @@
 			                            </div>
 			                        </div>
 			                    </div> <!-- END 리스트 칸-->
-													                    <!-- <div class="col-md-4"> 리스트 칸 시작 //원본
-													                        <div class="card mb-4 product-wap rounded-0">
-													                            <div class="card rounded-0">
-													                                <img class="card-img rounded-0 img-fluid" src="assets/img/shop_01.jpg">
-													                                <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
-													                                    <ul class="list-unstyled">
-													                                        <li><a class="btn btn-success text-white" href="shop-single.html"><i class="far fa-heart"></i></a></li>
-													                                        <li><a class="btn btn-success text-white mt-2" href="shop-single.html"><i class="far fa-eye"></i></a></li>
-													                                        <li><a class="btn btn-success text-white mt-2" href="shop-single.html"><i class="fas fa-cart-plus"></i></a></li>
-													                                    </ul>
-													                                </div>
-													                            </div>
-													                            <div class="card-body">
-													                                <a href="shop-single.html" class="h3 text-decoration-none">Oupidatat non</a>
-													                                <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
-													                                    <li>M/L/X/XL</li>
-													                                    <li class="pt-2">
-													                                        <span class="product-color-dot color-dot-red float-left rounded-circle ml-1"></span>
-													                                        <span class="product-color-dot color-dot-blue float-left rounded-circle ml-1"></span>
-													                                        <span class="product-color-dot color-dot-black float-left rounded-circle ml-1"></span>
-													                                        <span class="product-color-dot color-dot-light float-left rounded-circle ml-1"></span>
-													                                        <span class="product-color-dot color-dot-green float-left rounded-circle ml-1"></span>
-													                                    </li>
-													                                </ul>
-													                                <ul class="list-unstyled d-flex justify-content-center mb-1">
-													                                    <li>
-													                                        <i class="text-warning fa fa-star"></i>
-													                                        <i class="text-warning fa fa-star"></i>
-													                                        <i class="text-warning fa fa-star"></i>
-													                                        <i class="text-muted fa fa-star"></i>
-													                                        <i class="text-muted fa fa-star"></i>
-													                                    </li>
-													                                </ul>
-													                                <p class="text-center mb-0">$250.00</p>
-													                            </div>
-													                        </div>
-													                    </div> END 리스트 칸 -->
+													                    
 			                    </c:forEach><!--end forEach  -->
 			                 <%--  </c:if> --%>
 		                </div><!--END 리스트칸의 wrapper  -->
@@ -453,20 +349,11 @@
 	        </c:choose>
         </div>   --%>
              
-        <div id="sizeDiv">
-        	<input type="hidden" name="sizeArray" value="${pagingCre.paging.sizeArray}">	
-		        
-        </div>       
-             
-             
-        <c:forEach var="color" items="${pagingCre.paging.colorArray}">
-        	<input type="hidden" name="colorArray" value="${color}">
-        </c:forEach>
-        
-        <c:forEach var="brand" items="${pagingCre.paging.brandArray}">
-        	<input type="hidden" name="brandArray" value="${brand}">
-        </c:forEach>
-        
+         
+        <input type="hidden" name="sizeArray" value="${pagingCre.paging.sizeArray}">	
+        <!-- 231003전 보전이후 바꾸는 것  -->
+       	<input type="hidden" name="colorArray" value="${pagingCre.paging.colorArray}">
+       	<input type="hidden" name="brandArray" value="${pagingCre.paging.brandArray}">
         <input type="hidden" name="exSoldout" value="${pagingCre.paging.exSoldout}">
         <input type="hidden" name="array" value="${pagingCre.paging.array}">
          
@@ -480,6 +367,9 @@
 		
         var frmSendValue = $("#frmSendValue");
     	var sizeChoice = "";
+    	var colorChoice = "";
+    	var brandChoice = "";
+    	var exSoldout = 0;
     		
         
 
@@ -491,9 +381,9 @@
         	frmSendValue.find("input[name='pageNum']").val(1);
         	frmSendValue.find("#div").empty();
         	
-        	var newInput = $("<input>").attr("type","hidden").attr("name","sizeArray") ;
+     /*    	var newInput = $("<input>").attr("type","hidden").attr("name","sizeArray") ;
         	frmSendValue.find("#div").append(newInput);
-        	
+        	 */
         	
         	
         	sizeChoice = $(".sizeArray:checked").map(function(){
@@ -501,12 +391,29 @@
     		}).get() ;
         
         	
-        	console.log(sizeChoice);
         	
+        	colorChoice = $(".colorArray:checked").map(function(){
+    			return $(this).val();
+    		}).get() ;
+        
+        
+        	brandChoice = $(".brandArray:checked").map(function(){
+    			return $(this).val();
+    		}).get() ;
+        
         	 
         	  
         	 
         	frmSendValue.find("input[name='sizeArray']").val(sizeChoice.join(","));
+        	frmSendValue.find("input[name='colorArray']").val(colorChoice.join(","));
+        	frmSendValue.find("input[name='brandArray']").val(brandChoice.join(","));
+        	
+			if($("#exSoldout").prop("checked")){
+        	exSoldout = parseInt($("#exSoldout").val());
+        	};
+        	
+        	frmSendValue.find("input[name='exSoldout']").val(exSoldout);
+
         	frmSendValue.attr("method","GET");
             frmSendValue.attr("action","${contextPath}/list");
 
@@ -515,7 +422,20 @@
         	
         })//$("searchTerm") end
         
-        
+        //정렬 순
+        $("#arraySelect").on("change",function(){
+        	var arrayFlag = parseInt($("#arraySelect").attr("option","selected").val());
+        	
+            frmSendValue.find("input[name='pageNum']").val(1);
+            frmSendValue.find("input[name='array']").val(arrayFlag);
+            
+            frmSendValue.attr("method","GET");
+            
+            frmSendValue.attr("action","${contextPath}/list");
+
+            frmSendValue.submit();
+        		
+        })
         
         
 		//페이징

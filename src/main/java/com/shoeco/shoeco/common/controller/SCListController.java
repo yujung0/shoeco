@@ -36,11 +36,13 @@ public class SCListController {
 	//메개변수로 받아와서 한꺼 번에
 	
 	@GetMapping("/list")
-	public void showCategoryList(Model model,ListPagingDTO paging,
-			@RequestParam(name="sizeArray", required=false) String[] sizeArray ){
+	public void showCategoryList(Model model,ListPagingDTO paging
+			/*@RequestParam(name="sizeArray", required=false) String[] sizeArray, 
+			@RequestParam(name="colorArray", required=false) String[] colorArray,
+			@RequestParam(name="brandArray", required=false) String[] brandArray*/){
 		
 		  
-		
+		 
 		model.addAttribute("categoryList",scListService.getCategoryList(paging));
 		//System.err.println(scListService.getCategoryList(gender,paging).get(0).toString());
 		model.addAttribute("pagingCre",new ListPagingCreatorDTO(scListService.rowTotal(paging),paging));

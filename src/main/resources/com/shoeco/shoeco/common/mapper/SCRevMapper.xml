@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.shoeco.shoeco.common.mapper.SCRevMapper">
+	<!-- revList 뽑기  -->
+	<select id="selectRevList">
+	SELECT REVNO,PRODCODE,USERID,STARGRADE,REVTITLE,REVCONTENT,REVWRITEDATE,
+		   REVDELFLAG,REVLIKE,REVSIZE,REVCOLOR,REVWIDTH,PRODOPTIONNO FROM SC_REV
+		   WHERE PRODCODE = #{PRODCODE}
+	</select>
+	
+	<!-- rev 좋아요 + 1  & 좋아요 - 1  -->
+	<update id="updateRevLikeP">
+		UPDATE SC_REV
+		SET REVLIKE = REVLIKE + 1
+		WHERE REVNO = #{REVNO}
+	</update>
+	
+	<update id="updateRevLikeM">
+		UPDATE SC_REV
+		SET REVLIKE = REVLIKE - 1
+		WHERE REVNO = #{REVNO}
+	</update>
+	
+	<!-- rev 신고 -->
+	<update id="updateRevDelFlag">
+		UPDATE SC_REV
+		SET REVDELFLAG = 1
+		WHERE REVNO = #{REVNO}
+	</update>
+	
+	<!-- rev 수정 -->
+	<update id="updateRevMod">
+		UPDATE SC_REV
+		SET STARGRADE = #{STARGRADE},
+			REVSIZE = #{REVSIZE}, 
+			REVCOLOR= #{REVCOLOR}, 
+			REVWIDTH = #{REVWIDTH}, 
+			REVTITLE = #{REVTITLE},
+			REVCONTENT = #{REVCONTENT},
+			REVWRITEDATE = default
+		WHERE REVNO = #{REVNO}
+	</update>
+	
+	<!-- rev 삭제 -->
+	<delete id="deleteRev">
+		DELETE FROM SC_REV
+		WHERE REVNO = #{REVNO}	
+	</delete>
+	
+	<insert id="insertBuyRev">
+		INSERT INTO SC_REV
+		VALUES(#{SEQ_REV.nextval},#{PRODCODE},#{userId},#{STARGRADE},
+				#{REVTITLE},#{REVCONTENT},default,#{REVDELFLAG},
+				default,#{REVSIZE},#{REVCOLOR},#{REVWIDTH},#{PRODOPTIONNO})
+	
+	</insert>
+	
+	  
+	 
+
+
+</mapper>

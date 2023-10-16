@@ -187,7 +187,7 @@
 
 
          <div style="display: inline;">
-         	<input type="text" placeholder="검색어 입력"><button>검색</button>
+         	<input type="text" placeholder="검색어 입력"><button class="services-icon-wap">검색</button>
          </div>
          <div style="display: inline;">
 			<a class="nav-icon position-relative text-decoration-none" id="faq-chatbot">

@@ -35,7 +35,7 @@ public class SCListServiceImpl implements SCListService{
 		return scListMapper.selectMaxPrice(paging);
 	};
 
-	public long totalMaxPrice() {
+	public Long totalMaxPrice() {
 		return scListMapper.selecTotalMaxPrice();
 				
 	}

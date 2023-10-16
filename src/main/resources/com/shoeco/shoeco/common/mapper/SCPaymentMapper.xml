@@ -10,7 +10,7 @@
 	  
 		<insert id="insertSellTotal"> 		 
 				INSERT INTO SC_PRODUCTS_SELL_TOTAL
-				VALUES(SHOECO.SEQ_sellTotalNo_SELL_TOTAL.nextval,#{userId},default,#{usedMileage}) 
+				VALUES(SHOECO.SEQ_sellTotalNo_SELL_TOTAL.nextval,#{userId},default,#{usedMileage},#{mid}) 
 		</insert>
 	
 <!-- 	해당 옵션 재고랑 감소 

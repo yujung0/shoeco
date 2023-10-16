@@ -28,11 +28,6 @@ public class SCPaymentController {
 	SCDetailService scDetailService;
 	List<SCOrderList> scOrderList;
 	
-	/*SCPaymentController(SCPaymentService scPaymentService, SCDetailService scDetailService){
-		this.scPaymentService = scPaymentService;
-		this.scDetailService = scDetailService;
-	}
-	*/
 	SCPaymentController(SCPaymentService scPaymentService, SCDetailService scDetailService, List<SCOrderList> scOrderList){
 		this.scPaymentService = scPaymentService;
 		this.scDetailService = scDetailService;
@@ -86,12 +81,35 @@ public class SCPaymentController {
 	@PostMapping(value="/payment/before")
 	@ResponseBody
 	public Map<String, String> getUid() {
+		Map<String,String> response = new HashMap<>();
+		String str = "재고가 부족합니다.";
+		int checkStock = 0;
+		 for(int i = 0 ; i < scOrderList.size() ; i ++) {
+		 	 if((scPaymentService.getProdStock(scOrderList.get(i).getProdOptionNo()) - scOrderList.get(i).getRowCount() )< 0 ) {
+		 		 System.err.println((scPaymentService.getProdStock(scOrderList.get(i).getProdOptionNo()) - scOrderList.get(i).getRowCount() ) + " : 0보다 작음");
+		 		 checkStock+=1;
+		 		 str+= "\n"+ checkStock+ ") "+
+		 		 scDetailService.getByOptionNo(scOrderList.get(i).getProdOptionNo()).getColor()+"/"+  
+		 		 scDetailService.getByOptionNo(scOrderList.get(i).getProdOptionNo()).getProdSize()+"/"+
+		 		 "현재수량: "+ scDetailService.getByOptionNo(scOrderList.get(i).getProdOptionNo()).getProdCount() +"개" ;
+		 		 
+		 	 	}
+		 }
+		 
+		 if(checkStock != 0) {
+			 response.put("uid", "noStock");
+	 		 response.put("stockInfo", str);
+	 		 return response;
+	 	
+		 }
+		
+		
 		Date myDate = new Date();
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
 		String uid = simpleDateFormat.format(myDate);
 		int ranNum = new Random().nextInt(999999-100000) + 100000;
 		uid+="-"+ranNum ;
-		Map<String,String> response = new HashMap<>();
+		
 		response.put("uid", uid);
 		
 		return response;
@@ -102,27 +120,16 @@ public class SCPaymentController {
 	
 	@PostMapping(value="/payment")
 	@ResponseBody
-	public void executePay(@RequestParam long usedMileage) {
+	public void executePay(@RequestParam("usedMileage") long usedMileage, @RequestParam("mid")String mid) {
 
 		String userId = "admin" ;
-		boolean stockFlag = true;
-		
-		 for(int i = 0 ; i < scOrderList.size() ; i ++) {
-			 	 if((scPaymentService.getProdStock(scOrderList.get(i).getProdOptionNo()) - scOrderList.get(i).getRowCount() )< 0 ) {
-			 		 System.err.println((scPaymentService.getProdStock(scOrderList.get(i).getProdOptionNo()) - scOrderList.get(i).getRowCount() ) + " : 0보다 작음");
-			 		 stockFlag = false;
-			 	 }
-		 }
-		
-		 if(stockFlag) {
-		
-		scPaymentService.insertSellTotal(userId,usedMileage); 
+		 
+		scPaymentService.insertSellTotal(userId,usedMileage,mid); 
 		scPaymentService.updateMileage(userId,usedMileage); 
 		scPaymentService.updateProdCount(scOrderList);
 		scPaymentService.insertProdSell(userId,scOrderList); 
 		
 		
-		 }
 		
 		
 	}

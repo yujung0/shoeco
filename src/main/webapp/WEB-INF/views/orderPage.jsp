@@ -5,7 +5,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@include file="./include/header.jsp" %>
 
-<!-- 심세연 - 결제 페이지 -->
+<!-- 심세연 - 주문페이지 -->
 
 <c:set var="contextPath" value="${pageContext.request.contextPath }"/>
 <link rel="stylesheet" href="${contextPath}/resources/css/orderPage.css">
@@ -134,7 +134,7 @@
 							<h4>마일리지 사용</h4>
 							<p>보유한 총 마일리지 (<c:out value="${user.mileage}"/>)</p>
 							<p></p>
-							<input type="text" id="inputMileage" placeholder="0"><button type="button" id="btnMileage" onclick="fnMileage()">사용</button>
+							<input type="text" id="inputMileage" placeholder="0"><button type="button" id="btnMileage" class="services-icon-wap paymentBtn" onclick="fnMileage()">사용</button>
 							<input type="hidden" value="0" id="usedMileageHidden">
 							<br><span id="restMileage" style="display: none"><small id="restMileage2"></small></span>
 							<button type="button" id="btnMileageReset" style="display: none">초기화</button>
@@ -144,22 +144,21 @@
 					<div class="row">
 		                <div class="col-lg-5 mt-5">
 								<h4>결제</h4>
-							<button type="button" class="paymentBtn" id="paymentButton1">카드/일반 결제</button>
-							<button type="button" class="paymentBtn" id="paymentButton2">카카오 페이</button>
+								<button type="button" class="services-icon-wap shadow paymentBtn" id="paymentButton1">카드/일반 결제</button>
+								<button type="button" class="services-icon-wap shadow paymentBtn" id="paymentButton2">카카오 페이</button>
 						</div>
 					</div>
 				</div> <!-- end leftContainer -->	
 					
 					  
 				<div class="rightContainer"> <!-- 오른쪽 section -->
-					<div class="col-lg-5 mt-5">
+					<div class="col-lg-6 mt-6">
+						<br><br>
 						<h4>결제 상세</h4>
-							<br>상품금액: <br>
-							차감금액: <br>
-							배송비: <br>
-							총금액
-					
-					
+							<br>상품금액: <c:out value="${totalPrice}"/>원 <br>
+							차감금액: <span id="minusPrice">0</span>원<br>
+							배송비: /택배는아직x/  <br>
+							총금액: <span id="total_Price"><c:out value="${totalPrice}"/></span>원
 					</div>
 				</div> <!-- end rightContainer -->
 				
@@ -309,7 +308,7 @@
                 $.ajax({
             	url:"${contextPath}/payment",
             	type: "post",
-	           	data: { usedMileage: usedMileage }, 
+	           	data: { usedMileage: usedMileage, mid: merchant_uid }, 
  	           	success: function(response){
             		alert("결제후 서버단에 처리완료"); 
             	},
@@ -348,6 +347,10 @@
  			type: "post",
  			dataType: "json",
   			success: function(rsp){
+  				if(rsp.uid == "noStock"){
+  					alert(rsp.stockInfo);
+  					return;
+  				}
  				merchant_uid = rsp.uid ;
  				console.log(rsp.uid);
  				requestPay(pg, merchant_uid); 
@@ -410,7 +413,10 @@
 		$("#restMileage2").html("잔여금액: " + ( totalMile - inputMile));
 		$("#btnMileageReset").attr("style","display: block");
 		$("#inputMileage").attr("placeholder",inputMile);
-		
+		//231003 우측여백에 표시
+		$("#minusPrice").html(inputMile);
+		$("#total_Price").html(parseInt(${totalPrice}) - parseInt($("#usedMileageHidden").val()));
+			
 	
 	}
  	
@@ -421,6 +427,9 @@
  		$("#restMileage2").html("");
 		$("#btnMileageReset").attr("style","display: none");
 		$("#inputMileage").attr("placeholder","0");
+		//231003 우측여백에 표시
+		$("#minusPrice").html("0");	
+		$("#total_Price").html(${totalPrice});
  	})
 </script>
   

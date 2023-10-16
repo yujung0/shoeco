@@ -20,8 +20,8 @@ public class SCPaymentServiceImpl implements SCPaymentService{
 	
 	
 	@Override
-	public int insertSellTotal(String userId,long usedMileage) {
-		return scPaymentMapper.insertSellTotal(userId, usedMileage);
+	public int insertSellTotal(String userId,long usedMileage, String mid) {
+		return scPaymentMapper.insertSellTotal(userId, usedMileage, mid);
 	}
 
 	@Override

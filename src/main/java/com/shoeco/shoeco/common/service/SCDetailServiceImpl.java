@@ -51,6 +51,9 @@ public class SCDetailServiceImpl implements SCDetailService {
 		return scDetailMapper.selectMember(userId);
 	}
 	
+	public SCOptionVO getByOptionNo(long prodOptionNo){
+		return scDetailMapper.selectByOptionNo(prodOptionNo);
+	};
 	
 	
 	

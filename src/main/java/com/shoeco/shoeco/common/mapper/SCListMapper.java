@@ -18,5 +18,5 @@ public interface SCListMapper {
 	
 	public Long selectMaxPrice(@Param("paging") ListPagingDTO paging);
 	
-	public long selecTotalMaxPrice() ;
+	public Long selecTotalMaxPrice() ;
 }

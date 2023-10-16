@@ -27,33 +27,14 @@ public class ListPagingDTO {
 //	private String[] sizeArray;
 	private String sizeArray;
 	
-//	public Integer[] getSizeArray() {
-//		
-//		for(int i = 0 ; i < sizeArray.length ; i++) {
-//			if(sizeArray[i] = ) {
-//				
-//			
-//				
-//			}
-//			 
-//		
-//		}
-//		
-//		
-//		
-//		return sizeArray;
-//	}
-	
-	
-	 
-	private String[] colorArray;
+	private String colorArray;
 	
 	//230816 최신순, 가격별정렬 설정 
-	private Integer array; // 0(기본값) = 최신순, 1 = 가격낮은순, 2 = 가격높은순 
+	private int array; // 0(기본값) = 최신순, 1 = 가격낮은순, 2 = 가격높은순 
 	//230816 품절상태 제외 표시
 	private int exSoldout; // 0 (기본값) = 제외x, 1 = 제외
 	
-	private String[] brandArray;
+	private String brandArray;
 	
 	
 //	private String soldOut; 향후 고려 

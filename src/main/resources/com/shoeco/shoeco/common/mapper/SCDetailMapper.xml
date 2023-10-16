@@ -41,7 +41,7 @@
 	
 	<!--  -->
 	<select id="selectOneProdCount">
-	    SELECT prodCount FROM SC_PRODUCTS_OPTION
+	   SELECT prodCount FROM SC_PRODUCTS_OPTION
 	   WHERE prodCode = #{prodCode} AND color = #{color} AND prodSize = #{prodSize}
 	</select>
 	
@@ -51,7 +51,12 @@
   		FROM SC_USER
   		WHERE userId = #{userId}
 	</select>
- 
+ 	
+ 	<select id="selectByOptionNo">
+	   SELECT prodCode, color, prodSize, prodCount FROM SC_PRODUCTS_OPTION
+	   WHERE prodOptionNo=#{prodOptionNo}
+	</select>
+	
 	
 	
 

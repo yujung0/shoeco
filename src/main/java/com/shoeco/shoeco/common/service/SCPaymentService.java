@@ -10,7 +10,7 @@ public interface SCPaymentService {
 	
 //detail -> 결제
 	// 한번에 결제 했을때 생기는 sell_total  -->
-	public int insertSellTotal(@RequestParam("usedId")String userId, @RequestParam("usedMileage")long usedMileage) ;
+	public int insertSellTotal(@RequestParam("usedId")String userId, @RequestParam("usedMileage")long usedMileage, @RequestParam("mid") String mid) ;
 	
 	//해당 옵션 재고랑 감소  
 	public int updateProdCount(@RequestParam("scOrderList") List<SCOrderList> scOrderList); 

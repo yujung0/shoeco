@@ -3,6 +3,7 @@ package com.shoeco.shoeco.common.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
+import org.sonatype.inject.Parameters;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.shoeco.shoeco.common.domain.SCOrderList;
@@ -13,7 +14,7 @@ public interface SCPaymentMapper {
 	// 한번에 결제 했을때 생기는 sell_total  -->
 	
 	@Transactional
-	public int insertSellTotal(@Param("userId")String userId,@Param("usedMileage") long usedMileage) ;
+	public int insertSellTotal(@Param("userId")String userId,@Param("usedMileage") long usedMileage,@Param("mid") String mid) ;
 	
 	//해당 옵션 재고랑 감소  
 	@Transactional
