@@ -125,7 +125,7 @@
                 
                 <div class="row"> <!-- 리스트칸의 wrapper  -->
                 	<%--  <c:if test="${not empty categoryList}">--%>
-		                <c:forEach var="one" items="${categoryList }"><!-- forEach   -->
+		                <c:forEach var="one" items="${categoryList }" varStatus="index"><!-- forEach   -->
 			                <div class="col-md-4"> <!-- 리스트 칸 시작 -->
 			                        <div class="card mb-4 product-wap rounded-0">
 			                            <div class="card rounded-0">
@@ -139,9 +139,36 @@
 			                                </div>
 			                            </div>
 			                            <div class="card-body listOne">
-			                                <a href="${contextPath}/detail?prodCode=${one.prodCode}" class="h3 text-decoration-none">${one.prodCode} 의 ${one.prodName}</a>
+			                                <a href="${contextPath}/detail?prodCode=${one.prodCode}" class="h3 text-decoration-none">${one.prodCode} - ${one.prodName}</a>
 			                                <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
-			                                    <li>M/L/X/XL</li>
+			                                   <input type="hidden" class="prodCodeForList" value="${one.prodCode }" >
+			                                   <c:set var="prodKey" value="${one.prodCode }" />
+			                                   <li>
+					                           
+					                           <c:forEach var="one2" items="${listForOpt1[prodKey]}">
+					                           	<c:set var="prodKey2" value="${one2.color }" />
+					                           	<c:set var="prodKey3" value="${prodKey}-${one2.color }" />
+					                           		${prodKey2 }
+						                           	<c:forEach var="one3" items="${listForOpt2[prodKey3]}">
+						                           		<c:choose>
+							                           		<c:when test="${one3.prodCount > 0}">
+							                           			<em>
+							                           				<c:out value="${one3.prodSize}" />
+							                           			</em>
+							                           		</c:when>
+							                           		<c:otherwise>
+							                           			<em>
+							                           				<span style="color: gray;"><c:out value="${one3.prodSize}"/></span>
+							                           			</em>
+							                           		</c:otherwise>
+							                           	</c:choose>	
+						                          	</c:forEach>
+					                           		<br>
+					                           </c:forEach>
+					                           
+					                           
+					                                     
+			                                   </li>
 			                                    <li class="pt-2">
 			                                        <span class="product-color-dot color-dot-red float-left rounded-circle ml-1"></span>
 			                                        <span class="product-color-dot color-dot-blue float-left rounded-circle ml-1"></span>
@@ -152,14 +179,64 @@
 			                                </ul>
 			                                <ul class="list-unstyled d-flex justify-content-center mb-1">
 			                                    <li>
-			                                        <i class="text-warning fa fa-star"></i>
+			                                        <!-- <i class="text-warning fa fa-star"></i>
 			                                        <i class="text-warning fa fa-star"></i>
 			                                        <i class="text-warning fa fa-star"></i>
 			                                        <i class="text-muted fa fa-star"></i>
-			                                        <i class="text-muted fa fa-star"></i>
+			                                        <i class="text-muted fa fa-star"></i> -->
+			                                        <c:set var="nowIdx" value="${index.index}" />
+			                                        <c:choose>
+			                                        	<c:when test="${1 <= starList[nowIdx] && starList[nowIdx] < 2}">
+			                                        		<i class="text-warning fa fa-star"></i> 
+			                                        		<i class="text-muted fa fa-star"></i>
+			                                        		<i class="text-muted fa fa-star"></i>
+			                                        		<i class="text-muted fa fa-star"></i>
+			                                        		<i class="text-muted fa fa-star"></i>
+			                                        	</c:when>
+			                                        	<c:when test="${2 <= starList[nowIdx] && starList[nowIdx] < 3}">
+			                                        		<i class="text-warning fa fa-star"></i> 
+			                                        		<i class="text-warning fa fa-star"></i>
+			                                        		<i class="text-muted fa fa-star"></i>
+			                                        		<i class="text-muted fa fa-star"></i>
+			                                        		<i class="text-muted fa fa-star"></i>
+			                                        	</c:when>
+			                                        	<c:when test="${3 <= starList[nowIdx] && starList[nowIdx] < 4}">
+			                                        		<i class="text-warning fa fa-star"></i> 
+			                                        		<i class="text-warning fa fa-star"></i>
+			                                        		<i class="text-warning fa fa-star"></i>
+			                                        		<i class="text-muted fa fa-star"></i>
+			                                        		<i class="text-muted fa fa-star"></i>
+			                                        	</c:when>
+			                                        	<c:when test="${4 <= starList[nowIdx] && starList[nowIdx] < 5}">
+			                                        		<i class="text-warning fa fa-star"></i> 
+			                                        		<i class="text-warning fa fa-star"></i>
+			                                        		<i class="text-warning fa fa-star"></i>
+			                                        		<i class="text-warning fa fa-star"></i>
+			                                        		<i class="text-muted fa fa-star"></i>
+			                                        	</c:when>
+														<c:when test="${starList[nowIdx] == 5}">
+			                                        		<i class="text-warning fa fa-star"></i> 
+			                                        		<i class="text-warning fa fa-star"></i>
+			                                        		<i class="text-warning fa fa-star"></i>
+			                                        		<i class="text-warning fa fa-star"></i>
+			                                        		<i class="text-warning fa fa-star"></i>
+			                                        	</c:when>	
+			                                        	<c:otherwise>
+			                                        		<i class="text-muted fa fa-star"></i>
+			                                        		<i class="text-muted fa fa-star"></i>
+			                                        		<i class="text-muted fa fa-star"></i>
+			                                        		<i class="text-muted fa fa-star"></i>
+			                                        		<i class="text-muted fa fa-star"></i>
+			                                        	
+			                                        	</c:otherwise>		                                        	
+			                                        
+			                                        </c:choose>
+			                                         
 			                                    </li>
 			                                </ul>
-			                                <p class="text-center mb-0">${one.sellPrice }</p>
+			                                <p class="text-center mb-0"> 
+			                                <small>₩<fmt:formatNumber pattern="#,###">${one.sellPrice }</fmt:formatNumber></small> 
+			                                </p>
 			                            </div>
 			                        </div>
 			                    </div> <!-- END 리스트 칸-->

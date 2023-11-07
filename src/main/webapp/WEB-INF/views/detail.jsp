@@ -30,11 +30,16 @@
  	right: 28px;
  	}
  
- 	#totalPrice{
+ 	#won{
  	position : absolute ;
  	right: 28px;
  	}
- 
+ 	
+ 	#totalPrice{
+ 	position : absolute ;
+ 	right: 45px;
+ 	}
+ 	 
   	 
  </style>
  
@@ -162,7 +167,7 @@
                         <!--End Controls-->
                     </div>
                 </div>
-                <!-- col end -->
+                <!-- col end --> 
                 <div class="col-lg-7 mt-5">
                     <div class="card">
                         <div class="card-body"> <!-- div class="card-body"  -->
@@ -170,12 +175,51 @@
                             <h1 class="h2">${product.get(0).prodName} </h1>
                             <p class="h3 py-2">₩ <fmt:formatNumber value="${product.get(0).sellPrice}" pattern="#,###"/></p>   
                             <p class="py-2">
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-secondary"></i>
-                                <span class="list-inline-item text-dark"><small>리뷰평점</small> 4.8 | 36 Comments</span> <!-- 아직 리뷰정보에 관해서는 x -->
+                                <c:choose>
+                                  	<c:when test="${1 <= starAvg && starAvg < 2}">
+                                  		<i class="text-warning fa fa-star"></i> 
+                                  		<i class="text-muted fa fa-star"></i>
+                                  		<i class="text-muted fa fa-star"></i>
+                                  		<i class="text-muted fa fa-star"></i>
+                                  		<i class="text-muted fa fa-star"></i>
+                                  	</c:when>
+                                  	<c:when test="${2 <= starAvg && starAvg < 3}">
+                                  		<i class="text-warning fa fa-star"></i> 
+                                  		<i class="text-warning fa fa-star"></i>
+                                  		<i class="text-muted fa fa-star"></i>
+                                  		<i class="text-muted fa fa-star"></i>
+                                  		<i class="text-muted fa fa-star"></i>
+                                  	</c:when>
+                                  	<c:when test="${3 <= starAvg && starAvg < 4}">
+                                  		<i class="text-warning fa fa-star"></i> 
+                                  		<i class="text-warning fa fa-star"></i>
+                                  		<i class="text-warning fa fa-star"></i>
+                                  		<i class="text-muted fa fa-star"></i>
+                                  		<i class="text-muted fa fa-star"></i>
+                                  	</c:when>
+                                  	<c:when test="${4 <= starAvg && starAvg < 5}">
+                                  		<i class="text-warning fa fa-star"></i> 
+                                  		<i class="text-warning fa fa-star"></i>
+                                  		<i class="text-warning fa fa-star"></i>
+                                  		<i class="text-warning fa fa-star"></i>
+                                  		<i class="text-muted fa fa-star"></i>
+                                  	</c:when>
+									<c:when test="${starAvg == 5}">
+                                  		<i class="text-warning fa fa-star"></i> 
+                                  		<i class="text-warning fa fa-star"></i>
+                                  		<i class="text-warning fa fa-star"></i>
+                                  		<i class="text-warning fa fa-star"></i>
+                                  		<i class="text-warning fa fa-star"></i>
+                                  	</c:when>	
+                                  	<c:otherwise>
+                                  		<i class="text-muted fa fa-star"></i>
+                                  		<i class="text-muted fa fa-star"></i>
+                                  		<i class="text-muted fa fa-star"></i>
+                                  		<i class="text-muted fa fa-star"></i>
+                                  		<i class="text-muted fa fa-star"></i>
+                                  	</c:otherwise>
+                                  </c:choose>
+                                <span class="list-inline-item text-dark"><small>리뷰평점</small> ${starAvg} | <small>Comments</small> ${reviewCnt}</span> <!-- 아직 리뷰정보에 관해서는 x -->
                             </p>
                             <ul class="list-inline">
                                 <li class="list-inline-item">
@@ -251,7 +295,7 @@
 							<!-- end/ 총 금액 표시  -->
 							<hr>
 							 <!-- 구매버튼 / add 장바구니 -->
-							 	<span>총 상품 금액: </span><span id="totalPrice">0 원</span><br><br>
+							 	<span>총 상품 금액: </span> <span id="totalPrice">0</span><span id="won">원</span><br><br>
 								 <div class="row pb-3">
                                     <div class="col d-grid">
                                         <button type="button" class="btn btn-success btn-lg" name="submit" value="buy" id="buyBtn">Buy</button>
@@ -452,17 +496,62 @@
 		        	</c:when>
 		        	<c:otherwise>
 			        	<c:forEach var="rev" items="${revList}">
-			        			
 			        	
-			        		<br>
-				        	<div class="card-body">
-			                             
-			                                ${rev.revTitle}
-						        			${rev.revContent}
-						        			<fmt:formatDate value="${rev.revWriteDate}" pattern="yyyy/MM/dd HH:mm:ss"/>
-							    <p class="text-center mb-0">$125.00</p>
+				        		<table>
+	                             	<tr>
+		                             	<c:choose>
+		        							<c:when test="${rev.starGrade == 1 }">
+			                             		<!-- ⭐ -->
+			                             		<i class="text-warning fa fa-star"></i>
+			                             		<i class="text-muted fa fa-star"></i>
+			                             		<i class="text-muted fa fa-star"></i>
+			                             		<i class="text-muted fa fa-star"></i>
+			                             		<i class="text-muted fa fa-star"></i>
+		                					</c:when>
+		                					<c:when test="${rev.starGrade == 2 }">
+			                             		<i class="text-warning fa fa-star"></i>
+			                             		<i class="text-warning fa fa-star"></i>
+			                             		<i class="text-muted fa fa-star"></i>
+			                             		<i class="text-muted fa fa-star"></i>
+			                             		<i class="text-muted fa fa-star"></i>
+		                					</c:when>
+		                					<c:when test="${rev.starGrade == 3 }">
+		                             			<i class="text-warning fa fa-star"></i>
+		                             			<i class="text-warning fa fa-star"></i>
+		                             			<i class="text-warning fa fa-star"></i>
+		                             			<i class="text-muted fa fa-star"></i>
+		                             			<i class="text-muted fa fa-star"></i>
+		                					</c:when>
+		                					<c:when test="${rev.starGrade == 4 }">
+		                             			<i class="text-warning fa fa-star"></i>
+		                             			<i class="text-warning fa fa-star"></i>
+		                             			<i class="text-warning fa fa-star"></i>
+		                             			<i class="text-warning fa fa-star"></i>
+		                             			<i class="text-muted fa fa-star"></i>
+		                					</c:when>
+		                					<c:when test="${rev.starGrade == 5 }">
+		                             			<i class="text-warning fa fa-star"></i>
+		                             			<i class="text-warning fa fa-star"></i>
+		                             			<i class="text-warning fa fa-star"></i>
+		                             			<i class="text-warning fa fa-star"></i>
+		                             			<i class="text-warning fa fa-star"></i>
+		                					</c:when>
+		                				</c:choose>
+					        			/ <fmt:formatDate value="${rev.revWriteDate}" pattern="yyyy/MM/dd HH:mm:ss"/><br>
+								    	<!-- <p class="text-center mb-0">$125.00</p> -->
+							    	</tr>
+							    	<tr>
+							    		/ ${rev.revTitle}
+							    	</tr>
+							    	<tr>
+							    		<td>
+							    		${rev.revContent}
+							    		</td>
+							    	</tr>
 							    
-			                </div>
+							    	
+							    </table>
+			                
 			        	</c:forEach>
 		        	</c:otherwise>
 	        	</c:choose>
@@ -500,11 +589,6 @@
 	        반품 교환 정보 당당
 	        <!--반품/교환정보 end  -->
 	        
-	        
-	        
-	        
-	        
-	         
 	    </div>
 	 </section>
  	<!-- 상세/리뷰/QnA/반품 end -->
@@ -514,17 +598,12 @@
 	 <section>
         
         <div class="container pb-5 bg-white">
-        
         	
         
         </div>
         
         
-        
-        
      </section>
-
- 
 
 
 	<script> //detail 내용에 대한 script 시작
@@ -540,6 +619,10 @@
 		 */
 		
 		/* href="${contextPath}/orderPage"; */
+		if($("#totalPrice").html() == 0){
+			alert("구매 목록을 확인 해주세요.");
+			return;
+		}
 		
 		
 		
@@ -781,7 +864,7 @@
 			}//end 이미 선택된 옵션입니다의 else문  
                             
 			totalPrice();
-			$("#totalPrice").html(totalPrice2 +" 원");
+			$("#totalPrice").html(totalPrice2);
 		
 			}); // change function,  end
 			
@@ -836,9 +919,11 @@
 				    				//재고가 없으면 실행문
 				    				alert("재고가 부족합니다. 현재 재고: " + response.prodCount + "개");
 				    				$(this).val(1);
+				    				//$(this).val(0);
 				    				$(this).closest("span").siblings(".perPrice").find(".rowPrice").html(1 * sellPrice);
+				    				//$(this).closest("span").siblings(".perPrice").find(".rowPrice").html(0);
 				    				totalPrice();
-				    				$("#totalPrice").html(totalPrice2 +" 원");
+				    				$("#totalPrice").html(totalPrice2);
 				    				
 				    				
 				    			}else{
@@ -847,7 +932,7 @@
 				    				$(this).val(beforeVal);
 				    				$(this).closest("span").siblings(".perPrice").find(".rowPrice").html(beforeVal * sellPrice);
 				    				totalPrice();
-				    				$("#totalPrice").html(totalPrice2 +" 원");
+				    				$("#totalPrice").html(totalPrice2);
 				    			}
 				    			
 				    			
@@ -891,7 +976,7 @@
 				    				$(this).closest("li").siblings("span").find(".prodQuantity").val(beforeVal);
 				    				$(this).closest("li").siblings(".perPrice").find(".rowPrice").html(beforeVal * sellPrice);
 				    				 totalPrice();
-				    				 $("#totalPrice").html(totalPrice2 +" 원");
+				    				 $("#totalPrice").html(totalPrice2);
 				    				
 				    			}else{
 				    				
@@ -899,7 +984,7 @@
 				    				$(this).closest("li").siblings("span").find(".prodQuantity").val(prodQuantityStr);
 				    				$(this).closest("li").siblings(".perPrice").find(".rowPrice").html(prodQuantityStr * sellPrice);
 				    				 totalPrice();
-				    				 $("#totalPrice").html(totalPrice2 +" 원");
+				    				 $("#totalPrice").html(totalPrice2);
 				    			}
 				    			
 				    			
@@ -926,13 +1011,13 @@
 					$(this).closest("li").siblings("span").find(".prodQuantity").val(1);	
 					$(this).closest("li").siblings(".perPrice").find(".rowPrice").html(1 * sellPrice);
 	   				 totalPrice();
-	   				$("#totalPrice").html(totalPrice2 +" 원");
+	   				$("#totalPrice").html(totalPrice2);
 				}else{
 				
 			 		$(this).closest("li").siblings("span").find(".prodQuantity").val(beforeVal - 1);
 			 		$(this).closest("li").siblings(".perPrice").find(".rowPrice").html((beforeVal - 1) * sellPrice);
 	   				 totalPrice();
-	   				$("#totalPrice").html(totalPrice2 +" 원");
+	   				$("#totalPrice").html(totalPrice2);
 				}
 				
 				 
@@ -968,7 +1053,7 @@
       		/* $(this).closest(".modalContain").html("") ; */
       		$(this).closest(".modalContain").remove();
       		totalPrice();
-			$("#totalPrice").html(totalPrice2 +" 원");
+			$("#totalPrice").html(totalPrice2);
       		   
 				 
 			});  // end  $("#optionEvent").on("click", ".closeModal", function() {

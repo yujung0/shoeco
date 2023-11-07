@@ -27,7 +27,7 @@
 	
 	<!--1 색상 당 사이즈 // detail에서 특정 컬러의 재고 파악을 위해 -->
 	<select id="selectSizePerColor">
-	   SELECT prodCode, color, prodSize, prodCount, prodOptionNo FROM SC_PRODUCTS_OPTION
+	   SELECT /*+ INDEX_ASC(SC_PRODUCTS_OPTION IDX_PRODSIZE)*/ prodCode, color, prodSize, prodCount, prodOptionNo FROM SC_PRODUCTS_OPTION
 	   WHERE prodCode = #{prodCode} AND color = #{color} 
 	</select>
 	

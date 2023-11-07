@@ -251,7 +251,7 @@
 	                   <div>
                         <li class="nav-item">
                           <%--  <a class="nav-link" href="${contextPath}/list?gender=남성">MEN</a> --%>
-                           <a class="nav-link" href="${contextPath}/list?gender=공용">MEN</a>
+                           <a class="nav-link" href="${contextPath}/list?gender=남성">MEN</a>
 								<div class="smallCategories">
 	                        		<p>운동화</p>
 	                        		<p>구두</p>
@@ -263,7 +263,7 @@
                         </div>  
                         <div>   
                         <li class="nav-item">
-                            <a class="nav-link" href="shop.html">WOMEN</a>
+                            <a class="nav-link" href="${contextPath}/list?gender=여성">WOMEN</a>
 	                        	<div class="smallCategories">
 	                        		<p>운동화</p>
 	                        		<p>구두</p>

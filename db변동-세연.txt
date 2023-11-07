@@ -1,4 +1,4 @@
-db변동사항 - 세연
+--db변동사항 - 세연
 
 --sellNo에 대한 시퀀스 생성 얘는 option에 대한 판매임 부분 환불을 위해 필요한 소단위 sellNO
 CREATE SEQUENCE SHOECO.SEQ_sellNo_SELL 
@@ -58,6 +58,14 @@ ADD revWidth NUMBER(1,0);
 --리뷰남길때 구매한 옵션 코드& 사이즈도 
 ALTER TABLE SC_REV
 ADD prodOptionNo NUMBER(10,0) constraint FK_PRODOPTIONNO_REV REFERENCES SC_PRODUCTS_OPTION(PRODOPTIONNO);
+
+----------------------------------------------
+--인덱스 생성
+CREATE INDEX IDX_PRODSIZE ON SC_PRODUCTS_OPTION (prodSize);
+
+SELECT /*+ INDEX_ASC(SC_PRODUCTS_OPTION IDX_PRODSIZE)*/ prodCode, color, prodSize, prodCount, prodOptionNo FROM SC_PRODUCTS_OPTION
+WHERE prodCode = 1 AND color = '검정' ;
+
 
 
 

@@ -73,6 +73,8 @@ public class SCDetailController {
 		
 		model.addAttribute("starAvg",starAvg);
 		System.out.println(starAvg);
+		
+		model.addAttribute("reviewCnt",revList.size());
 		 
 		
 	}
