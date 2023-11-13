@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-
+<!-- main 검색 전에 보존  -->
 <c:set var="contextPath" value="${pageContext.request.contextPath }" /> 
      
 <!DOCTYPE html>
@@ -118,10 +118,6 @@
         gap: 10px;
         margin-top: 20px;
     }
-    
-    
- 
-	
 </style>
 	
 </head>
@@ -191,11 +187,7 @@
 
 
          <div style="display: inline;">
-         	<div style="display: flex;"><input type="text" id="mainSearch" style="width: 120mm;%" flex="1" aceholder="검색어 입력" ><button class="services-icon-wap" flex="1">검색</button></div>
-         	<div id="searchBoard" class="searchBoard" style="position: absolute;z-index: 999;background-color: white;width: 120mm;%" > 
-	         	  
-         	
-         	</div>
+         	<input type="text" placeholder="검색어 입력"><button class="services-icon-wap">검색</button>
          </div>
          <div style="display: inline;">
 			<a class="nav-icon position-relative text-decoration-none" id="faq-chatbot">
@@ -338,18 +330,6 @@
     var chatbotWindow = document.getElementById("chatbot-window");
         chatbotWindow.style.display = "none";
         });
-    
-    
-    //
-    //검색창 관련 (addEventListner를 on대신 사용해보겠음))
-    document.getElementById("mainSearch").addEventListener("input",function(){
-    	var searchVal = document.getElementById("mainSearch").value;
-    	$(".searchBoard").text(searchVal);
-     	
-    });
-    
-    
-    
 </script>
     
     

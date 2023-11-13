@@ -158,7 +158,7 @@
 							                           		</c:when>
 							                           		<c:otherwise>
 							                           			<em>
-							                           				<span style="color: gray;"><c:out value="${one3.prodSize}"/></span>
+							                           				<span style="color: gray; text-decoration: line-through;"><c:out value="${one3.prodSize}"/></span>
 							                           			</em>
 							                           		</c:otherwise>
 							                           	</c:choose>	
