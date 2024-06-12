@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shoeco.shoeco.admin.mapper.SCAdminMapper">
+ 
+<!-- 2309182109 장유정 -->
+  
+<!-- 상품 등록 -->
+<insert id="shoesEnroll">
+	INSERT INTO SHOECO.SC_PRODUCTS(prodName, gender, sellPrice, category, material, country, regDate, updateDate, prodDiscount, prodContents, prodStock, brandCode)
+	VALUES (
+   #{prodName},    
+   #{gender},      
+   #{sellPrice},   
+   #{category},  
+   #{material},  
+   #{country},  
+   SYSDATE,     
+   SYSDATE,     
+   #{prodDiscount},   
+   #{prodContents},
+   #{prodStock},   
+   #{brandCode}
+)
+</insert>
+ 
+<!-- 2309281606 장유정 - 카테고리 리스트 -->
+<!-- resultType 은 반환타입으로 클래스 자체를 가져와 참조 -->
+<select id="cateList" resultType="com.shoeco.shoeco.admin.model.SCCateVO">
+	SELECT *
+	FROM SC_BCATE
+	ORDER BY cateCode
+</select>
+  
+</mapper>

@@ -12,16 +12,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.shoeco.shoeco.common.domain.SCOptionVO;
+import com.shoeco.shoeco.common.domain.SCRevVO;
 import com.shoeco.shoeco.common.service.SCDetailService;
+import com.shoeco.shoeco.common.service.SCRevService;
 
 @Controller
 //@RequestMapping("/detail")
 public class SCDetailController {
 
 	private SCDetailService scDetailService;
+	private SCRevService scRevService;
 	
-	public SCDetailController(SCDetailService scDetailService) {
+	public SCDetailController(SCDetailService scDetailService, SCRevService scRevService) {
 		this.scDetailService = scDetailService;
+		this.scRevService = scRevService;
 	}
 	
 	@GetMapping("/detail")
@@ -33,6 +37,46 @@ public class SCDetailController {
 		model.addAttribute("prodSize",scDetailService.getSize(prodCode));
 		model.addAttribute("product",scDetailService.getProduct(prodCode));
 		System.out.println("detail로가는 컨트롤러");
+		
+		//231010 리뷰 부분 추가 
+		List<SCRevVO> revList = scRevService.getRevList(prodCode);
+		model.addAttribute("revList",revList);
+		float starAvg = 0f;
+		
+		if(revList.size() != 0) {
+			int[] revSize= new int[5];
+			int[] revColor = new int[3];
+			int[] revWidth = new int[5];
+			
+			for(int i = 0 ; i < revList.size(); i ++) {
+				starAvg += revList.get(i).getStarGrade();
+				
+				//인덱스 = 점수 -1
+				revSize[revList.get(i).getRevSize() - 1] += 1;
+				revColor[revList.get(i).getRevColor() - 1] += 1;
+				revWidth[revList.get(i).getRevWidth() - 1] += 1;
+				
+			}
+			
+			starAvg /= revList.size();
+			model.addAttribute("revSize",revSize);
+			model.addAttribute("revColor",revColor);
+			model.addAttribute("revWidth",revWidth);
+		
+		}else {
+			starAvg = 0;
+			model.addAttribute("revSize",-100);
+			model.addAttribute("revColor",-100);
+			model.addAttribute("revWidth",-100);
+		
+		}
+		
+		model.addAttribute("starAvg",starAvg);
+		System.out.println(starAvg);
+		
+		model.addAttribute("reviewCnt",revList.size());
+		 
+		
 	}
 	
 	//사이즈 별 재고 파익을 위한 ajax
@@ -80,7 +124,7 @@ public class SCDetailController {
 	
 	
 	
-
+	
 
 	
 	

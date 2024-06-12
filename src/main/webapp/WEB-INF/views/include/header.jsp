@@ -118,6 +118,10 @@
         gap: 10px;
         margin-top: 20px;
     }
+    
+    
+ 
+	
 </style>
 	
 </head>
@@ -187,7 +191,11 @@
 
 
          <div style="display: inline;">
-         	<input type="text" placeholder="검색어 입력"><button>검색</button>
+         	<div style="display: flex;"><input type="text" id="mainSearch" style="width: 120mm;%" flex="1" aceholder="검색어 입력" ><button class="services-icon-wap" flex="1">검색</button></div>
+         	<div id="searchBoard" class="searchBoard" style="position: absolute;z-index: 999;background-color: white;width: 120mm;%" > 
+	         	  
+         	
+         	</div>
          </div>
          <div style="display: inline;">
 			<a class="nav-icon position-relative text-decoration-none" id="faq-chatbot">
@@ -237,7 +245,7 @@
                     <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
                        <div>
                        		<li class="nav-item">
-	                            <a class="nav-link" href="index.html">BRAND</a>
+	                            <a class="nav-link" href="${contextPath}/list?gender=공용">BRAND</a>
 	                             	<div class="smallCategories">
 		                        		<p>아디다스</p>
 		                        		<p>나이키</p>
@@ -251,7 +259,7 @@
 	                   <div>
                         <li class="nav-item">
                           <%--  <a class="nav-link" href="${contextPath}/list?gender=남성">MEN</a> --%>
-                           <a class="nav-link" href="${contextPath}/list?gender=공용">MEN</a>
+                           <a class="nav-link" href="${contextPath}/list?gender=남성">MEN</a>
 								<div class="smallCategories">
 	                        		<p>운동화</p>
 	                        		<p>구두</p>
@@ -263,7 +271,7 @@
                         </div>  
                         <div>   
                         <li class="nav-item">
-                            <a class="nav-link" href="shop.html">WOMEN</a>
+                            <a class="nav-link" href="${contextPath}/list?gender=여성">WOMEN</a>
 	                        	<div class="smallCategories">
 	                        		<p>운동화</p>
 	                        		<p>구두</p>
@@ -330,6 +338,18 @@
     var chatbotWindow = document.getElementById("chatbot-window");
         chatbotWindow.style.display = "none";
         });
+    
+    
+    //
+    //검색창 관련 (addEventListner를 on대신 사용해보겠음))
+    document.getElementById("mainSearch").addEventListener("input",function(){
+    	var searchVal = document.getElementById("mainSearch").value;
+    	$(".searchBoard").text(searchVal);
+     	
+    });
+    
+    
+    
 </script>
     
     

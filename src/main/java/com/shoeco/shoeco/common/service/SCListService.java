@@ -18,5 +18,5 @@ public interface SCListService {
 	public Long MaxPrice(@RequestParam("paging") ListPagingDTO paging);
 
 	//5 조건 검색시 값이 안나올때 다시 range이용할때 표시할 최대값 
-	public long totalMaxPrice();
+	public Long totalMaxPrice();
 }

@@ -1,0 +1,73 @@
+--db변동사항 - 세연
+
+--sellNo에 대한 시퀀스 생성 얘는 option에 대한 판매임 부분 환불을 위해 필요한 소단위 sellNO
+CREATE SEQUENCE SHOECO.SEQ_sellNo_SELL 
+START WITH 1 ;
+DROP SEQUENCE SEQ_sellNO;
+
+--total 테이블을 먼저 만드므로 굳이 안만들겟음 
+--테이블 추가 해야함 sellNO 테이블에 기본키가 아닌 공통적인 시퀸스를 만들고 한번에 결제에 관해서 만듬 / 매핑이라고 생각하는게 좋을 듯 /기본키는 없게함 
+CREATE TABLE SC_PRODUCTS_SELL_TOTAL
+(sellTotalNo NUMBER(10,0),userId VARCHAR2(50));
+
+CREATE SEQUENCE SHOECO.SEQ_sellTotalNo_SELL_TOTAL START WITH 1; 
+
+ALTER TABLE SC_PRODUCTS_SELL_TOTAL
+ADD CONSTRAINT pk_sellTotalNo_sell_total PRIMARY KEY (sellTotalNo) ;
+
+--sell 테이블에 sellTotalNo컬럼 추가
+ALTER TABLE SC_PRODUCTS_SELL 
+ADD sellTotalNO NUMBER(10,0) CONSTRAINT fk_sellTotalNo_SELL_TOTAL  REFERENCES SC_PRODUCTS_SELL_TOTAL(sellTotalNo);
+
+-- 230929  추가
+--timestamp추가 
+ALTER TABLE SC_PRODUCTS_SELL_TOTAL
+ADD SELLTOTALTIME timestamp default systimestamp;
+
+--마일리지 사용을 위한 추가 
+ALTER TABLE SC_PRODUCTS_SELL_TOTAL
+ADD usedMileage NUMBER(10,0) default 0 ;
+COMMIT;
+
+--환불을 위한 추가
+ALTER TABLE SC_PRODUCTS_SELL_TOTAL
+ADD MID VARCHAR2(60) NOT NULL;
+
+
+--231010 리뷰 추가 
+
+--좋아요 컬럼 추가 
+ALTER TABLE SC_REV
+ADD revLike NUMBER(10,0) default 0;
+COMMIT;
+
+--date 유형 timestamp로 변경
+ALTER TABLE SC_REV
+MODIFY revWriteDate timestamp(0) default systimestamp;
+
+--5지 선다로 평가 선택(사이즈/색상/발볼)
+ALTER TABLE SC_REV
+ADD revSize NUMBER(1,0);
+
+ALTER TABLE SC_REV
+ADD revColor NUMBER(1,0) ;
+
+ALTER TABLE SC_REV
+ADD revWidth NUMBER(1,0);
+
+--리뷰남길때 구매한 옵션 코드& 사이즈도 
+ALTER TABLE SC_REV
+ADD prodOptionNo NUMBER(10,0) constraint FK_PRODOPTIONNO_REV REFERENCES SC_PRODUCTS_OPTION(PRODOPTIONNO);
+
+----------------------------------------------
+--인덱스 생성
+CREATE INDEX IDX_PRODSIZE ON SC_PRODUCTS_OPTION (prodSize);
+
+SELECT /*+ INDEX_ASC(SC_PRODUCTS_OPTION IDX_PRODSIZE)*/ prodCode, color, prodSize, prodCount, prodOptionNo FROM SC_PRODUCTS_OPTION
+WHERE prodCode = 1 AND color = '검정' ;
+
+
+
+
+
+ 

@@ -23,5 +23,7 @@ public interface SCDetailService {
 	public long getOneProdCount( long prodCode,  String color, long prodSize); 
 		
 	public SCMemberVO getMember(String userId) ;
-
+	
+	//optionNo로 뽑아내는 방식으로 정정
+	public SCOptionVO getByOptionNo(long prodOptionNo) ;
 }

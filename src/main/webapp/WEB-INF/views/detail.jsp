@@ -30,11 +30,16 @@
  	right: 28px;
  	}
  
- 	#totalPrice{
+ 	#won{
  	position : absolute ;
  	right: 28px;
  	}
- 
+ 	
+ 	#totalPrice{
+ 	position : absolute ;
+ 	right: 45px;
+ 	}
+ 	 
   	 
  </style>
  
@@ -77,7 +82,9 @@
                         </div>
                         <!--End Controls-->
                         <!--Start Carousel Wrapper-->
-                        <div id="multi-item-example" class="col-10 carousel slide carousel-multi-item" data-bs-ride="carousel">
+                     		<!--    <div id="multi-item-example" class="col-10 carousel slide carousel-multi-item" data-bs-ride="carousel">
+                      		-->   
+                      		<div id="multi-item-example" class="col-10 carousel slide carousel-multi-item" data-bs-ride="carousel">
                             <!--Start Slides-->
                             <div class="carousel-inner product-links-wap" role="listbox">
 
@@ -160,7 +167,7 @@
                         <!--End Controls-->
                     </div>
                 </div>
-                <!-- col end -->
+                <!-- col end --> 
                 <div class="col-lg-7 mt-5">
                     <div class="card">
                         <div class="card-body"> <!-- div class="card-body"  -->
@@ -168,12 +175,51 @@
                             <h1 class="h2">${product.get(0).prodName} </h1>
                             <p class="h3 py-2">₩ <fmt:formatNumber value="${product.get(0).sellPrice}" pattern="#,###"/></p>   
                             <p class="py-2">
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-secondary"></i>
-                                <span class="list-inline-item text-dark"><small>리뷰평점</small> 4.8 | 36 Comments</span> <!-- 아직 리뷰정보에 관해서는 x -->
+                                <c:choose>
+                                  	<c:when test="${1 <= starAvg && starAvg < 2}">
+                                  		<i class="text-warning fa fa-star"></i> 
+                                  		<i class="text-muted fa fa-star"></i>
+                                  		<i class="text-muted fa fa-star"></i>
+                                  		<i class="text-muted fa fa-star"></i>
+                                  		<i class="text-muted fa fa-star"></i>
+                                  	</c:when>
+                                  	<c:when test="${2 <= starAvg && starAvg < 3}">
+                                  		<i class="text-warning fa fa-star"></i> 
+                                  		<i class="text-warning fa fa-star"></i>
+                                  		<i class="text-muted fa fa-star"></i>
+                                  		<i class="text-muted fa fa-star"></i>
+                                  		<i class="text-muted fa fa-star"></i>
+                                  	</c:when>
+                                  	<c:when test="${3 <= starAvg && starAvg < 4}">
+                                  		<i class="text-warning fa fa-star"></i> 
+                                  		<i class="text-warning fa fa-star"></i>
+                                  		<i class="text-warning fa fa-star"></i>
+                                  		<i class="text-muted fa fa-star"></i>
+                                  		<i class="text-muted fa fa-star"></i>
+                                  	</c:when>
+                                  	<c:when test="${4 <= starAvg && starAvg < 5}">
+                                  		<i class="text-warning fa fa-star"></i> 
+                                  		<i class="text-warning fa fa-star"></i>
+                                  		<i class="text-warning fa fa-star"></i>
+                                  		<i class="text-warning fa fa-star"></i>
+                                  		<i class="text-muted fa fa-star"></i>
+                                  	</c:when>
+									<c:when test="${starAvg == 5}">
+                                  		<i class="text-warning fa fa-star"></i> 
+                                  		<i class="text-warning fa fa-star"></i>
+                                  		<i class="text-warning fa fa-star"></i>
+                                  		<i class="text-warning fa fa-star"></i>
+                                  		<i class="text-warning fa fa-star"></i>
+                                  	</c:when>	
+                                  	<c:otherwise>
+                                  		<i class="text-muted fa fa-star"></i>
+                                  		<i class="text-muted fa fa-star"></i>
+                                  		<i class="text-muted fa fa-star"></i>
+                                  		<i class="text-muted fa fa-star"></i>
+                                  		<i class="text-muted fa fa-star"></i>
+                                  	</c:otherwise>
+                                  </c:choose>
+                                <span class="list-inline-item text-dark"><small>리뷰평점</small> ${starAvg} | <small>Comments</small> ${reviewCnt}</span> <!-- 아직 리뷰정보에 관해서는 x -->
                             </p>
                             <ul class="list-inline">
                                 <li class="list-inline-item">
@@ -203,48 +249,6 @@
                             <h6><strong>배송 관련 정보: <br></strong></h6>
                             <p>-추 후 업뎃</p>
                             <hr>
-                       <!-- <ul class="list-unstyled pb-3">
-                                <li>Lorem ipsum dolor sit</li>
-                                <li>Amet, consectetur</li>
-                                <li>Adipiscing elit,set</li>
-                                <li>Duis aute irure</li>
-                                <li>Ut enim ad minim</li>
-                                <li>Dolore magna aliqua</li>
-                                <li>Excepteur sint</li>
-                            </ul>   -->
-
-                           <%--  <form action="" method="GET">
-                                <input type="hidden" name="product-title" value="Activewear">
-                                <div class="row">
-                                    <div class="col-auto">
-                                        <ul class="list-inline pb-3">
-                                            <li class="list-inline-item">Size :
-                                                <input type="hidden" name="product-size" id="product-size" value="S">
-                                            </li>
-                                            
-      										<c:forEach var="size" items="${prodSize}">						                                     
-	                                            <li class="list-inline-item"><span class="btn btn-success btn-size">${size.prodSize }</span></li>
-	                       <!--                      <li class="list-inline-item"><span class="btn btn-success btn-size">M</span></li>
-	                                            <li class="list-inline-item"><span class="btn btn-success btn-size">L</span></li>
-	                                            <li class="list-inline-item"><span class="btn btn-success btn-size">XL</span></li> -->
-                                        	</c:forEach>
-                                        </ul>
-                                    </div>
-                                    <div class="col-auto">
-                                        <ul class="list-inline pb-3">
-                                            <li class="list-inline-item text-right">
-                                                Quantity
-                                                <input type="hidden" name="product-quanity" id="product-quanity" value="1">
-                                            </li>
-                                            <li class="list-inline-item"><span class="btn btn-success" id="btn-minus">-</span></li>
-                                            <li class="list-inline-item"><span class="badge bg-secondary" id="var-value">1</span></li>
-                                            <li class="list-inline-item"><span class="btn btn-success" id="btn-plus">+</span></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                               
-                            </form> 색상/ 종류 담는 option 항목으로 변경 --%>
-							 
 								<div id="ProdColor">
 									<select id="selectClass">
 										<!--<option></option> -->
@@ -291,7 +295,7 @@
 							<!-- end/ 총 금액 표시  -->
 							<hr>
 							 <!-- 구매버튼 / add 장바구니 -->
-							 	<span>총 상품 금액: </span><span id="totalPrice">0 원</span><br><br>
+							 	<span>총 상품 금액: </span> <span id="totalPrice">0</span><span id="won">원</span><br><br>
 								 <div class="row pb-3">
                                     <div class="col d-grid">
                                         <button type="button" class="btn btn-success btn-lg" name="submit" value="buy" id="buyBtn">Buy</button>
@@ -325,6 +329,283 @@
     	
     </section> <!-- Close Content -->
     
+	<!-- 원래 script 구역-->
+	
+
+
+
+
+
+
+
+
+
+ 	<!-- 상세/리뷰/QnA/반품 start-->
+	 <section>
+        
+        <div class="container pb-5 bg-white">
+        
+        	<!--상세정보 start  -->
+	        <nav><br>
+	        	<p id="aa"></p><!-- 임시로 페이지 이동 실험  -->
+	            <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
+	                <button class="nav-link active" type="button"><a href="#aa">상세정보</a></button> 
+	                <button class="nav-link" type="button"><a href="#bb">리뷰</a></button>
+	                <button class="nav-link" type="button"><a href="#cc">QnA</a></button>
+	                <button class="nav-link" type="button"><a href="#dd">반품/교환 정보</a></button>
+				</div>
+	        </nav>
+	        <br>
+	        <img src="./resources/img/000090110005.jpg" width="65%">
+	        <br>
+	        임시로 넣은 제 찰칵-사진입니다. 앗 카메라를 본격적으로 잡은지 1년하고 반은 지났네요!<br> 
+	        슈코 멤바들은 언젠가 이 짤을 보겠죠 / 20023-10-10 21:59 (푸쉬 전)
+	        <!--상세정보 end  -->
+	        
+	        
+	        
+	        <!--리뷰 start  -->
+	        <nav><br>
+	        	<p id="bb"></p><!-- 임시로 페이지 이동 실험  -->
+	            <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
+	                <button class="nav-link" type="button"><a href="#aa">상세정보</a></button> 
+	                <button class="nav-link active" type="button"><a href="#bb">리뷰</a></button>
+	                <button class="nav-link" type="button"><a href="#cc">QnA</a></button>
+	                <button class="nav-link" type="button"><a href="#dd">반품/교환 정보</a></button>
+				</div>
+	        </nav>
+	        	<!--평점표시/리뷰  -->
+	  		
+	  		 
+	  		<div>
+	  			<table style="text-align: center;">
+	  				<tr>
+	  					<td>전체평점</td>
+	  					<td>사이즈</td>
+	  					<td>색상</td>
+	  					<td>발볼</td>
+	  				</tr>
+	  				
+	  				<tr>
+		  				<td>${starAvg}</td>
+	  					<td>
+	  						<c:choose>
+	  							<c:when test="${revList.size() == 0}">
+	  								0<br>
+	  								없음
+	  							</c:when>
+	  							<c:otherwise>
+									<c:forEach var="revSizeOne" items="${revSize}" varStatus="each">
+			  							<c:choose>
+			  								<c:when test="${each.index == 0 }">
+			  										10mm 정도 작음 	
+			  								</c:when>
+			  								<c:when test="${each.index == 1 }">
+			  										5mm 정도 작음 
+			  								</c:when>
+			  								<c:when test="${each.index == 2 }">
+			  										정사이즈
+			  								</c:when>
+			  								<c:when test="${each.index == 3 }">
+			  										5mm 정도 큼
+			  								</c:when>
+			  								<c:when test="${each.index == 4 }">
+			  										10mm 정도 큼
+			  								</c:when>
+			  							
+			  							</c:choose>
+	  									: ${revSizeOne} 명<br>
+	  								</c:forEach>	  								
+	  							</c:otherwise>
+	  						</c:choose>
+	  					</td>
+	  					<td>
+	  						<c:choose>
+	  							<c:when test="${revList.size() == 0}">
+	  								0<br>
+	  								없음
+	  							</c:when>
+	  							<c:otherwise>
+			  						<c:forEach var="revColorOne" items="${revColor}" varStatus="eachTwo">
+			  							<c:choose>
+			  								<c:when test="${eachTwo.index == 0 }">
+			  										화면보다 더 밝음 	
+			  								</c:when>
+			  								<c:when test="${eachTwo.index == 1 }">
+			  										화면과 비슷함 
+			  								</c:when>
+			  								<c:when test="${eachTwo.index == 2 }">
+			  										화면보다 더 어두음 
+			  								</c:when>
+			  							 
+			  							
+			  							</c:choose>
+			  							: ${revColorOne} 명<br>
+			  						</c:forEach>
+			  					</c:otherwise>
+			  				</c:choose>
+	  					</td>
+	  					
+	  					<td>
+	  						<c:choose>
+	  							<c:when test="${revList.size() == 0}">
+	  								0<br>
+	  								없음
+	  							</c:when>
+	  							<c:otherwise>
+									<c:forEach var="revWidthOne" items="${revWidth}" varStatus="eachThree">
+			  							<c:choose>
+			  								<c:when test="${eachThree.index == 0 }">
+			  										 아주 좁음	
+			  								</c:when>
+			  								<c:when test="${eachThree.index == 1 }">
+			  										좁음
+			  								</c:when>
+			  								<c:when test="${eachThree.index == 2 }">
+			  										적당함
+			  								</c:when>
+			  								<c:when test="${eachThree.index == 3 }">
+			  										넓음
+			  								</c:when>
+			  								<c:when test="${eachThree.index == 4 }">
+			  										아주 넓음
+			  								</c:when>
+			  							
+			  							</c:choose>
+			  							
+			  							: ${revWidthOne} 명<br>
+			  						</c:forEach>
+		  						</c:otherwise>
+		  					</c:choose>
+						</td>
+	  				</tr>
+	  			
+	  			
+	  			</table>
+	  			
+	  		</div>      
+	  		<hr>
+	        	<!-- 진짜 리뷰 list -->
+	        <div>
+	        	<c:choose>
+		        	<c:when test="${revList.size() == 0 }">
+						<div style="margin: auto;">
+			        	    <img src="./resources/img/revpage/norev.png" style="display:block; margin: auto;">  
+							<p style="text-align: center;">작성된 리뷰가 없습니다.</p>	        		
+		        		</div>
+		        	</c:when>
+		        	<c:otherwise>
+			        	<c:forEach var="rev" items="${revList}">
+			        	
+				        		<table>
+	                             	<tr>
+		                             	<c:choose>
+		        							<c:when test="${rev.starGrade == 1 }">
+			                             		<!-- ⭐ -->
+			                             		<i class="text-warning fa fa-star"></i>
+			                             		<i class="text-muted fa fa-star"></i>
+			                             		<i class="text-muted fa fa-star"></i>
+			                             		<i class="text-muted fa fa-star"></i>
+			                             		<i class="text-muted fa fa-star"></i>
+		                					</c:when>
+		                					<c:when test="${rev.starGrade == 2 }">
+			                             		<i class="text-warning fa fa-star"></i>
+			                             		<i class="text-warning fa fa-star"></i>
+			                             		<i class="text-muted fa fa-star"></i>
+			                             		<i class="text-muted fa fa-star"></i>
+			                             		<i class="text-muted fa fa-star"></i>
+		                					</c:when>
+		                					<c:when test="${rev.starGrade == 3 }">
+		                             			<i class="text-warning fa fa-star"></i>
+		                             			<i class="text-warning fa fa-star"></i>
+		                             			<i class="text-warning fa fa-star"></i>
+		                             			<i class="text-muted fa fa-star"></i>
+		                             			<i class="text-muted fa fa-star"></i>
+		                					</c:when>
+		                					<c:when test="${rev.starGrade == 4 }">
+		                             			<i class="text-warning fa fa-star"></i>
+		                             			<i class="text-warning fa fa-star"></i>
+		                             			<i class="text-warning fa fa-star"></i>
+		                             			<i class="text-warning fa fa-star"></i>
+		                             			<i class="text-muted fa fa-star"></i>
+		                					</c:when>
+		                					<c:when test="${rev.starGrade == 5 }">
+		                             			<i class="text-warning fa fa-star"></i>
+		                             			<i class="text-warning fa fa-star"></i>
+		                             			<i class="text-warning fa fa-star"></i>
+		                             			<i class="text-warning fa fa-star"></i>
+		                             			<i class="text-warning fa fa-star"></i>
+		                					</c:when>
+		                				</c:choose>
+					        			/ <fmt:formatDate value="${rev.revWriteDate}" pattern="yyyy/MM/dd HH:mm:ss"/><br>
+								    	<!-- <p class="text-center mb-0">$125.00</p> -->
+							    	</tr>
+							    	<tr>
+							    		/ ${rev.revTitle}
+							    	</tr>
+							    	<tr>
+							    		<td>
+							    		${rev.revContent}
+							    		</td>
+							    	</tr>
+							    
+							    	
+							    </table>
+			                
+			        	</c:forEach>
+		        	</c:otherwise>
+	        	</c:choose>
+	        </div>
+		        
+	        	<!--평점표시/리뷰 end -->
+	  		    
+	        <!--리뷰 end  -->
+	        
+	        
+	        <!--QnA start  -->
+	        <nav><br>
+	        	<p id="cc"></p><!-- 임시로 페이지 이동 실험  -->
+	            <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
+	                <button class="nav-link" type="button"><a href="#aa">상세정보</a></button> 
+	                <button class="nav-link" type="button"><a href="#bb">리뷰</a></button>
+	                <button class="nav-link active" type="button"><a href="#cc">QnA</a></button>
+	                <button class="nav-link" type="button"><a href="#dd">반품/교환 정보</a></button>
+				</div>
+	        </nav>
+	        qna이당당
+	        
+	        <!--QnA end  -->
+	        
+	        <!--반품/교환정보 start  -->
+	        <nav><br>
+	        	<p id="dd"></p><!-- 임시로 페이지 이동 실험  -->
+	            <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
+	                <button class="nav-link" type="button"><a href="#aa">상세정보</a></button> 
+	                <button class="nav-link" type="button"><a href="#bb">리뷰</a></button>
+	                <button class="nav-link" type="button"><a href="#cc">QnA</a></button>
+	                <button class="nav-link active" type="button"><a href="#dd">반품/교환 정보</a></button>
+				</div>
+	        </nav>
+	        반품 교환 정보 당당
+	        <!--반품/교환정보 end  -->
+	        
+	    </div>
+	 </section>
+ 	<!-- 상세/리뷰/QnA/반품 end -->
+	 
+	 
+	<!-- 리뷰 부분 start-->
+	 <section>
+        
+        <div class="container pb-5 bg-white">
+        	
+        
+        </div>
+        
+        
+     </section>
+
+
 	<script> //detail 내용에 대한 script 시작
 	
 	//232:  결제 버튼 눌렀을때 관련 script----------------------
@@ -338,15 +619,18 @@
 		 */
 		
 		/* href="${contextPath}/orderPage"; */
+		if($("#totalPrice").html() == 0){
+			alert("구매 목록을 확인 해주세요.");
+			return;
+		}
+		
+		
 		
 		var selectedColor2 = "";
 		var optionSizeV2 = "";
 		var perPrice2 = "" ;
 		var perCount2 = "";
-		
-/* 		var prodColorArray = "";
-		var prodSizeArray = "";
- */		var optionNoVArray = "";
+ 		var optionNoVArray = "";
 		var countArray = "";
 		var perCountArray =""
 		
@@ -580,7 +864,7 @@
 			}//end 이미 선택된 옵션입니다의 else문  
                             
 			totalPrice();
-			$("#totalPrice").html(totalPrice2 +" 원");
+			$("#totalPrice").html(totalPrice2);
 		
 			}); // change function,  end
 			
@@ -635,9 +919,11 @@
 				    				//재고가 없으면 실행문
 				    				alert("재고가 부족합니다. 현재 재고: " + response.prodCount + "개");
 				    				$(this).val(1);
+				    				//$(this).val(0);
 				    				$(this).closest("span").siblings(".perPrice").find(".rowPrice").html(1 * sellPrice);
+				    				//$(this).closest("span").siblings(".perPrice").find(".rowPrice").html(0);
 				    				totalPrice();
-				    				$("#totalPrice").html(totalPrice2 +" 원");
+				    				$("#totalPrice").html(totalPrice2);
 				    				
 				    				
 				    			}else{
@@ -646,7 +932,7 @@
 				    				$(this).val(beforeVal);
 				    				$(this).closest("span").siblings(".perPrice").find(".rowPrice").html(beforeVal * sellPrice);
 				    				totalPrice();
-				    				$("#totalPrice").html(totalPrice2 +" 원");
+				    				$("#totalPrice").html(totalPrice2);
 				    			}
 				    			
 				    			
@@ -690,7 +976,7 @@
 				    				$(this).closest("li").siblings("span").find(".prodQuantity").val(beforeVal);
 				    				$(this).closest("li").siblings(".perPrice").find(".rowPrice").html(beforeVal * sellPrice);
 				    				 totalPrice();
-				    				 $("#totalPrice").html(totalPrice2 +" 원");
+				    				 $("#totalPrice").html(totalPrice2);
 				    				
 				    			}else{
 				    				
@@ -698,7 +984,7 @@
 				    				$(this).closest("li").siblings("span").find(".prodQuantity").val(prodQuantityStr);
 				    				$(this).closest("li").siblings(".perPrice").find(".rowPrice").html(prodQuantityStr * sellPrice);
 				    				 totalPrice();
-				    				 $("#totalPrice").html(totalPrice2 +" 원");
+				    				 $("#totalPrice").html(totalPrice2);
 				    			}
 				    			
 				    			
@@ -725,13 +1011,13 @@
 					$(this).closest("li").siblings("span").find(".prodQuantity").val(1);	
 					$(this).closest("li").siblings(".perPrice").find(".rowPrice").html(1 * sellPrice);
 	   				 totalPrice();
-	   				$("#totalPrice").html(totalPrice2 +" 원");
+	   				$("#totalPrice").html(totalPrice2);
 				}else{
 				
 			 		$(this).closest("li").siblings("span").find(".prodQuantity").val(beforeVal - 1);
 			 		$(this).closest("li").siblings(".perPrice").find(".rowPrice").html((beforeVal - 1) * sellPrice);
 	   				 totalPrice();
-	   				$("#totalPrice").html(totalPrice2 +" 원");
+	   				$("#totalPrice").html(totalPrice2);
 				}
 				
 				 
@@ -767,7 +1053,7 @@
       		/* $(this).closest(".modalContain").html("") ; */
       		$(this).closest(".modalContain").remove();
       		totalPrice();
-			$("#totalPrice").html(totalPrice2 +" 원");
+			$("#totalPrice").html(totalPrice2);
       		   
 				 
 			});  // end  $("#optionEvent").on("click", ".closeModal", function() {
@@ -781,55 +1067,13 @@
 		
 	
 	</script>
-	
-
-
-
-
-
-
-
-
-
-
-    <!-- 상품 관련 정보 Article -->
-	 <section>
-        
-        <div class="container pb-5 bg-white">
-	        <nav><br>
-	            <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
-	                <button class="nav-link active" id="nav-prodInfo-tab" data-bs-toggle="tab" data-bs-target="#nav-prodInfo" type="button" role="tab" aria-controls="nav-prodInfo" aria-selected="true">상세정보</button>
-	                <button class="nav-link" id="nav-review-tab" data-bs-toggle="tab" data-bs-target="#nav-review" type="button" role="tab" aria-controls="nav-review" aria-selected="false">리뷰</button>
-	                <button class="nav-link" id="nav-qna-tab" data-bs-toggle="tab" data-bs-target="#nav-qna" type="button" role="tab" aria-controls="nav-qna" aria-selected="false">QnA</button>
-	                <button class="nav-link" id="nav-refund-tab" data-bs-toggle="tab" data-bs-target="#nav-refund" type="button" role="tab" aria-controls="nav-refund" aria-selected="false">반품/교환 정보</button>
-	            </div>
-	        </nav>
-	        <div class="tab-content" id="nav-tabContent">
-	            <!-- 각 탭의 내용을 동적으로 표시할 공간 -->
-	            <div class="tab-pane active" id="nav-prodInfo" role="tabpanel" aria-labelledby="nav-prodInfo-tab">
-	                <p><strong>상품상세</strong> 첨부파일 테이블에서 직접 가져와야 할 듯 </p>
-	            </div>
-	            
-	              
-	            
-	            <div class="tab-pane" id="nav-review" role="tabpanel" aria-labelledby="nav-review-tab">
-	                <p><strong>리뷰</strong> Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling. You can use it with tabs, pills, and any other <code>.nav</code>-powered navigation.</p>
-	            </div>
-	            <div class="tab-pane" id="nav-qna" role="tabpanel" aria-labelledby="nav-qna-tab">
-	                <p><strong>QnA</strong> Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling. You can use it with tabs, pills, and any other <code>.nav</code>-powered navigation.</p>
-	            </div>
-		        <div class="tab-pane" id="nav-refund" role="tabpanel" aria-labelledby="nav-modify-tab">
-		            <p><strong>반품/교환 정보</strong> Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling. You can use it with tabs, pills, and any other <code>.nav</code>-powered navigation.</p>
-		        </div>
-	        </div>
-	    </div>
-	 </section>
-	 <!-- END 상품 관련 정보 Article -->
-
  
 
 
 
+
+
+<!-- 맨 밑 추천 품목 뜨는곳 -->
 
 
     <!-- Start Article -->

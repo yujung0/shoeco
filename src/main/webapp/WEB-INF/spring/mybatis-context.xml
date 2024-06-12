@@ -37,6 +37,7 @@
 			<list>
 				<value>classpath:com/shoeco/shoeco/admin/mapper/SCMemberMapper.xml</value> <!-- 2308091518 장유정 추가 -->
 				<value>classpath:com/shoeco/shoeco/admin/mapper/SCBrandMapper.xml</value> <!-- 2308181543 장유정 추가 -->
+				<value>classpath:com/shoeco/shoeco/admin/mapper/SCAdminMapper.xml</value><!-- 2309261815 장유정 추가 -->
 			</list>
 		</property>
 	</bean>
